@@ -1,0 +1,12 @@
+{
+    "/assets/js/mazer.js": "/assets/js/mazer.js",
+    "/frontend/styles/pages/email.css": "/frontend/styles/pages/email.css",
+    "/frontend/styles/pages/error.css": "/frontend/styles/pages/error.css",
+    "/frontend/styles/pages/auth.css": "/frontend/styles/pages/auth.css",
+    "/frontend/styles/bootstrap.css": "/frontend/styles/bootstrap.css",
+    "/frontend/styles/app.css": "/frontend/styles/app.css",
+    "/frontend/styles/widgets/todo.css": "/frontend/styles/widgets/todo.css",
+    "/frontend/styles/widgets/chat.css": "/frontend/styles/widgets/chat.css",
+    "/frontend/styles/pages/chat.css": "/frontend/styles/pages/chat.css",
+    "/assets/js/mazer.min.js": "/assets/js/mazer.min.js"
+}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('user')
+  ->namespace('USER')
+  ->group(function(){
+  });
+  
+  Route::get('/',  [DashboardController::class, 'index'])
+  ->name('dashboard');
+
+
+Route::get('/aditya', function(){
+  return '<h1>Hello World</h1>';
 });
+
