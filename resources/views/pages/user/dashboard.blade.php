@@ -3,12 +3,11 @@
 @section('content')
 
 <div id="main">
+  
   <header class="mb-3">
-    <span>
     <a href="#" class="burger-btn d-block d-xl-none">
       <i class="bi bi-justify fs-3"></i>
     </a>
-  </span>
   </header>
 
   <div class="page-heading">
@@ -128,7 +127,7 @@
                       <td>Dipinjam</td>
                       <td class='d-flex justify-content-center'>
                         <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
-                        <button class='btn-warning text-white rounded py-1 px-3'>Pengembalian</button>
+                        <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
                       </td>
                     </tr>
                     <tr>

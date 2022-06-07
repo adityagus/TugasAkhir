@@ -5,6 +5,7 @@
 
     <!-- untuk menggunakan icon -->
     <link rel="stylesheet" href="{{ url('user/dist/assets/vendors/iconly/bold.css') }}">
+    <link rel="stylesheet" href="{{ url('user/dist/assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
 
     <link rel="stylesheet" href="{{ url('user/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <!-- <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css"> -->
