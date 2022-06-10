@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Peminjaman</title>
+    <title>@yield('title')</title>
     
     
     @stack('prepend-styles')
@@ -14,19 +14,19 @@
 
 <body>
   
-  <!-- Start section navbar -->
-  <header>
-    <nav>
-
-    </nav>
-  </header>
-  <!-- End section navbar -->
-  
     <div id="app">
-      @include('includes.sidebar')
+      
+      
+      @include('includes.sidebars')
+      
+    <div id="main" class='layout-navbar'>
+      
+      @include('includes.navbar')
       
       @yield('content')
+  </div>
       
+    
     </div>
     @stack('prepend-script')
     @include('includes.script')
