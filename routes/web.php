@@ -19,44 +19,49 @@ Route::prefix('user')
   ->group(function(){
   });
   
-  Route::get('/',  function(){
-    return view('pages.admin.dashboard', [
-      "title" => "home"
-    ]);
-  });
-  
-  Route::get('/peminjaman',  function(){
-    return view('pages.user.peminjaman', [
-      "title" => "peminjaman"
-    ]);
-  });
-  
-  Route::get('/pengembalian',  function(){
-    return view('pages.user.pengembalian', [
-      "title" => "pengembalian"
-    ]);
-  });
-  
-  Route::get('/checkout',  function(){
-    return view('pages.user.checkout', [
-      "title" => "peminjaman"
-    ]);
-  });
-  
-  
-  // Route::get('/checkout',  function(){
-  //   return view('dashboard');
-  // });
-  
-  // Route::get('/',  function(){
-  //   return view('dashboard');
-  // });
-  
-  
-  
-  
-  
-  
+Route::get('/',  function(){
+  return view('pages.admin.dashboard', [
+    "title" => "home"
+  ]);
+});
+
+Route::get('/admin', [InventoryController::class, 'index'])
+->name('admin');
+
+
+
+Route::get('/peminjaman',  function(){
+  return view('pages.user.peminjaman', [
+    "title" => "peminjaman"
+  ]);
+});
+
+Route::get('/pengembalian',  function(){
+  return view('pages.user.pengembalian', [
+    "title" => "pengembalian"
+  ]);
+});
+
+Route::get('/checkout',  function(){
+  return view('pages.user.checkout', [
+    "title" => "peminjaman"
+  ]);
+});
+
+
+// Route::get('/checkout',  function(){
+//   return view('dashboard');
+// });
+
+// Route::get('/',  function(){
+//   return view('dashboard');
+// });
+
+
+
+
+
+
   
   
   // Route::get('/', [DashboardController::class, 'loan'])

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\inventory;
 use Illuminate\Http\Request;
+use Illuminate\Http\DB;
 
 class InventoryController extends Controller
 {
@@ -15,7 +16,14 @@ class InventoryController extends Controller
     public function index()
     {
         
-    }
+      $item = DB::table('inventories')->get();
+      
+        return view('pages.admin.dashboard', [
+          'item' => $items
+        ]);
+        
+        
+      }
 
     /**
      * Show the form for creating a new resource.

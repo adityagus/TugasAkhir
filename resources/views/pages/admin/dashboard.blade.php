@@ -115,32 +115,34 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <!-- <td colspan='7'><center>No Data</center></td> -->
-                      <td>1.</td>
-                      <td>Resistor</td>
-                      <td>Sulit</td>
-                      <td>12 pcs</td>
-                      <td>Te</td>
-                      <td>Dipinjam</td>
-                      <td class='d-flex justify-content-center'>
-                        <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
-                        <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <!-- <td colspan='7'><center>No Data</center></td> -->
-                      <td>2.</td>
-                      <td>Resistor</td>
-                      <td>Sulit</td>
-                      <td>12 pcs</td>
-                      <td>Te</td>
-                      <td>Dipinjam</td>
-                      <td class='d-flex justify-content-center'>
-                        <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
-                        <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
-                      </td>
-                    </tr>
+                    @php
+                    $nomor = 1;
+                @endphp
+                @forelse ( $items as $item)
+                <tr>
+                  <td>{{ $nomor++ }}</td>
+                  <td>{{ $item->name }}</td>
+                  <td>{{ $item->email }}</td>
+                  <td>{{ $item->updated_at }}</td>
+                  <td>{{ $item->roles }}</td>
+                  <td class="d-flex justify-content-center">
+                    <a href="{{ route('admin.users.edit', $item->id) }}" class="btn btn-info mx-2">
+                      <i class="fa fa-pencil-alt"></i>
+                    </a>
+                    <form action="{{ route('admin.users.destroy', $item->id)  }}" method="POST" class="d-inline">
+                      @csrf
+                      @method('delete')
+                      <button class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                @empty
+                <tr>
+                  <td colspan="7" class="text-center">Data Kosong</td>
+                </tr>
+                @endforelse 
                   </tbody>
 
                 </table>

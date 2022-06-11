@@ -11,10 +11,10 @@ class inventory extends Model
     use HasFactory, SoftDeletes;
     
     protected $fillable = [
-      'category_id', 'kd_brg', 'nama', 'deksripsi', 'jumlah', 'satuan', 'slug'
+      'id', 'category_id', 'kd_brg', 'nama', 'deksripsi', 'jumlah', 'satuan', 'slug'
     ];
     
-    public function category_item()
+    // public function category_item()
     // last
     // menampilkan database ke index di peminjaman alat
     // membuat admin database index, edit show ,store    //important mengerjakan admin terdahulu
