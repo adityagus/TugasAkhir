@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\User\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InventoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +21,17 @@ Route::prefix('user')
   });
   
 Route::get('/',  function(){
-  return view('pages.admin.dashboard', [
+  return view('pages.user.home', [
     "title" => "home"
   ]);
 });
 
+// Route::get('/admin', [InventoryController::class, 'index'])
+// ->name('admin');
+
 Route::get('/admin', [InventoryController::class, 'index'])
-->name('admin');
+->name('inventory');
+
 
 
 

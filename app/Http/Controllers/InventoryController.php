@@ -16,10 +16,10 @@ class InventoryController extends Controller
     public function index()
     {
         
-      $item = DB::table('inventories')->get();
-      
-        return view('pages.admin.dashboard', [
-          'item' => $items
+        // "posts" =>  Post::all()
+        $items = Inventory::all();
+        return view('pages.admin.inventory.index', [
+          'items' => $items
         ]);
         
         

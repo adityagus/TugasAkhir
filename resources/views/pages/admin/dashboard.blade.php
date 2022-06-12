@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-admin')
 
 @section('content')
 
@@ -121,11 +121,12 @@
                 @forelse ( $items as $item)
                 <tr>
                   <td>{{ $nomor++ }}</td>
-                  <td>{{ $item->name }}</td>
+                  <td>{{ $item-> nama}}</td>
                   <td>{{ $item->email }}</td>
                   <td>{{ $item->updated_at }}</td>
                   <td>{{ $item->roles }}</td>
-                  <td class="d-flex justify-content-center">
+                  
+                  {{-- <td class="d-flex justify-content-center">
                     <a href="{{ route('admin.users.edit', $item->id) }}" class="btn btn-info mx-2">
                       <i class="fa fa-pencil-alt"></i>
                     </a>
@@ -136,7 +137,7 @@
                         <i class="fa fa-trash"></i>
                       </button>
                     </form>
-                  </td>
+                  </td> --}}
                 </tr>
                 @empty
                 <tr>

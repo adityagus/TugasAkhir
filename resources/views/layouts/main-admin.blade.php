@@ -17,7 +17,7 @@
     <div id="app">
       
       
-      @include('includes.sidebar')
+      @include('includes.admin.sidebar')
       
     <div id="main" class='layout-navbar'>
       
