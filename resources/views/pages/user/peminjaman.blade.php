@@ -35,22 +35,20 @@
               <table class="table table-striped" id="table1">
               <thead>
                 <tr>
-                  <th>Nama Barang</th>
+                  <th>No</th>
+                  <th>Nama Alat & Bahan</th>
                   <th>Kategori</th>
-                  <th>jumlah alat</th>
-                  <th>Sedang dipinjam</th>
-                  <th>Sisa Alat</th>
+                  <th>Ketersedian</th>
                   <th>Jenis</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
+                  <td>1</td>
                   <td>Kapasitor</td>
                   <td>Mudah</td>
-                  <td>15</td>
                   <td>12</td>
-                  <td>3</td>
                   <td>TE</td>
                   <td>
                     <span class='d-flex d-inline-block'>
@@ -61,11 +59,10 @@
                 </tr>
                 
                 <tr>
+                  <td>1</td>
                   <td>Kapasitor</td>
                   <td>Mudah</td>
-                  <td>15</td>
                   <td>12</td>
-                  <td>3</td>
                   <td>TE</td>
                   <td>
                     <span class='d-flex d-inline-block'>
@@ -76,11 +73,10 @@
                 </tr>
                 
                 <tr>
+                  <td>1</td>
                   <td>Kapasitor</td>
                   <td>Mudah</td>
-                  <td>15</td>
                   <td>12</td>
-                  <td>3</td>
                   <td>TE</td>
                   <td>
                     <span class='d-flex d-inline-block'>
@@ -91,12 +87,11 @@
                 </tr>
                 
                 <tr>
+                  <td>1</td>
                   <td>Kapasitor</td>
                   <td>Mudah</td>
-                  <td>15</td>
                   <td>12</td>
-                  <td>3</td>
-                  <td>TL</td>
+                  <td>TE</td>
                   <td>
                     <span class='d-flex d-inline-block'>
                       <button class='btn btn-primary mx-1'>Detail</button>
@@ -106,12 +101,11 @@
                 </tr>
                 
                 <tr>
-                  <td>Multimeter</td>
-                  <td>Sedang</td>
-                  <td>15</td>
+                  <td>1</td>
+                  <td>Kapasitor</td>
+                  <td>Mudah</td>
                   <td>12</td>
-                  <td>3</td>
-                  <td>TL</td>
+                  <td>TE</td>
                   <td>
                     <span class='d-flex d-inline-block'>
                       <button class='btn btn-primary mx-1'>Detail</button>
@@ -120,12 +114,11 @@
                   </td>
                 </tr>
                 <tr>
+                  <td>1</td>
                   <td>Kapasitor</td>
                   <td>Mudah</td>
-                  <td>15</td>
                   <td>12</td>
-                  <td>3</td>
-                  <td>TL</td>
+                  <td>TE</td>
                   <td>
                     <span class='d-flex d-inline-block'>
                       <button class='btn btn-primary mx-1'>Detail</button>
@@ -149,11 +142,7 @@
     <footer>
       <div class="footer clearfix mb-0 text-muted">
         <div class="float-start">
-          <p>2021 &copy; Aditya Gustian</p>
-        </div>
-        <div class="float-end">
-          <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-            by <a href="https://ahmadsaugi.com"></a></p>
+          <p>2022 &copy; Teknik Elektro</p>
         </div>
       </div>
     </footer>

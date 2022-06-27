@@ -4,7 +4,7 @@
     <div class="sidebar-header">
       <div class="d-flex justify-content-between">
         <div class="logo">
-        <a href="index.html"><img src="user/dist/assets/images/logo/logo.png" alt="Logo" style="height:40px;" srcset=""></a>
+          <a href="index.html"><img src="{{ url('user/dist/assets/images/logo/logo.png') }}" alt="Logo" style="height:40px;" srcset=""></a>
         </div>
         <div class="toggler">
           <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -15,7 +15,7 @@
       <ul class="menu">
         <li class="sidebar-title">Manajemen</li>
 
-        <li class="sidebar-item active">
+        <li class="sidebar-item">
           <a href="/" class='sidebar-link'>
             <i class="bi bi-grid-fill"></i>
             <span>Dashboard</span>
@@ -23,18 +23,55 @@
         </li>
         <li class="sidebar-title">Manajemen</li>
 
+        <li class="sidebar-item has-sub">
+          <a href="#" class='sidebar-link'>
+            <i class="bi bi-file-check-fill"></i>
+            <span>Approval Barang</span>
+          </a>
 
-        <li class="sidebar-item">
-          <a href="/peminjaman" class='sidebar-link'>
-            <img src="user/dist/assets/images/logo/peminjaman-secondary.png" width='35px' alt="">
-            <span>Peminjaman</span>
+
+          <ul class="submenu">
+            <li class="submenu-item">
+              <a href="#" class='submenu-item'>
+                <i class="bi bi-file-arrow-up"></i>
+                &nbsp;<span>Peminjaman</span>
+              </a>
+              <a href="#" class='submenu-item'>
+                <i class="bi bi-file-arrow-down"></i>
+                &nbsp;<span>Pengembalian</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        {{-- {{ ($title == "inventaris" ? "active" : "") }} --}}
+        <li class="sidebar-item ">
+          <a href="{{ route('admin.inventory.index') }}" class='sidebar-link'>
+            <i class="bi bi-archive-fill"></i>
+            <span>Data Barang</span>
           </a>
         </li>
 
+        <li class="sidebar-item ">
+          <a href="{{ route('admin.inventory.index') }}" class='sidebar-link'>
+            <i class="bi bi-images"></i>
+            <span>Gallery</span>
+          </a>
+        </li>
+
+        <li class="sidebar-item ">
+          <a href="{{ route('admin.inventory.index') }}" class='sidebar-link'>
+            <i class="bi bi-person-fill"></i>
+            <span>User</span>
+          </a>
+        </li>
+
+        <li class="sidebar-title">Lainnya</li>
+
         <li class="sidebar-item">
           <a href="/pengembalian" class='sidebar-link'>
-            <img src="user/dist/assets/images/logo/pengembalian-secondary.png" width='35px' coloalt="">
-            <span>Pengembalian</span>
+            <i class="bi bi-stack"></i>
+            <span>Kelola Alat & Bahan</span>
           </a>
         </li>
 
@@ -43,5 +80,3 @@
     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
   </div>
 </div>
-
-      <!-- STOP SIDEBAR -->

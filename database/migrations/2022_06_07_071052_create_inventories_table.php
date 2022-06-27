@@ -16,7 +16,7 @@ class CreateInventoriesTable extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('category_id');
-            $table->bigInteger('kd_brg');
+            $table->string('kd_brg');
             $table->string('nama');
             $table->string('deskripsi');
             $table->integer('jumlah');

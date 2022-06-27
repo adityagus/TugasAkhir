@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\inventory;
 use Illuminate\Http\Request;
+use App\Models\Inventory;
+use App\Models\CategoryItem;
 use Illuminate\Http\DB;
+use App\Http\Request\InventoryRequest;
+use App\Http\Requests\InventoryRequest as RequestsInventoryRequest;
+use Illuminate\Support\Str;
 
 class InventoryController extends Controller
 {
@@ -17,9 +21,13 @@ class InventoryController extends Controller
     {
         
         // "posts" =>  Post::all()
-        $items = Inventory::all();
+        $items = Inventory::with(['category_items'])->get();
+        
+        // dd($items);
         return view('pages.admin.inventory.index', [
+          "title" => "inventaris",
           'items' => $items
+          
         ]);
         
         
@@ -32,7 +40,9 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        //
+      $items = CategoryItem::all();
+      return view('pages.admin.inventory.create', compact('items'));
+      
     }
 
     /**
@@ -41,9 +51,17 @@ class InventoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestsInventoryRequest $request)
     {
-        //
+      $data = $request->all();
+      $slug1 = '-' . $request->jumlah;
+      $data['slug'] = Str::slug($request->nama . $slug1) ;
+
+ 
+
+      Inventory::create($data);
+
+      return redirect()->route('admin.inventory.index');
     }
 
     /**
@@ -54,7 +72,7 @@ class InventoryController extends Controller
      */
     public function show(inventory $inventory)
     {
-        //
+        return view('pages.admin.inventory.detail', compact('inventory'));
     }
 
     /**
@@ -65,7 +83,11 @@ class InventoryController extends Controller
      */
     public function edit(inventory $inventory)
     {
-        //
+      $data = CategoryItem::all();
+      return view('pages.admin.inventory.edit',[
+        'item' => $inventory ,
+        'items' => $data,
+      ]);
     }
 
     /**
@@ -75,9 +97,15 @@ class InventoryController extends Controller
      * @param  \App\Models\inventory  $inventory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, inventory $inventory)
+    public function update(RequestsInventoryRequest $request, inventory $inventory)
     {
-        //
+      $data = $request->all();
+      $slug1 = '-' . $request->jumlah;
+      $data['slug'] = Str::slug($request->nama . $slug1) ;
+
+      $inventory->update($data);
+
+    return redirect()->route('admin.inventory.index');
     }
 
     /**
@@ -88,6 +116,8 @@ class InventoryController extends Controller
      */
     public function destroy(inventory $inventory)
     {
-        //
+      $inventory->delete();
+
+      return redirect()->route('admin.inventory.index');
     }
 }

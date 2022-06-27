@@ -8,7 +8,7 @@
     
     
     @stack('prepend-styles')
-    @include('includes.styles')
+    @include('includes.admin.styles')
     @stack('addon-styles')
 </head>
 

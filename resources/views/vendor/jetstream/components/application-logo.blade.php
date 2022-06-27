@@ -1,0 +1,1 @@
+<img src="user/dist/assets/images/logo/logo.png" alt="Logo" style="height:40px;" srcset="">

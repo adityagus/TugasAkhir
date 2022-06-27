@@ -17,6 +17,7 @@ class CreateCategoryItemsTable extends Migration
             $table->bigIncrements('id');
             $table->foreignId('inventory_id');
             $table->string('namakategori');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class CreateCategoryItemsTable extends Migration
      */
     public function down()
     {
-        schema::dro
+        // 
     }
 }

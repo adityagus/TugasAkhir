@@ -96,7 +96,7 @@
         <div class="card-header">
           <h4 class="card-title">Simple Datatable</h4>
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
           <table class='table table-bordered table-striped'>
             <thead>
               <tr>
@@ -139,7 +139,7 @@
           </table>
           <div class="d-flex justify-content-between align-content-center mt-4 table-footer">
             <h4>Alat yang anda pinjam (14)</h4>
-            <a href="checkout-success.html">
+            <a href="/checkout-success">
               <button class='btn btn-primary px-lg-5 py-2 '>Checkout</button>
             </a>
             
@@ -151,13 +151,13 @@
   </div>
 
   <footer>
-    <div class="footer clearfix mb-0 text-muted">
-      <div class="float-start">
-        <p>2021 &copy; Aditya Gustian</p>
-      </div>
-      <div class="float-end">
-        <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-          by <a href="https://ahmadsaugi.com">Saugi</a></p>
+    <div class="footer clearfix  mt-2 mb-0 ">
+      <div class="container">
+        <h6>Catatan :</h6>
+        <ol type="1">
+          <li>Kerusakan dan kehilangan alat/bahan wajib diganti sesuai dengan spesifikasi alat yang sama dan akan ditanggung oleh peminjam atau kelompok</li>
+          <li>Keterlambatan pengembalian alat/bahan akan dikenakan denda sesuai aturan yang berlaku</li>
+        </ol>
       </div>
     </div>
   </footer>

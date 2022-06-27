@@ -6,19 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class inventory extends Model
+class Inventory extends Model
 {
     use HasFactory, SoftDeletes;
     
     protected $fillable = [
-      'id', 'category_id', 'kd_brg', 'nama', 'deksripsi', 'jumlah', 'satuan', 'slug'
+      'id', 'category_id', 'kd_brg', 'nama', 'deskripsi', 'slug', 'jumlah', 'satuan', 
     ];
     
-    // public function category_item()
-    // last
-    // menampilkan database ke index di peminjaman alat
-    // membuat admin database index, edit show ,store    //important mengerjakan admin terdahulu
-    // menampilkan database peminjaman
     
-    // membuat sidebar admin dan halaman admin terdahulu 
+    public function category_items(){
+      return $this->belongsTo(CategoryItem::class, 'category_id', 'id');
+    } 
+    
 }
