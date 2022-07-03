@@ -18,7 +18,8 @@ class CreateInventoriesTable extends Migration
             $table->string('category_id');
             $table->string('kd_brg');
             $table->string('nama');
-            $table->string('deskripsi');
+            $table->string('lab');
+            $table->text('deskripsi');
             $table->integer('jumlah');
             $table->string('satuan');
             $table->string('slug');

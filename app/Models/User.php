@@ -27,8 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'username'
-    ];
+        'roles_id',
+    ];  
 
     /**
      * The attributes that should be hidden for serialization.
@@ -59,4 +59,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    
+    public function roles(){
+      return $this->belongsTo(roles::class, 'roles_id', 'id');
+    }
+    
+    public function loanitem(){
+      return $this->hasMany(LoanItem::class, 'id');
+    }
 }

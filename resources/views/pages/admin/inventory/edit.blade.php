@@ -75,7 +75,7 @@ Edit Inventaris
 
             <div class="mb-2">
               <label for="deskripsii" class="form-label">Deskripsi</label>
-              <textarea name="deskripsi" type="text" class="form-control text-bold" id="deskripsii" placeholder="Masukan Deskripsi Barang" required>{{  old('deskripsi') ?? $item->deskripsi  }}</textarea>
+              <textarea name="deskripsi" type="text" rows="12" required autofocus class="form-control text-bold" id="deskripsii" placeholder="Masukan Deskripsi Barang" required>{!!  old('deskripsi') ?? $item->deskripsi  !!}</textarea>
             </div>
 
             <div class="mb-2">
@@ -121,5 +121,19 @@ Edit Inventaris
   let table1 = document.querySelector('#table1');
   let dataTable = new simpleDatatables.DataTable(table1);
 
+</script>
+
+@endpush
+@push('addon-script')
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor
+          .create( document.querySelector( '#deskripsii' ) )
+          .then( editor => {
+                  console.log( editor );
+          } )
+          .catch( error => {
+                  console.error( error );
+          } );
 </script>
 @endpush

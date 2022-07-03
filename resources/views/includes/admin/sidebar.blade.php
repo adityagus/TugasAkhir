@@ -23,20 +23,20 @@
         </li>
         <li class="sidebar-title">Manajemen</li>
 
-        <li class="sidebar-item has-sub">
+        <li class="sidebar-item has-sub ">
           <a href="#" class='sidebar-link'>
             <i class="bi bi-file-check-fill"></i>
             <span>Approval Barang</span>
           </a>
-
-
           <ul class="submenu">
             <li class="submenu-item">
-              <a href="#" class='submenu-item'>
+              <a href="{{ route('admin.transaction.index') }}">
                 <i class="bi bi-file-arrow-up"></i>
                 &nbsp;<span>Peminjaman</span>
               </a>
-              <a href="#" class='submenu-item'>
+            </li>
+            <li class="submenu-item">
+              <a href="#">
                 <i class="bi bi-file-arrow-down"></i>
                 &nbsp;<span>Pengembalian</span>
               </a>
@@ -60,7 +60,7 @@
         </li>
 
         <li class="sidebar-item ">
-          <a href="{{ route('admin.inventory.index') }}" class='sidebar-link'>
+          <a href="{{ route('admin.user.index') }}" class='sidebar-link'>
             <i class="bi bi-person-fill"></i>
             <span>User</span>
           </a>

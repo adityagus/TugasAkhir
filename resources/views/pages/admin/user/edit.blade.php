@@ -1,7 +1,7 @@
 @extends('layouts.main-admin')
 
 @section('title')
-Create Inventaris
+Edit Inventaris
 @endsection
 
 @section('content')
@@ -13,15 +13,14 @@ Create Inventaris
     <div class="page-title">
       <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>Create Data Barang</h3>
+          <h3>Edit User <span class='text-primary'>{{ $user->name }}</span></h3>
           <p class="text-subtitle text-muted">Membuat Alat dan Bahan yang tersedia di Jurusan Elektro</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="#">Approval</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('admin.transaction.index') }}">Peminjaman</a></li>
+              <li class="breadcrumb-item"><a href="index.html">CRUD Data Barang</a></li>
               <li class="breadcrumb-item active" aria-current="page">Edit</li>
             </ol>
           </nav>
@@ -49,27 +48,34 @@ Create Inventaris
             </div>
           @endif
           
-          <form action="{{ route('admin.inventory.store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('admin.user.update', $user->id) }}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
+            <div class="mb-2">
+              <label for="name" class="form-label">Nama</label>
+              <input type="text" class="form-control text-bold" name="name" value="{{ old('name') ?? $user->name }}" id="kode" placeholder="Masukan Nama Anda" required>
+            </div>
+
+            <div class="mb-2">
+              <label for="nama" class="form-label">Email</label>
+              <input type="text" class="form-control text-bold" name="email" value="{{ old('email') ?? $user->email}}" id="nama" placeholder="Masukan Email Anda">
+            </div>
+
 
             <div class="mb-4">
-              <label for="status" class="">Name</label>
-              <select name="status" id="status" required class="form-select">
-                <option class='' style="color:#607080" value="{{ $transaction->status }}">{{ $transaction->status }}</option>
-                <option disabled>-----------------------------------------------------------------------------------------------------------------------------------------------------</option>
-                <option value="PENDING">PENDING</option>
-                <option value="SUCCESS">SUCCESS</option>
-                <option value="FAILED">FAILED</option>
-                <option value="CANCEL">CANCEL</option>
+              <label for="roles" class="form-label">Roles</label>
+              <select name="roles_id" id="roles" class="form-select text-bold">
+                <option value="{{ $user->roles_id }}">{{ $user->roles->name }}</option>
+                <option disabled>----------------------------------------------------------------------------------------------------------------------------------------</option>
+                @foreach ($roles as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+               @endforeach 
               </select>
             </div>
 
-
-
             <div class="mb-2 d-grid gap-1">
-              <button class='btn btn-success w-full' type=''>Update Data</button>
+              <button class='btn btn-success w-full' type='submit'>Update Kelola User</button>
             </div>
-
 
           </form>
         </div>

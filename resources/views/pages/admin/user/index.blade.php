@@ -13,14 +13,14 @@
       <div class="page-title">
         <div class="row">
           <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Transaksi</h3>
-            <p class="text-subtitle text-muted">Transaksi peminjaman Alat dan Bahan</p>
+            <h3>Users</h3>
+            <p class="text-subtitle text-muted">Daftar user yang ada di Jurusan Elektro</p>
           </div>
           <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Peminjaman</li>
+                <li class="breadcrumb-item active" aria-current="page">User</li>
               </ol>
             </nav>
           </div>
@@ -28,17 +28,18 @@
       </div>
       <section class="section">
         <div class="card">
+          <div class="card-header">
+
+          </div>
           <div class="card-body">
               <table class="table table-striped" id="table1">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama Peminjam</th>
-                  <th>phone</th>
-                  <th>keperluan</th>
-                  <th>laboratorium</th>
-                  <th>pertemuan</th>
-                  <th>Status</th>
+                  <th>ID</th>
+                  <th>Nama</th>
+                  <th>email</th>
+                  <th>roles</th>
                   <th class="">Aksi</th>
                 </tr>
               </thead>
@@ -47,33 +48,27 @@
                     $nomor = 1;
                 @endphp
                 
-                {{-- <tr>
-                  <th>No</th>
-                  <th>Nama Alat & Bahan</th>
-                  <th>Kategori</th>
-                  <th>Ketersedian</th>
-                  <th>Jenis</th>
-                  <th>Aksi</th>
-                </tr> --}}
-                @forelse ( $transaction as $item)
+                @forelse ( $user as $users)
                 <tr>
                   <td>{{ $nomor++ }}</td>
-                  <td>{{ $item->nama}}</td>
-                  <td>{{ $item->phone }}</td>
-                  <td>{{ $item->keperluan}}</td>
-                  <td>{{ $item->laboratorium}}</td>
-                  <td>{{ $item->pertemuan_ke}}</td>
-                  <td>{{ $item->status}}</td>
+                  <td>{{ $users->id}}</td>
+                  <td>{{ $users->name}}</td>
+                  <td>{{ $users->email }}</td>
+                  <td>{{ $users->roles->name}}</td>
                   <td class="d-flex justify-content-center">
                     <span class='d-flex d-inline-block'>
-                      <a href="{{ route('admin.transaction.show',$item->id) }}" class="btn btn-primary">
-                        <i class="fa fa-eye"></i>
-                        Show
-                      </a>
-                      <a href="{{ route('admin.transaction.edit',$item->id) }}" class="btn btn-info mx-2">
+                      <a href="{{ route('admin.user.edit', $users->id) }}" class="btn btn-info mx-2">
                         Edit
                       </a>
                     </span>
+                   
+                    <form action="{{ route('admin.user.destroy', $users->id)  }}" onclick="return confirm('Yakin Hapus?')" method="POST" class="d-inline">
+                      @csrf
+                      @method('delete')
+                      <button class="btn btn-danger">
+                        Delete
+                      </button>
+                    </form> 
                   </td>
                   {{-- <td>{{ $item->roles }}</td> --}}
                   
@@ -92,7 +87,7 @@
                 </tr>
                 @empty
                 <tr>
-                  <td colspan="8" class="text-center">Data Kosong</td>
+                  <td colspan="7" class="text-center">Data Kosong</td>
                 </tr>
                 @endforelse 
                   </tbody>
@@ -100,6 +95,7 @@
                 
                 
               
+              </tbody>
             </table>
           </div>
 

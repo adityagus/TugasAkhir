@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\User\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\User\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,57 +18,44 @@ use App\Http\Controllers\InventoryController;
 |
 */
 
-Route::prefix('user')
-  ->namespace('USER')
-  ->group(function(){
-  });
-  
-  
-Route::middleware(['auth:sanctum', 'verified', 'admin'])->group(function(){  
-  
-  Route::get('/',  function(){
-    return view('pages.user.home', [
-      "title" => "home"
-    ]);
-  });
+  Route::get('/', [FrontendController::class, 'home'])
+    ->name('index');
+  Route::get('/peminjaman', [FrontendController::class, 'peminjaman'])
+    ->name('index');
 
-  Route::get('/peminjaman',  function(){
-    return view('pages.user.peminjaman', [
-      "title" => "peminjaman"
-    ]);
-  });
-
-  Route::get('/pengembalian',  function(){
-    return view('pages.user.pengembalian', [
-      "title" => "pengembalian"
-    ]);
-  });
-
-  Route::get('/checkout',  function(){
-    return view('pages.user.checkout', [
-      "title" => "peminjaman"
-    ]);
-  });
   
-  Route::get('/checkout-success',  function(){
-    return view('pages.user.checkout-success', [
-      "title" => "peminjaman"
-    ]);
-  });
+  Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    
+    // Route::get('/', [DashboardController::class, 'index'])->name('index');
+  
+  Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
+    ->name('index');
+  Route::get('/cart-peminjaman', [FrontendController::class, 'checkout'])
+    ->name('index');
+  Route::get('/checkout-success', [FrontendController::class, 'home'])
+    ->name('index');
 
 });
 
-Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function(){
-  
-  Route::get('/', [DashboardController::class, 'index'])->name('index');
-  
-  Route::resource('inventory', InventoryController::class);
+Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
+
+  // Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+  Route::resource('inventory', InventoryController::class, [
+    'title' => 'approval'
+  ]);
+  Route::resource('transaction', TransactionController::class)->only([
+    'index', 'show', 'edit', 'update'
+  ]);
+  Route::resource('user', UserController::class)->only([
+    'index', 'edit', 'update', 'destroy'
+  ]);
   // Route::resource('category', CategoryItemController::class); 
   // Route::resource('users', UserController::class); 
-  
+
 });
-  
-  
+
+
 // });
 
 // Route::get('/admin', [InventoryController::class, 'index'])
@@ -86,21 +76,21 @@ Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix
 
 
 
-  
 
-  
-  
-Route::get('/aditya', function(){
+
+
+
+Route::get('/aditya', function () {
   return '<h1>Hello World</h1>';
 });
 
 
 Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
+  'auth:sanctum',
+  config('jetstream.auth_session'),
+  'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+  Route::get('/dashboard', function () {
+    return view('dashboard');
+  })->name('dashboard');
 });

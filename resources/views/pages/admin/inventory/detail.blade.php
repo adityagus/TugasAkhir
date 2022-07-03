@@ -20,7 +20,7 @@ Admin Inventaris
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('admin.inventory.index') }}">Peminjaman</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.inventory.index') }}">Data Barang</a></li>
               <li class="breadcrumb-item active" aria-current="page">Detail</li>
             </ol>
           </nav>
@@ -32,27 +32,29 @@ Admin Inventaris
         <div class="card-body">
           <table class="table table-bordered middle">
             <tr>
-              <th class="px-6 py-4 text-end">Gambar</th>
+              <th class="px-6 py-4 text-end align-middle">Gambar</th>
+              <td class="px-6 py-4">
+                <img  class='img-thumbnail' src="{{ url('frontend/images/content/kapasitor.png') }}" alt="" style="height:160px;">
+              </td>
+            </tr>
+            <tr>
+              <th class="px-6 py-4 text-end col-2">Kode</th>
               <td class="px-6 py-4">{{ $inventory->kd_brg }}</td>
             </tr>
             <tr>
-              <th class="px-6 py-4 text-end">Kode</th>
-              <td class="px-6 py-4">{{ $inventory->kd_brg }}</td>
-            </tr>
-            <tr>
-              <th class="px-6 py-4 text-end">Nama</th>
+              <th class="px-6 py-4 text-end col-2">Nama</th>
               <td class="px-6 py-4">{{ $inventory->nama }}</td>
             </tr>
             <tr>
-              <th class="px-6 py-4 text-end">Deskripsi</th>
-              <td class="px-6 py-4">{{ $inventory->deskripsi }}</td>
+              <th class="px-6 py-4 text-end col-2">Deskripsi</th>
+              <td class="px-6 py-4">{!! $inventory->deskripsi !!}</td>
             </tr>
             <tr>
-              <th class="px-6 py-4 text-end">Jumlah</th>
+              <th class="px-6 py-4 text-end col-2">Jumlah</th>
               <td class="px-6 py-4">{{ $inventory->jumlah }}</td>
             </tr>
             <tr>
-              <th class="border px-6 py-4 text-end">Satuan</th>
+              <th class="border px-6 py-4 text-end col-2">Satuan</th>
               <td class="border px-6 py-4">{{ $inventory->satuan }}</td>
             </tr>
             

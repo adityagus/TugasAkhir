@@ -21,6 +21,7 @@ class InventoryController extends Controller
     {
         
         // "posts" =>  Post::all()
+         
         $items = Inventory::with(['category_items'])->get();
         
         // dd($items);
@@ -116,8 +117,10 @@ class InventoryController extends Controller
      */
     public function destroy(inventory $inventory)
     {
+      // $data = array()
       $inventory->delete();
 
-      return redirect()->route('admin.inventory.index');
+      return redirect()->route('admin.inventory.index')->with('success', 'Data Berhasil Ke Hapus');
     }
+    
 }

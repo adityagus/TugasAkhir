@@ -13,14 +13,14 @@ Admin Inventaris
     <div class="page-title">
       <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>Detail &raquo; <span class='text-primary'>{{ $inventory->nama }}</span></h3>
+          <h3>Detail &raquo; <span class='text-primary'></span></h3>
           <p class="text-subtitle text-muted">Detail Alat dan Bahan yang tersedia di Jurusan Elektro</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('admin.inventory.index') }}">Peminjaman</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.transaction.index') }}">Peminjaman</a></li>
               <li class="breadcrumb-item active" aria-current="page">Detail</li>
             </ol>
           </nav>
@@ -29,37 +29,40 @@ Admin Inventaris
     </div>
     <section class="section">
       <div class="card">
+        @foreach ($item as $items)
         <div class="card-body">
+          
           <table class="table table-bordered middle">
             <tr>
               <th class="px-6 py-4 text-end">Gambar</th>
-              <td class="px-6 py-4">{{ $inventory->kd_brg }}</td>
+              <td class="px-6 py-4 text-black">{{ $items->inventory->nama }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Kode</th>
-              <td class="px-6 py-4">{{ $inventory->kd_brg }}</td>
+              <td class="px-6 py-4">{{ $items->kd_brg }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Nama</th>
-              <td class="px-6 py-4">{{ $inventory->nama }}</td>
+              <td class="px-6 py-4">{{ $items->nama }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Deskripsi</th>
-              <td class="px-6 py-4">{{ $inventory->deskripsi }}</td>
+              <td class="px-6 py-4">{{ $items->deskripsi }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Jumlah</th>
-              <td class="px-6 py-4">{{ $inventory->jumlah }}</td>
+              <td class="px-6 py-4">{{ $items->jumlah }}</td>
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Satuan</th>
-              <td class="border px-6 py-4">{{ $inventory->satuan }}</td>
+              <td class="border px-6 py-4">{{ $items->satuan }}</td>
             </tr>
             
-
+            
           </table>
         </div>
-
+        @endforeach
+        
       </div>
     </section>
   </div>

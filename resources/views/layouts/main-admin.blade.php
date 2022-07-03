@@ -22,7 +22,7 @@
     <div id="main" class='layout-navbar'>
       
       @include('includes.navbar')
-      
+      {{-- @include('includes.message') --}}
       @yield('content')
   </div>
       

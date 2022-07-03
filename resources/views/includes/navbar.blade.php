@@ -55,8 +55,9 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <form action="{{ route('logout') }}" method="post">
-            <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
+            <form action="{{ url('logout') }}" method="post">
+              @csrf
+            <li><button class="dropdown-item" ><i class="icon-mid bi bi-box-arrow-left me-2"></i>Logout</button></li>
           </form>
           </ul>
         </div>

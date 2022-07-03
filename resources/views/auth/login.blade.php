@@ -33,20 +33,34 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
             </div>
+            
+            <div class="block mt-4">
+              <div class="row">
+                <x-jet-button class="flex justify-center w-full btn-cyan-500">
+                    {{ __('Masuk') }}
+                </x-jet-button>
+              </div>
+          </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-center mt-4 mb-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                    <a class=" text-sm text-sky-900 hover:text-gray-900" href="{{ route('password.request') }}">
+                      Lupa Password?
                     </a>
                 @endif
-
+                
               </div>
-            <div class="block items-center justify-center mt-4">
-            <x-jet-button class="block text-blue-200 w-full">
-                {{ __('Log in') }}
-            </x-jet-button>
-          </div>
+              <hr>
+              
+              <div class="flex items-center justify-center mt-4 text-sm">
+                Belum Mempunyai Akun? &nbsp;
+                    <a class="underline text-sm text-blue-400 hover:text-gray-900" href="{{ route('register') }}">
+                        {{ __('Daftar Disini') }}
+                    </a>
+
+                
+              </div>
+
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>

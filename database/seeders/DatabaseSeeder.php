@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\CategoryItem;
+use App\Models\Inventory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,31 +22,14 @@ class DatabaseSeeder extends Seeder
       'name' => 'Aditya Gustian',
       'roles_id' => 1,
       'email' => 'adityagustian11@gmail.com',
-      'username' => 'adityagus',
       'password' => bcrypt('aditya123'),
     ]);
 
-    CategoryItem::create([
-      'inventory_id' => 1,
-      'namakategori' => 'Mudah',
-    ]);
-    CategoryItem::create([
-      'inventory_id' => 2,
-      'namakategori' => 'Sedang',
-    ]);
-    CategoryItem::create([
-      'inventory_id' => 3,
-      'namakategori' => 'Sulit',
-    ]);
-    CategoryItem::create([
-      'inventory_id' => 4,
-      'namakategori' => 'Bahan Umum',
-    ]);
-    CategoryItem::create([
-      'inventory_id' => 5,
-      'namakategori' => 'Bahan Khusus',
-    ]);
-    
+      $this->call([
+        InventoriesSeeder::class,
+        RolesTableSeeder::class,
+        CategoryTableSeeder::class,
+      ]);
 
   }
 }
