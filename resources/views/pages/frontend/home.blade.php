@@ -6,7 +6,10 @@
 <div class="px-5 pb-5">
   <div class="page-heading">
     <h3>Dashboard</h3>
-    <h6>Halo, Selamat datang Aditya Gustian</h1>
+    <h6>Halo, Selamat datang
+      @auth
+      {{ Auth::user()->name }}
+      @endauth
   </div>
   <div class="page-content">
     <section class="row">
@@ -22,8 +25,8 @@
                     </div>
                   </div>
                   <div class="col-md-8">
-                    <h6 class="text-muted font-semibold">Kesulitan Alat Mudah</h6>
-                    <h6 class="font-extrabold mb-0">450</h6>
+                    <h6 class="text-muted font-semibold">Jumlah Alat</h6>
+                    <h6 class="font-extrabold mb-0">{{ $jumlah_alat }}</h6>
                   </div>
                 </div>
               </div>
@@ -39,8 +42,8 @@
                     </div>
                   </div>
                   <div class="col-md-8">
-                    <h6 class="text-muted font-semibold">Kesulitan Alat Sedang</h6>
-                    <h6 class="font-extrabold mb-0">350</h6>
+                    <h6 class="text-muted font-semibold">Mahasiswa </h6>
+                    <h6 class="font-extrabold mb-0">{{ $user_pinjam }}</h6>
                   </div>
                 </div>
               </div>
@@ -56,8 +59,8 @@
                     </div>
                   </div>
                   <div class="col-md-8">
-                    <h6 class="text-muted font-semibold">Kesulitan Alat Sulit</h6>
-                    <h6 class="font-extrabold mb-0">80</h6>
+                    <h6 class="text-muted font-semibold">Pending</h6>
+                    <h6 class="font-extrabold mb-0">{{ $loan_pending }}</h6>
                   </div>
                 </div>
               </div>
@@ -73,8 +76,8 @@
                     </div>
                   </div>
                   <div class="col-md-8">
-                    <h6 class="text-muted font-semibold">Alat di pinjam</h6>
-                    <h6 class="font-extrabold mb-0">11</h6>
+                    <h6 class="text-muted font-semibold">SUCCESS</h6>
+                    <h6 class="font-extrabold mb-0">{{ $loan_success }}</h6>
                   </div>
                 </div>
               </div>
@@ -98,6 +101,71 @@
                 </div>
               </div>
               <div class="card-body table-responsive">
+                {{-- Auth --}}
+                @auth
+                <table class='table table-bordered table-striped'>
+                  <thead>
+                    <tr>
+                      <th>NO.</th>
+                      <th>Nama Alat & Bahan</th>
+                      <th>Kategori</th>
+                      <th>Jumlah Dipinjam</th>
+                      <th>Jenis</th>
+                      <th>Status</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @php
+                    $no =1
+                    @endphp
+                    @forelse ($items as $item)
+
+                    <tr>
+                      <!-- <td colspan='7'><center>No Data</center></td> -->
+                      <td>{{ $no++ }}</td>
+                      <td>{{ $item->inventory->nama }}</td>
+                      <td>{{ $item->inventory->category_items->namakategori }}</td>
+                      <td>{{ $item->total }}</td>
+                      <td>{{ $item->inventory->labs->name }}</td>
+                      <td> {{ $item->transaction->status }}</td>
+                      {{-- <td>{{ $status->status }}</td> --}}
+                      {{-- @if ($item->sta)
+                          
+                      @elseif($condition)
+                          
+                      @endif --}}
+                      <td class='d-flex justify-content-center'>
+                        <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
+                        <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
+                      </td>
+                    </tr>
+
+
+
+
+                    @empty
+
+
+                    <tr>
+                      <td colspan="8" class="text-center">Data Kosong</td>
+                    </tr>
+
+
+                    @endforelse
+
+
+
+
+                  </tbody>
+
+                </table>
+                @endauth
+
+                {{-- End Auth --}}
+
+                {{-- Guest --}}
+                @guest
                 <table class='table table-bordered table-striped'>
                   <thead>
                     <tr>
@@ -112,34 +180,13 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <!-- <td colspan='7'><center>No Data</center></td> -->
-                      <td>1.</td>
-                      <td>Resistor</td>
-                      <td>Sulit</td>
-                      <td>12 pcs</td>
-                      <td>Te</td>
-                      <td>Dipinjam</td>
-                      <td class='d-flex justify-content-center'>
-                        <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
-                        <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <!-- <td colspan='7'><center>No Data</center></td> -->
-                      <td>2.</td>
-                      <td>Resistor</td>
-                      <td>Sulit</td>
-                      <td>12 pcs</td>
-                      <td>Te</td>
-                      <td>Dipinjam</td>
-                      <td class='d-flex justify-content-center'>
-                        <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
-                        <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
-                      </td>
+                      <td colspan="8" class="text-center">Data Kosong</td>
                     </tr>
                   </tbody>
 
                 </table>
+                @endguest
+                {{-- End Guest --}}
               </div>
             </div>
           </div>

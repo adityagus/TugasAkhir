@@ -53,7 +53,7 @@ Admin Inventaris
                 <th>Keseluruhan</th>
                 <th>Dipinjam</th>
                 <th>Ketersedian</th>
-                <th>Jenis</th>
+                <th>Lab</th>
                 <th class="">Aksi</th>
               </tr>
             </thead>
@@ -67,8 +67,10 @@ Admin Inventaris
                 <td>{{ $nomor++ }}</td>
                 <td>{{ $item->nama}}</td>
                 <td >{{ $item->category_items->namakategori }}</td>
-                <td colspan="3">{{ $item->jumlah}}</td>
-                <td>TE</td>
+                <td>{{ $item->jumlah}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>{{ $item->labs->name }}</td>
                 <td class="d-flex justify-content-center">
                   <span class='d-flex d-inline-block'>
                     <a href="{{ route('admin.inventory.show',$item->id) }}" class="btn btn-primary">
@@ -110,7 +112,7 @@ Admin Inventaris
               </tr>
               @empty
               <tr>
-                <td colspan="8" class="text-center">Data Kosong</td>
+                <td colspan="8" class="text-center" value="language"></td>
               </tr>
               @endforelse
 
@@ -144,7 +146,12 @@ Admin Inventaris
 <script>
   // Simple Datatable
   let table1 = document.querySelector('#table1');
-  let dataTable = new simpleDatatables.DataTable(table1);
-  let pdfButtonTrans = new {{ trans('global.datatables.pdf') }};
+  let dataTable = new simpleDatatables.DataTable(table1, {
+    "oLanguage": {
+      "sEmptyTable": "No data available in table"
+    }
+  });
+  // let dataTable1 = new noRows.DataTable(table1)->'tidak ada';
+  
 </script>
 @endpush

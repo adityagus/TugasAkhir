@@ -56,6 +56,7 @@
                   <th>Aksi</th>
                 </tr> --}}
                 @forelse ( $transaction as $item)
+                    
                 <tr>
                   <td>{{ $nomor++ }}</td>
                   <td>{{ $item->nama}}</td>

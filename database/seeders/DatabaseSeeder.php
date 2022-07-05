@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         InventoriesSeeder::class,
         RolesTableSeeder::class,
         CategoryTableSeeder::class,
+        LabsFactory::class,
       ]);
 
   }

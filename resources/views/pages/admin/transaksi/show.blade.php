@@ -95,11 +95,12 @@ Admin Inventaris
               @endphp
 {{-- <td>{{ $no++ }}</td> --}}
 
-               @foreach ( $loanitem as $item) 
+               @foreach ( $loanitem as $loan) 
                
                <tr>
-                 <td>{{ $item->id }}</td>
-                 <td>{{ $item->inventory }}</td>
+                 <td>{{ $loan->id }}</td>
+                 <td>{{ $loan->inventory->nama }}</td>
+                 <td>{{ $loan->total }}</td>
                  {{-- <td>{{ $items->nama }}</td>
                  <td>{{ $items->jumlah }}</td> --}}
                  {{-- <td>{{ }}</td> --}}

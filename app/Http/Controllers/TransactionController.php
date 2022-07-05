@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LoanItem;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Requests\TransactionRequest;
+use App\Models\LoanItem;
+use App\Models\Inventory;
 
 class TransactionController extends Controller
 {
@@ -14,7 +15,7 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Transaction $transaction)
     {
         $transaction = Transaction::with(['user'])->get();
         
@@ -61,9 +62,16 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        $loanitem =  loanItem::with(['inventory'])->where('transactions_id', $transaction->id);
-        
-        return view('pages.admin.transaksi.show', compact('transaction', 'loanitem'));
+      
+      $loanItem =  LoanItem::with(['inventory'])->where('transactions_id', $transaction->id)->get();
+      // $transaction = Transaction::find($transaction);
+      // $apa = LoanItem::find($loanItem);
+      // dd($apa);
+      // dd($transaction);
+      return view('pages.admin.transaksi.show',[
+        'transaction' => $transaction,
+        'loanitem' => $loanItem
+      ]);
     }
 
     /**

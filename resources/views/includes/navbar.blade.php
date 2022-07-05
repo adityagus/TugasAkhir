@@ -33,7 +33,15 @@
           <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
             <div class="user-menu d-flex align-items-center">
               <div class="user-name me-3">
-                <h6 class="mb-0 text-gray-600 container-sm:visually-hidden">Aditya Gustian</h6>
+                <h6 class="mb-0 text-gray-600 container-sm:visually-hidden">
+                  @auth
+                  {{ Auth::user()->name }}
+                  {{ Auth::user()->nim }}
+                  @endauth
+                  @guest
+                      <a href="{{ url('login') }}">Login</a>
+                  @endguest
+                </h6>
               </div>
               <div class="user-img d-flex align-items-center">
                 <div class="avatar avatar-md">

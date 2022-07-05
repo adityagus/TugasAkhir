@@ -39,94 +39,30 @@
                   <th>Nama Alat & Bahan</th>
                   <th>Kategori</th>
                   <th>Ketersedian</th>
-                  <th>Jenis</th>
+                  <th>Lab</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
+                @forelse ($items as $item)
                 <tr>
-                  <td>1</td>
-                  <td>Kapasitor</td>
-                  <td>Mudah</td>
-                  <td>12</td>
-                  <td>TE</td>
+                  <td>{{ $item->id }}</td>
+                  <td>{{ $item->nama }}</td>
+                  <td>{{ $item->category_items->namakategori }}</td>
+                  <td>{{ $item->jumlah }}</td>
+                  <td>{{ $item->labs->name }}</td>
                   <td>
                     <span class='d-flex d-inline-block'>
-                      <button class='btn btn-primary mx-1'>Detail</button>
+                      <a href='{{ route('login') }}'>
+                        <button class='btn btn-primary mx-1'  type="submit">Detail</button>
+                      </a>
                       <button class='btn btn-success mx-1'>Pinjam</button>
                     </span>
                   </td>
                 </tr>
-                
-                <tr>
-                  <td>1</td>
-                  <td>Kapasitor</td>
-                  <td>Mudah</td>
-                  <td>12</td>
-                  <td>TE</td>
-                  <td>
-                    <span class='d-flex d-inline-block'>
-                      <button class='btn btn-primary mx-1'>Detail</button>
-                      <button class='btn btn-success mx-1'>Pinjam</button>
-                    </span>
-                  </td>
-                </tr>
-                
-                <tr>
-                  <td>1</td>
-                  <td>Kapasitor</td>
-                  <td>Mudah</td>
-                  <td>12</td>
-                  <td>TE</td>
-                  <td>
-                    <span class='d-flex d-inline-block'>
-                      <button class='btn btn-primary mx-1'>Detail</button>
-                      <button class='btn btn-success mx-1'>Pinjam</button>
-                    </span>
-                  </td>
-                </tr>
-                
-                <tr>
-                  <td>1</td>
-                  <td>Kapasitor</td>
-                  <td>Mudah</td>
-                  <td>12</td>
-                  <td>TE</td>
-                  <td>
-                    <span class='d-flex d-inline-block'>
-                      <button class='btn btn-primary mx-1'>Detail</button>
-                      <button class='btn btn-success mx-1'>Pinjam</button>
-                    </span>
-                  </td>
-                </tr>
-                
-                <tr>
-                  <td>1</td>
-                  <td>Kapasitor</td>
-                  <td>Mudah</td>
-                  <td>12</td>
-                  <td>TE</td>
-                  <td>
-                    <span class='d-flex d-inline-block'>
-                      <button class='btn btn-primary mx-1'>Detail</button>
-                      <button class='btn btn-success mx-1'>Pinjam</button>
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Kapasitor</td>
-                  <td>Mudah</td>
-                  <td>12</td>
-                  <td>TE</td>
-                  <td>
-                    <span class='d-flex d-inline-block'>
-                      <button class='btn btn-primary mx-1'>Detail</button>
-                      <button class='btn btn-success mx-1'>Pinjam</button>
-                    </span>
-                  </td>
-                </tr>
-                
+                @empty
+                    
+                @endforelse
                 
                 
                 

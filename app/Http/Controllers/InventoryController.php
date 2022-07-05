@@ -22,7 +22,7 @@ class InventoryController extends Controller
         
         // "posts" =>  Post::all()
          
-        $items = Inventory::with(['category_items'])->get();
+        $items = Inventory::with(['category_items', 'labs'])->get();
         
         // dd($items);
         return view('pages.admin.inventory.index', [
