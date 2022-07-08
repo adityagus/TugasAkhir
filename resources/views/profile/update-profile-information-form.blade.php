@@ -84,8 +84,8 @@
     </x-slot>
 
     <x-slot name="actions">
-        <x-jet-action-message class="mr-3" on="saved">
-            {{ __('Saved.') }}
+        <x-jet-action-message class="mr-3" on="saved" redirect="ur;">
+          <span class="badge bg-success">Berhasil Di simpan</span>
         </x-jet-action-message>
 
         <x-jet-button wire:loading.attr="disabled" wire:target="photo">

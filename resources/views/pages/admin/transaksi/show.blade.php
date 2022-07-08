@@ -22,7 +22,7 @@ Admin Inventaris
               <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
               <li class="breadcrumb-item"><a href="{{ route('admin.transaction.index') }}">Peminjaman</a></li>
               <li class="breadcrumb-item active" aria-current="page">
-                transaksi &raquo; #{{ $transaction->id }} <span class='text-primary'>{{ $transaction->nama }}</span>
+                transaksi &raquo; #{{ $transaction->id }} <span class='text-primary'>{{ $transaction->name }}</span>
               </li>
             </ol>
           </nav>
@@ -35,7 +35,7 @@ Admin Inventaris
           <table class="table table-bordered middle">
             <tr>
               <th class="px-6 py-4 text-end">Nama</th>
-              <td class="px-6 py-4">{{ $transaction->nama }}</td>
+              <td class="px-6 py-4">{{ $transaction->name }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Nim</th>

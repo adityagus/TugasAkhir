@@ -22,7 +22,7 @@ class Inventory extends Model
       return $this->belongsTo(lab::class, 'labs_id', 'id' );
     }
     public function loan_items(){
-      return $this->belongsTo(LoanItem::class, 'id', 'inventory_id' );
+      return $this->hasMany(LoanItem::class, 'id', 'inventory_id' );
     }
     
 }

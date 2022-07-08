@@ -21,7 +21,7 @@
       
     <div id="main" class='layout-navbar'>
       
-      @include('includes.navbar')
+      @include('includes.admin.navbar-main')
       {{-- @include('includes.message') --}}
       @yield('content')
   </div>

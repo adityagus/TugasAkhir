@@ -39,6 +39,7 @@
                   <th>Nama Alat & Bahan</th>
                   <th>Kategori</th>
                   <th>Ketersedian</th>
+                  {{-- <th>Total</th> --}}
                   <th>Lab</th>
                   <th>Aksi</th>
                 </tr>
@@ -46,18 +47,33 @@
               <tbody>
                 @forelse ($items as $item)
                 <tr>
-                  <td>{{ $item->id }}</td>
+                  <td>{{ $item->nama }}</td>
                   <td>{{ $item->nama }}</td>
                   <td>{{ $item->category_items->namakategori }}</td>
                   <td>{{ $item->jumlah }}</td>
+                  {{-- @if ($item->loan_items->total == 0)
+                  <td>0</td>
+                      
+                  @else
+                  <td>{{ $item->loan_items->total }}</td>
+                      
+                  @endif --}}
                   <td>{{ $item->labs->name }}</td>
-                  <td>
-                    <span class='d-flex d-inline-block'>
+                  <td class="d-flex justify-content-center">
+                    <span class='d-flex d-inline-block px-2'>
                       <a href='{{ route('login') }}'>
                         <button class='btn btn-primary mx-1'  type="submit">Detail</button>
                       </a>
-                      <button class='btn btn-success mx-1'>Pinjam</button>
                     </span>
+                    <form action="{{ route('cart-add', $item->id) }}" method="POST" class="d-inline">
+                      @csrf
+                      <button class="btn btn-info"
+                      type="submit">
+                        
+
+                        Add to Cart
+                      </button>
+                    </form>
                   </td>
                 </tr>
                 @empty

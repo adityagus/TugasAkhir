@@ -42,32 +42,28 @@
                  </tr>
               </thead>
               <tbody>
-                  <tr>
-                  <!-- <td colspan='7'><center>No Data</center></td> -->
-                  <td>1.</td>
-                  <td>Resistor</td>
-                  <td>Sulit</td>
-                  <td>12 pcs</td>
-                  <td>Te</td>
-                  <td>Dipinjam</td>
-                  <td class='d-flex justify-content-center'>
-                    <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
-                    <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
-                  </td>
-                </tr>
+                @forelse ($items as $item)
+                    
                 <tr>
                   <!-- <td colspan='7'><center>No Data</center></td> -->
-                  <td>2.</td>
-                  <td>Resistor</td>
-                  <td>Sulit</td>
-                  <td>12 pcs</td>
-                  <td>Te</td>
-                  <td>Dipinjam</td>
+                  <td>{{ $item->id }}</td>
+                  <td>{{ $item->inventory->nama }}</td>
+                  <td>{{ $item->inventory->category_items->namakategori }}</td>
+                  <td>{{ $item->total }}</td>
+                  <td>{{ $item->inventory->labs->name }}</td>
+                  <td>{{ $item->transaction->status }}</td>
                   <td class='d-flex justify-content-center'>
                     <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
                     <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
                   </td>
                 </tr>
+                    
+                @empty
+                    <tr>
+                      <td colspan="8" class='text-center'>Data Kosong</td>
+                    </tr>
+                @endforelse
+
               </tbody>
               
             </table>
@@ -90,7 +86,7 @@
 <link rel="stylesheet" href="user/dist/assets/vendors/simple-datatables/style.css">
 @endpush
 
-@push('prepend-script')
+{{-- @push('prepend-script')
 <script src="{{ url('user/dist/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
 
 <script>
@@ -98,4 +94,4 @@
   let table1 = document.querySelector('#table1');
   let dataTable = new simpleDatatables.DataTable(table1);
 </script>
-@endpush
+@endpush --}}

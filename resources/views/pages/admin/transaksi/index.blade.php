@@ -59,7 +59,7 @@
                     
                 <tr>
                   <td>{{ $nomor++ }}</td>
-                  <td>{{ $item->nama}}</td>
+                  <td>{{ $item->name}}</td>
                   <td>{{ $item->phone }}</td>
                   <td>{{ $item->keperluan}}</td>
                   <td>{{ $item->laboratorium}}</td>

@@ -106,7 +106,7 @@ class InventoryController extends Controller
 
       $inventory->update($data);
 
-    return redirect()->route('admin.inventory.index');
+    return view('pages.admin.transaksi.index');
     }
 
     /**

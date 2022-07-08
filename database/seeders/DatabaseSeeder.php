@@ -17,15 +17,9 @@ class DatabaseSeeder extends Seeder
   public function run()
   {
     // \App\Models\User::factory(10)->create();
-
-    User::create([
-      'name' => 'Aditya Gustian',
-      'roles_id' => 1,
-      'email' => 'adityagustian11@gmail.com',
-      'password' => bcrypt('aditya123'),
-    ]);
-
-      $this->call([
+    
+    $this->call([
+        UserSeeder::class,
         InventoriesSeeder::class,
         RolesTableSeeder::class,
         CategoryTableSeeder::class,

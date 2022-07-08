@@ -21,20 +21,26 @@ use App\Http\Controllers\User\FrontendController;
   Route::get('/', [FrontendController::class, 'home'])
     ->name('index');
   Route::get('/peminjaman', [FrontendController::class, 'peminjaman'])
-    ->name('index');
+    ->name('peminjaman');
 
   
   Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     
     // Route::get('/', [DashboardController::class, 'index'])->name('index');
   
-  Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
-    ->name('index');
-  Route::get('/cart-peminjaman', [FrontendController::class, 'checkout'])
-    ->name('index');
-  Route::get('/checkout-success', [FrontendController::class, 'home'])
-    ->name('index');
-
+    Route::get('/cart', [FrontendController::class, 'cart'])
+    ->name('cart');
+    Route::post('/cart/{id}', [FrontendController::class, 'cartAdd'])
+    ->name('cart-add');
+    Route::delete('/cart/{id}', [FrontendController::class, 'cartDelete'])
+    ->name('cart-delete');
+    Route::post('/checkout-peminjaman', [FrontendController::class, 'checkout'])
+    ->name('checkout');
+    Route::get('/checkout-success', [FrontendController::class, 'success'])
+    ->name('success');
+    Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
+      ->name('pengembalian');
+    
 });
 
 Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
@@ -45,7 +51,7 @@ Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix
     'title' => 'approval'
   ]);
   Route::resource('transaction', TransactionController::class)->only([
-    'index', 'show', 'edit', 'update'
+    'index', 'show', 'edit', 'update', 'store'
   ]);
   Route::resource('user', UserController::class)->only([
     'index', 'edit', 'update', 'destroy'

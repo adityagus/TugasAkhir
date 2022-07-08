@@ -88,7 +88,7 @@ Create Inventaris
             </div>
 
             <div class="mb-2 d-grid gap-1">
-              <button class='btn btn-success w-full' type=''>Submit</button>
+              <button class='btn btn-success w-full' type='submit'>Submit</button>
             </div>
 
 

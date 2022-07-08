@@ -18,7 +18,7 @@ class TransactionController extends Controller
     public function index(Transaction $transaction)
     {
         $transaction = Transaction::with(['user'])->get();
-        
+        // dd($transaction);
         return view('pages.admin.transaksi.index', compact('transaction'));
     }
 
@@ -38,9 +38,9 @@ class TransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TransactionRequest $request, Transaction $transaction)
     {
-        //
+
     }
 
     /**
@@ -83,12 +83,10 @@ class TransactionController extends Controller
      */
     public function update(TransactionRequest $request, Transaction $transaction)
     {
-      $data= $request->all();
+      $data = $request->all();
       $transaction->update($data);
-      
+
       return redirect()->route('admin.transaction.index');
-      
-      
       
     }
 

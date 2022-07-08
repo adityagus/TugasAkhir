@@ -24,14 +24,14 @@
         <li class="sidebar-title">Manajemen</li>
 
 
-        <li class="sidebar-item {{ ($title === "peminjaman" ? "active" : "") }}">
+        <li class="sidebar-item {{ ($title == "peminjaman" || $title == "cart" ? "active" : "") }}">
           <a href="/peminjaman" class='sidebar-link'>
-            <img src="user/dist/assets/images/logo/peminjaman{{ $title !== "peminjaman" ? "-secondary" : "" }}.png" width='35px' alt="">
+            <img src="user/dist/assets/images/logo/peminjaman{{ $title !== "peminjaman" && $title !=='cart' ? "-secondary" : "" }}.png" width='35px' alt="">
             <span>Peminjaman</span>
           </a>
         </li>
 
-        <li class="sidebar-item {{ ($title === "pengembalian" ? "active" : "") }}">
+        <li class="sidebar-item {{ ($title == "pengembalian" ? "active" : "") }}">
           <a href="/pengembalian" class='sidebar-link'>
             <img src="user/dist/assets/images/logo/pengembalian{{ $title !== "pengembalian" ? "-secondary" : "" }}.png" width='35px' coloalt="">
             <span>Pengembalian</span>
