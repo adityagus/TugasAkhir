@@ -34,7 +34,15 @@ Admin Inventaris
             <tr>
               <th class="px-6 py-4 text-end align-middle">Gambar</th>
               <td class="px-6 py-4">
-                <img  class='img-thumbnail' src="{{ url('frontend/images/content/kapasitor.png') }}" alt="" style="height:160px;">
+                @forelse ($items as $item)
+
+                <img src="{{ Storage::url($item->image) }}" alt="alat dan bahan" style="width: 250px; height:160px" class="img-thumbnail">
+                
+                @empty
+                  
+                <img src="{{ 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt="alat dan bahan" style="width: 250px; height:160px" class="img-thumbnail">
+                
+                @endforelse
               </td>
             </tr>
             <tr>

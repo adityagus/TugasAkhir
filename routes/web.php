@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\User\FrontendController;
+use App\Http\Controllers\TransactionReturnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,9 +55,15 @@ Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix
   Route::resource('transaction', TransactionController::class)->only([
     'index', 'show', 'edit', 'update', 'store'
   ]);
+  Route::resource('return', TransactionReturnController::class)->only([
+    'index', 'show', 'edit', 'update', 'store'
+  ]);
   Route::resource('user', UserController::class)->only([
     'index', 'edit', 'update', 'destroy'
   ]);
+  Route::resource('gallery', GalleryController::class);
+  
+  
   // Route::resource('category', CategoryItemController::class); 
   // Route::resource('users', UserController::class); 
 

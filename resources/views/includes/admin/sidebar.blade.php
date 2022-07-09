@@ -36,7 +36,7 @@
               </a>
             </li>
             <li class="submenu-item">
-              <a href="#">
+              <a href="{{ route('admin.return.index') }}">
                 <i class="bi bi-file-arrow-down"></i>
                 &nbsp;<span>Pengembalian</span>
               </a>
@@ -53,7 +53,7 @@
         </li>
 
         <li class="sidebar-item ">
-          <a href="{{ route('admin.inventory.index') }}" class='sidebar-link'>
+          <a href="{{ route('admin.gallery.index') }}" class='sidebar-link'>
             <i class="bi bi-images"></i>
             <span>Gallery</span>
           </a>

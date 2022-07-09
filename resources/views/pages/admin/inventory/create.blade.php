@@ -30,8 +30,8 @@ Create Inventaris
     <section class="section">
       <div class="card">
         <div class="card-body">
-        
-         @if ($errors->any())
+
+          {{-- @if ($errors->any())
             <div class="mb-3" role="alert">
               <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
                 There's Something Wrong!!
@@ -46,8 +46,18 @@ Create Inventaris
               </p>
             </div>
             </div>
+          @endif --}}
+
+          @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
           @endif
-          
+
           <form action="{{ route('admin.inventory.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-2">
@@ -59,6 +69,16 @@ Create Inventaris
               <label for="nama" class="form-label">Nama Barang</label>
               <input type="text" class="form-control text-bold" name="nama" value="{{ old('nama') }}" id="nama" placeholder="Masukan Nama Barang">
             </div>
+
+            <div class="mb-4">
+              <label for="labs_id" class="">Name</label>
+              <select name="labs_id" id="status" required class="form-select">
+                <option value="1">TE</option>
+                <option value="2">TL</option>
+
+              </select>
+            </div>
+
 
             <div class="mb-2">
               <label for="namakategori" class="">Kategori </label>
@@ -72,9 +92,14 @@ Create Inventaris
               </select>
             </div>
 
+            <div class="form-group">
+              <label for="image">Image</label>
+              <input type="file" name="image" placeholder="Image">
+            </div>
+
             <div class="mb-2">
               <label for="deskripsii" class="form-label">Deskripsi</label>
-            <textarea name="deskripsi" type="text" class="form-control text-bold" id="deskripsii" placeholder="Masukan Deskripsi Barang" required>{!!  old('deskripsi')  !!}</textarea>
+              <textarea name="deskripsi" type="text" class="form-control text-bold" id="deskripsii" placeholder="Masukan Deskripsi Barang" required>{!!  old('deskripsi')  !!}</textarea>
             </div>
 
             <div class="mb-2">

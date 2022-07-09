@@ -5,12 +5,12 @@ namespace App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TransactionRequest extends FormRequest
+class GalleryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
-     * @return boolo
+     * @return bool
      */
     public function authorize()
     {
@@ -25,7 +25,9 @@ class TransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => 'required|string|in:PENDING,SUCCESS,FAILEDo,CANCEL'
+            'inventories_id' => 'required|integer|exists:inventories,id',
+            'image' => 'required|image'
+
         ];
     }
 }

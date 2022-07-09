@@ -11,7 +11,7 @@ class Inventory extends Model
     use HasFactory, SoftDeletes;
     
     protected $fillable = [
-      'id', 'category_id', 'labs_id', 'kd_brg', 'nama', 'deskripsi', 'slug', 'jumlah', 'satuan', 
+      'id', 'category_id', 'labs_id', 'kd_brg', 'nama', 'deskripsi', 'slug', 'jumlah', 'satuan', 'inventories_id'
     ];
     
     
@@ -25,4 +25,7 @@ class Inventory extends Model
       return $this->hasMany(LoanItem::class, 'id', 'inventory_id' );
     }
     
+    public function galleries(){
+      return $this->hasMany(Gallery::class, 'inventories_id', 'id');
+    }
 }
