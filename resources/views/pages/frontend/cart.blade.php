@@ -41,6 +41,65 @@ Checkout
       </ul>
     </div>
     @endif
+    
+      {{-- Start Cart Section --}}
+  <section class="section">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Checkout Item</h4>
+      </div>
+      <div class="card-body table-responsive">
+        <table class='table table-striped'>
+          <thead>
+            <tr>
+              <th>Nama Alat & Bahan</th>
+              <th>Kategori</th>
+              <th>Jumlah Dipinjam</th>
+              <th>Jenis</th>
+              <th class="">Aksi</th>
+            </tr>
+          </thead>
+          <tbody >
+            <div>
+              @forelse ($carts as $item)
+              <tr>
+                <!-- <td colspan='7'><center>No Data</center></td> -->
+                <td>{{ $item->inventory->nama }}</td>
+                <td>{{ $item->inventory->category_items->namakategori }}</td>
+                <td>{{ $item->inventory->jumlah }}</td>
+                <td>{{ $item->inventory->labs->name }}</td>
+                <td>
+                  <form action="{{ route('cart-delete', $item->id)  }}" method="post">
+                    @csrf
+                    @method("DELETE")
+                  <button class="btn btn-toggle shadow-none" onClick="cartDelete({{ $item->id }})">
+                    X
+                  </button>
+                </form>
+                </td>
+
+              </tr>
+
+              @empty
+              <td colspan="5" class='text-center'>
+                <h6>Oopps Transaksi Belum Ada</h6>
+                <a href="{{ route('peminjaman') }}" class="no-underline">Kembali</a>
+              </td>
+              @endforelse
+
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+
+
+  </section>
+
+  {{-- End Cart Section --}}
+
+    
     <form action="{{ route('checkout') }}" method="POST">
       @csrf
       @method('POST')
@@ -138,58 +197,6 @@ Checkout
   </section>
 
 
-  {{-- Start Cart Section --}}
-  <section class="section">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Checkout Item</h4>
-      </div>
-      <div class="card-body table-responsive">
-        <table class='table table-striped'>
-          <thead>
-            <tr>
-              <th>Nama Alat & Bahan</th>
-              <th>Kategori</th>
-              <th>Jumlah Dipinjam</th>
-              <th>Jenis</th>
-              <th class="">Aksi</th>
-            </tr>
-          </thead>
-          <tbody >
-            <div>
-              @forelse ($carts as $item)
-              <tr>
-                <!-- <td colspan='7'><center>No Data</center></td> -->
-                <td>{{ $item->inventory->nama }}</td>
-                <td>{{ $item->inventory->category_items->namakategori }}</td>
-                <td>{{ $item->inventory->jumlah }}</td>
-                <td>{{ $item->inventory->labs->name }}</td>
-                <td>
-                  <button class="btn btn-toggle shadow-none" onClick="cartDelete({{ $item->id }})">
-                    X
-                  </button>
-                </td>
-
-              </tr>
-
-              @empty
-              <td colspan="5" class='text-center'>
-                <h6>Oopps Transaksi Belum Ada</h6>
-                <a href="{{ route('peminjaman') }}" class="no-underline">Kembali</a>
-              </td>
-              @endforelse
-
-          </tbody>
-        </table>
-
-
-      </div>
-    </div>
-
-
-  </section>
-
-  {{-- End Cart Section --}}
 
 
 
