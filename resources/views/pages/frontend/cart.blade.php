@@ -41,65 +41,7 @@ Checkout
       </ul>
     </div>
     @endif
-    
-      {{-- Start Cart Section --}}
-  <section class="section">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Checkout Item</h4>
-      </div>
-      <div class="card-body table-responsive">
-        <table class='table table-striped'>
-          <thead>
-            <tr>
-              <th>Nama Alat & Bahan</th>
-              <th>Kategori</th>
-              <th>Jumlah Dipinjam</th>
-              <th>Jenis</th>
-              <th class="">Aksi</th>
-            </tr>
-          </thead>
-          <tbody >
-            <div>
-              @forelse ($carts as $item)
-              <tr>
-                <!-- <td colspan='7'><center>No Data</center></td> -->
-                <td>{{ $item->inventory->nama }}</td>
-                <td>{{ $item->inventory->category_items->namakategori }}</td>
-                <td>{{ $item->inventory->jumlah }}</td>
-                <td>{{ $item->inventory->labs->name }}</td>
-                <td>
-                  <form action="{{ route('cart-delete', $item->id)  }}" method="post">
-                    @csrf
-                    @method("DELETE")
-                  <button class="btn btn-toggle shadow-none" onClick="cartDelete({{ $item->id }})">
-                    X
-                  </button>
-                </form>
-                </td>
 
-              </tr>
-
-              @empty
-              <td colspan="5" class='text-center'>
-                <h6>Oopps Transaksi Belum Ada</h6>
-                <a href="{{ route('peminjaman') }}" class="no-underline">Kembali</a>
-              </td>
-              @endforelse
-
-          </tbody>
-        </table>
-
-
-      </div>
-    </div>
-
-
-  </section>
-
-  {{-- End Cart Section --}}
-
-    
     <form action="{{ route('checkout') }}" method="POST">
       @csrf
       @method('POST')
@@ -117,7 +59,7 @@ Checkout
                 <div class="form-group">
                   <label for="nam">Nama</label>
                   {{-- <input type='hidden' readonly value="{{ Auth::user()->name }}" name="nama"> --}}
-                  <input readonly value="{{ Auth::user()->name }}" type="text" name="name" class="form-control" id="nama" placeholder="{{ Auth::user()->name }}"  required>
+                  <input readonly value="{{ Auth::user()->name }}" type="text" name="name" class="form-control" id="nama" placeholder="{{ Auth::user()->name }}" required>
                 </div>
 
                 <div class="form-group">
@@ -171,8 +113,8 @@ Checkout
                 <label for="mata-kuliah">Laboratorium</label>
                 <input type="text" name="laboratorium" class="form-control" id="mata-kuliah" placeholder="Masukan Mata Kuliah Anda">
               </div>
-              
-              
+
+
 
               {{-- <div class="form-group">
                   <label for="disabledInput">Readonly Input</label>
@@ -186,18 +128,69 @@ Checkout
             </div>
 
           </div>
-          <div class="d-flex justify-content-between align-content-center mt-4 table-footer">
-            <h4>Alat yang anda pinjam ({{ $inCart }})</h4>
-            <button class='btn btn-primary px-lg-5 py-2 ' type="submit">Checkout</button>
-          </div>
-          </form>
+
 
         </div>
   </div>
   </section>
+  </form>
 
 
-
+      {{-- Start Cart Section --}}
+      <section class="section">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Checkout Item</h4>
+          </div>
+          <div class="card-body table-responsive">
+            <table class='table table-striped'>
+              <thead>
+                <tr>
+                  <th>Nama Alat & Bahan</th>
+                  <th>Kategori</th>
+                  <th>Jumlah Dipinjam</th>
+                  <th>Jenis</th>
+                  <th class="">Aksi</th>
+                </tr>
+              </thead>
+              <tbody >
+                <div>
+                  @forelse ($carts as $item)
+                  <tr>
+                    <!-- <td colspan='7'><center>No Data</center></td> -->
+                    <td>{{ $item->inventory->nama }}</td>
+                    <td>{{ $item->inventory->category_items->namakategori }}</td>
+                    <td>{{ $item->inventory->jumlah }}</td>
+                    <td>{{ $item->inventory->labs->name }}</td>
+                    <td>
+                      <button class="btn btn-toggle shadow-none" onClick="cartDelete({{ $item->id }})">
+                        X
+                      </button>
+                    </td>
+    
+                  </tr>
+    
+                  @empty
+                  <td colspan="5" class='text-center'>
+                    <h6>Oopps Transaksi Belum Ada</h6>
+                    <a href="{{ route('peminjaman') }}" class="no-underline">Kembali</a>
+                  </td>
+                  @endforelse
+    
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-between align-content-center mt-4 table-footer">
+              <h4>Alat yang anda pinjam ({{ $inCart }})</h4>
+              <button class='btn btn-primary px-lg-5 py-2 ' type="submit">Checkout</button>
+            </div>
+    
+          </div>
+        </div>
+    
+    
+      </section>
+    
+      {{-- End Cart Section --}}
 
 
   <footer>
@@ -218,17 +211,20 @@ Checkout
 
 @push('addon-script')
 <script>
+  $(document).on('click', '#delete_cart')
   function cartDelete($id) {
+    confirm('apakah anda yakin untuk menghapus data?')
     $.ajax({
-      type: 'get'
-      , url: "{{ url('cart') }}/" + id
-      , data: "name=" + nama
+      type: 'delete'
+      , url: "{{ url('cart-delete') }}/" + id
+      , data: "id": id,
+              "_token": "{{csrf_token()}}"
       , succes: function(data) {
         $(".btn-close").click();
         read()
-      }
+      };
 
-    })
+    });
   }
 
 </script>
