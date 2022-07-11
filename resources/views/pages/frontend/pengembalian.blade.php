@@ -9,6 +9,15 @@ Pengembalian Alat
   <div class="page-heading">
     <div class="page-title">
       <div class="row">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif 
         <div class="col-12 col-md-6 order-md-1 order-last">
           <h3>Pengembalian Alat dan Bahan</h3>
           <p class="text-subtitle text-muted">Alat dan bahan yang anda pinjam yakk</p>
@@ -42,7 +51,9 @@ Pengembalian Alat
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <form>
+                        <form action="{{ route('return-success') }}" method="POST">
+                          @csrf
+                          @method("POST")
                           <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Bagaimana Kondisi Sesudah dipinjam?</label>
                             <div class="d-flex">
@@ -68,7 +79,7 @@ Pengembalian Alat
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Send message</button>
+                        <button type="submit" class="btn btn-primary">Send message</button>
                       </div>
                     </div>
                   </div>
@@ -90,8 +101,9 @@ Pengembalian Alat
               </tr>
             </thead>
             <tbody>
-              @forelse ($items as $item)
-
+              @foreach ($items as $item)
+              @if ($item->transaction->status == 'SUCCESS')
+                  
               <tr>
                 <!-- <td colspan='7'><center>No Data</center></td> -->
                 <td>{{ $item->id }}</td>
@@ -105,12 +117,9 @@ Pengembalian Alat
                   <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
                 </td>
               </tr>
-
-              @empty
-              <tr>
-                <td colspan="8" class='text-center'>Data Kosong</td>
-              </tr>
-              @endforelse
+              
+              @endif
+              @endforeach
 
             </tbody>
 

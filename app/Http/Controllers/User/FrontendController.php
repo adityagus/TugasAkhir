@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\LoanItem;
 use App\Models\Inventory;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\TransactionReturn;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CheckoutRequest;
-use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CheckoutRequest;
+use App\Http\Requests\CheckoutReturnRequest;
 
 class FrontendController extends Controller
 { 
@@ -112,15 +114,51 @@ class FrontendController extends Controller
       
       // payment process
       
-      
-      
     }
+    
+    public function return(CheckoutReturnRequest $request){
+      return $request->all();
+       
+       //Get Carts Data 
+       $carts = LoanItem::with('inventory')->where('users_id', Auth::user()->id)->get();
+       
+       //Add to Transaction data 
+       $data['nama'] = Auth::user()->name;
+       $data['users_id'] = Auth::user()->id;
+       // $data['total_price'] = $carts->sum('inventory.jumlah');
+       
+       //Create transaction item 
+       $transactionsreturn = TransactionReturn::create($data);
+       
+       //Create transaction item 
+       foreach ($carts as $cart ) {
+         $items[] = LoanItem::create([
+           'transactions_id' => $transactionsreturn->id,
+           'users_id' => $cart->users_id,
+           'inventory_id' => $cart->inventories_id
+         ]);
+       }
+       
+       //Delete cart after transaction 
+       Cart::where('users_id', Auth::user()->id)->delete();
+       
+       return redirect()->route('success');
+       
+       //Configuration 
+       
+       // Setup Variabel midtrans
+       
+       // payment process
+       
+       
+       
+     }
     
     
     
     
     public function details(request $request){
-      $data = Inventory::with('category_items', 'labs', 'loan_items')->get();
+      $data = DB::with('category_items', 'labs', 'loan_items')->get();
       return view('pages.frontend.peminjaman', [
         'items' => $data, 
         "title" => "peminjaman"

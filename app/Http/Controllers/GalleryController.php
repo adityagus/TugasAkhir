@@ -105,7 +105,7 @@ class GalleryController extends Controller
       $item = Gallery::findOrFail($id);
       $item->update($data);
       
-      return redirect()->route('gallery.index');
+      return redirect()->route('admin.gallery.index');
       
     }
 
@@ -120,6 +120,6 @@ class GalleryController extends Controller
         $item = Gallery::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('gallery.index');
+        return redirect()->route('admin.gallery.index');
     }
 }
