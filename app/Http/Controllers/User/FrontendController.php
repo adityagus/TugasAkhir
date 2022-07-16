@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Gallery;
 use App\Models\LoanItem;
 use App\Models\Inventory;
 use App\Models\Transaction;
@@ -157,12 +158,19 @@ class FrontendController extends Controller
     
     
     
-    public function details(request $request){
-      $data = DB::with('category_items', 'labs', 'loan_items')->get();
-      return view('pages.frontend.peminjaman', [
-        'items' => $data, 
-        "title" => "peminjaman"
+    public function details(request $request, $slug){
+      
+      $item = Inventory::with(['galleries'])->where('slug', $slug)->firstOrFail();
+      $inCarts = Cart::where('users_id', Auth::user()->id)->count();
+      
+      
+      // dd($item);
+      return view('pages.frontend.detail', [
+        'inventory' => $item,
+        "title" => "peminjaman",
+        'inCart' => $inCarts
       ]);
+      
     }
     
     public function pengembalian(request $request){

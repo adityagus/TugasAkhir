@@ -6,13 +6,14 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between">
-            <h1 class="h3 mb-0 text-gray-800">Paket Travel</h1>
+            <h1 class="h3 mb-0 text-gray-800"> Gallery Inventory</h1>
             <a href="{{ route('admin.gallery.create') }}" class="btn sm btn-primary shadow-sm">
-              <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Paket Travel
+              <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Gallery Inventory
             </a>
         </div>
 
 
+        <div class="card my-4">
         <div class="row">
           <div class="card-body">
             <div class="table-responsive">
@@ -56,6 +57,7 @@
 
               </table>
             </div>
+          </div>
           </div>
         </div>
 

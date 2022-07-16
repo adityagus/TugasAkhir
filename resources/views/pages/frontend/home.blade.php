@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+    Sistem Informasi Peminjaman - Elektro
+@endsection
+
 @section('content')
 
 

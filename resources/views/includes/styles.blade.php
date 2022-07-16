@@ -11,5 +11,5 @@
     <!-- <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css"> -->
     <link rel="stylesheet" href="{{ url('user/dist/assets/css/app.css') }}">
     
-    <link rel="shortcut icon" href="{{ url('user/dist/assets/images/favicon.svg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url('favicon.ico') }}" type="image/x-icon">
     <!-- STOP STYLE -->

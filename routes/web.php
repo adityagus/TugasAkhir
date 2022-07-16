@@ -24,6 +24,8 @@ use App\Http\Controllers\TransactionReturnController;
     ->name('index');
   Route::get('/peminjaman', [FrontendController::class, 'peminjaman'])
     ->name('peminjaman');
+  Route::get('/details/{slug}', [FrontendController::class, 'details'])
+    ->name('details');
 
   
   Route::middleware(['auth:sanctum', 'verified'])->group(function () {

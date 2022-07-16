@@ -17,7 +17,7 @@ Pengembalian Alat
             @endforeach
           </ul>
         </div>
-        @endif 
+        @endif
         <div class="col-12 col-md-6 order-md-1 order-last">
           <h3>Pengembalian Alat dan Bahan</h3>
           <p class="text-subtitle text-muted">Alat dan bahan yang anda pinjam yakk</p>
@@ -25,7 +25,7 @@ Pengembalian Alat
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
               <li class="breadcrumb-item active" aria-current="page">Pengembalian</li>
             </ol>
           </nav>
@@ -38,6 +38,9 @@ Pengembalian Alat
           <div class="d-flex justify-content-between">
             <div class="div">
               <h4 class=''>Alat Yang Anda Pinjam</h4>
+              @unless (Auth::check())
+              You are not signed in.
+              @endunless
             </div>
             <div class="bd-highlight">
               <form action="">
@@ -103,7 +106,7 @@ Pengembalian Alat
             <tbody>
               @foreach ($items as $item)
               @if ($item->transaction->status == 'SUCCESS')
-                  
+
               <tr>
                 <!-- <td colspan='7'><center>No Data</center></td> -->
                 <td>{{ $item->id }}</td>
@@ -117,7 +120,7 @@ Pengembalian Alat
                   <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
                 </td>
               </tr>
-              
+
               @endif
               @endforeach
 

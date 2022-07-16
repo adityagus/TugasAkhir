@@ -54,7 +54,6 @@ Checkout
             <tr>
               <th>Nama Alat & Bahan</th>
               <th>Kategori</th>
-              <th>Jumlah Dipinjam</th>
               <th>Jenis</th>
               <th class="">Aksi</th>
             </tr>
@@ -66,7 +65,7 @@ Checkout
                 <!-- <td colspan='7'><center>No Data</center></td> -->
                 <td>{{ $item->inventory->nama }}</td>
                 <td>{{ $item->inventory->category_items->namakategori }}</td>
-                <td>{{ $item->inventory->jumlah }}</td>
+                <td>{{ $item->inventory->peminjaman }}</td>
                 <td>{{ $item->inventory->labs->name }}</td>
                 <td>
                   <form action="{{ route('cart-delete', $item->id)  }}" method="post">
