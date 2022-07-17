@@ -72,6 +72,7 @@ Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix
   Route::resource('gallery', GalleryController::class);
   
   
+  
   // Route::resource('category', CategoryItemController::class); 
   // Route::resource('users', UserController::class); 
 

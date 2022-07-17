@@ -14,7 +14,7 @@
 </head>
 <body>
   <section class="kop-surat" id="kopSurat">
-    <table   width='100%'  align="center">
+    <table  width='100%'  align="center">
       <tr>
         <td width='10px' class='gambar'>
           {{-- {{ url('user/assets/images/logo/logo.png') }} --}}
@@ -29,7 +29,7 @@
           <p>Telp. (0542) 860895, 862305 Fax. 861107</p>
           <p>Email: admin@poltkeba.ac.id Web:http://www.poltkeba.ac.id</p>
         </td>
-      </tr> 
+      </tr>
       <tr>
         <td colspan="2">
           <hr>
@@ -43,14 +43,7 @@
         </td>
       </tr>
       <tr>
-        @php
-            // date_default_timezone_set('Asia/Makassar');
-            $getTime = date("j F Y");
-        @endphp
-        
-        <td colspan="2">
-          Periode : {{ $getTime }}
-        </td>
+        <td>Periode :</td>
       </tr>
     </table>
 
