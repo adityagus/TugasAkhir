@@ -28,19 +28,31 @@ Admin Inventaris
     </div>
     <section class="section">
       <div class="card">
-
-        <div class="card-header">
-            @if (session('success'))
-            <div class="alert alert-success p-2">
-              {{ session('success') }}
-            </div>
-            @endif
-
-          <a href="{{ route('admin.inventory.create') }}">
-            <button class='btn btn-primary rounded'>
-              <i class='bi bi-plus bi-sub'></i>Tambah Barang
-            </button>
-          </a>
+        @if (session('success'))
+        <div class="alert alert-success p-2">
+          {{ session('success') }}
+        </div>
+        @endif
+        
+        <div class="card-header d-flex justify-content-between">
+          <div class="">
+            <a href="{{ route('admin.inventory.create') }}">
+              <button class='btn btn-primary btn-opacity-70 rounded'>
+                <i class='bi bi-plus bi-sub'></i>Tambah Barang
+              </button>
+            </a>
+          </div>
+          <div class="export">
+            <a href="{{ route('admin.cetakdatabarang') }}" target="_blank">
+              <button class='btn-red'>
+                Export PDF &nbsp;  <i class="bi bi-file-earmark-arrow-down "></i>
+              </button>
+            </a>
+          </div>
+          
+          
+          
+          
         </div>
         <div class="card-body">
 
@@ -138,6 +150,16 @@ Admin Inventaris
 
 @push('prepend-script')
 <link rel="stylesheet" href="{{ url('user/dist/assets/vendors/simple-datatables/style.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 @endpush
 
 @push('prepend-script')
@@ -148,10 +170,14 @@ Admin Inventaris
   let table1 = document.querySelector('#table1');
   let dataTable = new simpleDatatables.DataTable(table1, {
     "oLanguage": {
-      "sEmptyTable": "No data available in table"
+      "sEmptyTable": "Data Tidak ada",
+      "button" : ['copy', 'csv', 'excel', 'pdf', 'print']
     }
-  });
+});
   // let dataTable1 = new noRows.DataTable(table1)->'tidak ada';
   
 </script>
+
+
+
 @endpush

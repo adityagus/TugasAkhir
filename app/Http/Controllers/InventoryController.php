@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Inventory;
-use App\Models\CategoryItem;
+use Mpdf\Mpdf;
+use App\Models\Gallery;
 use Illuminate\Http\DB;
+use App\Models\Inventory;
+use Illuminate\Support\Str;
+use App\Models\CategoryItem;
+use Illuminate\Http\Request;
 use App\Http\Request\InventoryRequest;
 use App\Http\Requests\InventoryRequest as RequestsInventoryRequest;
-use App\Models\Gallery;
-use Illuminate\Support\Str;
 
 class InventoryController extends Controller
 {
@@ -34,6 +35,13 @@ class InventoryController extends Controller
         
         
       }
+      
+    public function dataBarang(){
+      $mpdf = new Mpdf;
+      $mpdf->WriteHTML('<h1>Hello World</h1>');
+      $mpdf->output();
+      
+    }  
 
     /**
      * Show the form for creating a new resource.

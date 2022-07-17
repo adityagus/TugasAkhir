@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\cetak\CetakController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GalleryController;
@@ -28,7 +29,6 @@ use App\Http\Controllers\TransactionReturnController;
     ->name('details');
 
   
-  Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     
     // Route::get('/', [DashboardController::class, 'index'])->name('index');
   
@@ -49,12 +49,14 @@ use App\Http\Controllers\TransactionReturnController;
     Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
       ->name('pengembalian');
     
-});
 
 Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
 
   // Route::get('/', [DashboardController::class, 'index'])->name('index');
 
+  Route::get('/cetakdatabarang', [CetakController::class, 'dataBarang'])
+  ->name('cetakdatabarang');
+  
   Route::resource('inventory', InventoryController::class, [
     'title' => 'approval'
   ]);

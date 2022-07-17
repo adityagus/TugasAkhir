@@ -21,7 +21,7 @@ class FrontendController extends Controller
     public function home(Request $request){
       
         if ($request->user()) {
-          $loanItem = LoanItem::with(['inventory', 'transaction'])->where('users_id', Auth::user()->id)->get();
+          $loanItem = LoanItem::with(['inventory', 'transaction'])->get();
         }else {
           $loanItem = LoanItem::with(['inventory'])->get();
       }
@@ -131,7 +131,7 @@ class FrontendController extends Controller
        //Create transaction item 
        $transactionsreturn = TransactionReturn::create($data);
        
-       //Create transaction item 
+       //Create transaction item graph
        foreach ($carts as $cart ) {
          $items[] = LoanItem::create([
            'transactions_id' => $transactionsreturn->id,

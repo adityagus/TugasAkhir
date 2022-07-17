@@ -12,4 +12,6 @@
     <link rel="stylesheet" href="{{ url('user/dist/assets/css/app.css') }}">
     
     <link rel="shortcut icon" href="{{ url('favicon.ico') }}" type="image/x-icon">
+    
+    
     <!-- STOP STYLE -->
