@@ -38,7 +38,7 @@ class FrontendController extends Controller
     }
     
     public function peminjaman(request $request){
-      $inCarts = Cart::where('users_id', Auth::user()->id)->count();
+      $inCarts = Cart::count();
         $data = Inventory::with('category_items', 'labs', 'loan_items')->get();
         // dd($data);
       return view('pages.frontend.peminjaman', [

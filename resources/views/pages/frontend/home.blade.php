@@ -10,12 +10,40 @@
 <div class="px-5 pb-5">
   <div class="page-heading">
     <h3>Dashboard</h3>
-    <h6>Halo, Selamat datang
+    <h6>Daftar Mahasiswa Jurusan Teknik Elektro
       @auth
       {{ Auth::user()->name }}
       @endauth
   </div>
   <div class="page-content">
+    <section class="list-mahasiswa">
+      <div class="row">
+        <div class="card col-12 col-md-6 order-md-1 order-last">
+          <div class="display d-flex">
+            <div class="img">
+              <img src="{{ url('user\dist\assets\images\faces\1.jpg') }}" alt="" class="img-thumbnail my-2" width="150px">
+            </div>
+            <div class="descriptions">
+              <h5>ADITYA GUSTIAN</h5>
+              <h6>9302019028</h6>
+              <h6>TEKNIK ELEKTRONIKA</h6>
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-12 col-md-6 order-md-2 order-first d-flex" >
+          <div class="col-9 form-group ">
+          <input type="text" class="form-control " placeholder="Masukan Daftar Mahasiswa">
+          </div>
+          <div class="col-2">
+            <button class="btn-cari">Cari...</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+    
+    
     <section class="row">
       <div class="col-12">
         <div class="row">

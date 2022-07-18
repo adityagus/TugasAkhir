@@ -13,5 +13,7 @@
     
     <link rel="shortcut icon" href="{{ url('favicon.ico') }}" type="image/x-icon">
     
+    <link rel="stylesheet" href="{{ url('frontend/styles/style_main.css') }}">
+    
     
     <!-- STOP STYLE -->
