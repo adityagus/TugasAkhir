@@ -36,17 +36,21 @@
 
     </div>
   </tbody>
+
 </table>
 <script>
-
+  
   $(function() {
+    
     $(document).ready(function(){
       read()
     });
+
     
     function read() {
       $.get("{{ url('read') }}", {}, function(carts,status){
         $("#read").html(carts);
+        
       })
     }
     $.ajaxSetup({
@@ -69,10 +73,13 @@
             type: 'delete',
             dataType: 'json',
             success: function(carts) {
-            read();
+            read();  
+            const h4 = document.querySelector('#total');
+            h4.innerHTML = ("Alat yang anda pinjam ({{ $inCart-1 }})");
           }
           , error: function(jqXhr, textStatus, errorMessage) {
             $("p").append("Delete request is Fail.");
+            
           }
 
         });

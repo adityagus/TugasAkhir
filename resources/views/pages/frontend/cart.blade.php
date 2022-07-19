@@ -146,9 +146,10 @@ Checkout
           <div id="read""></div>
 
             <div class="d-flex justify-content-between align-content-center mt-4 table-footer">
-              <h4 id='total'></h4>
+              <h4 id='total'>Alat yang anda pinjam ({{ $inCart }})</h4>
               <button class='btn btn-primary px-lg-5 py-2 ' type="submit">Checkout</button>
             </div>
+
 
         </div>
   </div>

@@ -86,7 +86,7 @@ class TransactionController extends Controller
       $data = $request->all();
       $transaction->update($data);
 
-    return redirect()->route('admin.transaction.index');
+      return redirect()->route('admin.transaction.index');
       
     }
 
