@@ -5,7 +5,7 @@ Checkout
 @endsection
 
 @section('content')
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div id="main-content">
 
@@ -64,23 +64,23 @@ Checkout
 
                 <div class="form-group">
                   <label for="nama-peminjam">Nim</label>
-                  <input type="text" name="nim" class="form-control" id="nama-peminjam" placeholder='Masukan Nama Anda' required>
+                  <input type="text" name="nim" class="form-control" id="nama-peminjam" placeholder='Masukan Nama Anda' value='{{ old('nim') }}' required>
                 </div>
 
                 <div class="form-group">
                   <label for="kelas-peminjam">Kelas</label>
-                  <input type="text" name="kelas" class="form-control" id="kelas-peminjam" placeholder="Masukan Kelas Anda" required>
+                  <input type="text" name="kelas" class="form-control" id="kelas-peminjam" placeholder="Masukan Kelas Anda" value='{{ old('kelas') }}' required>
                 </div>
 
                 <div class="form-group">
                   <label for="phone">No. Telp</label>
-                  <input type="text" name="phone" class="form-control" id="phone" placeholder="Masukan Kelas Anda">
+                  <input type="text" name="phone" class="form-control" id="phone" placeholder="Masukan Kelas Anda" value='{{ old('phone') }}' required>
                 </div>
 
                 <div class="form-group">
                   <label for="mata-kuliah">Keperluan Alat</label>
                   <fieldset class="form-group">
-                    <select class="form-select" name='keperluan' id="basicSelect">
+                    <select class="form-select" name='keperluan' id="basicSelect" value='{{ old('keperluan') }}'>
                       <option value="PENELITIAN">Penelitian</option>
                       <option value="PRAKTIKUM">Praktikum</option>
                       <option value="PKM">PKM</option>
@@ -130,10 +130,10 @@ Checkout
           </div>
 
 
+
         </div>
-  </div>
-  </section>
-  </form>
+      </section>
+
 
 
       {{-- Start Cart Section --}}
@@ -143,54 +143,20 @@ Checkout
             <h4 class="card-title">Checkout Item</h4>
           </div>
           <div class="card-body table-responsive">
-            <table class='table table-striped'>
-              <thead>
-                <tr>
-                  <th>Nama Alat & Bahan</th>
-                  <th>Kategori</th>
-                  <th>Jumlah Dipinjam</th>
-                  <th>Jenis</th>
-                  <th class="">Aksi</th>
-                </tr>
-              </thead>
-              <tbody >
-                <div>
-                  @forelse ($carts as $item)
-                  <tr>
-                    <!-- <td colspan='7'><center>No Data</center></td> -->
-                    <td>{{ $item->inventory->nama }}</td>
-                    <td>{{ $item->inventory->category_items->namakategori }}</td>
-                    <td>{{ $item->inventory->jumlah }}</td>
-                    <td>{{ $item->inventory->labs->name }}</td>
-                    <td>
-                      <button class="btn btn-toggle shadow-none" onClick="cartDelete({{ $item->id }})">
-                        X
-                      </button>
-                    </td>
-    
-                  </tr>
-    
-                  @empty
-                  <td colspan="5" class='text-center'>
-                    <h6>Oopps Transaksi Belum Ada</h6>
-                    <a href="{{ route('peminjaman') }}" class="no-underline">Kembali</a>
-                  </td>
-                  @endforelse
-    
-              </tbody>
-            </table>
+          <div id="read""></div>
+
             <div class="d-flex justify-content-between align-content-center mt-4 table-footer">
-              <h4>Alat yang anda pinjam ({{ $inCart }})</h4>
+              <h4 id='total'></h4>
               <button class='btn btn-primary px-lg-5 py-2 ' type="submit">Checkout</button>
             </div>
-    
-          </div>
+
         </div>
-    
-    
-      </section>
-    
-      {{-- End Cart Section --}}
+  </div>
+
+  </section>
+  </form>
+
+  {{-- End Cart Section --}}
 
 
   <footer>
@@ -211,21 +177,44 @@ Checkout
 
 @push('addon-script')
 <script>
-  $(document).on('click', '#delete_cart')
-  function cartDelete($id) {
-    confirm('apakah anda yakin untuk menghapus data?')
-    $.ajax({
-      type: 'delete'
-      , url: "{{ url('cart-delete') }}/" + id
-      , data: "id": id,
-              "_token": "{{csrf_token()}}"
-      , succes: function(data) {
-        $(".btn-close").click();
-        read()
-      };
 
+  $(function() {
+    $(document).ready(function(){
+      read()
     });
-  }
+    
+    function read() {
+      $.get("{{ url('read') }}", {}, function(carts,status){
+        $("#read").html(carts);
+      })
+    }
+
+
+
+  });
+
+  // $(function(){
+  //   $('.hapusCart').on('click', function(){
+  //     return confirm('hello');
+  //   });
+  // });
+  // function cartDelete(id) {
+  //     return confirm('apakah yakin');
+  // $.ajax({
+  //   type: 'get'
+  //   , url: "{{ url('cart') }}/" + id
+  //   , data: "id=" + id
+  //   , 
+  //   , succes: function(data) {
+  //     return view('pages.frontend.home')
+  //   };
+
+  // });
+  //   };
 
 </script>
+@endpush
+
+@push('addon-style')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush

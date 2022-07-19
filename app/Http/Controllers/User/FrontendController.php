@@ -61,6 +61,21 @@ class FrontendController extends Controller
       ]);
     }
     
+    public function read(Request $request)
+    {
+      $inCarts = Cart::where('users_id', Auth::user()->id)->count();
+      $carts = Cart::with(['inventory'])->where('users_id', Auth::user()->id)->get();
+      // $data = LoanItem::with('study')->get();
+      return view('pages.frontend.ajax.tabelcart', [
+        "title" => "cart",
+        "carts" =>  $carts,
+        'inCart' => $inCarts
+        
+        // "study" => $data,
+      ]);
+    }
+    
+    
     public function cartAdd(request $request, $id){
       Cart::create([
         'users_id' => Auth::user()->id,
@@ -77,7 +92,9 @@ class FrontendController extends Controller
       
       $data->delete();
       
-      return redirect()->route('cart');
+      return response()->json([
+        'success' => 'Record deleted successfully!'
+    ]);
     }
     
     public function checkout(CheckoutRequest $request){
@@ -106,7 +123,9 @@ class FrontendController extends Controller
       //Delete cart after transaction 
       Cart::where('users_id', Auth::user()->id)->delete();
       
-      return redirect()->route('success');
+      return response()->json([
+        'success' => 'Record deleted successfully!'
+    ]);
       
       //Configuration 
       
