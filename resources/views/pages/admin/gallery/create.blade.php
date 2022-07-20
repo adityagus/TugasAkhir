@@ -27,7 +27,7 @@
         <form action="{{ route('admin.gallery.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
-            <label for="inventory">Alat dan Bahan</label>
+            <label for="inventory">Gallery Inventory</label>
             <select id="inventory" name="inventories_id" required class="form-control">
               <option value="">Pilih Alat dan Bahan</option>
               @foreach ($inventory as $item)

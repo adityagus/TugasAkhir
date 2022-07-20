@@ -21,7 +21,7 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Travel</th>
+                    <th>Alat dan Bahan</th>
                     <th>Gambar</th>
                     <th>Action</th>
                   </tr>
@@ -35,16 +35,35 @@
                     <td>
                        <img src="{{ Storage::url($item->image) }}" alt="" style="width: 100px; height:100px" class="img-thumbnail">
                     </td>
-                    <td>
+                    <td align="center">
                       <a href="{{ route('admin.gallery.edit' ,$item->id) }}" class="btn btn-info">
-                        EDIT
+                        Edit
                       </a>
                       <form action="{{ route('admin.gallery.destroy' ,$item->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('delete')
-                        <button class="btn btn-danger">
-                          HAPUS
+                        <button type="button" class="btn btn-danger" data-bs-toggle='modal' data-bs-target="#galleryHapus">
+                          Hapus
                         </button>
+                        
+                        <div class="modal fade" id="galleryHapus" aria-hidden="true" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                               <div class="modal-header">
+                                 <h5 class="modal-title">Hapus Data</h5>
+                                 <i class="bi bi-x-circle-red"></i>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" align='left'>
+                                  <p>Apakah {{ $item->nama }} gambar yakin dihapus?</p>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-danger">Hapus Data</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </form>
                     </td>
                   </tr>
