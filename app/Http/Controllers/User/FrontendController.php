@@ -8,6 +8,7 @@ use App\Models\Gallery;
 use App\Models\LoanItem;
 use App\Models\Inventory;
 use App\Models\Mahasiswa;
+use App\Models\ReturnItem;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\TransactionReturn;
@@ -120,32 +121,48 @@ class FrontendController extends Controller
     }
     
     public function return(CheckoutReturnRequest $request){
-      return $request->all();
+      // return $request->all();
        
        //Get Carts Data 
-       $carts = LoanItem::with('inventory')->where('users_id', Auth::user()->id)->get();
+       $loans = LoanItem::with('inventory')->where('users_id', Auth::user()->id)->get();
+       $transactions = Transaction::with('user')->where('users_id', Auth::user()->id)->get();
        
        //Add to Transaction data 
        $data['nama'] = Auth::user()->name;
        $data['users_id'] = Auth::user()->id;
+      $data["transaction_id"] = $transactions->id;
        // $data['total_price'] = $carts->sum('inventory.jumlah');
        
        //Create transaction item 
        $transactionsreturn = TransactionReturn::create($data);
        
        //Create transaction item graph
-       foreach ($carts as $cart ) {
-         $items[] = LoanItem::create([
-           'transactions_id' => $transactionsreturn->id,
-           'users_id' => $cart->users_id,
-           'inventory_id' => $cart->inventories_id
+       foreach ($loans as $loan ) {
+         $items[] = ReturnItem::create([
+           'transactionreturn_id' => $transactionsreturn->id,
+           'users_id' => $loan->users_id,
+          //  'total' => $loan->total,
+           'inventory_id' => $loan->inventories_id
          ]);
+       }
+       
+       foreach ($transactions as $transaction) {
+        $items[] = TransactionReturn::create([
+        'transactions_id' => $transaction->id,  
+        'name' => $transaction->name,
+        'nim' => $transaction->nim,
+        'kelas' => $transaction->kelas,
+        'phone' => $transaction->pertemuan_ke,
+        'keperluan' => $transaction->laboratorium,
+        
+        ]);
        }
        
        //Delete cart after transaction 
        Cart::where('users_id', Auth::user()->id)->delete();
+       Transaction::where('users_id', Auth::user()->id)->delete();
        
-       return redirect()->route('success');
+       return redirect()->route('index');
        
        //Configuration 
        

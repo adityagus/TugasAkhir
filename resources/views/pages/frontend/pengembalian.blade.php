@@ -43,7 +43,9 @@ Pengembalian Alat
               @endunless
             </div>
             <div class="bd-highlight">
-              <form action="">
+              <form action="{{ route('return') }}" method="POST">
+                @csrf
+                @method('POST')
                 <button type="button" name="" id="" class="btn btn-warning btn-md btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Kembalikan Semua</button>
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -58,16 +60,16 @@ Pengembalian Alat
                           @csrf
                           @method("POST")
                           <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Bagaimana Kondisi Sesudah dipinjam?</label>
+                            <label for="periksa" class="col-form-label">Bagaimana Kondisi Sesudah dipinjam?</label>
                             <div class="d-flex">
                               <div class="form-check me-4">
-                                <input class="form-check-input" type="radio" name="condition" id="bagus">
+                                <input class="form-check-input" type="radio" name="kondisi" id="periksa" value="bagus">
                                 <label class="form-check-label" for="bagus">
                                   Bagus
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="condition" id="rusak">
+                                <input class="form-check-input" type="radio" name="kondisi" id="periksa" value="rusak">
                                 <label class="form-check-label" for="rusak">
                                   Rusak
                                 </label>
@@ -76,7 +78,7 @@ Pengembalian Alat
                           </div>
                           <div class="mb-3">
                             <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            <textarea class="form-control" id="message-text" name="keterangan"></textarea>
                           </div>
                         </form>
                       </div>

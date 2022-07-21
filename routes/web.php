@@ -40,8 +40,8 @@ use App\Http\Controllers\TransactionReturnController;
     ->name('cart-delete');
     Route::post('/checkout-peminjaman', [FrontendController::class, 'checkout'])
     ->name('checkout');
-    // Route::post('/return', [FrontendController::class, 'checkout'])
-    // ->name('checkout');
+    Route::post('/checkout-pengembalian', [FrontendController::class, 'return'])
+    ->name('return');
     Route::post('/return-success', [FrontendController::class, 'return'])
     ->name('return-success');
     Route::get('/checkout-success', [FrontendController::class, 'success'])

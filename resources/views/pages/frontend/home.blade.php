@@ -10,25 +10,14 @@
 <div class="px-5 pb-5">
   <div class="page-title">
     <div class="row">
-      <div class="col-12 col-md-7 ">
+      <div class="col-12 col-md-7 py-3 ">
         <h3>Dashboard</h3>
-        <h6>Daftar Mahasiswa Jurusan Teknik Elektro</h6>
+        Halo, Selamat datang
           @auth
           {{ Auth::user()->name }}
           @endauth
       </div>
-      <div class="col-md-5 ">
-      <form action="{{ route('index') }}">
-      <div class="d-flex col-12 jus ">
-          <div class="col-9 form-group inline">
-          <input type="text" class="form-control" placeholder="Masukan Daftar Mahasiswa" name='search' value="{{ request('search') }}">
-          </div>
-          <div class="col-3 form-group inline">
-            <button class="btn-cari" type="submit">Cari...</button>
-          </div>
-        </div>
-      </form>
-    </div>
+
     </div>
   </div>
   <div class="page-content">

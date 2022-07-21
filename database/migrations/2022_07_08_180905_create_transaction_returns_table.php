@@ -25,6 +25,8 @@ class CreateTransactionReturnsTable extends Migration
           $table->string('keperluan')->nullable();
           $table->string('laboratorium')->nullable();
           $table->string('status')->default('Verifikasi');
+          $table->string('kondisi');
+          $table->string('keterangan');
           $table->softDeletes();
           $table->timestamps();
         });
