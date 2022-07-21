@@ -8,39 +8,87 @@
 
 
 <div class="px-5 pb-5">
-  <div class="page-heading">
-    <h3>Dashboard</h3>
-    <h6>Daftar Mahasiswa Jurusan Teknik Elektro
-      @auth
-      {{ Auth::user()->name }}
-      @endauth
+  <div class="page-title">
+    <div class="row">
+      <div class="col-12 col-md-7 ">
+        <h3>Dashboard</h3>
+        <h6>Daftar Mahasiswa Jurusan Teknik Elektro</h6>
+          @auth
+          {{ Auth::user()->name }}
+          @endauth
+      </div>
+      <div class="col-md-5 ">
+      <form action="{{ route('index') }}">
+      <div class="d-flex col-12 jus ">
+          <div class="col-9 form-group inline">
+          <input type="text" class="form-control" placeholder="Masukan Daftar Mahasiswa" name='search' value="{{ request('search') }}">
+          </div>
+          <div class="col-3 form-group inline">
+            <button class="btn-cari" type="submit">Cari...</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
   </div>
   <div class="page-content">
     <section class="list-mahasiswa">
-      <div class="row">
-        <div class="card col-12 col-md-6 order-md-1 order-last">
-          <div class="display d-flex">
+      @if(request('search'))  
+        <div class="card ">
+          <div class="card-header blue text-white">
+              Biodata Mahasiswa
+          </div>
+          <div class="card-body display d-flex">
             <div class="img">
-              <img src="{{ url('user\dist\assets\images\faces\1.jpg') }}" alt="" class="img-thumbnail my-2" width="150px">
+              @forelse ($mhs as $item)
+
+              {{-- <img src="{{ Storage::url($item->image) }}" alt="alat dan bahan" style="width: 250px; height:160px" class="img-thumbnail"> --}}
+              <img src="{{ url('user\dist\assets\images\faces\1.jpg') }} ? " alt="" class="img-thumbnail my-3" width="150px">
+              
+              @empty
+                
+              <img src="{{ 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt="alat dan bahan" style="width: 250px; height:160px" class="img-thumbnail">
+              
+              @endforelse
             </div>
             <div class="descriptions">
-              <h5>ADITYA GUSTIAN</h5>
-              <h6>9302019028</h6>
-              <h6>TEKNIK ELEKTRONIKA</h6>
+              <table>
+                @forelse ($mhs as $mhs)
+                    
+                <tr>
+                  <td width='10%'>Nama</td>
+                  <td width='5%'>:</td>
+                  <td width='0%'>{{ $mhs->nama_mhs }}</td>
+                </tr>
+                <tr>
+                  <td width='10%'>Nim</td>
+                  <td width='5%'>:</td>
+                  <td width='0%'>{{ $mhs->nim }}</td>
+                </tr>
+                <tr>
+                  <td width='10%'>Prodi</td>
+                  <td width='5%'>:</td>
+                  <td width='0%'">Teknik Elektronika</td>
+                </tr>
+                
+                @empty
+                    
+                <tr>
+                  <td colspan="3">Data Tidak Ada</td>
+                </tr>
+                
+                @endforelse
+                
+              </table>
+              <h6></h6>
+              <h6></h6>
             </div>
-            
+                
           </div>
         </div>
-        <div class="col-12 col-md-6 order-md-2 order-first d-flex" >
-          <div class="col-9 form-group ">
-          <input type="text" class="form-control " placeholder="Masukan Daftar Mahasiswa">
-          </div>
-          <div class="col-2">
-            <button class="btn-cari">Cari...</button>
-          </div>
-        </div>
-        </div>
+        
       </div>
+      @endif
     </section>
     
     
@@ -65,7 +113,7 @@
             </div>
           </div>
           <div class="col-6 col-lg-3 col-md-6">
-            <div class="card max" style="min-height: 6rem">
+            <div class="card max" style="min-height: 4rem">
               <div class="card-body px-3 py-4-5">
                 <div class="row">
                   <div class="col-md-4">

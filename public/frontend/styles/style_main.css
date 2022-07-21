@@ -2,8 +2,20 @@
 
 .descriptions{
   padding: 50px 0px 50px 50px;
-  margin-top: 50px 0px 50px 0px;
-  color: red;
+  width: 500px;
+  margin-top: 50px 0px 40px 0px;
+}
+.card .card-header .card-body{
+  padding-top: 1.5rem;
+  margin-top: 50px;
+}
+
+.descriptions table tr{
+  margin-top: 20px;
+}
+
+.blue{
+  background-color: #57caeb;
 }
 
 .btn-cari{
