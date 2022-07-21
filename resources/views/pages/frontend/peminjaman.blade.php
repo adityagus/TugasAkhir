@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    aaa
+    Peminjaman Alat
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
           <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Peminjaman</li>
               </ol>
             </nav>
@@ -38,19 +38,21 @@
                   <th>No</th>
                   <th>Nama Alat & Bahan</th>
                   <th>Kategori</th>
-                  <th>Ketersedian</th>
                   {{-- <th>Total</th> --}}
                   <th>Lab</th>
-                  <th>Aksi</th>
+                  <th class="text-center">Aksi</th>
                 </tr>
               </thead>
+              @php
+                  $no = 1;
+              @endphp
+              
               <tbody>
                 @forelse ($items as $item)
                 <tr>
-                  <td>{{ $item->nama }}</td>
+                  <td>{{ $no++ }}</td>
                   <td>{{ $item->nama }}</td>
                   <td>{{ $item->category_items->namakategori }}</td>
-                  <td>{{ $item->jumlah }}</td>
                   {{-- @if ($item->loan_items->total == 0)
                   <td>0</td>
                       
@@ -61,7 +63,7 @@
                   <td>{{ $item->labs->name }}</td>
                   <td class="d-flex justify-content-center">
                     <span class='d-flex d-inline-block px-2'>
-                      <a href='{{ route('login') }}'>
+                      <a href='{{ route('details', $item->slug) }}'>
                         <button class='btn btn-primary mx-1'  type="submit">Detail</button>
                       </a>
                     </span>

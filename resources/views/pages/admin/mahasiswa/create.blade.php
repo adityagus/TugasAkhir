@@ -71,7 +71,7 @@ Create Inventaris
             </div>
 
             <div class="mb-4">
-              <label for="labs_id" class="">Lab</label>
+              <label for="labs_id" class="">Name</label>
               <select name="labs_id" id="status" required class="form-select">
                 <option value="1">TE</option>
                 <option value="2">TL</option>
@@ -90,6 +90,11 @@ Create Inventaris
                 </option>
                 @endforeach
               </select>
+            </div>
+
+            <div class="form-group">
+              <label for="image">Image</label>
+              <input type="file" name="image" placeholder="Image">
             </div>
 
             <div class="mb-2">

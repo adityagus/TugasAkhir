@@ -28,7 +28,6 @@ class InventoryRequest extends FormRequest
             'kd_brg' => 'required|max:255',
             'category_id'=> 'required',
             'labs_id'=> 'required',
-            'image' => 'required|image',
             'nama' => 'required|max:255',
             'deskripsi' => 'required',
             'jumlah' => 'required|integer',

@@ -4,7 +4,7 @@
     <div class="sidebar-header">
       <div class="d-flex justify-content-between">
         <div class="logo">
-        <a href="index.html"><img src="user/dist/assets/images/logo/logo.png" alt="Logo" style="height:40px;" srcset=""></a>
+        <a href="index.html"><img src="{{ url('user/dist/assets/images/logo/logo.png') }}" alt="Logo" style="height:40px;" srcset=""></a>
         </div>
         <div class="toggler">
           <a href="#" class="sidebar-hide d-xl-none d-block">
@@ -27,14 +27,14 @@
 
         <li class="sidebar-item {{ ($title == "peminjaman" || $title == "cart" ? "active" : "") }}">
           <a href="/peminjaman" class='sidebar-link'>
-            <img src="user/dist/assets/images/logo/peminjaman{{ $title !== "peminjaman" && $title !=='cart' ? "-secondary" : "" }}.png" width='35px' alt="">
+            <img src="{{ $title !== "peminjaman" && $title !=='cart' ? url("user/dist/assets/images/logo/peminjaman-secondary.png") : url("user/dist/assets/images/logo/peminjaman.png") }}" width='35px' alt="">
             <span>Peminjaman</span>
           </a>
         </li>
 
         <li class="sidebar-item {{ ($title == "pengembalian" ? "active" : "") }}">
           <a href="/pengembalian" class='sidebar-link'>
-            <img src="user/dist/assets/images/logo/pengembalian{{ $title !== "pengembalian" ? "-secondary" : "" }}.png" width='35px' coloalt="">
+          <img src="{{ $title !== "pengembalian" ? url("user/dist/assets/images/logo/pengembalian-secondary.png") : url("user/dist/assets/images/logo/pengembalian.png") }}" width='35px' coloalt="">
             <span>Pengembalian</span>
           </a>
         </li>

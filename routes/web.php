@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\cetak\CetakController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GalleryController;
@@ -24,9 +25,10 @@ use App\Http\Controllers\TransactionReturnController;
     ->name('index');
   Route::get('/peminjaman', [FrontendController::class, 'peminjaman'])
     ->name('peminjaman');
+  Route::get('/details/{slug}', [FrontendController::class, 'details'])
+    ->name('details');
 
   
-  Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     
     // Route::get('/', [DashboardController::class, 'index'])->name('index');
   
@@ -35,7 +37,7 @@ use App\Http\Controllers\TransactionReturnController;
     Route::post('/cart/{id}', [FrontendController::class, 'cartAdd'])
     ->name('cart-add');
     Route::get('/read', [FrontendController::class, 'read'])
-    ->name('cart-delete');
+    ->name('cartda');
     Route::delete('/cart/{id}', [FrontendController::class, 'cartDelete'])
     ->name('cart-delete');
     Route::post('/checkout-peminjaman', [FrontendController::class, 'checkout'])
@@ -49,12 +51,14 @@ use App\Http\Controllers\TransactionReturnController;
     Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
       ->name('pengembalian');
     
-});
 
 Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
 
   // Route::get('/', [DashboardController::class, 'index'])->name('index');
 
+  Route::get('/cetakdatabarang', [CetakController::class, 'dataBarang'])
+  ->name('cetakdatabarang');
+  
   Route::resource('inventory', InventoryController::class, [
     'title' => 'approval'
   ]);
@@ -68,6 +72,7 @@ Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix
     'index', 'edit', 'update', 'destroy'
   ]);
   Route::resource('gallery', GalleryController::class);
+  
   
   
   // Route::resource('category', CategoryItemController::class); 

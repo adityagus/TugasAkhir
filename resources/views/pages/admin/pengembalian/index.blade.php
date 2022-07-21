@@ -55,7 +55,7 @@
                   <th>Jenis</th>
                   <th>Aksi</th>
                 </tr> --}}
-                @forelse ( $pengembalian as $item)
+                @foreach ( $pengembalian as $item)
                     
                 <tr>
                   <td>{{ $nomor++ }}</td>
@@ -91,11 +91,12 @@
                     </form>
                   </td> --}}
                 </tr>
-                @empty
+                @empty($item = null)
                 <tr>
                   <td colspan="8" class="text-center">Data Kosong</td>
                 </tr>
-                @endforelse 
+                @endempty
+                @endforeach 
                   </tbody>
                 
                 

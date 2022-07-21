@@ -4,8 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Gallery;
 use App\Models\LoanItem;
 use App\Models\Inventory;
+use App\Models\Mahasiswa;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\TransactionReturn;
@@ -20,7 +22,7 @@ class FrontendController extends Controller
     public function home(Request $request){
       
         if ($request->user()) {
-          $loanItem = LoanItem::with(['inventory', 'transaction'])->where('users_id', Auth::user()->id)->get();
+          $loanItem = LoanItem::with(['inventory', 'transaction'])->get();
         }else {
           $loanItem = LoanItem::with(['inventory'])->get();
       }
@@ -32,11 +34,13 @@ class FrontendController extends Controller
         'loan_pending' => Transaction::where('status', 'PENDING')->count(),
         'loan_success' => Transaction::where('status', 'SUCCESS')->count(),
         "items" => $loanItem,
+        "mhs" =>  Mahasiswa::latest()->filter(request(['search']))->paginate(7)->withQueryString(),
         "title" => "home"
       ]);
     }
     
     public function peminjaman(request $request){
+
       if (Auth::check() == true) {
         $inCarts = Cart::where('users_id', Auth::user()->id)->count();
       }
@@ -128,9 +132,6 @@ class FrontendController extends Controller
       //Delete cart after transaction 
       Cart::where('users_id', Auth::user()->id)->delete();
       
-      return response()->json([
-        'success' => 'Record deleted successfully!'
-    ]);
       
       //Configuration 
       
@@ -154,7 +155,7 @@ class FrontendController extends Controller
        //Create transaction item 
        $transactionsreturn = TransactionReturn::create($data);
        
-       //Create transaction item 
+       //Create transaction item graph
        foreach ($carts as $cart ) {
          $items[] = LoanItem::create([
            'transactions_id' => $transactionsreturn->id,
@@ -181,12 +182,19 @@ class FrontendController extends Controller
     
     
     
-    public function details(request $request){
-      $data = DB::with('category_items', 'labs', 'loan_items')->get();
-      return view('pages.frontend.peminjaman', [
-        'items' => $data, 
-        "title" => "peminjaman"
+    public function details(request $request, $slug){
+      
+      $item = Inventory::with(['galleries'])->where('slug', $slug)->firstOrFail();
+      $inCarts = Cart::where('users_id', Auth::user()->id)->count();
+      
+      
+      // dd($item);
+      return view('pages.frontend.detail', [
+        'inventory' => $item,
+        "title" => "peminjaman",
+        'inCart' => $inCarts
       ]);
+      
     }
     
     public function pengembalian(request $request){

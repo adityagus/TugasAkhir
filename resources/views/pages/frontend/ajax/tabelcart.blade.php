@@ -16,10 +16,10 @@
         <!-- <td colspan='7'><center>No Data</center></td> -->
         <td>{{ $item->inventory->nama }}</td>
         <td>{{ $item->inventory->category_items->namakategori }}</td>
-        <td>{{ $item->inventory->jumlah }}</td>
+        <td>1</td>
         <td>{{ $item->inventory->labs->name }}</td>
         <td>
-          <a class="btn btn-primary btnHapus" data-id='{{ $item->id }}' data-token="{{ csrf_token() }}">
+          <a class="btn btn-toggle shadow-none btnHapus" data-id='{{ $item->id }}' data-token="{{ csrf_token() }}">
             X
           </a>
           {{-- <button class="btn btn=dark" onclick="cartDelete({{ $item->id }})">X</button> --}}

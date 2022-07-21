@@ -79,11 +79,11 @@ class GalleryController extends Controller
     public function edit($id)
     {
         $item  = Gallery::findOrFail($id);
-        $travel_packages = Inventory::all();
+        $inventories = Inventory::all();
 
         return view ('pages.admin.gallery.edit', [
           'item' => $item,
-          'travel_packages' => $travel_packages
+          'inventories' => $inventories
         ]);
     }
 

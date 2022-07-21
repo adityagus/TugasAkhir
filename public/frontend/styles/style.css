@@ -1,0 +1,75 @@
+.sidebar-wrapper {
+    background-color: rgb(225, 225, 237);
+}
+
+.btn-red {
+    background-color: rgb(239, 83, 83);
+    border-radius: 4px;
+    border: thick;
+    padding: 7px 5px;
+    color: white;
+    
+}
+
+.btn-red:hover {
+    background-color: rgb(198, 74, 74);
+    color: white;
+}
+
+/* .image-logo img{
+  /* height: 50px ;
+  width: 50px ;
+  display: inline; */
+  
+  
+/* cetak data barang */
+
+.kop {
+    display: inline;
+
+    /* justify-content: space-between; */
+}
+
+
+td .gambar {
+  margin: 0px;
+}
+
+.instansi h5 {
+    padding: 0px;
+    text-align: center;
+    margin: 2px;
+}
+
+.instansi p {
+  text-align: center;
+  margin: 2px;
+  font-size: small;
+}
+
+.judul h4 {
+    margin: 2px;
+}
+.table-info {
+    border: 2px solid black;
+}
+.table-info th {
+    border: 2px solid black;
+}
+.table-info tr {
+    border: 2px solid black;
+}
+.table-info tr td {
+    border: 2px solid black;
+}
+
+.ttd {
+    text-align: inherit;
+    vertical-align: top;
+}
+
+.jabatan {
+    padding-left: 20px;
+}
+
+

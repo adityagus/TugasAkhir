@@ -181,7 +181,7 @@ Checkout
 
   $(function() {
     $(document).ready(function(){
-      read()
+      read() 
     });
     
     function read() {
