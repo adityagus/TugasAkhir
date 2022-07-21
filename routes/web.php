@@ -37,11 +37,13 @@ use App\Http\Controllers\TransactionReturnController;
     Route::post('/cart/{id}', [FrontendController::class, 'cartAdd'])
     ->name('cart-add');
     Route::get('/read', [FrontendController::class, 'read'])
-    ->name('cartda');
+    ->name('cart-delete');
     Route::delete('/cart/{id}', [FrontendController::class, 'cartDelete'])
     ->name('cart-delete');
     Route::post('/checkout-peminjaman', [FrontendController::class, 'checkout'])
-    ->name('checkout');
+  ->name('checkout');
+    Route::post('/checkout-pengembalian', [FrontendController::class, 'return'])
+    ->name('return');
     // Route::post('/return', [FrontendController::class, 'checkout'])
     // ->name('checkout');
     Route::post('/return-success', [FrontendController::class, 'return'])
