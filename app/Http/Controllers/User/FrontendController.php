@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Gallery;
 use App\Models\LoanItem;
 use App\Models\Inventory;
+use App\Models\Mahasiswa;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\TransactionReturn;
@@ -33,6 +34,7 @@ class FrontendController extends Controller
         'loan_pending' => Transaction::where('status', 'PENDING')->count(),
         'loan_success' => Transaction::where('status', 'SUCCESS')->count(),
         "items" => $loanItem,
+        "mhs" =>  Mahasiswa::latest()->filter(request(['search']))->paginate(7)->withQueryString(),
         "title" => "home"
       ]);
     }

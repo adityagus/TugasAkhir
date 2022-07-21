@@ -12,4 +12,14 @@ class Mahasiswa extends Model
     protected $fillable = [
       'nama_mhs', 'nim', 'image'
     ];
+    
+    public function scopeFilter($query, array $filters)
+    {
+      $query->when($filters['search'] ?? false, function ($query, $search) {
+        return $query->where(function($query) use ($search){
+          $query->where('nama_mhs',  'like', '%' . $search . '%')
+                ->orWhere('nim', 'like', '%' . $search . '%');
+        });  
+      });
+    }
 }
