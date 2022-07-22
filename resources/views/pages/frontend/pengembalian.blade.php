@@ -56,9 +56,6 @@ Pengembalian Alat
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <form action="{{ route('return-success') }}" method="POST">
-                          @csrf
-                          @method("POST")
                           <div class="mb-3">
                             <label for="periksa" class="col-form-label">Bagaimana Kondisi Sesudah dipinjam?</label>
                             <div class="d-flex">
@@ -80,15 +77,15 @@ Pengembalian Alat
                             <label for="message-text" class="col-form-label">Message:</label>
                             <textarea class="form-control" id="message-text" name="keterangan"></textarea>
                           </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Send message</button>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Send message</button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </form>
             </div>
           </div>
         </div>

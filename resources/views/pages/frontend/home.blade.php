@@ -10,13 +10,22 @@
 <div class="px-5 pb-5">
   <div class="page-title">
     <div class="row">
-      <div class="col-12 col-md-7 py-3 ">
+      <div class="col-12 col-md-7 ">
         <h3>Dashboard</h3>
-        Halo, Selamat datang
-          @auth
-          {{ Auth::user()->name }}
-          @endauth
+        <h6>Daftar Mahasiswa Jurusan Teknik Elektro</h6>
       </div>
+      <div class="col-md-5 ">
+      <form action="{{ route('index') }}">
+      <div class="d-flex col-12 jus ">
+          <div class="col-9 form-group inline">
+          <input type="text" class="form-control" placeholder="Masukan Daftar Mahasiswa" name='search' value="{{ request('search') }}">
+          </div>
+          <div class="col-3 form-group inline">
+            <button class="btn-cari" type="submit">Cari...</button>
+          </div>
+        </div>
+      </form>
+    </div>
 
     </div>
   </div>
@@ -25,14 +34,14 @@
       @if(request('search'))  
         <div class="card ">
           <div class="card-header blue text-white">
-              Biodata Mahasiswa
+              Biodata Mahasiswa 
           </div>
           <div class="card-body display d-flex">
             <div class="img">
               @forelse ($mhs as $item)
 
               {{-- <img src="{{ Storage::url($item->image) }}" alt="alat dan bahan" style="width: 250px; height:160px" class="img-thumbnail"> --}}
-              <img src="{{ url('user\dist\assets\images\faces\1.jpg') }} ? " alt="" class="img-thumbnail my-3" width="150px">
+              <img src="{{ $item->image }}" alt="" class="img-thumbnail my-3" width="150px">
               
               @empty
                 
@@ -41,27 +50,38 @@
               @endforelse
             </div>
             <div class="descriptions">
+
               <table>
                 @forelse ($mhs as $mhs)
-                    
                 <tr>
                   <td width='10%'>Nama</td>
                   <td width='5%'>:</td>
                   <td width='0%'>{{ $mhs->nama_mhs }}</td>
+                  
                 </tr>
                 <tr>
                   <td width='10%'>Nim</td>
                   <td width='5%'>:</td>
                   <td width='0%'>{{ $mhs->nim }}</td>
+                  
                 </tr>
                 <tr>
                   <td width='10%'>Prodi</td>
                   <td width='5%'>:</td>
-                  <td width='0%'">Teknik Elektronika</td>
+                  <td width='0%'">{{ $mhs->prodi }}</td>
+                  <input type="hidden" name="prodi" value="{{ $mhs->prodi }}">
+                  
+                  
                 </tr>
+                <form action="/login" method="POST">
+                  @csrf
+                  <input type="hidden" name="nama_mhs" value="{{ $mhs->nama_mhs }}">
+                  <input type="hidden" name="nim" value="{{ $mhs->nim }}">
+                  <button type="submit" >Submit</button>
+                </form>
                 
                 @empty
-                    
+                
                 <tr>
                   <td colspan="3">Data Tidak Ada</td>
                 </tr>

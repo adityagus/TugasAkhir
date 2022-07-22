@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\TransactionReturn;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\isMahasiswa;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CheckoutRequest;
 use App\Http\Requests\CheckoutReturnRequest;
@@ -40,6 +41,13 @@ class FrontendController extends Controller
       ]);
     }
     
+    public function authorize($ability, $arguments = [])
+    {
+      
+    }
+    
+    
+    
     public function peminjaman(request $request){
       $inCarts = Cart::count();
         $data = Inventory::with('category_items', 'labs', 'loan_items')->get();
@@ -49,6 +57,26 @@ class FrontendController extends Controller
         "title" => "peminjaman",
         'inCart' => $inCarts
       ]);
+    }
+    
+    public function details(request $request, $slug){
+      $this->authorize('mahasiswa');
+      if (Auth::check()) {
+        $inCarts = Cart::where('users_id', $this->authorize('mahasiswa'))->count();
+      }else {
+        $inCarts = Cart::count();
+      }
+      $item = Inventory::with(['galleries'])->where('slug', $slug)->firstOrFail();
+      
+      
+      
+      // dd($item);
+      return view('pages.frontend.detail', [
+        'inventory' => $item,
+        "title" => "peminjaman",
+        'inCart' => $inCarts
+      ]);
+      
     }
     
     public function cart(Request $request)
@@ -130,7 +158,6 @@ class FrontendController extends Controller
        //Add to Transaction data 
        $data['nama'] = Auth::user()->name;
        $data['users_id'] = Auth::user()->id;
-      $data["transaction_id"] = $transactions->id;
        // $data['total_price'] = $carts->sum('inventory.jumlah');
        
        //Create transaction item 
@@ -177,20 +204,7 @@ class FrontendController extends Controller
     
     
     
-    public function details(request $request, $slug){
-      
-      $item = Inventory::with(['galleries'])->where('slug', $slug)->firstOrFail();
-      $inCarts = Cart::where('users_id', Auth::user()->id)->count();
-      
-      
-      // dd($item);
-      return view('pages.frontend.detail', [
-        'inventory' => $item,
-        "title" => "peminjaman",
-        'inCart' => $inCarts
-      ]);
-      
-    }
+
     
     public function pengembalian(request $request){
       $loanItem = LoanItem::with('inventory' , 'transaction')->where('users_id', Auth::user()->id)->get();

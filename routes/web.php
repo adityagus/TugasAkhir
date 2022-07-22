@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\User\FrontendController;
 use App\Http\Controllers\TransactionReturnController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\TransactionReturnController;
   
     
     // Route::get('/', [DashboardController::class, 'index'])->name('index');
+// Route::middleware(['mahasiswa'])->group(function () {
   
     Route::get('/cart', [FrontendController::class, 'cart'])
     ->name('cart');
@@ -48,9 +50,10 @@ use App\Http\Controllers\TransactionReturnController;
     ->name('success');
     Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
       ->name('pengembalian');
+// });
     
 
-Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
 
   // Route::get('/', [DashboardController::class, 'index'])->name('index');
 
@@ -71,10 +74,7 @@ Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix
   ]);
   Route::resource('gallery', GalleryController::class);
   
-  
-  
-  // Route::resource('category', CategoryItemController::class); 
-  // Route::resource('users', UserController::class); 
+
 
 });
 
@@ -94,19 +94,7 @@ Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix
 
 
 
-
-
-
-
-
-
-
-
-
-Route::get('/aditya', function () {
-  return '<h1>Hello World</h1>';
-});
-
+// start configuration laravel jetstream
 
 Route::middleware([
   'auth:sanctum',
@@ -117,3 +105,13 @@ Route::middleware([
     return view('dashboard');
   })->name('dashboard');
 });
+
+// end configuration laravel jetstream
+
+route::post('/login', [LoginUserController::class, 'authenticate'])->name('login');
+
+
+
+
+
+
