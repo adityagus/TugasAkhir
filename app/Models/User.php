@@ -69,4 +69,7 @@ class User extends Authenticatable
     public function loanitem(){
       return $this->hasMany(LoanItem::class, 'id');
     }
+    public function mahasiswa(){
+      return $this->hasOne(Mahasiswa::class, 'id', 'mahasiswa_id');
+    }
 }

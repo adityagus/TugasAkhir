@@ -14,7 +14,7 @@
         <h3>Dashboard</h3>
         <h6>Daftar Mahasiswa Jurusan Teknik Elektro</h6>
       </div>
-      <div class="col-md-5 ">
+      {{-- <div class="col-md-5 ">
       <form action="{{ route('index') }}">
       <div class="d-flex col-12 jus ">
           <div class="col-9 form-group inline">
@@ -25,7 +25,7 @@
           </div>
         </div>
       </form>
-    </div>
+    </div> --}}
     </div>
   </div>
   <div class="page-content">
@@ -214,7 +214,9 @@
                       @endif --}}
                       <td class='d-flex justify-content-center'>
                         <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
-                        <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
+                        <a href="{{ route('pengembalian') }}">
+                          <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
+                        </a>
                       </td>
                     </tr>
 

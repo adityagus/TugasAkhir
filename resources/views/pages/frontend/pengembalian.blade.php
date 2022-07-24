@@ -57,14 +57,14 @@ Pengembalian Alat
                             <label for="periksa" class="col-form-label">Bagaimana Kondisi Sesudah dipinjam?</label>
                             <div class="d-flex">
                               <div class="form-check me-4">
-                                <input class="form-check-input" type="radio" name="kondisi" id="periksa" value="bagus">
-                                <label class="form-check-label" for="BAGUS">
+                                <input class="form-check-input" type="radio" name="kondisi" id="bagus" value="BAGUS">
+                                <label class="form-check-label" for="bagus">
                                   Bagus
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="kondisi" id="periksa" value="rusak">
-                                <label class="form-check-label" for="RUSAK">
+                                <input class="form-check-input" type="radio" name="kondisi" id="rusak" value="RUSAK">
+                                <label class="form-check-label" for="rusak">
                                   Rusak
                                 </label>
                               </div>
@@ -113,7 +113,7 @@ Pengembalian Alat
                 <td>{{ $item->transaction->status }}</td>
                 <td class='d-flex justify-content-center'>
                   <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
-                  <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
+                  {{-- <button class='btn-warning rounded py-1 px-3'>Pengembalian</button> --}}
                 </td>
               </tr>
 

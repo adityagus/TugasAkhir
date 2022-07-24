@@ -19,6 +19,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CheckoutRequest;
 use App\Http\Requests\CheckoutReturnRequest;
+use Ramsey\Uuid\Type\Integer;
 
 class FrontendController extends Controller
 { 
@@ -64,6 +65,8 @@ class FrontendController extends Controller
       $matakuliah = Study::all();
       $inCarts = Cart::where('users_id', Auth::user()->id)->count();
       $carts = Cart::with(['inventory'])->where('users_id', Auth::user()->id)->get();
+      
+      
       // dd($matakuliah):
       // $data = LoanItem::with('study')->get();
       return view('pages.frontend.cart', [
@@ -80,11 +83,12 @@ class FrontendController extends Controller
     {
       $inCarts = Cart::where('users_id', Auth::user()->id)->count();
       $carts = Cart::with(['inventory'])->where('users_id', Auth::user()->id)->get();
+      
       // $data = LoanItem::with('study')->get();
       return view('pages.frontend.ajax.tabelcart', [
         "title" => "cart",
         "carts" =>  $carts,
-        'inCart' => $inCarts
+        'inCart' => $inCarts,
         
         // "study" => $data,
       ]);
@@ -132,6 +136,7 @@ class FrontendController extends Controller
         $items[] = LoanItem::create([
           'transactions_id' => $transactions->id,
           'users_id' => $cart->users_id,
+          'total' => $cart->total,
           'inventory_id' => $cart->inventories_id
         ]);
       }
@@ -213,8 +218,13 @@ class FrontendController extends Controller
     public function details(request $request, $slug){
       
       $item = Inventory::with(['galleries'])->where('slug', $slug)->firstOrFail();
-      $inCarts = Cart::where('users_id', Auth::user()->id)->count();
-      
+      // $inCarts = Cart::where('users_id', Auth::user()->id)->count();
+      if (Auth::check() == true) {
+        $inCarts = Cart::where('users_id', Auth::user()->id)->count();
+      }
+      else {
+        $inCarts = Cart::count();
+      }
       
       // dd($item);
       return view('pages.frontend.detail', [

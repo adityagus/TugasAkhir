@@ -82,7 +82,7 @@ Checkout
 
                 <div class="form-group">
                   <label for="kelas-peminjam">Kelas</label>
-                  <input type="text" name="kelas" class="form-control" id="kelas-peminjam" placeholder="Masukan Kelas Anda" value='{{ old('kelas') }}' required>
+                  <input type="text" name="kelas" class="form-control" id="kelas-peminjam" placeholder="Masukan Kelas Anda" value='{{ Auth::user()->email ?? '' }}' required>
                 </div>
 
                 <div class="form-group">

@@ -4,7 +4,7 @@
     <tr>
       <th>Nama Alat & Bahan</th>
       <th>Kategori</th>
-      <th>Jumlah Dipinjam</th>
+      <th width='200px' align="center">Jumlah Dipinjam</th>
       <th>Jenis</th>
       <th class="">Aksi</th>
     </tr>
@@ -14,10 +14,20 @@
       @forelse ($carts as $item)
       <tr>
         <!-- <td colspan='7'><center>No Data</center></td> -->
-        <td>{{ $item->inventory->nama }}</td>
-        <td>{{ $item->inventory->category_items->namakategori }}</td>
-        <td>1</td>
-        <td>{{ $item->inventory->labs->name }}</td>
+        <td width='200px'>{{ $item->inventory->nama }}</td>
+        <td class="px-2">{{ $item->inventory->category_items->namakategori }}</td>
+        <td align='center' class="cart-product-quantity" width="130px">
+          <div class="input-group quantity">
+              <div class="input-group-prepend decrement-btn" style="cursor: pointer">
+                  <span class="input-group-text">-</span>
+              </div>
+              <input type="text" class="qty-input form-control" maxlength="2" max="10" value="1">
+              <div class="input-group-append increment-btn" style="cursor: pointer">
+                  <span class="input-group-text">+</span>
+              </div>
+          </div>
+      </td>
+        <td align="center">{{ $item->inventory->labs->name }}</td>
         <td>
           <a class="btn btn-toggle shadow-none btnHapus" data-id='{{ $item->id }}' data-token="{{ csrf_token() }}">
             X
@@ -44,12 +54,38 @@
     
     $(document).ready(function(){
       read()
+      var quantity = $(this).find('.qty-input').val();
     });
+    
+    
+    $('.increment-btn').click(function (e) {
+            e.preventDefault();
+            var incre_value = $(this).parents('.quantity').find('.qty-input').val();
+            var value = parseInt(incre_value, 10);
+            value = isNaN(value) ? 0 : value;
+            if(value<10){
+                value++;
+                $(this).parents('.quantity').find('.qty-input').val(value);
+            }
+
+        });
+
+        $('.decrement-btn').click(function (e) {
+            e.preventDefault();
+            var decre_value = $(this).parents('.quantity').find('.qty-input').val();
+            var value = parseInt(decre_value, 10);
+            value = isNaN(value) ? 0 : value;
+            if(value>1){
+                value--;
+                $(this).parents('.quantity').find('.qty-input').val(value);
+            }
+        });
 
     
     function read() {
-      $.get("{{ url('read') }}", {}, function(carts,status){
+      $.get("{{ url('read') }}", {}, function(carts,status,total){
         $("#read").html(carts);
+        // const $total = 0;
         
       })
     }
@@ -58,6 +94,7 @@
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    
 
     $('.btnHapus').on('click', function() {
         console.log('ok');
