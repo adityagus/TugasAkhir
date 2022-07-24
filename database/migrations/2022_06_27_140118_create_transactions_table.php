@@ -16,7 +16,8 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id');
+            $table->bigInteger('users_id');
+            $table->bigInteger('matakuliah_id');
             $table->string('name');
             $table->string('nim')->nullable();
             $table->string('kelas')->nullable();
@@ -24,6 +25,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('pertemuan_ke')->nullable();
             $table->string('keperluan')->nullable();
             $table->string('laboratorium')->nullable();
+            $table->dateTime('waktupeminjaman')->nullable();
             $table->string('status')->default('PENDING');
             $table->softDeletes();
             $table->timestamps();

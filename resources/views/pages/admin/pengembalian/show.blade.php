@@ -67,7 +67,7 @@ Admin Inventaris
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Komentar</th>
-              <td class="border px-6 py-4">{{ $pengembalian->komentar}}</td>
+              <td class="border px-6 py-4">{{ $pengembalian->keterangan}}</td>
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Status</th>
@@ -103,12 +103,12 @@ Admin Inventaris
               @endphp
 {{-- <td>{{ $no++ }}</td> --}}
 
-               @foreach ( $loanitem as $loan) 
+               @foreach ( $returnitem as $return) 
                
                <tr>
-                 <td>{{ $loan->id }}</td>
-                 <td>{{ $loan->inventory->nama }}</td>
-                 <td>{{ $loan->total }}</td>
+                 <td>{{ $return->id }}</td>
+                 <td>{{ $return->inventory->nama }}</td>
+                 <td>{{ $return->total }}</td>
                  {{-- <td>{{ $items->nama }}</td>
                  <td>{{ $items->jumlah }}</td> --}}
                  {{-- <td>{{ }}</td> --}}
@@ -156,7 +156,6 @@ Admin Inventaris
               
               
             
-            </tbody>
           </table>
         </div>
 

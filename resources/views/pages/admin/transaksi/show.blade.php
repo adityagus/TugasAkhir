@@ -50,6 +50,10 @@ Admin Inventaris
               <td class="px-6 py-4">{{ $transaction->phone }}</td>
             </tr>
             <tr>
+              <th class="px-6 py-4 text-end">Mata Kuliah</th>
+              <td class="px-6 py-4">{{ $transaction->studies->matakuliah }}</td>
+            </tr>
+            <tr>
               <th class="px-6 py-4 text-end">Pertemuan Ke</th>
               <td class="px-6 py-4">{{ $transaction->pertemuan_ke }}</td>
             </tr>
@@ -143,7 +147,6 @@ Admin Inventaris
                 <td colspan="8" class="text-center">Data Kosong</td>
               </tr>
               @endforelse  --}}
-                </tbody>
               
               
               

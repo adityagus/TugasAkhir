@@ -15,15 +15,17 @@ class CreateTransactionReturnsTable extends Migration
     {
         Schema::create('transaction_returns', function (Blueprint $table) {
           $table->id();
-          $table->foreignId('users_id');
-          $table->foreignId('transactions_id');
-          $table->string('name');
+          $table->foreignId('users_id')->nullable();
+          $table->foreignId('transactions_id')->nullable();
+          $table->string('name')->nullable();
           $table->string('nim')->nullable();
           $table->string('kelas')->nullable();
           $table->string('phone')->nullable();
           $table->integer('pertemuan_ke')->nullable();
           $table->string('keperluan')->nullable();
           $table->string('laboratorium')->nullable();
+          $table->string('kondisi')->nullable();
+          $table->text('keterangan')->nullable();
           $table->string('status')->default('Verifikasi');
           $table->softDeletes();
           $table->timestamps();

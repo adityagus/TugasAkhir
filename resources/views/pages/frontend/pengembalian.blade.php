@@ -38,9 +38,6 @@ Pengembalian Alat
           <div class="d-flex justify-content-between">
             <div class="div">
               <h4 class=''>Alat Yang Anda Pinjam</h4>
-              @unless (Auth::check())
-              You are not signed in.
-              @endunless
             </div>
             <div class="bd-highlight">
               <form action="{{ route('return') }}" method="POST">
@@ -56,45 +53,41 @@ Pengembalian Alat
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <form action="{{ route('return') }}" method="POST">
-                          @csrf
-                          @method("POST")
                           <div class="mb-3">
                             <label for="periksa" class="col-form-label">Bagaimana Kondisi Sesudah dipinjam?</label>
                             <div class="d-flex">
                               <div class="form-check me-4">
                                 <input class="form-check-input" type="radio" name="kondisi" id="periksa" value="bagus">
-                                <label class="form-check-label" for="bagus">
+                                <label class="form-check-label" for="BAGUS">
                                   Bagus
                                 </label>
                               </div>
                               <div class="form-check">
                                 <input class="form-check-input" type="radio" name="kondisi" id="periksa" value="rusak">
-                                <label class="form-check-label" for="rusak">
+                                <label class="form-check-label" for="RUSAK">
                                   Rusak
                                 </label>
                               </div>
                             </div>
                           </div>
                           <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Message:</label>
+                            <label for="message-text" class="col-form-label">Keterangan</label>
                             <textarea class="form-control" id="message-text" name="keterangan"></textarea>
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </form>
-                        <button type="submit" class="btn btn-primary">Send message</button>
+                          <button type="submit" class="btn btn-primary">Submit Pengembalian</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
                 </div>
               </form>
             </div>
           </div>
         </div>
         <div class="card-body table-responsive">
-          <table class='table table-bordered table-striped  fa-scroll'>
+          <table class='table table-striped' id='table1'>
             <thead>
               <tr>
                 <th>NO.</th>
@@ -107,7 +100,7 @@ Pengembalian Alat
               </tr>
             </thead>
             <tbody>
-              @foreach ($items as $item)
+              @forelse ($items as $item)
               @if ($item->transaction->status == 'SUCCESS')
 
               <tr>
@@ -125,8 +118,16 @@ Pengembalian Alat
               </tr>
 
               @endif
-              @endforeach
 
+              
+              @empty
+              <tr>
+                <td colspan="7" align="center">Peminjaman Kosong</td>
+              </tr>
+                  
+              
+              @endforelse
+                            
             </tbody>
 
           </table>
@@ -149,13 +150,13 @@ Pengembalian Alat
 <link rel="stylesheet" href="user/dist/assets/vendors/simple-datatables/style.css">
 @endpush
 
-{{-- @push('prepend-script')
+@push('prepend-script')
 <script src="{{ url('user/dist/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
 
-<script></script>
+<script>
 // Simple Datatable
 let table1 = document.querySelector('#table1');
 let dataTable = new simpleDatatables.DataTable(table1);
 
 </script>
-@endpush --}}
+@endpush

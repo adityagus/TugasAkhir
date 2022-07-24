@@ -37,7 +37,7 @@
                   <th>phone</th>
                   <th>keperluan</th>
                   <th>laboratorium</th>
-                  <th>pertemuan</th>
+                  <th>waktu peminjaman</th>
                   <th>Status</th>
                   <th class="">Aksi</th>
                 </tr>
@@ -63,7 +63,7 @@
                   <td>{{ $item->phone }}</td>
                   <td>{{ $item->keperluan}}</td>
                   <td>{{ $item->laboratorium}}</td>
-                  <td>{{ $item->pertemuan_ke}}</td>
+                  <td>{{ $item->created_at->format('d M Y / H:i a')}}</td>
                   <td>{{ $item->status}}</td>
                   <td class="d-flex justify-content-center">
                     <span class='d-flex d-inline-block'>

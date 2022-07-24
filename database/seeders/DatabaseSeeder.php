@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\CategoryItem;
 use App\Models\Inventory;
+use App\Models\Study;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
     
     $this->call([
         UserSeeder::class,
+        StudySeeder::class,
         InventoriesSeeder::class,
         RolesTableSeeder::class,
         CategoryTableSeeder::class,

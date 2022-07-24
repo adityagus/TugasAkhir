@@ -62,7 +62,8 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-      
+      // dd($transaction);
+      // $transaction = Transaction::with(['studies'])->all();
       $loanItem =  LoanItem::with(['inventory'])->where('transactions_id', $transaction->id)->get();
       // $transaction = Transaction::find($transaction);
       // $apa = LoanItem::find($loanItem);

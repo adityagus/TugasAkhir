@@ -91,16 +91,11 @@
                     </form>
                   </td> --}}
                 </tr>
-                @empty($item = null)
-                <tr>
-                  <td colspan="8" class="text-center">Data Kosong</td>
-                </tr>
-                @endempty
+                
                 @endforeach 
-                  </tbody>
-                
-                
-                
+              </tbody>
+              
+              
               
             </table>
           </div>

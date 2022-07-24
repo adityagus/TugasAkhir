@@ -15,9 +15,9 @@ class CreateReturnItemsTable extends Migration
     {
         Schema::create('return_items', function (Blueprint $table) {
           $table->id();
-          $table->bigInteger('inventory_id');
-          $table->bigInteger('users_id');
-          $table->bigInteger('transactionreturn_id');
+          $table->bigInteger('inventory_id')->nullable();
+          $table->bigInteger('users_id')->nullable();
+          $table->bigInteger('transactionreturn_id')->nullable();
           $table->bigInteger('total')->default(1);
           // $table->softDeletes();
           $table->timestamps();

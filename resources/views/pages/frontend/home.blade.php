@@ -13,9 +13,6 @@
       <div class="col-12 col-md-7 ">
         <h3>Dashboard</h3>
         <h6>Daftar Mahasiswa Jurusan Teknik Elektro</h6>
-          @auth
-          {{ Auth::user()->name }}
-          @endauth
       </div>
       <div class="col-md-5 ">
       <form action="{{ route('index') }}">

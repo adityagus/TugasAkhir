@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Study;
 use App\Models\Gallery;
 use App\Models\LoanItem;
 use App\Models\Inventory;
@@ -11,6 +12,7 @@ use App\Models\Mahasiswa;
 use App\Models\ReturnItem;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\TransactionReturn;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -59,13 +61,16 @@ class FrontendController extends Controller
     
     public function cart(Request $request)
     {
+      $matakuliah = Study::all();
       $inCarts = Cart::where('users_id', Auth::user()->id)->count();
       $carts = Cart::with(['inventory'])->where('users_id', Auth::user()->id)->get();
+      // dd($matakuliah):
       // $data = LoanItem::with('study')->get();
       return view('pages.frontend.cart', [
         "title" => "cart",
         "carts" =>  $carts,
-        'inCart' => $inCarts
+        'inCart' => $inCarts,
+        'studies' => $matakuliah,
         
         // "study" => $data,
       ]);
@@ -106,16 +111,17 @@ class FrontendController extends Controller
         'success' => 'Record deleted successfully!'
     ]);
     }
-    
+    // peminjaman alat dan bahan
     public function checkout(CheckoutRequest $request){
-     $data = $request->all();
+    $data = $request->all();
       
       //Get Carts Data 
       $carts = Cart::with('inventory')->where('users_id', Auth::user()->id)->get();
       
       //Add to Transaction data 
-      $data['nama'] = Auth::user()->name;
+      $data['name'] = Auth::user()->name;
       $data['users_id'] = Auth::user()->id;
+      // dd( $data['waktupeminjaman']);
       // $data['total_price'] = $carts->sum('inventory.jumlah');
       
       //Create transaction item 
@@ -139,52 +145,57 @@ class FrontendController extends Controller
       // Setup Variabel midtrans
       
       // payment process
-      
     }
     
+    // pengembalian alat dan bahan
     public function return(CheckoutReturnRequest $request){
-      return $request->all(); 
-       
+      
+      //Get Carts Data 
        //Get Carts Data 
-       $loans = LoanItem::with('inventory')->where('users_id', Auth::user()->id)->get();
-       $transactions = Transaction::with('user')->where('users_id', Auth::user()->id)->get();
-       
+      //Get Carts Data 
+      $loans = LoanItem::with('inventory')->where('users_id', Auth::user()->id)->get();
+      $transactions = Transaction::with('user')->where('users_id', Auth::user()->id)->first();
+      
+      //Add to Transaction data 
        //Add to Transaction data 
-       $data['nama'] = Auth::user()->name;
-       $data['users_id'] = Auth::user()->id;
-      $data["transaction_id"] = $transactions->id;
+      //Add to Transaction data 
+      
+        $transactionreturn = TransactionReturn::create([ 
+          'users_id' => Auth::user()->id,  
+          'name' => Auth::user()->name,  
+          'transactions_id' => $transactions->id,
+          'nim' => $transactions->nim,
+          'kondisi' => $request->kondisi,
+          'keterangan' => $request->keterangan,
+          'kelas' => $transactions->kelas,
+          'phone' => $transactions->phone,
+          'pertemuan_ke' => $transactions->pertemuan_ke,
+          'keperluan' => $transactions->keperluan,
+          'laboratorium' => $transactions->laboratorium,
+        ]);
+      
+      
        // $data['total_price'] = $carts->sum('inventory.jumlah');
        
        //Create transaction item 
-       $transactionsreturn = TransactionReturn::create($data);
        
        //Create transaction item graph
        foreach ($loans as $loan ) {
          $items[] = ReturnItem::create([
-           'transactionreturn_id' => $transactionsreturn->id,
+           'transactionreturn_id' => $transactionreturn->id,
            'users_id' => $loan->users_id,
           //  'total' => $loan->total,
-           'inventory_id' => $loan->inventories_id
+           'inventory_id' => $loan->inventory_id
          ]);
        }
+
        
-       foreach ($transactions as $transaction) {
-        $items[] = TransactionReturn::create([
-        'transactions_id' => $transaction->id,  
-        'name' => $transaction->name,
-        'nim' => $transaction->nim,
-        'kelas' => $transaction->kelas,
-        'phone' => $transaction->pertemuan_ke,
-        'keperluan' => $transaction->laboratorium,
-        
-        ]);
-       }
        
        //Delete cart after transaction 
-       Cart::where('users_id', Auth::user()->id)->delete();
+       LoanItem::where('users_id', Auth::user()->id)->delete();
        Transaction::where('users_id', Auth::user()->id)->delete();
        
-       return redirect()->route('index');
+       return redirect()->route('pengembalian');
        
        //Configuration 
        
@@ -215,7 +226,12 @@ class FrontendController extends Controller
     }
     
     public function pengembalian(request $request){
-      $loanItem = LoanItem::with('inventory' , 'transaction')->where('users_id', Auth::user()->id)->get();
+      if (Auth::user() == true) {
+        $loanItem = LoanItem::with('inventory' , 'transaction')->where('users_id', Auth::user()->id)->get();
+      }else{
+        $loanItem = LoanItem::with('inventory' , 'transaction')->get();
+        
+      }
       
       return view('pages.frontend.pengembalian', [
         'items' => $loanItem,

@@ -26,6 +26,7 @@ class CheckoutRequest extends FormRequest
     {
         return [
             'id' => 'integer',
+            'matakuliah_id' => 'required|integer',
             'name' => 'required|string|max:255',
             'nim' => 'required|integer',
             'kelas' => 'required|string|max:255',

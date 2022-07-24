@@ -31,3 +31,7 @@
   background-color: rgb(82, 82, 223);
   
 }
+
+select.disabled{
+  color: white;
+}

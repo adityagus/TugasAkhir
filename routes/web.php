@@ -31,27 +31,31 @@ use App\Http\Controllers\TransactionReturnController;
   
     
     // Route::get('/', [DashboardController::class, 'index'])->name('index');
+    
+    Route::middleware(['auth', 'verified', 'admin'])->group(function(){
+      
+      Route::get('/cart', [FrontendController::class, 'cart'])
+      ->name('cart');
+      Route::post('/cart/{id}', [FrontendController::class, 'cartAdd'])
+      ->name('cart-add');
+      Route::get('/read', [FrontendController::class, 'read'])
+      ->name('cart-delete');
+      Route::delete('/cart/{id}', [FrontendController::class, 'cartDelete'])
+      ->name('cart-delete');
+      Route::post('/checkout-peminjaman', [FrontendController::class, 'checkout'])
+    ->name('checkout');
+      Route::post('/checkout-pengembalian', [FrontendController::class, 'return'])
+      ->name('return');
+      // Route::post('/return', [FrontendController::class, 'checkout'])
+      // ->name('checkout');
+      Route::post('/return-success', [FrontendController::class, 'return'])
+      ->name('return-success');
+      Route::get('/checkout-success', [FrontendController::class, 'success'])
+      ->name('success');
+      Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
+        ->name('pengembalian');
+    });
   
-    Route::get('/cart', [FrontendController::class, 'cart'])
-    ->name('cart');
-    Route::post('/cart/{id}', [FrontendController::class, 'cartAdd'])
-    ->name('cart-add');
-    Route::get('/read', [FrontendController::class, 'read'])
-    ->name('cart-delete');
-    Route::delete('/cart/{id}', [FrontendController::class, 'cartDelete'])
-    ->name('cart-delete');
-    Route::post('/checkout-peminjaman', [FrontendController::class, 'checkout'])
-  ->name('checkout');
-    Route::post('/checkout-pengembalian', [FrontendController::class, 'return'])
-    ->name('return');
-    // Route::post('/return', [FrontendController::class, 'checkout'])
-    // ->name('checkout');
-    Route::post('/return-success', [FrontendController::class, 'return'])
-    ->name('return-success');
-    Route::get('/checkout-success', [FrontendController::class, 'success'])
-    ->name('success');
-    Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
-      ->name('pengembalian');
     
 
 Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
