@@ -10,6 +10,21 @@
   margin-top: 50px;
 }
 
+.btn-red {
+  background-color: rgb(239, 83, 83);
+  border-radius: 4px;
+  border: thick;
+  padding: 7px 5px;
+  color: white;
+  
+}
+
+.btn-red:hover {
+  background-color: rgb(198, 74, 74);
+  color: white;
+}
+
+
 .descriptions table tr{
   margin-top: 20px;
 }

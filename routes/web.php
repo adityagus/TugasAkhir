@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\cetak\CetakController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\cetak\CetakController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\User\FrontendController;
 use App\Http\Controllers\TransactionReturnController;
@@ -27,6 +28,9 @@ use App\Http\Controllers\TransactionReturnController;
     ->name('peminjaman');
   Route::get('/details/{slug}', [FrontendController::class, 'details'])
     ->name('details');
+  Route::get('/informasi', [FrontendController::class, 'informasi'])
+    ->name('informasi');
+    
 
   
     
@@ -54,6 +58,8 @@ use App\Http\Controllers\TransactionReturnController;
       ->name('success');
       Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
         ->name('pengembalian');
+      Route::get('/cetakpeminjaman', [CetakController::class, 'cPeminjaman'])
+      ->name('cetakpeminjaman');
     });
   
     
@@ -62,6 +68,8 @@ Route::middleware(['auth:sanctum', 'verified', 'admin'])->name('admin.')->prefix
 
   // Route::get('/', [DashboardController::class, 'index'])->name('index');
 
+  Route::get('/', [HomeController::class, 'home'])
+  ->name('home');
   Route::get('/cetakdatabarang', [CetakController::class, 'dataBarang'])
   ->name('cetakdatabarang');
   

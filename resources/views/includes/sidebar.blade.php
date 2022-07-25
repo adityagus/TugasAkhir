@@ -4,7 +4,7 @@
     <div class="sidebar-header">
       <div class="d-flex justify-content-between">
         <div class="logo">
-        <a href="index.html"><img src="{{ url('user/dist/assets/images/logo/logo.png') }}" alt="Logo" style="height:40px;" srcset=""></a>
+        <a href="{{ route('index') }}"><img src="{{ url('user/dist/assets/images/logo/logo.png') }}" alt="Logo" style="height:40px;" srcset=""></a>
         </div>
         <div class="toggler">
           <a href="#" class="sidebar-hide d-xl-none d-block">
@@ -42,8 +42,8 @@
         <li class="sidebar-title mt-2">Lainnya</li>
         
         
-        <li class="sidebar-item ">
-          <a href="/" class='sidebar-link'>
+        <li class="sidebar-item {{ ($title == "informasi" ? "active" : "") }} ">
+          <a href="{{ route('informasi') }}" class='sidebar-link'>
             <i class="bi bi-info" ></i>
             <span>Informasi</span>
           </a>

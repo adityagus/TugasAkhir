@@ -82,7 +82,7 @@ Checkout
 
                 <div class="form-group">
                   <label for="kelas-peminjam">Kelas</label>
-                  <input type="text" name="kelas" class="form-control" id="kelas-peminjam" placeholder="Masukan Kelas Anda" value='{{ Auth::user()->email ?? '' }}' required>
+                  <input type="text" name="kelas" class="form-control" id="kelas-peminjam" placeholder="Masukan Kelas Anda" value='' required>
                 </div>
 
                 <div class="form-group">
@@ -109,7 +109,7 @@ Checkout
                   <label for="mata-kuliah">Mata Kuliah</label>
                   <small class="text-muted">contoh. <i>elektronika dasar</i></small>
                   <select class="form-select" id="mata-kuliah" name="matakuliah_id" placeholder="Masukan Mata Kuliah Anda" required>
-                    <option selected disabled>Pilih Mata Kuliah Anda</option>
+                    <option selected disabled value="{{ false }}">Pilih Mata Kuliah Anda</option>
                     @foreach ($studies as $study)
                     <option value={{ $study->id }}>{{ $study->matakuliah }}</option>
                     @endforeach

@@ -18,6 +18,8 @@ Pengembalian Alat
           </ul>
         </div>
         @endif
+        
+
         <div class="col-12 col-md-6 order-md-1 order-last">
           <h3>Pengembalian Alat dan Bahan</h3>
           <p class="text-subtitle text-muted">Alat dan bahan yang anda pinjam yakk</p>
@@ -77,7 +79,11 @@ Pengembalian Alat
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary">Submit Pengembalian</button>
+                          <button type="submit" class="btn btn-primary" onclick="Swal.fire(
+                            'The Internet?',
+                            'That thing is still around?',
+                            'question'
+                          );" >Submit Pengembalian</button>
                         </div>
                       </div>
                     </div>
@@ -146,12 +152,15 @@ Pengembalian Alat
 </div>
 @endsection
 
-@push('prepend-script')
+
+@push('prepend-styles')
 <link rel="stylesheet" href="user/dist/assets/vendors/simple-datatables/style.css">
 @endpush
 
-@push('prepend-script')
+@push('addon-script')
 <script src="{{ url('user/dist/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
+
+@include('sweetalert::alert')
 
 <script>
 // Simple Datatable
@@ -160,3 +169,4 @@ let dataTable = new simpleDatatables.DataTable(table1);
 
 </script>
 @endpush
+

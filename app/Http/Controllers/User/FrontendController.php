@@ -19,6 +19,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CheckoutRequest;
 use App\Http\Requests\CheckoutReturnRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 use Ramsey\Uuid\Type\Integer;
 
 class FrontendController extends Controller
@@ -31,7 +32,7 @@ class FrontendController extends Controller
           $loanItem = LoanItem::with(['inventory'])->get();
       }
       
-      return view('pages.frontend.home', [
+      return view('pages.frontend.index', [
         'status' => LoanItem::count(),
         'jumlah_alat' => Inventory::count(),
         'user_pinjam' => Transaction::count(),
@@ -200,7 +201,7 @@ class FrontendController extends Controller
        LoanItem::where('users_id', Auth::user()->id)->delete();
        Transaction::where('users_id', Auth::user()->id)->delete();
        
-       return redirect()->route('pengembalian');
+       return redirect()->route('pengembalian')->with('success', 'Pengembalian sedang di Verifikasi!');
        
        //Configuration 
        
@@ -212,7 +213,12 @@ class FrontendController extends Controller
        
      }
     
-    
+    public function informasi(Request $request){
+      
+      return view('pages.frontend.information',[
+        "title" => "informasi",
+      ]);
+    }
     
     
     public function details(request $request, $slug){

@@ -7,5 +7,7 @@
 {{-- <script src="{{ url('user/dist/assets/js/pages/dashboard.js') }}"></script> --}}
 
 <script src="{{ url('user/dist/assets/js/mazer.js') }}"></script>
+{{-- <script src="{{ url('frontend/scripts/script.js') }}"></script> --}}
+
 
 {{-- End Script --}}
