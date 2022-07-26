@@ -79,10 +79,10 @@ class FrontendController extends Controller
       
     }
     
-    public function cart(Request $request)
+    public function cart(Request $request, Mahasiswa $mahasiswa)
     {
-      $inCarts = Cart::where('users_id', Auth::user()->id)->count();
-      $carts = Cart::with(['inventory'])->where('users_id', Auth::user()->id)->get();
+      $inCarts = Cart::where('mahasiswa_id', $mahasiswa->id)->count();
+      $carts = Cart::with(['inventory'])->where('mahasiswa_id', $mahasiswa->id)->get();
       // $data = LoanItem::with('study')->get();
       return view('pages.frontend.cart', [
         "title" => "cart",
@@ -93,9 +93,11 @@ class FrontendController extends Controller
       ]);
     }
     
-    public function cartAdd(request $request, $id){
+    public function cartAdd(mahasiswa $mahasiswa, $id ){
+      
       Cart::create([
-        'users_id' => Auth::user()->id,
+        // 'users_id' => Auth::user()->id,
+        'users_id' => session($id),
         'inventories_id' => $id,
       ]);
       // public function pengurangan 

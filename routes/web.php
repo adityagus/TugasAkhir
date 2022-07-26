@@ -7,6 +7,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\LoginUserController;
+use App\Http\Controllers\otentikasi\OtentikasiController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\User\FrontendController;
 use App\Http\Controllers\TransactionReturnController;
@@ -27,15 +28,21 @@ use App\Http\Controllers\TransactionReturnController;
   Route::get('/peminjaman', [FrontendController::class, 'peminjaman'])
     ->name('peminjaman');
   Route::get('/details/{slug}', [FrontendController::class, 'details'])
-    ->name('details');
+    ->name('details')->middleware('mahasiswa');
+  Route::post('/masuk', [OtentikasiController::class, 'login'])
+    ->name('masuk');
+  Route::get('/keluar', [OtentikasiController::class, 'logout'])
+    ->name('keluar');
+    
+    
 
   
     
     // Route::get('/', [DashboardController::class, 'index'])->name('index');
-// Route::middleware(['mahasiswa'])->group(function () {
+Route::middleware(['mahasiswa'])->group(function () {
   
     Route::get('/cart', [FrontendController::class, 'cart'])
-    ->name('cart');
+    ->name('cart')->middleware('mahasiswa');
     Route::post('/cart/{id}', [FrontendController::class, 'cartAdd'])
     ->name('cart-add');
     Route::delete('/cart/{id}', [FrontendController::class, 'cartDelete'])
@@ -50,7 +57,7 @@ use App\Http\Controllers\TransactionReturnController;
     ->name('success');
     Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
       ->name('pengembalian');
-// });
+});
     
 
 Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {

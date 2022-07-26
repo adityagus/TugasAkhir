@@ -25,8 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Gate::define('mahasiswa', function(Mahasiswa $user){
-          return $user->id;
+        Gate::define('mahasiswa', function(Mahasiswa $mahasiswa){
+          return $mahasiswa->id;
+          
         });
     }
 }

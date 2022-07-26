@@ -41,7 +41,7 @@
               @forelse ($mhs as $item)
 
               {{-- <img src="{{ Storage::url($item->image) }}" alt="alat dan bahan" style="width: 250px; height:160px" class="img-thumbnail"> --}}
-              <img src="{{ $item->image }}" alt="" class="img-thumbnail my-3" width="150px">
+              <img src="{{ 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt="alat dan bahan" style="width: 160px" class="img-thumbnail">
               
               @empty
                 
@@ -73,7 +73,7 @@
                   
                   
                 </tr>
-                <form action="/login" method="POST">
+                <form action="{{ route('masuk') }}" method="POST">
                   @csrf
                   <input type="hidden" name="nama_mhs" value="{{ $mhs->nama_mhs }}">
                   <input type="hidden" name="nim" value="{{ $mhs->nim }}">
@@ -104,6 +104,7 @@
     <section class="row">
       <div class="col-12">
         <div class="row">
+          <a href="{{ route('keluar') }}">coba</a>
           <div class="col-6 col-lg-3 col-md-6">
             <div class="card" style="min-height: 8rem">
               <div class="card-body px-3 py-4-5">

@@ -4,6 +4,8 @@
     Peminjaman Alat
 @endsection
 
+
+
 @section('content')
 
 
@@ -15,6 +17,8 @@
           <div class="col-12 col-md-6 order-md-1 order-last">
             <h3>Peminjaman Alat dan Bahan</h3>
             <p class="text-subtitle text-muted">Halaman untuk melihat data barang serta dapat meminjamnya</p>
+            
+
           </div>
           <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -25,11 +29,16 @@
             </nav>
           </div>
         </div>
+        @if (session('message'))
+        <div class="alert alert-success form-control">
+      {{ session('message') }}
+        </div>
+        @endif
       </div>
       <section class="section">
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">Simple Datatable</h4>
+            <h4 class="card-title">Data Alat dan Bahan</h4>
           </div>
           <div class="card-body">
               <table class="table table-striped" id="table1">
