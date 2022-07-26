@@ -62,6 +62,8 @@
           <th class="thead">Tanggal Masuk <br>Barang</th>
           <th class="thead">Stock Awal</th>
           <th class="thead">Satuan</th>
+          <th class="thead">Stock Akhir</th>
+          <th class="thead">Satuan</th>
           <th class="thead">Lab</th>
           <th class="thead">Keterangan</th>
         </tr>
@@ -76,6 +78,8 @@
           <td>{{ $nomor++ }}</td>
           <td align="center">{!! $item->nama !!}</td>
           <td align="center">{{ date('d/n/Y', strtotime($item->created_at)) }}</td>
+          <td align="center">10</td>
+          <td align="center">{{ $item->satuan }}</td>
           <td align="center">{{ $item->jumlah}}</td>
           <td align="center">{{ $item->satuan }}</td>
           <td align="center">{{ $item->labs->name }}</td>

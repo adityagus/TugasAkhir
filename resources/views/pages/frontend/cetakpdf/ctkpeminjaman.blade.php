@@ -87,6 +87,7 @@
           <th class="thead">Tanggal Meminjam <br>Barang</th>
           <th class="thead">Jumlah</th>
           <th class="thead">Satuan</th>
+          <th class="thead">Status</th>
           <th class="thead">Tempat <br> Laboratorium</th>
           <th class="thead">Keterangan</th>
         </tr>
@@ -105,6 +106,7 @@
           <td align="center">{{ date('d/n/Y', strtotime($item->created_at)) }}</td>
           <td align="center">{{ $item->inventory->jumlah}}</td>
           <td align="center">{{ $item->inventory->satuan }}</td>
+          <td align="center" >{{ $transaction->status }}</td>
           <td align="center" >{{ $transaction->laboratorium }}</td>
           {{-- <td align="center">{{ $items->studies->matakuliah }}</td> --}}
           
