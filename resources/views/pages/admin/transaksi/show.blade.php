@@ -91,6 +91,7 @@ Admin Inventaris
                 <th>No</th>
                 <th>Nama Alat dan Bahan</th>
                 <th>Banyak</th>
+                <th>aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -105,6 +106,15 @@ Admin Inventaris
                  <td>{{ $loan->id }}</td>
                  <td>{{ $loan->inventory->nama }}</td>
                  <td>{{ $loan->total }}</td>
+                 <td>
+                  <form action="{{ route('admin., $loan->id)  }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-danger">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </form>
+                 </td>
                  {{-- <td>{{ $items->nama }}</td>
                  <td>{{ $items->jumlah }}</td> --}}
                  {{-- <td>{{ }}</td> --}}
@@ -132,13 +142,7 @@ Admin Inventaris
                   <a href="{{ route('admin.users.edit', $item->id) }}" class="btn btn-info mx-2">
                     <i class="fa fa-pencil-alt"></i>
                   </a>
-                  <form action="{{ route('admin.users.destroy', $item->id)  }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('delete')
-                    <button class="btn btn-danger">
-                      <i class="fa fa-trash"></i>
-                    </button>
-                  </form>
+                 
                 </td> --}}
               </tr>
               @endforeach

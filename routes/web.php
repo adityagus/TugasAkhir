@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
@@ -30,13 +31,18 @@ use App\Http\Controllers\TransactionReturnController;
     ->name('details');
   Route::get('/informasi', [FrontendController::class, 'informasi'])
     ->name('informasi');
-    
+  Route::get('/email',[EmailController::class, 'email'] )
+    ->name('email');
+  Route::get('/emailattach',[EmailController::class, 'attach'] )
+    ->name('attach');
+  Route::get('/pesan',[EmailController::class, 'notif'] )
+    ->name('notif');
 
   
     
     // Route::get('/', [DashboardController::class, 'index'])->name('index');
     
-    Route::middleware(['auth', 'verified', 'admin'])->group(function(){
+    Route::middleware(['auth', 'verified'])->group(function(){
       
       Route::get('/cart', [FrontendController::class, 'cart'])
       ->name('cart');

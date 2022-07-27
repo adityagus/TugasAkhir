@@ -16,7 +16,7 @@
         <li class="sidebar-title">Menu</li>
 
         <li class="sidebar-item">
-          <a href="/" class='sidebar-link'>
+          <a href="{{ route('admin.home') }}" class='sidebar-link'>
             <i class="bi bi-grid-fill"></i>
             <span>Dashboard</span>
           </a>
@@ -69,7 +69,7 @@
         <li class="sidebar-title">Lainnya</li>
 
         <li class="sidebar-item">
-          <a href="/pengembalian" class='sidebar-link'>
+          <a href="#" class='sidebar-link'>
             <i class="bi bi-stack"></i>
             <span>Kelola Alat & Bahan</span>
           </a>

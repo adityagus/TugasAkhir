@@ -36,12 +36,7 @@ class InventoryController extends Controller
         
       }
       
-    public function dataBarang(){
-      $mpdf = new Mpdf;
-      $mpdf->WriteHTML('<h1>Hello World</h1>');
-      $mpdf->output();
-      
-    }  
+
 
     /**
      * Show the form for creating a new resource.

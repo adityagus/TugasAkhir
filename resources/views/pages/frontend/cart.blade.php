@@ -160,9 +160,9 @@ Checkout
           <div class="card-body table-responsive">
             <div id="read""></div>
 
-            <div class=" d-flex justify-content-between align-content-center mt-4 table-footer">
+            <div class="check d-flex justify-content-between align-content-center mt-4 table-footer">
               <h4 id='total'>Alat yang anda pinjam ({{ $inCart }})</h4>
-              <button class='btn btn-primary px-lg-5 py-2 ' type="submit">Checkout</button>
+              <button id='checkouty' class='btn btn-primary btn-checkout px-lg-5 py-2 ' type="submit">Checkout</button>
             </div>
 
 
@@ -191,41 +191,35 @@ Checkout
 
 @endsection
 
+@push('prepend')
+    <script src="{{ url('frontend/scripts/script.js') }}"></script>
+@endpush
 @push('addon-script')
 <script>
-  $(function() {
     $(document).ready(function() {
       read()
-    });
+      
+      $(document).on('click','.checkout-item', function(e){
+      e.preventDefault();
+      // console.log('ok');
+      const data = {
+        'total ' : $('.qty-input').val(),
+      }
+      console.log(data);
+      
+      
+      })
+      
+      
 
     function read() {
       $.get("{{ url('read') }}", {}, function(carts, status) {
         $("#read").html(carts);
       })
     }
-
-
-
   });
 
-  // $(function(){
-  //   $('.hapusCart').on('click', function(){
-  //     return confirm('hello');
-  //   });
-  // });
-  // function cartDelete(id) {
-  //     return confirm('apakah yakin');
-  // $.ajax({
-  //   type: 'get'
-  //   , url: "{{ url('cart') }}/" + id
-  //   , data: "id=" + id
-  //   , 
-  //   , succes: function(data) {
-  //     return view('pages.frontend.home')
-  //   };
 
-  // });
-  //   };
 
 </script>
 @endpush

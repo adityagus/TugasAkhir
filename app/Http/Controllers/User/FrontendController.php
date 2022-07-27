@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Mail\Email;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Study;
@@ -12,22 +13,22 @@ use App\Models\Mahasiswa;
 use App\Models\ReturnItem;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
+use App\Notifications\Informasi;
 use App\Models\TransactionReturn;
+use App\Http\Requests\LoanRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CheckoutRequest;
 use App\Http\Requests\CheckoutReturnRequest;
-use RealRashid\SweetAlert\Facades\Alert;
-use Ramsey\Uuid\Type\Integer;
+use Illuminate\Support\Facades\Notification;
 
 class FrontendController extends Controller
 { 
     public function home(Request $request){
       
-        if ($request->user()) {
-          $loanItem = LoanItem::with(['inventory', 'transaction'])->get();
+        if (Auth::check() == true) {
+          $loanItem = LoanItem::with(['inventory', 'transaction'])->where('users_id', Auth::user()->id)->get();
         }else {
           $loanItem = LoanItem::with(['inventory'])->get();
       }
@@ -117,15 +118,18 @@ class FrontendController extends Controller
     ]);
     }
     // peminjaman alat dan bahan
-    public function checkout(CheckoutRequest $request){
-    $data = $request->all();
+    public function checkout(CheckoutRequest $request, LoanRequest $loanRequest){
+      $data = $request->all();
+
       
       //Get Carts Data 
       $carts = Cart::with('inventory')->where('users_id', Auth::user()->id)->get();
       
       //Add to Transaction data 
       $data['name'] = Auth::user()->name;
+      $email = $request->email;
       $data['users_id'] = Auth::user()->id;
+      $user = User::with(['roles'])->get();
       // dd( $data['waktupeminjaman']);
       // $data['total_price'] = $carts->sum('inventory.jumlah');
       
@@ -137,7 +141,7 @@ class FrontendController extends Controller
         $items[] = LoanItem::create([
           'transactions_id' => $transactions->id,
           'users_id' => $cart->users_id,
-          'total' => $cart->total,
+          // 'total' => $loanRequest->total,
           'inventory_id' => $cart->inventories_id
         ]);
       }
@@ -145,12 +149,35 @@ class FrontendController extends Controller
       //Delete cart after transaction 
       Cart::where('users_id', Auth::user()->id)->delete();
       
-      return redirect()->route('success');
-      //Configuration 
+      // redirect route 
+      $user = User::with('roles')->where('roles_id', 1 )
+                                  ->orWhere('roles_id', 2)
+                                  ->get();
       
-      // Setup Variabel midtrans
       
-      // payment process
+      $data = [
+        'subject' => 'Peminjaman Barang',
+        'line1' => 'Ada Mahasiswa Yang ingin Meminjam Barang',
+        'action' => 'Approval now',
+        'line2' => 'Hello ini line 2'
+      ];
+
+        
+        // $user->notify(new Informasi($data));
+        Notification::send($user, new Informasi($data));
+        return redirect()->route('success');
+
+  
+
+      // // message
+      // $pesan = [
+      //   'line1' => 'Hello Ini Line1',
+      //   'action' => 'Hello ini action nya',
+      //   'line2' => 'Hello ini line 2'
+      // ];
+      // // notification
+      // $admin->notify(new Informasi($pesan));
+      
     }
     
     // pengembalian alat dan bahan
@@ -256,6 +283,7 @@ class FrontendController extends Controller
     }
 
     public function success(request $request){
+
       return view('pages.frontend.checkout-success', [
         "title" => "cart"
       ]);
