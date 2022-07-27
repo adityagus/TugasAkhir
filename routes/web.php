@@ -29,9 +29,9 @@ use App\Http\Controllers\TransactionReturnController;
     ->name('peminjaman');
   Route::get('/details/{slug}', [FrontendController::class, 'details'])
     ->name('details')->middleware('mahasiswa');
-  Route::post('/masuk', [OtentikasiController::class, 'login'])
+  Route::post('/masuk', [LoginUserController::class, 'authenticate'])
     ->name('masuk');
-  Route::get('/keluar', [OtentikasiController::class, 'logout'])
+  Route::get('/keluar', [LoginUserController::class, 'keluar'])
     ->name('keluar');
     
     

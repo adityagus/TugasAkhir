@@ -61,6 +61,7 @@ class InventoryController extends Controller
     public function store(RequestsInventoryRequest $request)
     {
       $data = $request->all();
+      $data['jumlah_awal'] = $request->jumlah;
       $slug1 = '-' . $request->jumlah;
       $data['slug'] = Str::slug($request->nama . $slug1) ;
 

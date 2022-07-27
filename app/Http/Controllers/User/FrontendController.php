@@ -48,8 +48,8 @@ class FrontendController extends Controller
     
     
     
-    public function peminjaman(request $request){
-      $inCarts = Cart::count();
+    public function peminjaman(Mahasiswa $mahasiswa){
+      $inCarts = Cart::where('mahasiswa_id', $mahasiswa->id)->count();
         $data = Inventory::with('category_items', 'labs', 'loan_items')->get();
         // dd($data);
       return view('pages.frontend.peminjaman', [
@@ -82,7 +82,11 @@ class FrontendController extends Controller
     public function cart(Request $request, Mahasiswa $mahasiswa)
     {
       $inCarts = Cart::where('mahasiswa_id', $mahasiswa->id)->count();
-      $carts = Cart::with(['inventory'])->where('mahasiswa_id', $mahasiswa->id)->get();
+      $carts = Cart::with(['inventory'])->where('mahasiswa_id', $mahasiswa)->get();
+      
+      $value = $request->session()->get('nama_mhs');
+      dd($value);
+      
       // $data = LoanItem::with('study')->get();
       return view('pages.frontend.cart', [
         "title" => "cart",
@@ -93,11 +97,13 @@ class FrontendController extends Controller
       ]);
     }
     
-    public function cartAdd(mahasiswa $mahasiswa, $id ){
-      
+    public function cartAdd(Mahasiswa $mahasiswa, $id ){
+      $mahasiswa = Mahasiswa::get();
+      // dd($mahasiswa);
+      // 
       Cart::create([
         // 'users_id' => Auth::user()->id,
-        'users_id' => session($id),
+        'mahasiswa_id' =>  $mahasiswa->id,
         'inventories_id' => $id,
       ]);
       // public function pengurangan 
