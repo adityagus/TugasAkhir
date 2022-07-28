@@ -83,7 +83,7 @@
     
     function read() {
       $.get("{{ url('read') }}", {}, function(carts,status,total){
-          
+        $("#read").html(carts);
         // const $total = 0;
         
       })
@@ -109,10 +109,10 @@
             type: 'delete',
             dataType: 'json',
             success: function(carts) {
+              read();  
               const h4 = document.querySelector('#total');
               h4.innerHTML = ("Alat yang anda pinjam ({{ $inCart-1 }})");
                 
-                window.location.reload();
                 
             }
           , error: function(jqXhr, textStatus, errorMessage) {

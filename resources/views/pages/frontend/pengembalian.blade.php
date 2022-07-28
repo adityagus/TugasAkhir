@@ -79,11 +79,7 @@ Pengembalian Alat
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary" onclick="Swal.fire(
-                            'The Internet?',
-                            'That thing is still around?',
-                            'question'
-                          );" >Submit Pengembalian</button>
+                          <button type="submit" class="btn btn-primary">Submit Pengembalian</button>
                         </div>
                       </div>
                     </div>

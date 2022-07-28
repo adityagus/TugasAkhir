@@ -49,7 +49,7 @@ use App\Http\Controllers\TransactionReturnController;
       Route::post('/cart/{id}', [FrontendController::class, 'cartAdd'])
       ->name('cart-add');
       Route::get('/read', [FrontendController::class, 'read'])
-      ->name('cart-delete');
+      ->name('read');
       Route::delete('/cart/{id}', [FrontendController::class, 'cartDelete'])
       ->name('cart-delete');
       Route::post('/checkout-peminjaman', [FrontendController::class, 'checkout'])

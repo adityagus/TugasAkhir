@@ -131,7 +131,7 @@ class FrontendController extends Controller
       
       //Add to Transaction data 
       $data['name'] = Auth::user()->name;
-      $email = $request->email;
+      // $email = $request->email;
       $data['users_id'] = Auth::user()->id;
       $user = User::with(['roles'])->get();
       // dd( $data['waktupeminjaman']);
