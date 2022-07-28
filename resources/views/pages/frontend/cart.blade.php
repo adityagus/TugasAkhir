@@ -59,7 +59,7 @@ Checkout
 
                 <div class="form-group">
                   <label for="nama">Nama</label>
-                  <input type="text" name="nama" class="form-control" id="nama" placeholder='Masukan Nama Anda' required>
+                  <input type="text" name="name" class="form-control" id="nama" placeholder='Masukan Nama Anda' required>
                 </div>
                 
                 
@@ -134,8 +134,12 @@ Checkout
 
 
         </div>
+        <div class="d-flex justify-content-between align-content-center mt-4 table-footer">
+          <h4>Alat yang anda pinjam ({{ $inCart }})</h4>
+          <button class='btn btn-primary px-lg-5 py-2 ' type="submit">Checkout</button>
         </div>
       </section>
+    </form>
       
             {{-- Start Cart Section --}}
   <section class="section">
@@ -163,13 +167,13 @@ Checkout
                 <td>{{ $item->inventory->peminjaman }}</td>
                 <td>{{ $item->inventory->labs->name }}</td>
                 <td>
-                  <form action="{{ route('cart-delete', $item->id)  }}" method="post">
+                  {{-- <form action="{{ route('cart-delete', $item->id)  }}" method="post">
                     @csrf
                     @method("DELETE")
                   <button class="btn btn-toggle shadow-none" onClick="cartDelete({{ $item->id }})">
                     X
                   </button>
-                </form>
+                </form> --}}
                 </td>
 
               </tr>
@@ -184,9 +188,7 @@ Checkout
           </tbody>
         </table>
         
-        <div class="d-flex justify-content-between align-content-center mt-4 table-footer">
-          <h4>Alat yang anda pinjam ({{ $inCart }})</h4>
-          <button class='btn btn-primary px-lg-5 py-2 ' type="submit">Checkout</button>
+
         </div>
 
 
@@ -197,7 +199,6 @@ Checkout
   </section>
 
   {{-- End Cart Section --}}
-    </form>
 
 
 

@@ -21,7 +21,7 @@ class CreateInventoriesTable extends Migration
             $table->string('kd_brg');
             $table->string('nama');
             $table->text('deskripsi');
-            $table->integer('jumlah_awal');
+            // $table->integer('jumlah_awal');
             $table->integer('jumlah');
             $table->string('satuan');
             $table->string('slug');

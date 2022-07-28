@@ -37,7 +37,6 @@
           </li> --}}
           
           
-          @auth
           @if ( $title == 'peminjaman')
           <li class="nav-item mx-5">
             <a class="nav-link active position-relative py-0 " href="{{ route('cart') }}" aria-expanded="false">
@@ -50,21 +49,7 @@
             </a>
           </li>
           @endif
-          @endauth
           
-          @guest
-          @if ( $title == 'peminjaman')
-          <li class="nav-item mx-5">
-            <a class="nav-link active position-relative py-0 " href="{{ route('cart') }}" aria-expanded="false">
-              <i class='bi bi-cart bi-sub fs-4 py-0 text-gray-600'></i>
-              <span class="">
-                <span class="visually-hidden">Peminjaman Ballon</span>
-              </span>
-              {{-- <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">5</span> --}}
-            </a>
-          </li>
-          @endif
-          @endguest
         </ul>
         <div class="dropdown">
           @auth

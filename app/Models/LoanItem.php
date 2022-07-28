@@ -10,7 +10,7 @@ class LoanItem extends Model
     use HasFactory;
     
     protected $fillable = [
-      'inventory_id', 'users_id', 'transactions_id', 'total'
+      'inventory_id', 'transactions_id', 'total'
     ];
     
     public function inventory(){

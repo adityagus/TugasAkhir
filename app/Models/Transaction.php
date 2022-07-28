@@ -10,12 +10,16 @@ class Transaction extends Model
 {
     use HasFactory;
     protected $fillable = [
-     'id', 'users_id', 'name', 'nim', 'kelas', 'phone', 'pertemuan_ke', 'keperluan', 'laboratorium', 'status'
+     'id', 'mahasiswa_id', 'name', 'nim', 'kelas', 'phone', 'pertemuan_ke', 'keperluan', 'laboratorium', 'status'
     ];
     
     public function user(){
       return $this->belongsTo(User::class, 'users_id', 'id');
     }
+    public function mahasiswa(){
+      return $this->belongsTo(User::class, 'mahasiswa_id', 'id');
+    }
+    
 
       
 }

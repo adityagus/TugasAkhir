@@ -25,14 +25,18 @@ use App\Http\Controllers\TransactionReturnController;
 
   Route::get('/', [FrontendController::class, 'home'])
     ->name('index');
+  Route::get('/alat-dan-bahan', [FrontendController::class, 'barang'])
+    ->name('barang');
   Route::get('/peminjaman', [FrontendController::class, 'peminjaman'])
     ->name('peminjaman');
   Route::get('/details/{slug}', [FrontendController::class, 'details'])
     ->name('details')->middleware('mahasiswa');
-  Route::post('/masuk', [LoginUserController::class, 'authenticate'])
+  Route::post('/masuk', [OtentikasiController::class, 'masuk'])
     ->name('masuk');
-  Route::get('/keluar', [LoginUserController::class, 'keluar'])
+  Route::get('/keluar', [OtentikasiController::class, 'keluar'])
     ->name('keluar');
+  Route::get('/session/tampil',[FrontendController::class, 'tampil']);
+  Route::get('/session/buat',[FrontendController::class, 'buat']);
     
     
 
@@ -115,7 +119,7 @@ Route::middleware([
 
 // end configuration laravel jetstream
 
-route::post('/login', [LoginUserController::class, 'authenticate'])->name('login');
+// route::post('/login', [LoginUserController::class, 'authenticate'])->name('login');
 
 
 

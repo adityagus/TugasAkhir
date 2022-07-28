@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Mahasiswa as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Mahasiswa extends Authenticatable
+class Mahasiswa extends model
 {
     use HasFactory,SoftDeletes;
     protected $fillable = [

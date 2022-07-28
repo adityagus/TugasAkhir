@@ -41,6 +41,32 @@ class FrontendController extends Controller
       ]);
     }
     
+    public function barang(Mahasiswa $mahasiswa){
+      $inCarts = Cart::count();
+        $data = Inventory::with('category_items', 'labs', 'loan_items')->get();
+        // dd($data);
+      return view('pages.frontend.barang', [
+        'items' => $data, 
+        "title" => "barang",
+        'inCart' => $inCarts
+      ]);
+    }
+    
+    
+    
+    
+    public function tampil(Request $request) {
+      if($request->session()->has('nama')){
+        echo $request->session()->get('nama');
+      }else{
+        echo 'Tidak ada data dalam session.';
+      }
+    }
+    public function buat(Request $request) {
+      $request->session()->put('nama','Diki Alfarabi Hadi');
+      echo "Data telah ditambahkan ke session.";
+    }
+    
     public function authorize($ability, $arguments = [])
     {
       
@@ -49,7 +75,7 @@ class FrontendController extends Controller
     
     
     public function peminjaman(Mahasiswa $mahasiswa){
-      $inCarts = Cart::where('mahasiswa_id', $mahasiswa->id)->count();
+      $inCarts = Cart::count();
         $data = Inventory::with('category_items', 'labs', 'loan_items')->get();
         // dd($data);
       return view('pages.frontend.peminjaman', [
@@ -81,11 +107,8 @@ class FrontendController extends Controller
     
     public function cart(Request $request, Mahasiswa $mahasiswa)
     {
-      $inCarts = Cart::where('mahasiswa_id', $mahasiswa->id)->count();
-      $carts = Cart::with(['inventory'])->where('mahasiswa_id', $mahasiswa)->get();
-      
-      $value = $request->session()->get('nama_mhs');
-      dd($value);
+      $inCarts = Cart::count();
+      $carts = Cart::with(['inventory'])->get();
       
       // $data = LoanItem::with('study')->get();
       return view('pages.frontend.cart', [
@@ -97,13 +120,9 @@ class FrontendController extends Controller
       ]);
     }
     
-    public function cartAdd(Mahasiswa $mahasiswa, $id ){
-      $mahasiswa = Mahasiswa::get();
-      // dd($mahasiswa);
+    public function cartAdd( $id ){
       // 
       Cart::create([
-        // 'users_id' => Auth::user()->id,
-        'mahasiswa_id' =>  $mahasiswa->id,
         'inventories_id' => $id,
       ]);
       // public function pengurangan 
@@ -121,14 +140,13 @@ class FrontendController extends Controller
     }
     
     public function checkout(CheckoutRequest $request){
-     $data = $request->all();
+     $data =  $request->all();
       
       //Get Carts Data 
-      $carts = Cart::with('inventory')->where('users_id', Auth::user()->id)->get();
+      $carts = Cart::with('inventory')->get();
       
       //Add to Transaction data 
-      $data['nama'] = Auth::user()->name;
-      $data['users_id'] = Auth::user()->id;
+      $data['name'] = $request->name;
       // $data['total_price'] = $carts->sum('inventory.jumlah');
       
       //Create transaction item 
@@ -138,13 +156,12 @@ class FrontendController extends Controller
       foreach ($carts as $cart ) {
         $items[] = LoanItem::create([
           'transactions_id' => $transactions->id,
-          'users_id' => $cart->users_id,
           'inventory_id' => $cart->inventories_id
         ]);
+        $cart->delete();
       }
       
       //Delete cart after transaction 
-      Cart::where('users_id', Auth::user()->id)->delete();
       
       return redirect()->route('success');
       
@@ -215,7 +232,7 @@ class FrontendController extends Controller
 
     
     public function pengembalian(request $request){
-      $loanItem = LoanItem::with('inventory' , 'transaction')->where('users_id', Auth::user()->id)->get();
+      $loanItem = LoanItem::with('inventory' , 'transaction')->get();
       
       return view('pages.frontend.pengembalian', [
         'items' => $loanItem,

@@ -25,6 +25,13 @@
         <li class="sidebar-title mb-0">Manajemen</li>
 
 
+        <li class="sidebar-item {{ ($title == "barang" ? "active" : "") }}">
+          <a href="/alat-dan-bahan" class='sidebar-link'>
+            <img src="{{ $title !== "barang" ? url("frontend/images/assets/listbarang-secondary.png") : url("frontend/images/assets/listbarang.png") }}" width='35px' alt="">
+            <span>List Barang</span>
+          </a>
+        </li>
+        
         <li class="sidebar-item {{ ($title == "peminjaman" || $title == "cart" ? "active" : "") }}">
           <a href="/peminjaman" class='sidebar-link'>
             <img src="{{ $title !== "peminjaman" && $title !=='cart' ? url("user/dist/assets/images/logo/peminjaman-secondary.png") : url("user/dist/assets/images/logo/peminjaman.png") }}" width='35px' alt="">
@@ -40,6 +47,13 @@
         </li>
         
         <li class="sidebar-title mt-2">Lainnya</li>
+        
+        <li class="sidebar-item {{ ($title == "transaksi" ? "active" : "") }}">
+          <a href="/" class='sidebar-link'>
+            <img src="{{ $title !== "transaksi" ? url("frontend/images/assets/listbarang-secondary.png") : url("frontend/images/assets/listbarang.png") }}" width='35px' alt="">
+            <span>List Barang</span>
+          </a>
+        </li>
         
         
         <li class="sidebar-item ">
