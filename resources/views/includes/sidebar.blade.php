@@ -4,7 +4,7 @@
     <div class="sidebar-header">
       <div class="d-flex justify-content-between">
         <div class="logo">
-        <a href="index.html"><img src="{{ url('user/dist/assets/images/logo/logo.png') }}" alt="Logo" style="height:40px;" srcset=""></a>
+        <a href="{{ route('index') }}"><img src="{{ url('user/dist/assets/images/logo/logo.png') }}" alt="Logo" style="height:40px;" srcset=""></a>
         </div>
         <div class="toggler">
           <a href="#" class="sidebar-hide d-xl-none d-block">
@@ -48,16 +48,16 @@
         
         <li class="sidebar-title mt-2">Lainnya</li>
         
-        <li class="sidebar-item {{ ($title == "transaksi" ? "active" : "") }}">
-          <a href="/" class='sidebar-link'>
-            <img src="{{ $title !== "transaksi" ? url("frontend/images/assets/listbarang-secondary.png") : url("frontend/images/assets/listbarang.png") }}" width='35px' alt="">
-            <span>List Barang</span>
+        <li class="sidebar-item {{ ($title == "history" ? "active" : "") }}">
+          <a href="/history" class='sidebar-link'>
+            <img src="{{ $title !== "history" ? url("frontend/images/assets/mytransaksi-secondary.png") : url("frontend/images/assets/mytransaksi.png") }}" width='35px' alt="">
+            <span>History</span>
           </a>
         </li>
         
         
-        <li class="sidebar-item ">
-          <a href="/" class='sidebar-link'>
+        <li class="sidebar-item {{ ($title == "informasi" ? "active" : "") }} ">
+          <a href="{{ route('informasi') }}" class='sidebar-link'>
             <i class="bi bi-info" ></i>
             <span>Informasi</span>
           </a>

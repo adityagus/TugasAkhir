@@ -19,7 +19,7 @@
           <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Peminjaman</li>
               </ol>
             </nav>
@@ -37,7 +37,7 @@
                   <th>phone</th>
                   <th>keperluan</th>
                   <th>laboratorium</th>
-                  <th>pertemuan</th>
+                  <th>waktu peminjaman</th>
                   <th>Status</th>
                   <th class="">Aksi</th>
                 </tr>
@@ -63,7 +63,7 @@
                   <td>{{ $item->phone }}</td>
                   <td>{{ $item->keperluan}}</td>
                   <td>{{ $item->laboratorium}}</td>
-                  <td>{{ $item->pertemuan_ke}}</td>
+                  <td>{{ $item->created_at->format('d M Y / H:i a')}}</td>
                   <td>{{ $item->status}}</td>
                   <td class="d-flex justify-content-center">
                     <span class='d-flex d-inline-block'>

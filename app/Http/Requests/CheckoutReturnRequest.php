@@ -25,7 +25,7 @@ class CheckoutReturnRequest extends FormRequest
     public function rules()
     {
         return [
-          'kondisi' => 'string|in:bagus,rusak',  
+          'kondisi' => 'string|in:BAGUS,RUSAK',  
           'keterangan' => 'string'  
         ];
     }

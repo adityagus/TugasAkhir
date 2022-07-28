@@ -2,6 +2,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('user/dist/assets/css/bootstrap.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- untuk menggunakan icon -->
     <link rel="stylesheet" href="{{ url('user/dist/assets/vendors/iconly/bold.css') }}">

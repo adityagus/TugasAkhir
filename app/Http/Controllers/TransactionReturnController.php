@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\TransactionReturn;
 use App\Http\Requests\TransactionReturnRequest;
+use App\Models\ReturnItem;
 
 class TransactionReturnController extends Controller
 {
@@ -51,11 +52,11 @@ class TransactionReturnController extends Controller
      */
     public function show(TransactionReturn $return)
     {
-      $loanItem =  LoanItem::with(['inventory'])->where('transactions_id', $return->id)->get();
+      $returnItem =  ReturnItem::with(['inventory', ])->where('transactionreturn_id', $return->id)->get();
       
       return view('pages.admin.pengembalian.show',[
         'pengembalian' => $return,
-        'loanitem' => $loanItem
+        'returnitem' => $returnItem
       ]);
     }
 

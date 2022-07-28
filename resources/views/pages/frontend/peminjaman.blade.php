@@ -1,127 +1,187 @@
 @extends('layouts.main')
 
 @section('title')
-    Peminjaman Alat
+Pengembalian Alat
 @endsection
-
-
-
 @section('content')
+<div id="main-content">
 
-
-  <div id="main-content">
-
-    <div class="page-heading">
-      <div class="page-title">
-        <div class="row">
-          <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Peminjaman Alat dan Bahan</h3>
-            <p class="text-subtitle text-muted">Halaman untuk melihat data barang serta dapat meminjamnya</p>
-            
-
-          </div>
-          <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Peminjaman</li>
-              </ol>
-            </nav>
-          </div>
-        </div>
-        @if (session('message'))
-        <div class="alert alert-success form-control">
-      {{ session('message') }}
+  <div class="page-heading">
+    <div class="page-title">
+      <div class="row">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
         </div>
         @endif
-      </div>
-      <section class="section">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="card-title">Data Alat dan Bahan</h4>
-          </div>
-          <div class="card-body">
-              <table class="table table-striped" id="table1">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Nama Alat & Bahan</th>
-                  <th>Kategori</th>
-                  {{-- <th>Total</th> --}}
-                  <th>Lab</th>
-                  <th class="text-center">Aksi</th>
-                </tr>
-              </thead>
-              @php
-                  $no = 1;
-              @endphp
-              
-              <tbody>
-                @forelse ($items as $item)
-                <tr>
-                  <td>{{ $no++ }}</td>
-                  <td>{{ $item->nama }}</td>
-                  <td>{{ $item->category_items->namakategori }}</td>
-                  {{-- @if ($item->loan_items->total == 0)
-                  <td>0</td>
-                      
-                  @else
-                  <td>{{ $item->loan_items->total }}</td>
-                      
-                  @endif --}}
-                  <td>{{ $item->labs->name }}</td>
-                  <td class="d-flex justify-content-center">
-                    <span class='d-flex d-inline-block px-2'>
-                      <a href='{{ route('details', $item->slug) }}'>
-                        <button class='btn btn-primary mx-1'  type="submit">Detail</button>
-                      </a>
-                    </span>
-                    <form action="{{ route('cart-add', $item->id) }}" method="POST" class="d-inline">
-                      @csrf
-                      <button class="btn btn-info"
-                      type="submit">
-                        
+        
 
-                        Add to Cart
-                      </button>
-                    </form>
-                  </td>
-                </tr>
-                @empty
-                    
-                @endforelse
-                
-                
-                
-              
-              </tbody>
-            </table>
-          </div>
-
+        <div class="col-12 col-md-6 order-md-1 order-last">
+          <h3>Peminjaman Alat dan Bahan</h3>
+          <p class="text-subtitle text-muted">List Peminjaman di Jurusan Teknik Elektro</p>
         </div>
-      </section>
+        <div class="col-12 col-md-6 order-md-2 order-first">
+          <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Pengembalian</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
     </div>
+    <section class="section">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex justify-content-between">
+            <div class="div">
+              <h4 class=''>Alat Yang Anda Pinjam</h4>
+            </div>
+            <div class="bd-highlight">
+              <form action="{{ route('return') }}" method="POST">
+                @csrf
+                @method('POST')
+                <button type="button" name="" id="" class="btn btn-warning btn-md btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Kembalikan Semua</button>
 
-    <footer>
-      <div class="footer clearfix mb-0 text-muted">
-        <div class="float-start">
-          <p>2022 &copy; Teknik Elektro</p>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Pengembalian</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="mb-3">
+                            <label for="periksa" class="col-form-label">Bagaimana Kondisi Sesudah dipinjam?</label>
+                            <div class="d-flex">
+                              <div class="form-check me-4">
+
+                                <input class="form-check-input" type="radio" name="kondisi" id="bagus" value="BAGUS">
+                                <label class="form-check-label" for="bagus">
+                                  Bagus
+                                </label>
+                              </div>
+                                <input class="form-check-input" type="radio" name="kondisi" id="rusak" value="RUSAK">
+                                <label class="form-check-label" for="rusak">
+                                  Rusak
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Keterangan</label>
+                            <textarea class="form-control" id="message-text" name="keterangan"></textarea>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary" onclick="Swal.fire(
+                            'The Internet?',
+                            'That thing is still around?',
+                            'question'
+                          );" >Submit Pengembalian</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        <div class="card-body table-responsive">
+          <table class='table table-bordered table-striped'>
+            <thead>
+              <tr>
+                <th>NO.</th>
+                <th>Nama Mahasiswa</th>
+                <th>Nim</th>
+                <th>Kelas</th>
+                <th>Phone</th>
+                <th>Tempat Lab</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              @php
+              $no =1
+              @endphp
+              @forelse ($transaction as $item)
+
+              <tr>
+                <!-- <td colspan='7'><center>No Data</center></td> -->
+                <td>{{ $no++ }}</td>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->nim }}</td>
+                <td>{{ $item->kelas }}</td>
+                <td>{{ $item->phone }}</td>
+                <td> {{ $item->laboratorium }}</td>
+                <td> {{ $item->status }}</td>
+                <td class="d-flex justify-content-center">
+                  <span class='d-flex d-inline-block'>
+                    <a href="{{ route('admin.transaction.show',$item->id) }}">
+                      <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
+                    </a>
+                  </span>
+                  @if ($item->status == 'SUCCESS')
+                  <a href="{{ route('pengembalian') }}">
+                    <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
+                  </a>
+                  @endif    
+                  
+                  
+              </tr>
+
+              @empty
+
+
+              <tr>
+                <td colspan="8" class="text-center">Data Kosong</td>
+              </tr>
+
+
+              @endforelse
+
+
+
+
+            </tbody>
+
+          </table>
         </div>
+
       </div>
-    </footer>
+    </section>
   </div>
+</div>
+
+  <footer>
+    <div class="footer d-flex justify-content-center mb-0 text-muted">
+      <div class="float-center">
+        <p class='text-center'>2022 &copy; Teknik Elektro</p>
+      </div>
+  </footer>
+</div>
 @endsection
 
-@push('prepend-script')
+
+@push('prepend-styles')
 <link rel="stylesheet" href="user/dist/assets/vendors/simple-datatables/style.css">
 @endpush
 
-@push('prepend-script')
+@push('addon-script')
 <script src="{{ url('user/dist/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
 
+@include('sweetalert::alert')
+
 <script>
-  // Simple Datatable
-  let table1 = document.querySelector('#table1');
-  let dataTable = new simpleDatatables.DataTable(table1);
+// Simple Datatable
+let table1 = document.querySelector('#table1');
+let dataTable = new simpleDatatables.DataTable(table1);
+
 </script>
 @endpush
+

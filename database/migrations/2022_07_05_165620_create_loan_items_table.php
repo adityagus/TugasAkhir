@@ -16,7 +16,6 @@ class CreateLoanItemsTable extends Migration
         Schema::create('loan_items', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('inventory_id');
-            $table->bigInteger('users_id');
             $table->bigInteger('transactions_id');
             $table->bigInteger('total')->default(1);
             // $table->softDeletes();

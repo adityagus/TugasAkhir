@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\cetak\CetakController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\LoginUserController;
 use App\Http\Controllers\otentikasi\OtentikasiController;
+use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\cetak\CetakController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\User\FrontendController;
 use App\Http\Controllers\TransactionReturnController;
@@ -30,14 +31,19 @@ use App\Http\Controllers\TransactionReturnController;
   Route::get('/peminjaman', [FrontendController::class, 'peminjaman'])
     ->name('peminjaman');
   Route::get('/details/{slug}', [FrontendController::class, 'details'])
-    ->name('details')->middleware('mahasiswa');
+    ->name('details');
   Route::post('/masuk', [OtentikasiController::class, 'masuk'])
     ->name('masuk');
   Route::get('/keluar', [OtentikasiController::class, 'keluar'])
     ->name('keluar');
-  Route::get('/session/tampil',[FrontendController::class, 'tampil']);
-  Route::get('/session/buat',[FrontendController::class, 'buat']);
-    
+    Route::get('/informasi', [FrontendController::class, 'informasi'])
+    ->name('informasi');
+  Route::get('/email',[EmailController::class, 'email'] )
+    ->name('email');
+  Route::get('/emailattach',[EmailController::class, 'attach'] )
+    ->name('attach');
+  Route::get('/pesan',[EmailController::class, 'notif'] )
+    ->name('notif');
     
 
   
@@ -49,11 +55,13 @@ Route::middleware(['mahasiswa'])->group(function () {
     ->name('cart')->middleware('mahasiswa');
     Route::post('/cart/{id}', [FrontendController::class, 'cartAdd'])
     ->name('cart-add');
+    Route::get('/read', [FrontendController::class, 'read'])
+    ->name('read');
     Route::delete('/cart/{id}', [FrontendController::class, 'cartDelete'])
     ->name('cart-delete');
     Route::post('/checkout-peminjaman', [FrontendController::class, 'checkout'])
     ->name('checkout');
-    Route::post('/checkout-pengembalian', [FrontendController::class, 'return'])
+    Route::post('/checkout-pengembalian/{id}', [FrontendController::class, 'return'])
     ->name('return');
     Route::post('/return-success', [FrontendController::class, 'return'])
     ->name('return-success');
@@ -61,13 +69,20 @@ Route::middleware(['mahasiswa'])->group(function () {
     ->name('success');
     Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
       ->name('pengembalian');
+    Route::get('/cetakpeminjaman', [CetakController::class, 'cPeminjaman'])
+    ->name('cetakpeminjaman');
+    Route::get('/history', [Frontendcontroller::class, 'history'])
+    ->name('history');
 });
+
     
 
 Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin')->group(function () {
 
   // Route::get('/', [DashboardController::class, 'index'])->name('index');
 
+  Route::get('/', [HomeController::class, 'home'])
+  ->name('home');
   Route::get('/cetakdatabarang', [CetakController::class, 'dataBarang'])
   ->name('cetakdatabarang');
   

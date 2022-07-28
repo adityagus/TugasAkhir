@@ -37,7 +37,7 @@
           </li> --}}
           
           
-          @if ( $title == 'peminjaman')
+          @if ( $title == 'barang')
           <li class="nav-item mx-5">
             <a class="nav-link active position-relative py-0 " href="{{ route('cart') }}" aria-expanded="false">
               <i class='bi bi-cart bi-sub fs-4 py-0 text-gray-600'></i>

@@ -19,7 +19,7 @@ Admin Inventaris
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
               <li class="breadcrumb-item active" aria-current="page">Data Barang</li>
             </ol>
           </nav>
@@ -80,7 +80,9 @@ Admin Inventaris
                 <td>{{ $item->nama}}</td>
                 <td >{{ $item->category_items->namakategori }}</td>
                 <td>{{ $item->jumlah}}</td>
-                <td>&nbsp;</td>
+                <td>
+                  {{ $item->keluar }}
+                </td>
                 <td>&nbsp;</td>
                 <td>{{ $item->labs->name }}</td>
                 <td class="d-flex justify-content-center">

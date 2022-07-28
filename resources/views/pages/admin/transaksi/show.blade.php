@@ -19,7 +19,7 @@ Admin Inventaris
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
               <li class="breadcrumb-item"><a href="{{ route('admin.transaction.index') }}">Peminjaman</a></li>
               <li class="breadcrumb-item active" aria-current="page">
                 transaksi &raquo; #{{ $transaction->id }} <span class='text-primary'>{{ $transaction->name }}</span>
@@ -48,6 +48,10 @@ Admin Inventaris
             <tr>
               <th class="px-6 py-4 text-end">No. Telp</th>
               <td class="px-6 py-4">{{ $transaction->phone }}</td>
+            </tr>
+            <tr>
+              <th class="px-6 py-4 text-end">Mata Kuliah</th>
+              <td class="px-6 py-4">{{ $transaction->studies->matakuliah }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Pertemuan Ke</th>
@@ -87,6 +91,7 @@ Admin Inventaris
                 <th>No</th>
                 <th>Nama Alat dan Bahan</th>
                 <th>Banyak</th>
+                <th>aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -101,6 +106,15 @@ Admin Inventaris
                  <td>{{ $loan->id }}</td>
                  <td>{{ $loan->inventory->nama }}</td>
                  <td>{{ $loan->total }}</td>
+                 <td>
+                  <form action="{{ route('admin., $loan->id)  }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-danger">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </form>
+                 </td>
                  {{-- <td>{{ $items->nama }}</td>
                  <td>{{ $items->jumlah }}</td> --}}
                  {{-- <td>{{ }}</td> --}}
@@ -128,13 +142,7 @@ Admin Inventaris
                   <a href="{{ route('admin.users.edit', $item->id) }}" class="btn btn-info mx-2">
                     <i class="fa fa-pencil-alt"></i>
                   </a>
-                  <form action="{{ route('admin.users.destroy', $item->id)  }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('delete')
-                    <button class="btn btn-danger">
-                      <i class="fa fa-trash"></i>
-                    </button>
-                  </form>
+                 
                 </td> --}}
               </tr>
               @endforeach
@@ -143,7 +151,6 @@ Admin Inventaris
                 <td colspan="8" class="text-center">Data Kosong</td>
               </tr>
               @endforelse  --}}
-                </tbody>
               
               
               

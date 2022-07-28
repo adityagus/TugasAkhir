@@ -1,7 +1,7 @@
-@extends('layouts.main')
+@extends('layouts.main-admin')
 
 @section('title')
-    Sistem Informasi Peminjaman - Elektro
+    Dashboard Admin
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
         <h3>Dashboard</h3>
         <h6>Daftar Mahasiswa Jurusan Teknik Elektro</h6>
       </div>
-      <div class="col-md-5 ">
+      {{-- <div class="col-md-5 ">
       <form action="{{ route('index') }}">
       <div class="d-flex col-12 jus ">
           <div class="col-9 form-group inline">
@@ -25,23 +25,22 @@
           </div>
         </div>
       </form>
-    </div>
-
+    </div> --}}
     </div>
   </div>
   <div class="page-content">
-    <section class="list-mahasiswa">
+<!--    <section class="list-mahasiswa">
       @if(request('search'))  
         <div class="card ">
           <div class="card-header blue text-white">
-              Biodata Mahasiswa 
+              Biodata Mahasiswa
           </div>
           <div class="card-body display d-flex">
             <div class="img">
               @forelse ($mhs as $item)
 
               {{-- <img src="{{ Storage::url($item->image) }}" alt="alat dan bahan" style="width: 250px; height:160px" class="img-thumbnail"> --}}
-              <img src="{{ 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt="alat dan bahan" style="width: 160px" class="img-thumbnail">
+              <img src="{{ url('user\dist\assets\images\faces\1.jpg') }} ? " alt="" class="img-thumbnail my-3" width="150px">
               
               @empty
                 
@@ -50,38 +49,27 @@
               @endforelse
             </div>
             <div class="descriptions">
-
               <table>
                 @forelse ($mhs as $mhs)
+                    
                 <tr>
                   <td width='10%'>Nama</td>
                   <td width='5%'>:</td>
                   <td width='0%'>{{ $mhs->nama_mhs }}</td>
-                  
                 </tr>
                 <tr>
                   <td width='10%'>Nim</td>
                   <td width='5%'>:</td>
                   <td width='0%'>{{ $mhs->nim }}</td>
-                  
                 </tr>
                 <tr>
                   <td width='10%'>Prodi</td>
                   <td width='5%'>:</td>
-                  <td width='0%'">{{ $mhs->prodi }}</td>
-                  <input type="hidden" name="prodi" value="{{ $mhs->prodi }}">
-                  
-                  
+                  <td width='0%'">Teknik Elektronika</td>
                 </tr>
-                <form action="{{ route('masuk') }}" method="POST">
-                  @csrf
-                  <input type="hidden" name="nama_mhs" value="{{ $mhs->nama_mhs }}">
-                  <input type="hidden" name="nim" value="{{ $mhs->nim }}">
-                  <button type="submit" >Submit</button>
-                </form>
                 
                 @empty
-                
+                    
                 <tr>
                   <td colspan="3">Data Tidak Ada</td>
                 </tr>
@@ -98,13 +86,12 @@
         
       </div>
       @endif
-    </section>
+    </section> -->
     
     
     <section class="row">
       <div class="col-12">
         <div class="row">
-          <a href="{{ route('keluar') }}">coba</a>
           <div class="col-6 col-lg-3 col-md-6">
             <div class="card" style="min-height: 8rem">
               <div class="card-body px-3 py-4-5">
@@ -174,19 +161,31 @@
             </div>
           </div>
         </div>
+        
+  {{-- Peminjaman mahasiswa --}}
         <div class="row">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
                 <div class="d-flex justify-content-between">
                   <div class="div">
-                    <h4 class=''>Alat Yang Anda Pinjam</h4>
+                    <h4 class=''>Mahasiswa yang ingin Meminjam</h4>
                   </div>
                   <div class="bd-highlight">
-                    <form action="">
+                    @if ($items == true)
+                        
+                    <div class="export">
+                      <a href="{{ route('cetakpeminjaman') }}" target="_blank">
+                        <button class='btn-red'>
+                          Export PDF &nbsp;  <i class="bi bi-file-earmark-arrow-down "></i>
+                        </button>
+                      </a>
+                    </div>
+                    @endif
+                    {{-- <form action="">
                       <input type="search" class='form-control'>
                       <i></i>
-                    </form>
+                    </form> --}}
                   </div>
                 </div>
               </div>
@@ -197,10 +196,11 @@
                   <thead>
                     <tr>
                       <th>NO.</th>
-                      <th>Nama Alat & Bahan</th>
-                      <th>Kategori</th>
-                      <th>Jumlah Dipinjam</th>
-                      <th>Jenis</th>
+                      <th>Nama Mahasiswa</th>
+                      <th>Nim</th>
+                      <th>Kelas</th>
+                      <th>Phone</th>
+                      <th>Tempat Lab</th>
                       <th>Status</th>
                       <th>Aksi</th>
                     </tr>
@@ -214,25 +214,123 @@
                     <tr>
                       <!-- <td colspan='7'><center>No Data</center></td> -->
                       <td>{{ $no++ }}</td>
-                      <td>{{ $item->inventory->nama }}</td>
-                      <td>{{ $item->inventory->category_items->namakategori }}</td>
-                      <td>{{ $item->total }}</td>
-                      <td>{{ $item->inventory->labs->name }}</td>
-                      <td> {{ $item->transaction->status }}</td>
-                      {{-- <td>{{ $status->status }}</td> --}}
-                      {{-- @if ($item->sta)
-                          
-                      @elseif($condition)
-                          
-                      @endif --}}
-                      <td class='d-flex justify-content-center'>
-                        <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
-                        <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
-                      </td>
+                      <td>{{ $item->name }}</td>
+                      <td>{{ $item->nim }}</td>
+                      <td>{{ $item->kelas }}</td>
+                      <td>{{ $item->phone }}</td>
+                      <td> {{ $item->laboratorium }}</td>
+                      <td> {{ $item->status }}</td>
+                      <td class="d-flex justify-content-center">
+                        <span class='d-flex d-inline-block'>
+                          <a href="{{ route('admin.transaction.show',$item->id) }}" class="btn btn-primary">
+                            <i class="fa fa-eye"></i>
+                            Show
+                          </a>
+                          <a href="{{ route('admin.transaction.edit',$item->id) }}" class="btn btn-info mx-2">
+                            Edit
+                          </a>
+                        </span>
+                    </tr>
+
+                    @empty
+
+
+                    <tr>
+                      <td colspan="8" class="text-center">Data Kosong</td>
                     </tr>
 
 
+                    @endforelse
 
+
+
+
+                  </tbody>
+
+                </table>
+                @endauth
+
+                {{-- End Auth --}}
+
+                {{-- Guest --}}
+                @guest
+                <table class='table table-bordered table-striped'>
+                  <thead>
+                    <tr>
+                      <th>NO.</th>
+                      <th>Nama Alat & Bahan</th>
+                      <th>Kategori</th>
+                      <th>Jumlah Dipinjam</th>
+                      <th>Jenis</th>
+                      <th>Status</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="8" class="text-center">Data Kosong</td>
+                    </tr>
+                  </tbody>
+
+                </table>
+                @endguest
+                {{-- End Guest --}}
+              </div>
+            </div>
+          </div>
+        </div>
+   {{-- Pengembalian Mahasiswa --}}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="d-flex justify-content-between">
+                  <div class="div">
+                    <h4 class=''>Mahasiswa yang ingin mengembalikan</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body table-responsive">
+                {{-- Auth --}}
+                @auth
+                <table class='table table-bordered table-striped'>
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Nama Peminjam</th>
+                      <th>phone</th>
+                      <th>keperluan</th>
+                      <th>laboratorium</th>
+                      <th>Kondisi Terakhir</th>
+                      <th>Status</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @php
+                    $nomor =1
+                    @endphp
+                    @forelse ($pengembalian as $item)
+
+                    <tr>
+                      <td>{{ $nomor++ }}</td>
+                      <td>{{ $item->name}}</td>
+                      <td>{{ $item->phone }}</td>
+                      <td>{{ $item->keperluan}}</td>
+                      <td>{{ $item->laboratorium}}</td>
+                      <td>{{ $item->kondisi}}</td>
+                      <td>{{ $item->status}}</td>
+                      <td class="d-flex justify-content-center">
+                        <span class='d-flex d-inline-block'>
+                          <a href="{{ route('admin.return.show',$item->id) }}" class="btn btn-primary">
+                            <i class="fa fa-eye"></i>
+                            Show
+                          </a>
+                          <a href="{{ route('admin.return.edit',$item->id) }}" class="btn btn-info mx-2">
+                            Edit
+                          </a>
+                        </span>
+                      </td>
 
                     @empty
 

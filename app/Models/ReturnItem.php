@@ -17,8 +17,8 @@ class ReturnItem extends Model
       return $this->hasOne(Inventory::class, 'id', 'inventory_id');
     }
     
-    public function transaction(){
-      return $this->hasOne(Transaction::class, 'id', 'transactions_id');
+    public function transactionreturn(){
+      return $this->hasOne(TransactionReturn::class, 'id', 'transactionreturn_id');
     }
     
     public function study(){

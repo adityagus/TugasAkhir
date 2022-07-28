@@ -19,7 +19,7 @@ Admin Inventaris
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
               <li class="breadcrumb-item"><a href="{{ route('admin.return.index') }}">Pengembalian</a></li>
               <li class="breadcrumb-item active" aria-current="page">
                 Transaksi  &raquo; #{{ $pengembalian->id }} <span class='text-primary'>{{ $pengembalian->name }}</span>
@@ -67,7 +67,7 @@ Admin Inventaris
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Komentar</th>
-              <td class="border px-6 py-4">{{ $pengembalian->komentar}}</td>
+              <td class="border px-6 py-4">{{ $pengembalian->keterangan}}</td>
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Status</th>
@@ -103,12 +103,12 @@ Admin Inventaris
               @endphp
 {{-- <td>{{ $no++ }}</td> --}}
 
-               @foreach ( $loanitem as $loan) 
+               @foreach ( $returnitem as $return) 
                
                <tr>
-                 <td>{{ $loan->id }}</td>
-                 <td>{{ $loan->inventory->nama }}</td>
-                 <td>{{ $loan->total }}</td>
+                 <td>{{ $return->id }}</td>
+                 <td>{{ $return->inventory->nama }}</td>
+                 <td>{{ $return->total }}</td>
                  {{-- <td>{{ $items->nama }}</td>
                  <td>{{ $items->jumlah }}</td> --}}
                  {{-- <td>{{ }}</td> --}}
@@ -156,7 +156,6 @@ Admin Inventaris
               
               
             
-            </tbody>
           </table>
         </div>
 

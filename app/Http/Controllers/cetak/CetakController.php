@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\cetak;
 
+use Carbon\Carbon;
+use App\Models\LoanItem;
 use App\Models\Inventory;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class CetakController extends Controller
 {
@@ -32,4 +35,20 @@ class CetakController extends Controller
     // $dompdf->render();
     // $dompdf->stream();
   }  
+  
+  
+  public function cPeminjaman(Request $request){
+    
+
+    $data = LoanItem::with(['inventory', 'transaction'])->get();
+    $transaction = Transaction::with(['studies'])->where('users_id',Auth::user()->id)->first();
+    
+    // dd($transaction);
+    // $html = view('pages.admin.inventory.cetak', compact('data', 'transaction'));
+    $time = Carbon::now();
+    $pdf = Pdf::loadView('pages.frontend.cetakpdf.ctkpeminjaman', compact('data', 'time', 'transaction'));
+    
+    // return $pdf->download('Rekapitulasi Stock Opname.pdf');
+    return $pdf->stream();
+  }
 }

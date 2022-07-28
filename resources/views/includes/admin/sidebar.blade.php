@@ -4,7 +4,7 @@
     <div class="sidebar-header">
       <div class="d-flex justify-content-between">
         <div class="logo">
-          <a href="index.html"><img src="{{ url('user/dist/assets/images/logo/logo.png') }}" alt="Logo" style="height:40px;" srcset=""></a>
+          <a href="{{ route('admin.home') }}"><img src="{{ url('user/dist/assets/images/logo/logo.png') }}" alt="Logo" style="height:40px;" srcset=""></a>
         </div>
         <div class="toggler">
           <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -13,17 +13,17 @@
     </div>
     <div class="sidebar-menu">
       <ul class="menu">
-        <li class="sidebar-title">Manajemen</li>
+        <li class="sidebar-title">Menu</li>
 
         <li class="sidebar-item">
-          <a href="/" class='sidebar-link'>
+          <a href="{{ route('admin.home') }}" class='sidebar-link'>
             <i class="bi bi-grid-fill"></i>
             <span>Dashboard</span>
           </a>
         </li>
         <li class="sidebar-title">Manajemen</li>
 
-        <li class="sidebar-item has-sub ">
+        <li class="sidebar-item has-sub">
           <a href="#" class='sidebar-link'>
             <i class="bi bi-file-check-fill"></i>
             <span>Approval Barang</span>
@@ -69,7 +69,7 @@
         <li class="sidebar-title">Lainnya</li>
 
         <li class="sidebar-item">
-          <a href="/pengembalian" class='sidebar-link'>
+          <a href="#" class='sidebar-link'>
             <i class="bi bi-stack"></i>
             <span>Kelola Alat & Bahan</span>
           </a>

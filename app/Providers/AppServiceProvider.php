@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,5 +30,7 @@ class AppServiceProvider extends ServiceProvider
           return $mahasiswa->id;
           
         });
+      config(['app.locale' => 'id']);
+      Carbon::setLocale('id');
     }
 }
