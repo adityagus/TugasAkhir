@@ -40,7 +40,7 @@
       @empty
       <td colspan="5" class='text-center'>
         <h6>Oopps Transaksi Belum Ada</h6>
-        <a href="{{ route('peminjaman') }}" class="no-underline">Kembali</a>
+        <a href="{{ route('alat-dan-bahan') }}" class="no-underline">Kembali</a>
       </td>
       @endforelse
 
@@ -84,8 +84,7 @@
     function read() {
       $.get("{{ url('read') }}", {}, function(carts,status,total){
           
-        // const $total = 0;
-        
+        $("#read").html(carts);
       })
     }
     $.ajaxSetup({
@@ -111,8 +110,7 @@
             success: function(carts) {
               const h4 = document.querySelector('#total');
               h4.innerHTML = ("Alat yang anda pinjam ({{ $inCart-1 }})");
-                
-                window.location.reload();
+              $("#read").html(carts);
                 
             }
           , error: function(jqXhr, textStatus, errorMessage) {

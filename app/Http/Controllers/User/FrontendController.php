@@ -213,21 +213,16 @@ class FrontendController extends Controller
     }
     
     // pengembalian alat dan bahan
-    public function return(CheckoutReturnRequest $request, Transaction $transaction){
-      return $request->all();
-      
+    public function return(CheckoutReturnRequest $request, Transaction $transaction ,$id){
       //Get Carts Data 
-      $loans = LoanItem::with('inventory', 'transaction')->where('transaction.id', 'id');
-      $transactions = Transaction::with('user')->where('users_id', Auth::user()->id)->first();
-      
+      $loans = LoanItem::with('inventory')->get();
+      $transactions = Transaction::with('user')->findOrFail($id);
       //Add to Transaction data 
       //Add to Transaction data 
-      
         $transactionreturn = TransactionReturn::create([ 
-          'users_id' => Auth::user()->id,  
-          'name' => Auth::user()->name,  
           'transactions_id' => $transactions->id,
           'nim' => $transactions->nim,
+          'name' =>$transactions->name,
           'kondisi' => $request->kondisi,
           'keterangan' => $request->keterangan,
           'kelas' => $transactions->kelas,
@@ -246,16 +241,20 @@ class FrontendController extends Controller
        foreach ($loans as $loan ) {
          $items[] = ReturnItem::create([
            'transactionreturn_id' => $transactionreturn->id,
-           'users_id' => $loan->users_id,
           //  'total' => $loan->total,
            'inventory_id' => $loan->inventory_id
-         ]);
+          ]);
+          $loan->delete();
+         
        }
-
-       
+        
+        
+        //Delete cart after transaction 
        //Delete cart after transaction 
-       LoanItem::where('users_id', Auth::user()->id)->delete();
-       Transaction::where('users_id', Auth::user()->id)->delete();
+        //Delete cart after transaction 
+       //Delete cart after transaction 
+        //Delete cart after transaction 
+       $transactions->delete();
        
 
        
@@ -283,12 +282,13 @@ class FrontendController extends Controller
        
      }
     
-    public function informasi(Request $request){
+    // public function informasi(Request $request){
       
-      return view('pages.frontend.information',[
-        "title" => "informasi",
-      ]);
-    }
+    //   return view('pages.frontend.information',[
+    //     "title" => "informasi",
+    //   ]);
+    // }
+    
     
     
     public function details(request $request, $slug){

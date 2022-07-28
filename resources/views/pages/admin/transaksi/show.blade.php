@@ -107,13 +107,13 @@ Admin Inventaris
                  <td>{{ $loan->inventory->nama }}</td>
                  <td>{{ $loan->total }}</td>
                  <td>
-                  <form action="{{ route('admin., $loan->id)  }}" method="POST" class="d-inline">
+                  {{-- <form action="{{ route('admin., $loan->id)  }}" method="POST" class="d-inline">
                     @csrf
                     @method('delete')
                     <button class="btn btn-danger">
                       <i class="fa fa-trash"></i>
                     </button>
-                  </form>
+                  </form> --}}
                  </td>
                  {{-- <td>{{ $items->nama }}</td>
                  <td>{{ $items->jumlah }}</td> --}}

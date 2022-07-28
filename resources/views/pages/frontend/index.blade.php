@@ -37,11 +37,11 @@
               Biodata Mahasiswa 
           </div>
           <div class="card-body display d-flex">
-            <div class="img">
+            <div class="img my-4">
               @forelse ($mhs as $item)
 
               {{-- <img src="{{ Storage::url($item->image) }}" alt="alat dan bahan" style="width: 250px; height:160px" class="img-thumbnail"> --}}
-              <img src="{{ 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt="alat dan bahan" style="width: 160px" class="img-thumbnail">
+              <img src="{{ 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt="alat dan bahan" style="width: 80px" class="img-thumbnail">
               
               @empty
                 
