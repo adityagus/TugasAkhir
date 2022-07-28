@@ -10,8 +10,7 @@ use Illuminate\Notifications\Notification;
 class Peminjaman extends Notification
 {
     use Queueable;
-    
-    
+
     private $pesan;
     /**
      * Create a new notification instance.
@@ -20,7 +19,7 @@ class Peminjaman extends Notification
      */
     public function __construct($pesan)
     {
-        $this->pesan = $pesan;
+      $this->pesan = $pesan;
     }
 
     /**
@@ -42,15 +41,15 @@ class Peminjaman extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->from('siman@poltekba.ac.id', 'SIMAN')
-                    ->greeting($this->pesan['greeting'])
-                    ->subject($this->pesan['subject'])
-                    ->line($this->pesan['line1'])
-                    ->action($this->pesan['action'], url('/admin/transaction'))
-                    ->line($this->pesan['line2']);
+      return (new MailMessage)
+      ->from('siman@poltekba.ac.id', 'SIMAN')
+      ->greeting($this->pesan['greeting'])
+      ->subject($this->pesan['subject'])
+      ->line($this->pesan['line1'])
+      ->action($this->pesan['action'], url('/admin/transaction'))
+      ->line($this->pesan['line2']);
     }
-// 
+
     /**
      * Get the array representation of the notification.
      *

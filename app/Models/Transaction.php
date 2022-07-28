@@ -20,6 +20,7 @@ class Transaction extends Model
     public function studies(){
       return $this->belongsTo(Study::class, 'matakuliah_id', 'id' );
     }
+    
 
       
 }

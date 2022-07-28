@@ -13,10 +13,11 @@ use App\Models\Mahasiswa;
 use App\Models\ReturnItem;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
-use App\Notifications\Informasi;
 use App\Models\TransactionReturn;
+use App\Notifications\Peminjaman;
 use App\Http\Requests\LoanRequest;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\Pengembalian;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CheckoutRequest;
@@ -25,13 +26,16 @@ use Illuminate\Support\Facades\Notification;
 
 class FrontendController extends Controller
 { 
-    public function home(Request $request){
+    public function home(Request $request, Inventory $inventory){
       
         if (Auth::check() == true) {
           $loanItem = LoanItem::with(['inventory', 'transaction'])->where('users_id', Auth::user()->id)->get();
         }else {
           $loanItem = LoanItem::with(['inventory'])->get();
       }
+      
+
+      
       
       return view('pages.frontend.index', [
         'status' => LoanItem::count(),
@@ -141,10 +145,18 @@ class FrontendController extends Controller
         $items[] = LoanItem::create([
           'transactions_id' => $transactions->id,
           'users_id' => $cart->users_id,
-          // 'total' => $loanRequest->total,
+          'total' => $loanRequest->total,
           'inventory_id' => $cart->inventories_id
         ]);
       }
+      // 
+      // $get1 = LoanItem::with(['inventory'])->where('inventory_id', $carts->inventories_id );
+      // dd($get1);n
+      // $transaction = 
+      
+      // if ($loanRequest->total) {
+      //   $loanItem->total += $loanRequest;
+      // }
       
       //Delete cart after transaction 
       Cart::where('users_id', Auth::user()->id)->delete();
@@ -156,15 +168,16 @@ class FrontendController extends Controller
       
       
       $data = [
+        'greeting' => "Halo Sobat Siman",
         'subject' => 'Peminjaman Barang',
         'line1' => 'Ada Mahasiswa Yang ingin Meminjam Barang',
         'action' => 'Approval now',
-        'line2' => 'Hello ini line 2'
+        'line2' => 'Abaikan Pesan ini apabila sudah di approve'
       ];
 
         
         // $user->notify(new Informasi($data));
-        Notification::send($user, new Informasi($data));
+        Notification::send($user, new Peminjaman($data));
         return redirect()->route('success');
 
   
@@ -228,13 +241,27 @@ class FrontendController extends Controller
        LoanItem::where('users_id', Auth::user()->id)->delete();
        Transaction::where('users_id', Auth::user()->id)->delete();
        
-       return redirect()->route('pengembalian')->with('success', 'Pengembalian sedang di Verifikasi!');
+
        
-       //Configuration 
-       
-       // Setup Variabel midtrans
-       
-       // payment process
+      //  configuration
+       $user = User::with('roles')->where('roles_id', 1 )
+       ->orWhere('roles_id', 2)
+       ->get();
+
+      //  data to email
+      $data = [
+      'greeting' => "Halo Sobat Siman",
+      'subject' => 'Pengembalian Barang',
+      'line1' => 'Ada Mahasiswa Yang ingin Mengembalikan Barang',
+      'action' => 'Approval now',
+      'line2' => 'Abaikan Pesan ini apabila sudah di approve'
+      ];
+
+
+      // $user->notify(new Informasi($data));
+      Notification::send($user, new Pengembalian($data));
+      
+      return redirect()->route('pengembalian')->with('success', 'Pengembalian sedang di Verifikasi!');
        
        
        

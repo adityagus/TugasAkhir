@@ -6,7 +6,7 @@ use App\Mail\Email;
 use App\Models\User;
 use App\Mail\EmailAtach;
 use Illuminate\Http\Request;
-use App\Notifications\Informasi;
+use App\Notifications\Peminjaman;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
@@ -53,8 +53,8 @@ class EmailController extends Controller
 
         
         // $user->notify(new Informasi($data));
-        Notification::send($user, new Informasi($data));
-        Notification::send($user1, new Informasi($data));
+        Notification::send($user, new Peminjaman($data));
+        Notification::send($user1, new Peminjaman($data));
         return redirect()->route('success');
       
     }

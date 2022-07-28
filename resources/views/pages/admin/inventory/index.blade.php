@@ -80,7 +80,9 @@ Admin Inventaris
                 <td>{{ $item->nama}}</td>
                 <td >{{ $item->category_items->namakategori }}</td>
                 <td>{{ $item->jumlah}}</td>
-                <td>&nbsp;</td>
+                <td>
+                  {{ $item->keluar }}
+                </td>
                 <td>&nbsp;</td>
                 <td>{{ $item->labs->name }}</td>
                 <td class="d-flex justify-content-center">
