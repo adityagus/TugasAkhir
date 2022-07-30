@@ -117,12 +117,43 @@ Checkout
                 <div class="form-group">
                   <label for="pertemuan">Pertemuan Ke</label>
                   <small class="text-muted">contoh. <i>1</i></small>
-                  <input type="text" name="pertemuan_ke" class="form-control" id="pertemuan" placeholder="Masukan Pertemuan ke Anda">
+                  {{-- <input type="text" name="pertemuan_ke" class="form-control" id="pertemuan" placeholder="Masukan Pertemuan ke Anda"> --}}
+                  <select name="pertemuan_ke" id="" class="form-select" name="matakuliah_id" name="Masukan Mata Kuliah Anda" required>
+                    <option selected disabled value="{{ false }}">
+                      Pilih Pertemuan ke
+                    </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                  </select>
                 </div>
 
                 <div class="form-group">
                   <label for="laboratorium">Laboratorium</label>
-                  <input type="text" name="laboratorium" class="form-control" id="laboratorium" placeholder="Masukan Mata Kuliah Anda">
+                  <select name="pertemuan_ke" id="" class="form-select" name="matakuliah_id" name="Masukan Mata Kuliah Anda" required>
+                    <option selected disabled value="{{ false }}">
+                      Masukan Tempat Laboratorium
+                    </option>
+                    @foreach ($labs as $lab)
+                    <option value={{ $lab->id }}>{{ $lab->name }}</option>
+                    @endforeach
+
+    
+                  </select>
                 </div>
 
 

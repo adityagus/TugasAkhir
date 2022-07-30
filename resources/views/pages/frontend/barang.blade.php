@@ -69,7 +69,7 @@
                   <td>{{ $item->loan_items->total }}</td>
                       
                   @endif --}}
-                  <td>{{ $item->labs->name }}</td>
+                  <td>{{ $item->studyprograms->name }}</td>
                   <td class="d-flex justify-content-center">
                     <span class='d-flex d-inline-block px-2'>
                       <a href='{{ route('details', $item->slug) }}'>

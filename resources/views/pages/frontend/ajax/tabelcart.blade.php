@@ -27,7 +27,7 @@
               </div>
           </div>
       </td>
-        <td align="center">{{ $item->inventory->labs->name }}</td>
+        <td align="center">{{ $item->inventory->studyprograms->name }}</td>
         <td>
           <a class="btn btn-toggle shadow-none btnHapus" data-id='{{ $item->id }}' data-token="{{ csrf_token() }}">
             X

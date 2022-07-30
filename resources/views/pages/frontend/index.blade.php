@@ -49,7 +49,7 @@
               
               @endforelse
             </div>
-            <div class="descriptions">
+            <div class="descriptions d-flex flex-sm-column-reverse">
 
               <table>
                 @forelse ($mhs as $mhs)
@@ -73,22 +73,26 @@
                   <input type="hidden" name="prodi" value="{{ $mhs->prodi }}">
                   
                   
-                </tr>
-                <form action="{{ route('masuk') }}" method="POST">
-                  @csrf
-                  <input type="hidden" name="nama_mhs" value="{{ $mhs->nama_mhs }}">
-                  <input type="hidden" name="nim" value="{{ $mhs->nim }}">
-                  <button type="submit" >Submit</button>
-                </form>
+                </tr class='py-4'>
+                  <form action="{{ route('masuk') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="nama_mhs" value="{{ $mhs->nama_mhs }}">
+                    <input type="hidden" name="nim" value="{{ $mhs->nim }}">
+                    <button  class='btn btn-primary' type="submit" >Submit</button>
+                  </form>
+                  
+                  
+                  @empty
+                  <tr>
+                    <td colspan="3">Data Tidak Ada</td>
+                  </tr>
+                  
+                  @endforelse
+                  
+                </table>
                 
-                @empty
-                <tr>
-                  <td colspan="3">Data Tidak Ada</td>
-                </tr>
-                
-                @endforelse
-                
-              </table>
+              
+              
               <h6></h6>
               <h6></h6>
             </div>
@@ -183,7 +187,7 @@
                     <h4 class=''>Alat Yang Anda Pinjam</h4>
                   </div>
                   <div class="bd-highlight">
-                    @if ($items == true)
+                    {{-- @if ($items == true)
                         
                     <div class="export">
                       <a href="{{ route('cetakpeminjaman') }}" target="_blank">
@@ -192,7 +196,7 @@
                         </button>
                       </a>
                     </div>
-                    @endif
+                    @endif --}}
                     {{-- <form action="">
                       <input type="search" class='form-control'>
                       <i></i>

@@ -16,13 +16,35 @@ class LabsFactory extends Seeder
     {
       $lab = [
         [
-          'inventory_id' => 1,
-          'name' => 'TE',
+          'name' => 'Laboratorium Sistem Kendali',
         ],
         [
-          'inventory_id' => 2,
-          'name' => 'TL',
-        ]
+          'name' => 'Laboratorium Instalasi Listrik',
+        ],
+        [
+          'name' => 'Laboratorium Pemrosesan PCB',
+        ],
+        [
+          'name' => 'Laboratorium Sistem Radio dan Telekomunikasi',
+        ],
+        [
+          'name' => 'Laboratorium Elekronika Analog dan Digital',
+        ],
+        [
+          'name' => 'Laboratorium Jaringan dan Komputer',
+        ],
+        [
+          'name' => 'Laboratorium Sensor dan Tranduser',
+        ],
+        [
+          'name' => 'Laboratorium Komunikasi Bergerak',
+        ],
+        [
+          'name' => 'Laboratorium Pemograman',
+        ],
+        [
+          'name' => 'Laboratorium Sistem Komputer',
+        ],
       ];
         Lab::insert($lab);
     }

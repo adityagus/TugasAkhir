@@ -23,6 +23,8 @@ use App\Http\Middleware\isMahasiswa;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CheckoutRequest;
 use App\Http\Requests\CheckoutReturnRequest;
+use App\Models\Lab;
+use App\Models\StudyProgram;
 use Illuminate\Support\Facades\Notification;
 
 class FrontendController extends Controller
@@ -48,7 +50,7 @@ class FrontendController extends Controller
     
     public function barang(Mahasiswa $mahasiswa){
       $inCarts = Cart::count();
-        $data = Inventory::with('category_items', 'labs', 'loan_items')->get();
+        $data = Inventory::with('category_items', 'studyprograms', 'loan_items')->get();
         // dd($data);
       return view('pages.frontend.barang', [
         'items' => $data, 
@@ -93,8 +95,9 @@ class FrontendController extends Controller
     public function cart(Request $request, Mahasiswa $mahasiswa)
     {
       $matakuliah = Study::all();
+      $lab = Lab::all();
       $inCarts = Cart::count();
-      $carts = Cart::with(['inventory'])->get();
+      $carts = Cart::with(['inventory', 'inventory.studyprograms'])->get();
       
       // dd($matakuliah):
       // $data = LoanItem::with('study')->get();
@@ -103,6 +106,7 @@ class FrontendController extends Controller
         "carts" =>  $carts,
         'inCart' => $inCarts,
         'studies' => $matakuliah,
+        'labs' => $lab,
         
         // "study" => $data,
       ]);

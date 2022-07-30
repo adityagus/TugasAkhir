@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         RolesTableSeeder::class,
         CategoryTableSeeder::class,
         LabsFactory::class,
+        StudyProgramSeeder::class,
       ]);
 
   }

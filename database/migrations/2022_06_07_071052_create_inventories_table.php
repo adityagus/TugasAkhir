@@ -17,7 +17,7 @@ class CreateInventoriesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('category_id');
             // $table->bigInteger('loans_id');
-            $table->bigInteger('labs_id');
+            $table->bigInteger('studyprogram_id');
             $table->string('kd_brg');
             $table->string('nama');
             $table->text('deskripsi');
