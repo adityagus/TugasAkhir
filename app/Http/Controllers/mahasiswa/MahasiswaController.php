@@ -10,13 +10,9 @@ class MahasiswaController extends Controller
 {
   public function index()
     {
-      $items = Mahasiswa::latest()->filter(request(['search']))->paginate(7)->withQueryString();
+      $items = Mahasiswa::latest()->filter(request(['search']))->paginate(1)->withQueryString();
       dd($items);
       
-      return view('pages.frontend.home', [
-        "title" => "Mahasiswa",
-        "active" => 'posts',
-        "mhs" =>  Mahasiswa::latest()->filter(request(['search']))->paginate(7)->withQueryString()
-      ]);
+
     }
 }

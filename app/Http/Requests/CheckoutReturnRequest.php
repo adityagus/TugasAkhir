@@ -26,6 +26,7 @@ class CheckoutReturnRequest extends FormRequest
     {
         return [
           'kondisi' => 'string|in:BAGUS,RUSAK',  
+          'status' => 'required|string|in:Verifikasi,Ditangguhkan,Selesai',
           'keterangan' => 'string'  
         ];
     }

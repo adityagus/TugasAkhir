@@ -9,7 +9,7 @@ class Cart extends Model
 {
     use HasFactory;
     protected $fillable = [
-      'users_id', 'inventories_id', 'studies_id', 'studyprograms_id',  'mahasiswa_id', 'total'
+      'users_id', 'inventories_id', 'labs_id', 'total'
     ];
     
     public function inventory(){
@@ -24,6 +24,7 @@ class Cart extends Model
     public function studies(){
       return $this->belongsTo(Study::class, 'studies_id', 'id');
     }
+
     
 
 }

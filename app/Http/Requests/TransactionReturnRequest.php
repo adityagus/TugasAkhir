@@ -25,7 +25,8 @@ class TransactionReturnRequest extends FormRequest
     public function rules()
     {
         return [
-          'status' => 'required|string|in:VERTIFIKASI,DIKEMBALIKAN,FAILED,CANCEL'
+          'status' => 'required|string|in:Verifikasi,Ditangguhkan,Selesai',
+          'keterangan' => 'string'
         ];
     }
 }

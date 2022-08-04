@@ -1,4 +1,4 @@
-@extends('layouts.main-admin')
+@extends('layouts.main')
 
 @section('title')
 Admin Inventaris
@@ -19,10 +19,10 @@ Admin Inventaris
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('admin.transaction.index') }}">Peminjaman</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('peminjaman') }}">Peminjaman</a></li>
               <li class="breadcrumb-item active" aria-current="page">
-                transaksi &raquo; #{{ $transaction->id }} <span class='text-primary'>{{ $transaction->name }}</span>
+                Transaksi &raquo; #{{ $transactionreturn->id }} <span class='text-primary'>{{ $transactionreturn->name }}</span>
               </li>
             </ol>
           </nav>
@@ -32,56 +32,50 @@ Admin Inventaris
     <section class="section">
       <div class="card">
         <div class="card-body">
-          <div class="card-header">
-            <div class="export d-flex justify-content-end">
-              <a href="{{ route('cetakpeminjaman', $transaction->id) }}" target="_blank">
-                <button class='btn-red'>
-                  Export PDF &nbsp;  <i class="bi bi-file-earmark-arrow-down "></i>
-                </button>
-              </a>
-            </div>
-          </div>
           <table class="table table-bordered middle">
             <tr>
               <th class="px-6 py-4 text-end">Nama</th>
-              <td class="px-6 py-4">{{ $transaction->name }}</td>
+              <td class="px-6 py-4">{{ $transactionreturn->name }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Nim</th>
-              <td class="px-6 py-4">{{ $transaction->nim }}</td>
+              <td class="px-6 py-4">{{ $transactionreturn->nim }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Kelas</th>
-              <td class="px-6 py-4">{{ $transaction->kelas }}</td>
+              <td class="px-6 py-4">{{ $transactionreturn->kelas }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">No. Telp</th>
-              <td class="px-6 py-4">{{ $transaction->phone }}</td>
-            </tr>
-            <tr>
-              <th class="px-6 py-4 text-end">Waktu Peminjaman</th>
-              <td class="px-6 py-4">{{ $transaction->created_at->format('d M Y / H:i a')}}</td>
-              
+              <td class="px-6 py-4">{{ $transactionreturn->phone }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Mata Kuliah</th>
-              <td class="px-6 py-4">{{ $transaction->studies->matakuliah }}</td>
+              <td class="px-6 py-4">{{ $transactionreturn->studies->matakuliah }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Pertemuan Ke</th>
-              <td class="px-6 py-4">{{ $transaction->pertemuan_ke }}</td>
+              <td class="px-6 py-4">{{ $transactionreturn->pertemuan_ke }}</td>
+            </tr>
+            <tr>
+              <th class="px-6 py-4 text-end">Waktu Peminjaman</th>
+              <td class="px-6 py-4">{{ $transactionreturn->created_at->format('d M Y / H:i a')}}</td>
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Keperluan</th>
-              <td class="border px-6 py-4">{{ $transaction->keperluan }}</td>
+              <td class="border px-6 py-4">{{ $transactionreturn->keperluan }}</td>
+            </tr>
+            <tr>
+              <th class="border px-6 py-4 text-end">Keterangan</th>
+              <td class="border px-6 py-4">{{ $transactionreturn->keterangan }}</td>
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Laboratorium</th>
-              <td class="border px-6 py-4">{{ $transaction->labs->name }}</td>
+              <td class="border px-6 py-4">{{ $transactionreturn->labs->name }}</td>
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Status</th>
-              <td class="border px-6 py-4">{{ $transaction->status}}</td>
+              <td class="border px-6 py-4">{{ $transactionreturn->status}}</td>
             </tr>
             
 
@@ -99,38 +93,65 @@ Admin Inventaris
     <section class="section">
       <div class="card">
         <div class="card-body">
-            <table class="table table-striped" id="table1">
+            <table class="table table-bordered  table-striped" id="table1">
             <thead>
               <tr>
                 <th>No</th>
                 <th>Nama Alat dan Bahan</th>
                 <th>Banyak</th>
-                <th>aksi</th>
               </tr>
             </thead>
             <tbody>
+{{-- <td>{{ $no++ }}</td> --}}
               @php
                   $nomor = 1;
               @endphp
-{{-- <td>{{ $no++ }}</td> --}}
 
-               @foreach ( $loanitem as $loan) 
-               
+               @foreach ($returnitem as $loan)
+                   
                <tr>
-                 <td>{{ $loan->id }}</td>
+                 <td>{{ $nomor++}}</td>
                  <td>{{ $loan->inventory->nama }}</td>
                  <td>{{ $loan->total }}</td>
-                 <td>
-                  <form action="{{ route('admin.delete-loan', $loan->id) }}" method="POST" class="d-inline">
+                  {{-- <form action="{{ route('admin., $loan->id)  }}" method="POST" class="d-inline">
                     @csrf
                     @method('delete')
                     <button class="btn btn-danger">
-                      <i class="bi-trash" style="height: 16px;"></i>
-                  </form>
-                 </td>
-              
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </form> --}}
+                 {{-- <td>{{ $items->nama }}</td>
+                 <td>{{ $items->jumlah }}</td> --}}
+                 {{-- <td>{{ }}</td> --}}
+                 
+                 {{--
+                  <td>{{ $transactionreturns->phone}}</td>
+                <td>{{ $transactionreturns->keperluan}}</td>
+                <td>{{ $transactionreturns->laboratorium}}</td>
+                <td>{{ $transactionreturns->pertemuan_ke}}</td>
+                <td>{{ $transactionreturns->status}}</td>
+                <td class="d-flex justify-content-center">
+                  <span class='d-flex d-inline-block'>
+                    <a href="{{ route('admin.transactionreturn.show',$item->id) }}" class="btn btn-primary">
+                      <i class="fa fa-eye"></i>
+                      Show
+                    </a>
+                    <a href="{{ route('admin.transactionreturn.edit',$item->id) }}" class="btn btn-info mx-2">
+                      Edit
+                    </a>
+                  </span> 
+                </td> --}}
+                {{-- <td>{{ $item->roles }}</td> --}}
+                
+                {{-- <td class="d-flex justify-content-center">
+                  <a href="{{ route('admin.users.edit', $item->id) }}" class="btn btn-info mx-2">
+                    <i class="fa fa-pencil-alt"></i>
+                  </a>
+                 
+                </td> --}}
               </tr>
               @endforeach
+              
               {{-- @empty
               <tr>
                 <td colspan="8" class="text-center">Data Kosong</td>

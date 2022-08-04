@@ -1,4 +1,4 @@
-@extends('layouts.main-admin')
+@extends('layouts.main')
 
 @section('title')
 Admin Inventaris
@@ -19,10 +19,10 @@ Admin Inventaris
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('admin.transaction.index') }}">Peminjaman</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('peminjaman') }}">Peminjaman</a></li>
               <li class="breadcrumb-item active" aria-current="page">
-                transaksi &raquo; #{{ $transaction->id }} <span class='text-primary'>{{ $transaction->name }}</span>
+                Transaksi &raquo; #{{ $transaction->id }} <span class='text-primary'>{{ $transaction->name }}</span>
               </li>
             </ol>
           </nav>
@@ -32,15 +32,6 @@ Admin Inventaris
     <section class="section">
       <div class="card">
         <div class="card-body">
-          <div class="card-header">
-            <div class="export d-flex justify-content-end">
-              <a href="{{ route('cetakpeminjaman', $transaction->id) }}" target="_blank">
-                <button class='btn-red'>
-                  Export PDF &nbsp;  <i class="bi bi-file-earmark-arrow-down "></i>
-                </button>
-              </a>
-            </div>
-          </div>
           <table class="table table-bordered middle">
             <tr>
               <th class="px-6 py-4 text-end">Nama</th>
@@ -59,17 +50,16 @@ Admin Inventaris
               <td class="px-6 py-4">{{ $transaction->phone }}</td>
             </tr>
             <tr>
-              <th class="px-6 py-4 text-end">Waktu Peminjaman</th>
-              <td class="px-6 py-4">{{ $transaction->created_at->format('d M Y / H:i a')}}</td>
-              
-            </tr>
-            <tr>
               <th class="px-6 py-4 text-end">Mata Kuliah</th>
               <td class="px-6 py-4">{{ $transaction->studies->matakuliah }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Pertemuan Ke</th>
               <td class="px-6 py-4">{{ $transaction->pertemuan_ke }}</td>
+            </tr>
+            <tr>
+              <th class="px-6 py-4 text-end">Waktu Peminjaman</th>
+              <td class="px-6 py-4">{{ $transaction->created_at->format('d M Y / H:i a')}}</td>
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Keperluan</th>
@@ -99,13 +89,12 @@ Admin Inventaris
     <section class="section">
       <div class="card">
         <div class="card-body">
-            <table class="table table-striped" id="table1">
+            <table class="table table-bordered  table-striped" id="table1">
             <thead>
               <tr>
                 <th>No</th>
                 <th>Nama Alat dan Bahan</th>
                 <th>Banyak</th>
-                <th>aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -114,23 +103,51 @@ Admin Inventaris
               @endphp
 {{-- <td>{{ $no++ }}</td> --}}
 
-               @foreach ( $loanitem as $loan) 
-               
+               @foreach ($loanitem as $loan)
+                   
                <tr>
-                 <td>{{ $loan->id }}</td>
+                 <td>{{ $nomor++ }}</td>
                  <td>{{ $loan->inventory->nama }}</td>
                  <td>{{ $loan->total }}</td>
-                 <td>
-                  <form action="{{ route('admin.delete-loan', $loan->id) }}" method="POST" class="d-inline">
+                  {{-- <form action="{{ route('admin., $loan->id)  }}" method="POST" class="d-inline">
                     @csrf
                     @method('delete')
                     <button class="btn btn-danger">
-                      <i class="bi-trash" style="height: 16px;"></i>
-                  </form>
-                 </td>
-              
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </form> --}}
+                 {{-- <td>{{ $items->nama }}</td>
+                 <td>{{ $items->jumlah }}</td> --}}
+                 {{-- <td>{{ }}</td> --}}
+                 
+                 {{--
+                  <td>{{ $transactions->phone}}</td>
+                <td>{{ $transactions->keperluan}}</td>
+                <td>{{ $transactions->laboratorium}}</td>
+                <td>{{ $transactions->pertemuan_ke}}</td>
+                <td>{{ $transactions->status}}</td>
+                <td class="d-flex justify-content-center">
+                  <span class='d-flex d-inline-block'>
+                    <a href="{{ route('admin.transaction.show',$item->id) }}" class="btn btn-primary">
+                      <i class="fa fa-eye"></i>
+                      Show
+                    </a>
+                    <a href="{{ route('admin.transaction.edit',$item->id) }}" class="btn btn-info mx-2">
+                      Edit
+                    </a>
+                  </span> 
+                </td> --}}
+                {{-- <td>{{ $item->roles }}</td> --}}
+                
+                {{-- <td class="d-flex justify-content-center">
+                  <a href="{{ route('admin.users.edit', $item->id) }}" class="btn btn-info mx-2">
+                    <i class="fa fa-pencil-alt"></i>
+                  </a>
+                 
+                </td> --}}
               </tr>
               @endforeach
+              
               {{-- @empty
               <tr>
                 <td colspan="8" class="text-center">Data Kosong</td>

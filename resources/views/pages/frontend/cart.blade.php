@@ -5,6 +5,19 @@ Checkout
 @endsection
 
 @section('content')
+<script>
+  $(document).ready(function(){
+    $('upCart').on('change key', function(){
+      
+      alert('i am here');
+      
+    })
+  })
+</script>
+
+
+
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div id="main-content">
@@ -42,16 +55,6 @@ Checkout
     </div>
     @endif
 
-    @if ($errors->any())
-    <div class="alert alert-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
-    @endif
-
     <form action="{{ route('checkout') }}" method="POST">
       @csrf
       @method('POST')
@@ -68,18 +71,37 @@ Checkout
 
                 <div class="form-group">
                   <label for="nama">Nama</label>
-                  <input type="text" name="name" class="form-control" id="nama" placeholder='Masukan Nama Anda' required>
+                  <input type="text" name="name" class="form-control" id="nama" placeholder='Masukan Nama Anda' value="{{ session()->get(1) }}" readonly required>
                 </div>
                 
                 
                 <div class="form-group">
                   <label for="nama-peminjam">Nim</label>
-                  <input type="number" name="nim" class="form-control" id="nama-peminjam" placeholder='Masukan Nama Anda' value='{{ old('nim') }}' required>
+                  <input type="number" name="nim" class="form-control" id="nama-peminjam" placeholder='Masukan Nama Anda' value='{{ session()->get(0) }}' readonly required>
                 </div>
 
                 <div class="form-group">
                   <label for="kelas-peminjam">Kelas</label>
-                  <input type="text" name="kelas" class="form-control" id="kelas-peminjam" placeholder="Masukan Kelas Anda" value='' required>
+                  {{-- <input type="text" name="kelas" class="form-control" id="kelas-peminjam" placeholder="Masukan Kelas Anda" value='' required> --}}
+                  <select name="kelas" id="kelas-peminjam" class="form-select" required>
+                    <option selected disabled value="{{ false }}">
+                      Pilih Kelas Anda
+                    </option>
+                    <option value="1TE1">1TE1</option>
+                    <option value="1TE2">1TE2</option>
+                    <option value="1TE3">1TE3</option>
+                    <option value="1TL1">1TL1</option>
+                    <option value="2TE1">2TE1</option>
+                    <option value="2TE2">2TE2</option>
+                    <option value="2TE3">2TE3</option>
+                    <option value="2TL1">2TL1</option>
+                    <option value="3TE1">3TE1</option>
+                    <option value="3TE2">3TE2</option>
+                    <option value="3TE3">3TE3</option>
+                    <option value="3TE4">3TE4</option>
+                    <option value="3TL1">3TL1</option>
+
+                  </select>
                 </div>
 
                 <div class="form-group">
@@ -90,7 +112,8 @@ Checkout
                 <div class="form-group">
                   <label for="mata-kuliah">Keperluan Alat</label>
                   <fieldset class="form-group">
-                    <select class="form-select" name='keperluan' id="basicSelect" value='{{ old('keperluan') }}'>
+                    <select class="form-select" name='keperluan' id="basicSelect" value='{{ old('keperluan') }} required'>
+                      <option selected disabled value="{{ false }}">Pilih Keperluan Anda</option>
                       <option value="PENELITIAN">Penelitian</option>
                       <option value="PRAKTIKUM">Praktikum</option>
                       <option value="PKM">PKM</option>
@@ -118,7 +141,7 @@ Checkout
                   <label for="pertemuan">Pertemuan Ke</label>
                   <small class="text-muted">contoh. <i>1</i></small>
                   {{-- <input type="text" name="pertemuan_ke" class="form-control" id="pertemuan" placeholder="Masukan Pertemuan ke Anda"> --}}
-                  <select name="pertemuan_ke" id="" class="form-select" name="matakuliah_id" name="Masukan Mata Kuliah Anda" required>
+                  <select  class="form-select" id="pertemuan" name="pertemuan_ke" required>
                     <option selected disabled value="{{ false }}">
                       Pilih Pertemuan ke
                     </option>
@@ -144,7 +167,7 @@ Checkout
 
                 <div class="form-group">
                   <label for="laboratorium">Laboratorium</label>
-                  <select name="pertemuan_ke" id="" class="form-select" name="matakuliah_id" name="Masukan Mata Kuliah Anda" required>
+                  <select  id="" class="form-select" name="labs_id"  required>
                     <option selected disabled value="{{ false }}">
                       Masukan Tempat Laboratorium
                     </option>
@@ -185,6 +208,7 @@ Checkout
           <div class="card-body table-responsive">
             <div id="read""></div>
 
+            </table>
             <div class="check d-flex justify-content-between align-content-center mt-4 table-footer">
               <h4 id='total'>Alat yang anda pinjam ({{ $inCart }})</h4>
               <button id='checkouty' class='btn btn-primary btn-checkout px-lg-5 py-2 ' type="submit">Checkout</button>

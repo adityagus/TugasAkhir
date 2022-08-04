@@ -37,17 +37,16 @@ Pengembalian Alat
     <section class="section">
       <div class="card">
         <div class="card-header">
-              <h4 class=''>Alat Yang Anda Pinjam</h4>
+              <h4 class=''>Pengembalian</h4>
         </div>
         <div class="card-body table-responsive">
           <table class='table table-striped' id='table1'>
             <thead>
               <tr>
                 <th>NO.</th>
-                <th>Nama Alat & Bahan</th>
-                <th>Kategori</th>
-                <th>Jumlah Dipinjam</th>
-                <th>Jenis</th>
+                <th>Nama</th>
+                <th>Nim</th>
+                <th>Kelas</th>
                 <th>Status</th>
                 <th>Aksi</th>
               </tr>
@@ -57,7 +56,7 @@ Pengembalian Alat
                   $no = 1;
               @endphp
               @forelse ($items as $item)
-              @if ($item->status == 'SUCCESS')
+              @if ($item->status == 'Selesai' || $item->status == 'Verifikasi' ) 
 
               <tr>
                 <!-- <td colspan='7'><center>No Data</center></td> -->
@@ -65,62 +64,23 @@ Pengembalian Alat
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->nim }}</td>
                 <td>{{ $item->kelas }}</td>
-                <td>{{ $item->phone }}</td>
-                <td> {{ $item->laboratorium }}</td>
-                <td> {{ $item->status }}</td>
+                <td>
+                  
+                  @if ($item->status == 'Verifikasi')
+                  <span class="badge rounded-pill bg-primary">Dicek</span>
+                  
+                  @elseif($item->status == 'Selesai')
+                  <span class="badge rounded-pill bg-success">Selesai</span>
+                  
+                  
+                  @endif
+                </td>
                 <td class="d-flex justify-content-center">
                   <span class='d-flex d-inline-block'>
-                    <a href="{{ route('admin.transaction.show',$item->id) }}">
+                    <a href="{{ route('showpengembalian', $item->id) }}">
                       <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
                     </a>
                   </span>
-                  @if ($item->status == 'SUCCESS')
-                  <div class="bd-highlight">
-                    <form action="{{ route('return', $item->id) }}" method="POST">
-                      @csrf
-                      @method('POST')
-                      <button type="button" name="" id="" class="btn btn-warning btn-md btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Kembalikan Semua</button>
-      
-                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Pengembalian</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                  <label for="periksa" class="col-form-label">Bagaimana Kondisi Sesudah dipinjam?</label>
-                                  <div class="d-flex">
-                                    <div class="form-check me-4">
-                                      <input class="form-check-input" type="radio" name="kondisi" id="bagus" value="BAGUS">
-                                      <label class="form-check-label" for="bagus">
-                                        Bagus
-                                      </label>
-                                    </div>
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="kondisi" id="rusak" value="RUSAK">
-                                      <label class="form-check-label" for="rusak">
-                                        Rusak
-                                      </label>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="mb-3">
-                                  <label for="message-text" class="col-form-label">Keterangan</label>
-                                  <textarea class="form-control" id="message-text" name="keterangan"></textarea>
-                                </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit Pengembalian</button>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                    </form>
-                  </div>
-                   @endif    
                 </td>    
                 </tr>
               @endif
@@ -161,7 +121,6 @@ Pengembalian Alat
 @push('addon-script')
 <script src="{{ url('user/dist/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
 
-@include('sweetalert::alert')
 
 <script>
 // Simple Datatable

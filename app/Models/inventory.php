@@ -14,7 +14,6 @@ class Inventory extends Model
       'id', 'category_id', 'studyprogram_id', 'kd_brg', 'nama', 'deskripsi', 'slug', 'jumlah', 'satuan', 'inventories_id'
     ];
     
-    
     public function category_items(){
       return $this->belongsTo(CategoryItem::class, 'category_id', 'id');
     } 
@@ -24,6 +23,7 @@ class Inventory extends Model
     public function loan_items(){
       return $this->hasMany(LoanItem::class, 'id', 'inventory_id' );
     }
+    
     
     public function galleries(){
       return $this->hasMany(Gallery::class, 'inventories_id', 'id');

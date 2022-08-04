@@ -12,13 +12,13 @@
     <div class="row">
       <div class="col-12 col-md-7 ">
         <h3>Dashboard</h3>
-        <h6>Daftar Mahasiswa Jurusan Teknik Elektro</h6>
+        <h6>Permohonan Peminjaman Alat dan Bahan</h6>
       </div>
       <div class="col-md-5 ">
       <form action="{{ route('index') }}">
       <div class="d-flex col-12 jus ">
           <div class="col-9 form-group inline">
-          <input type="text" class="form-control" placeholder="Masukan Daftar Mahasiswa" name='search' value="{{ request('search') }}">
+          <input type="text" class="form-control" placeholder="keyword : [nama MHS] [NIM]" name='search' value="{{ request('search') }}">
           </div>
           <div class="col-3 form-group inline">
             <button class="btn-cari" type="submit">Cari...</button>
@@ -41,7 +41,7 @@
               @forelse ($mhs as $item)
 
               {{-- <img src="{{ Storage::url($item->image) }}" alt="alat dan bahan" style="width: 250px; height:160px" class="img-thumbnail"> --}}
-              <img src="{{ 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt="alat dan bahan" style="width: 80px" class="img-thumbnail">
+              <img src="{{ 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt="alat dan bahan" style="width: 180px;" class="img-thumbnail">
               
               @empty
                 
@@ -108,7 +108,7 @@
     <section class="row">
       <div class="col-12">
         <div class="row">
-          <a href="{{ route('keluar') }}">coba</a>
+          {{-- <a href="{{ route('keluar') }}">coba</a> --}}
           <div class="col-6 col-lg-3 col-md-6">
             <div class="card" style="min-height: 8rem">
               <div class="card-body px-3 py-4-5">
@@ -184,7 +184,8 @@
               <div class="card-header">
                 <div class="d-flex justify-content-between">
                   <div class="div">
-                    <h4 class=''>Alat Yang Anda Pinjam</h4>
+                  <a href="{{ route('keluar') }}">keluar</a>
+                    <h4 class=''>Alat yang di pinjam {{ session()->get(1) }}</h4>
                   </div>
                   <div class="bd-highlight">
                     {{-- @if ($items == true)
@@ -197,16 +198,14 @@
                       </a>
                     </div>
                     @endif --}}
-                    {{-- <form action="">
+                    <form action="">
                       <input type="search" class='form-control'>
                       <i></i>
-                    </form> --}}
+                    </form>
                   </div>
                 </div>
               </div>
-              <div class="card-body table-responsive">
-                {{-- Auth --}}
-                @auth
+              <div class="card-body table-responsive"> 
                 <table class='table table-bordered table-striped'>
                   <thead>
                     <tr>
@@ -218,11 +217,12 @@
                       <th>Status</th>
                       <th>Aksi</th>
                     </tr>
-                  </thead>
+                  </thead> 
                   <tbody>
                     @php
                     $no =1
                     @endphp
+                    @if (session()->get(1) )
                     @forelse ($items as $item)
 
                     <tr>
@@ -231,21 +231,16 @@
                       <td>{{ $item->inventory->nama }}</td>
                       <td>{{ $item->inventory->category_items->namakategori }}</td>
                       <td>{{ $item->total }}</td>
-                      <td>{{ $item->inventory->labs->name }}</td>
+                      <td>{{ $item->transaction->labs->name }}</td>
                       <td> {{ $item->transaction->status }}</td>
-                      {{-- <td>{{ $status->status }}</td> --}}
                       {{-- @if ($item->sta)
                           
                       @elseif($condition)
                           
-                      @endif --}}
-                      <td class='d-flex justify-content-center'>
+                      @endif  --}}
+                     <td class='d-flex justify-content-center'>
+                      <a href="{{ route('details', $item->inventory->id) }}"></a>
                         <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
-                        @if ($item->transaction->status == 'SUCCESS')
-                        <a href="{{ route('pengembalian') }}">
-                          <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
-                        </a>
-                        @endif    
                       </td>
                     </tr>
 
@@ -261,19 +256,19 @@
 
 
                     @endforelse
+                    @endif
+                      
 
 
 
+                  </tbody> 
 
-                  </tbody>
-
-                </table>
-                @endauth
+                 </table>
 
                 {{-- End Auth --}}
 
                 {{-- Guest --}}
-                @guest
+                {{-- @guest
                 <table class='table table-bordered table-striped'>
                   <thead>
                     <tr>
@@ -293,10 +288,10 @@
                   </tbody>
 
                 </table>
-                @endguest
+                @endguest --}}
                 {{-- End Guest --}}
-              </div>
-            </div>
+              {{-- </div>
+            </div>  --}}
           </div>
         </div>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Mail\Email;
+use App\Models\Lab;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Study;
@@ -12,6 +13,7 @@ use App\Models\Inventory;
 use App\Models\Mahasiswa;
 use App\Models\ReturnItem;
 use App\Models\Transaction;
+use App\Models\StudyProgram;
 use Illuminate\Http\Request;
 use App\Models\TransactionReturn;
 use App\Notifications\Peminjaman;
@@ -22,327 +24,322 @@ use App\Http\Controllers\Controller;
 use App\Http\Middleware\isMahasiswa;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CheckoutRequest;
+use Illuminate\Support\Facades\Cookie;
 use App\Http\Requests\CheckoutReturnRequest;
-use App\Models\Lab;
-use App\Models\StudyProgram;
 use Illuminate\Support\Facades\Notification;
 
 class FrontendController extends Controller
-{ 
-    public function home(Request $request){
-      
-      $loanItem = LoanItem::with(['inventory'])->get();
-  
+{
+  public function home(Request $request)
+  {
 
-      
-      
-      return view('pages.frontend.index', [
-        'status' => LoanItem::count(),
-        'jumlah_alat' => Inventory::count(),
-        'user_pinjam' => Transaction::count(),
-        'loan_pending' => Transaction::where('status', 'PENDING')->count(),
-        'loan_success' => Transaction::where('status', 'SUCCESS')->count(),
-        "items" => $loanItem,
-        "mhs" =>  Mahasiswa::latest()->filter(request(['search']))->paginate(7)->withQueryString(),
-        "title" => "home"
-      ]);
-    }
-    
-    public function barang(Mahasiswa $mahasiswa){
-      $inCarts = Cart::count();
-        $data = Inventory::with('category_items', 'studyprograms', 'loan_items')->get();
-        // dd($data);
-      return view('pages.frontend.barang', [
-        'items' => $data, 
-        "title" => "barang",
-        'inCart' => $inCarts
-      ]);
-    }
-    
-    
-    
-    
-    public function tampil(Request $request) {
-      if($request->session()->has('nama')){
-        echo $request->session()->get('nama');
-      }else{
-        echo 'Tidak ada data dalam session.';
-      }
-    }
-    public function buat(Request $request) {
-      $request->session()->put('nama','Diki Alfarabi Hadi');
-      echo "Data telah ditambahkan ke session.";
-    }
-    
-    public function authorize($ability, $arguments = [])
-    {
-      
-    }
-    
-    
-    
-    public function peminjaman(request $request){
-        $transaction = Transaction::with(['user'])->get();
-        // dd($transaction);
-      
-      return view('pages.frontend.peminjaman', [
-        'transaction' => $transaction,
-        "title" => "peminjaman"
-      ]);
-    }
-    
-    
-    public function cart(Request $request, Mahasiswa $mahasiswa)
-    {
-      $matakuliah = Study::all();
-      $lab = Lab::all();
-      $inCarts = Cart::count();
-      $carts = Cart::with(['inventory', 'inventory.studyprograms'])->get();
-      
-      // dd($matakuliah):
-      // $data = LoanItem::with('study')->get();
-      return view('pages.frontend.cart', [
-        "title" => "cart",
-        "carts" =>  $carts,
-        'inCart' => $inCarts,
-        'studies' => $matakuliah,
-        'labs' => $lab,
-        
-        // "study" => $data,
-      ]);
-    }
-    
-    public function read(Request $request)
-    {
-      $inCarts = Cart::count();
-      $carts = Cart::with(['inventory'])->get();
-      
-      // $data = LoanItem::with('study')->get();
-      return view('pages.frontend.ajax.tabelcart', [
-        "title" => "cart",
-        "carts" =>  $carts,
-        'inCart' => $inCarts,
-        
-        // "study" => $data,
-      ]);
-    }
-    
-    public function cartAdd( $id ){
-      // 
-      Cart::create([
-        'inventories_id' => $id,
-      ]);
-      // public function pengurangan 
-      return redirect()->route('barang');
-       
-    }
-    
-    public function cartDelete(Request $request, $id){
-      $data = Cart::findOrFail($id);
-      $data->name = $request->name;
-      
-      $data->delete();
-      
-      return response()->json([
-        'success' => 'Record deleted successfully!'
+    $loanItem = LoanItem::with(['inventory', 'transaction.labs', 'transaction'])->get();
+
+    // dd($request->session()->has('data'));
+
+
+    return view('pages.frontend.index', [
+      'status' => LoanItem::count(),
+      'jumlah_alat' => Inventory::count(),
+      'user_pinjam' => Transaction::count(),
+      'loan_pending' => Transaction::where('status', 'PENDING')->count(),
+      'loan_success' => Transaction::where('status', 'SUCCESS')->count(),
+      "items" => $loanItem,
+      "mhs" =>  Mahasiswa::latest()->filter(request(['search']))->paginate(1)->withQueryString(),
+      "title" => "home"
     ]);
-    }
-    // peminjaman alat dan bahan
-    public function checkout(CheckoutRequest $request, LoanRequest $loanRequest){
-      $data = $request->all();
+  }
 
-      //Get Carts Data 
-      $carts = Cart::with('inventory')->get();
-      
-      //Add to Transaction data 
-      $data['name'] = $request->name;
-      $email = $request->email;
-      $user = User::with(['roles'])->get();
-      // dd( $data['waktupeminjaman']);
-      // $data['total_price'] = $carts->sum('inventory.jumlah');
-      
-      //Create transaction item 
-      $transactions = Transaction::create($data);
-      
-      //Create transaction item 
-      foreach ($carts as $cart ) {
-        $items[] = LoanItem::create([
-          'transactions_id' => $transactions->id,
-          'total' => $loanRequest->total,
-          'inventory_id' => $cart->inventories_id
-        ]);
-        $cart->delete();
-      }
-      // 
-      // $get1 = LoanItem::with(['inventory'])->where('inventory_id', $carts->inventories_id );
-      // dd($get1);n
-      // $transaction = 
-      
-      // if ($loanRequest->total) {
-      //   $loanItem->total += $loanRequest;
-      // }
-      
-      //Delete cart after transaction 
-      
-      // redirect route 
-      $user = User::with('roles')->where('roles_id', 1 )
-                                  ->orWhere('roles_id', 2)
-                                  ->get();
-      
-      
-      $data = [
-        'greeting' => "Halo Sobat Siman",
-        'subject' => 'Peminjaman Barang',
-        'line1' => 'Ada Mahasiswa Yang ingin Meminjam Barang',
-        'action' => 'Approval now',
-        'line2' => 'Abaikan Pesan ini apabila sudah di approve'
-      ];
+  public function barang(Request $request, Mahasiswa $mahasiswa)
+  {
+    $inCarts = Cart::count();
 
-        
-        // $user->notify(new Informasi($data));
-        Notification::send($user, new Peminjaman($data));
-        return redirect()->route('success');
+    $data = Inventory::with('category_items', 'studyprograms', 'loan_items')->get();
 
+    // dd($data);
+    return view('pages.frontend.barang', [
+      'items' => $data,
+      "title" => "barang",
+      'inCart' => $inCarts
+    ]);
+  }
   
+  public function updatetocart(Request $request)
+  {
+      $prod_id = $request->input('product_id');
+      $quantity = $request->input('quantity');
 
-      // // message
-      // $pesan = [
-      //   'line1' => 'Hello Ini Line1',
-      //   'action' => 'Hello ini action nya',
-      //   'line2' => 'Hello ini line 2'
-      // ];
-      // // notification
-      // $admin->notify(new Informasi($pesan));
-      
+      if(Cookie::get('shopping_cart'))
+      {
+          $cookie_data = stripslashes(Cookie::get('shopping_cart'));
+          $cart_data = json_decode($cookie_data, true);
+
+          $item_id_list = array_column($cart_data, 'item_id');
+          $prod_id_is_there = $prod_id;
+
+          if(in_array($prod_id_is_there, $item_id_list))
+          {
+              foreach($cart_data as $keys => $values)
+              {
+                  if($cart_data[$keys]["item_id"] == $prod_id)
+                  {
+                      $cart_data[$keys]["item_quantity"] =  $quantity;
+                      $item_data = json_encode($cart_data);
+                      $minutes = 60;
+                      Cookie::queue(Cookie::make('shopping_cart', $item_data, $minutes));
+                      return response()->json(['status'=>'"'.$cart_data[$keys]["item_name"].'" Quantity Updated']);
+                  }
+              }
+          }
+      }
+  }
+
+
+  public function peminjaman(request $request)
+  {
+    $transaction = Transaction::with(['user', 'labs'])->get();
+    $transactionreturns = TransactionReturn::get();
+
+    // dd($transaction);
+
+    return view('pages.frontend.peminjaman', [
+      'transaction' => $transaction,
+      'transactionreturn' => $transactionreturns,
+      "title" => "peminjaman"
+    ]);
+  }
+
+  public function pengembalian(request $request)
+  {
+    $transactionreturn = TransactionReturn::get();
+    // dd($transaction);
+
+    return view('pages.frontend.pengembalian', [
+      'items' => $transactionreturn,
+      "title" => "pengembalian"
+
+    ]);
+  }
+
+
+  public function cart(Request $request, Mahasiswa $mahasiswa)
+  {
+    $matakuliah = Study::all();
+    $labs = Lab::all();
+    $inCarts = Cart::count();
+    $carts = Cart::with(['inventory', 'inventory.studyprograms'])->get();
+
+    // dd($matakuliah):
+    // $data = LoanItem::with('study')->get();
+    return view('pages.frontend.cart', [
+      "title" => "cart",
+      "carts" =>  $carts,
+      'inCart' => $inCarts,
+      'studies' => $matakuliah,
+      'labs' => $labs
+
+
+      // "study" => $data,
+    ]);
+  }
+
+  public function cartAdd($id)
+  {
+    // 
+    Cart::create([
+      'inventories_id' => $id,
+    ]);
+    // public function pengurangan 
+    return redirect()->route('barang');
+  }
+
+  public function read(Request $request)
+  {
+    $inCarts = Cart::count();
+    $carts = Cart::with(['inventory'])->get();
+
+    // $data = LoanItem::with('study')->get();
+    return view('pages.frontend.ajax.tabelcart', [
+      "title" => "cart",
+      "carts" =>  $carts,
+      'inCart' => $inCarts,
+
+      // "study" => $data,
+    ]);
+  }
+
+  public function cartDelete(Request $request, $id)
+  {
+    $data = Cart::findOrFail($id);
+    $data->name = $request->name;
+
+    $data->delete();
+
+    return response()->json([
+      'success' => 'Record deleted successfully!'
+    ]);
+  }
+
+  public function informasi(Request $request)
+  {
+
+    return view('pages.frontend.information', [
+      "title" => "informasi",
+    ]);
+  }
+
+
+
+  // peminjaman alat dan bahan
+  public function checkout(CheckoutRequest $request)
+  {
+    $data = $request->all();
+
+    //Get Carts Data 
+    $carts = Cart::with('inventory')->get();
+
+    //Add to Transaction data 
+    $data['name'] = $request->name;
+    $email = $request->email;
+    $user = User::with(['roles'])->get();
+    // dd( $data['waktupeminjaman']);
+    // $data['total_price'] = $carts->sum('inventory.jumlah');
+
+    //Create transaction item 
+    $transactions = Transaction::create($data);
+
+    //Create transaction item 
+    foreach ($carts as $cart) {
+      $items[] = LoanItem::create([
+        'transactions_id' => $transactions->id,
+        // 'total' => $loanRequest->total,
+        'inventory_id' => $cart->inventories_id
+      ]);
+      $cart->delete();
     }
-    
-    // pengembalian alat dan bahan
-    public function return(CheckoutReturnRequest $request, Transaction $transaction ,$id){
-      //Get Carts Data 
-      $loans = LoanItem::with('inventory')->get();
-      $transactions = Transaction::with('user')->findOrFail($id);
-      //Add to Transaction data 
-      //Add to Transaction data 
-        $transactionreturn = TransactionReturn::create([ 
-          'transactions_id' => $transactions->id,
-          'nim' => $transactions->nim,
-          'name' =>$transactions->name,
-          'kondisi' => $request->kondisi,
-          'keterangan' => $request->keterangan,
-          'kelas' => $transactions->kelas,
-          'phone' => $transactions->phone,
-          'pertemuan_ke' => $transactions->pertemuan_ke,
-          'keperluan' => $transactions->keperluan,
-          'laboratorium' => $transactions->laboratorium,
-        ]);
-      
-      
-       // $data['total_price'] = $carts->sum('inventory.jumlah');
-       
-       //Create transaction item 
-       
-       //Create transaction item graph
-       foreach ($loans as $loan ) {
-         $items[] = ReturnItem::create([
-           'transactionreturn_id' => $transactionreturn->id,
-          //  'total' => $loan->total,
-           'inventory_id' => $loan->inventory_id
-          ]);
-          $loan->delete();
-         
-       }
-        
-        
-        //Delete cart after transaction 
-       //Delete cart after transaction 
-        //Delete cart after transaction 
-       //Delete cart after transaction 
-        //Delete cart after transaction 
-       $transactions->delete();
-       
+    // 
+    // $get1 = LoanItem::with(['inventory'])->where('inventory_id', $carts->inventories_id );
+    // dd($get1);n
+    // $transaction = 
 
-       
-      //  configuration
-       $user = User::with('roles')->where('roles_id', 1 )
-       ->orWhere('roles_id', 2)
-       ->get();
+    // if ($loanRequest->total) {
+    //   $loanItem->total += $loanRequest;
+    // }
 
-      //  data to email
-      $data = [
+    //Delete cart after transaction 
+
+    // redirect route 
+    $user = User::with('roles')->where('roles_id', 1)
+      ->orWhere('roles_id', 2)
+      ->get();
+
+
+    $data = [
       'greeting' => "Halo Sobat Siman",
-      'subject' => 'Pengembalian Barang',
-      'line1' => 'Ada Mahasiswa Yang ingin Mengembalikan Barang',
+      'subject' => 'Peminjaman Barang',
+      'line1' => 'Ada Mahasiswa Yang ingin Meminjam Barang',
       'action' => 'Approval now',
       'line2' => 'Abaikan Pesan ini apabila sudah di approve'
-      ];
+    ];
 
 
-      // $user->notify(new Informasi($data));
-      Notification::send($user, new Pengembalian($data));
-      
-      return redirect()->route('pengembalian')->with('success', 'Pengembalian sedang di Verifikasi!');
-       
-       
-       
-     }
-    
-    // public function informasi(Request $request){
-      
-    //   return view('pages.frontend.information',[
-    //     "title" => "informasi",
-    //   ]);
-    // }
-    
-    
-    
-    public function details(request $request, $slug){
-      
-      $item = Inventory::with(['galleries'])->where('slug', $slug)->firstOrFail();
-      // $inCarts = Cart::where('users_id', Auth::user()->id)->count();
-      if (Auth::check() == true) {
-        $inCarts = Cart::where('users_id', Auth::user()->id)->count();
-      }
-      else {
-        $inCarts = Cart::count();
-      }
-      
-      // dd($item);
-      return view('pages.frontend.detail', [
-        'inventory' => $item,
-        "title" => "peminjaman",
-        'inCart' => $inCarts
-      ]);
-      
-    }
-    
-    public function pengembalian(request $request){
-      $transaction = Transaction::with(['user'])->get();
-      // dd($transaction);
-    
-      return view('pages.frontend.pengembalian', [
-        'items' => $transaction,
-        "title" => "pengembalian"
-      ]);
+    // $user->notify(new Informasi($data));
+    Notification::send($user, new Peminjaman($data));
+    return redirect()->route('success');
+
+
+
+    // // message
+    // $pesan = [
+    //   'line1' => 'Hello Ini Line1',
+    //   'action' => 'Hello ini action nya',
+    //   'line2' => 'Hello ini line 2'
+    // ];
+    // // notification
+    // $admin->notify(new Informasi($pesan));
+
+  }
+
+
+  // detail alat dan bahan
+  public function details(request $request, $slug)
+  {
+
+    $item = Inventory::with(['galleries'])->where('slug', $slug)->firstOrFail();
+    // $inCarts = Cart::where('users_id', Auth::user()->id)->count();
+    if (Auth::check() == true) {
+      $inCarts = Cart::where('users_id', Auth::user()->id)->count();
+    } else {
+      $inCarts = Cart::count();
     }
 
-    public function success(request $request){
+    // dd($item);
+    return view('pages.frontend.detail', [
+      'inventory' => $item,
+      "title" => "peminjaman",
+      'inCart' => $inCarts
+    ]);
+  }
 
-      return view('pages.frontend.checkout-success', [
-        "title" => "cart"
-      ]);
-    }
+  public function show(Transaction $transaction, $id)
+  {
+    // dd($transaction);
+    // $transaction = Transaction::with(['studies'])->all();
+    $transaction = Transaction::with(['studies', 'labs'])->findOrFail($id);
+    $loanItem =  LoanItem::with(['inventory'])->where('transactions_id', $transaction->id)->get();
+
+    // $transaction = Transaction::find($transaction);
+    // $apa = LoanItem::find($loanItem);
+    // dd($apa);
+    // dd($transaction);
+    return view('pages.frontend.showpeminjaman', [
+      'transaction' => $transaction,
+      'loanitem' => $loanItem,
+      'title' => 'peminjaman'
+    ]);
     
-    public function history(){
-      $transactionreturn = Transactionreturn::with(['user'])->get();
-      // dd($transaction);
+  }
+  
     
+  public function showpengembalian(Transaction $transaction, $id)
+  {
+    // dd($transaction);
+    // $transaction = Transaction::with(['studies'])->all();
+    $transaction = TransactionReturn::with(['transaction.studies', 'transaction.labs'])->findOrFail($id);
+    // dd($transaction);
+    $loanItem =  ReturnItem::with(['inventory'])->where('transactionreturn_id', $transaction->id)->get();
+
+    // $transaction = Transaction::find($transaction);
+    // $apa = LoanItem::find($loanItem);
+    // dd($apa);
+    // dd($transaction);
+    return view('pages.frontend.showpengembalian', [
+      'transactionreturn' => $transaction,
+      'returnitem' => $loanItem,
+      'title' => 'peminjaman'
+    ]);
+  }
+
+
+
+
+
+  public function success(request $request)
+  {
+
+    return view('pages.frontend.checkout-success', [
+      "title" => "cart"
+    ]);
+  }
+
+  public function history()
+  {
+    $transactionreturn = Transactionreturn::with(['user'])->get();
+    // dd($transaction);
+
     return view('pages.frontend.history', [
       'transaction' => $transactionreturn,
       "title" => "history"
     ]);
-      
-    }
-    
-    
-    
+  }
 }

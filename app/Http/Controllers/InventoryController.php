@@ -26,7 +26,7 @@ class InventoryController extends Controller
         
         // "posts" =>  Post::all()
          
-        $items = Inventory::with(['category_items', 'labs'])->get();
+        $items = Inventory::with(['category_items', 'studyprograms'])->get();
         
         // dd($items);
         return view('pages.admin.inventory.index', [
@@ -120,7 +120,7 @@ class InventoryController extends Controller
 
       $inventory->update($data);
 
-    return view('pages.admin.transaksi.index');
+    return redirect()->route('admin.inventory.index');
     }
 
     /**

@@ -37,18 +37,18 @@ Pengembalian Alat
     <section class="section">
       <div class="card">
         <div class="card-header">
-              <h4 class=''>Alat Yang Anda Pinjam</h4>
+              <h4 class=''>Mahasiswa yang Meminjam</h4>
           </div>
         <div class="card-body table-responsive">
           <table class='table table-bordered table-striped'>
             <thead>
               <tr>
                 <th>NO.</th>
-                <th>Nama Mahasiswa</th>
+                <th>Nama </th>
                 <th>Nim</th>
                 <th>Kelas</th>
-                <th>Phone</th>
-                <th>Tempat Lab</th>
+                <th>Mata Kuliah</th>
+                <th>Waktu Peminjaman</th>
                 <th>Status</th>
                 <th>Aksi</th>
               </tr>
@@ -65,21 +65,30 @@ Pengembalian Alat
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->nim }}</td>
                 <td>{{ $item->kelas }}</td>
-                <td>{{ $item->phone }}</td>
-                <td> {{ $item->laboratorium }}</td>
-                <td> {{ $item->status }}</td>
-                <td class="d-flex justify-content-center">
-                  <span class='d-flex d-inline-block'>
-                    <a href="{{ route('admin.transaction.show',$item->id) }}">
+                <td>{{ $item->studies->matakuliah }}</td>
+                <td align="center"> {{ $item->created_at->format('d M Y / H:i a') }}</td>
+                <td>
+                  @if ($item->status == 'PENDING')
+                  <span class="badge rounded-pill bg-primary">Verifikasi</span>
+                  
+                  @elseif($item->status == 'SUCCESS')
+                  <span class="badge rounded-pill bg-success">Dipinjam</span>
+                  
+                  @elseif($item->status == 'FAILED')
+                  <span class="badge rounded-pill bg-danger">Gagal</span>
+                  
+                  
+                  @endif
+                  
+                
+                </td>
+                <td class="">
+                  <span class='d-flex justify-content-center d-inline-block'>
+                    <a href="{{ route('showpeminjam', $item->id) }}">
                       <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
                     </a>
                   </span>
-                  @if ($item->status == 'SUCCESS')
-                  <a href="{{ route('pengembalian') }}">
-                    <button class='btn-warning rounded py-1 px-3'>Pengembalian</button>
-                  </a>
-                  @endif    
-                  
+                </td>  
                   
               </tr>
 
@@ -92,8 +101,7 @@ Pengembalian Alat
 
 
               @endforelse
-
-
+              
 
 
             </tbody>
@@ -103,13 +111,90 @@ Pengembalian Alat
 
       </div>
     </section>
+    
+    
+    
+    <section class="section">
+      <div class="card">
+        <div class="card-header">
+          <h4 class=''>Mahasiswa Yang ditangguhkan</h4>
+        </div>
+        <div class="card-body table-responsive">
+          <table class='table table-bordered table-striped'>
+            <thead>
+              <tr>
+                <th>NO.</th>
+                <th>Nama Mahasiswa</th>
+                <th>Nim</th>
+                <th>Kelas</th>
+                <th>Phone</th>
+                <th>Waktu Peminjaman</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              @php
+              $no =1
+              @endphp
+              @foreach ($transactionreturn as $item)
+              @if ($item->status == 'Ditangguhkan')
+              <tr>
+                <!-- <td colspan='7'><center>No Data</center></td> -->
+                <td>{{ $no++ }}</td>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->nim }}</td>
+                <td>{{ $item->kelas }}</td>
+                <td>{{ $item->phone }}</td>
+                <td align="center"> {{ $item->created_at->format('d M Y / H:i a') }}</td>
+                
+                {{-- <td> {{ $item->labs->name }}</td> --}}
+                <td>
+                  @if ($item->status == 'Verifikasi')
+                  <span class="badge rounded-pill bg-primary">Verifikasi</span>
+                  
+                  @elseif($item->status == 'Selesai')
+                  <span class="badge rounded-pill bg-success">Selesai</span>
+                  
+                  @elseif($item->status == 'Ditangguhkan')
+                  <span class="badge rounded-pill bg-warning">Ditangguhkan</span>
+                  
+                  
+                  @endif
+                </td>
+                <td class="d-flex justify-content-center">
+                  <span class='d-flex d-inline-block'>
+                    <a href="{{ route('showpengembalian', $item->id) }}">
+                      <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
+                    </a>
+                  </span>
+
+                  
+                  
+              </tr>
+              
+              
+              
+              @endif
+              @endforeach
+
+            </tbody>
+
+          </table>
+        </div>
+
+      </div>
+    </section>
+    
+        
+    
   </div>
 </div>
 
   <footer>
-    <div class="footer d-flex justify-content-center mb-0 text-muted">
-      <div class="float-center">
-        <p class='text-center'>2022 &copy; Teknik Elektro</p>
+    <div class="footer d-flex justify-content-end pe-4 mb-0 text-muted">
+      <div class="float-end">
+        <p class='text-left'>2022 &copy; Teknik Elektro</p>
       </div>
   </footer>
 </div>

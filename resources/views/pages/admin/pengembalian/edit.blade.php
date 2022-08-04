@@ -51,10 +51,9 @@ Create Inventaris
               <select name="status" id="status" required class="form-select">
                 <option class='' style="color:#607080" value="{{ $return->status }}">{{ $return->status }}</option>
                 <option disabled>-----------------------------------------------------------------------------------------------------------------------------------------------------</option>
-                <option value="VERTIFIKASI">VERTIFIKASI</option>
-                <option value="DIKEMBALIKAN">DIKEMBALIKAN</option>
-                <option value="FAILED">FAILED</option>
-                <option value="CANCEL">CANCEL</option>
+                <option value="Verifikasi">Verifikasi</option>
+                <option value="Ditangguhkan">Ditangguhkan</option>
+                <option value="Selesai">Selesai</option>
               </select>
             </div>
 

@@ -27,13 +27,13 @@ class CheckoutRequest extends FormRequest
         return [
             'id' => 'integer',
             'matakuliah_id' => 'required|integer',
+            'labs_id' => 'required|integer',
             'name' => 'required|string|max:255',
             'nim' => 'required|integer',
             'kelas' => 'required|string|max:255',
             'phone' => 'required',
             'pertemuan_ke' => 'required|integer',
             'keperluan' => 'required|string|max:255|in:PENELITIAN,PRAKTIKUM,PKM',
-            'laboratorium' => 'required|string|max:255',
             // 'matakuliah' => 'required|string|max:255',
         ];
     }

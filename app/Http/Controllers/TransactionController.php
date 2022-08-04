@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
-use Illuminate\Http\Request;
-use App\Http\Requests\TransactionRequest;
+use App\Models\User;
 use App\Models\LoanItem;
 use App\Models\Inventory;
+use App\Models\ReturnItem;
+use App\Models\Transaction;
+use Illuminate\Http\Request;
+use App\Models\TransactionReturn;
+use App\Notifications\Pengembalian;
+use App\Http\Requests\TransactionRequest;
+use App\Http\Requests\CheckoutReturnRequest;
+use Illuminate\Support\Facades\Notification;
 
 class TransactionController extends Controller
 {
@@ -17,7 +23,7 @@ class TransactionController extends Controller
      */
     public function index(Transaction $transaction)
     {
-        $transaction = Transaction::with(['user'])->get();
+        $transaction = Transaction::with(['studies', 'labs'])->get();
         // dd($transaction);
         return view('pages.admin.transaksi.index', compact('transaction'));
     }
@@ -31,6 +37,10 @@ class TransactionController extends Controller
     {
         //
     }
+    
+    
+      // pengembalian alat dan bahan
+
 
     /**
      * Store a newly created resource in storage.

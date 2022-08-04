@@ -62,11 +62,11 @@ Admin Inventaris
                 <th>No</th>
                 <th>Nama Alat & Bahan</th>
                 <th>Kategori</th>
-                <th>Keseluruhan</th>
-                <th>Dipinjam</th>
                 <th>Ketersedian</th>
-                <th>Lab</th>
-                <th class="">Aksi</th>
+                <th>Jenis</th>
+                {{-- <th>Dipinjam</th>
+                <th>Ketersedian</th> --}}
+                <th class='text-center'>Aksi</th>
               </tr>
             </thead>
             @php
@@ -80,11 +80,8 @@ Admin Inventaris
                 <td>{{ $item->nama}}</td>
                 <td >{{ $item->category_items->namakategori }}</td>
                 <td>{{ $item->jumlah}}</td>
-                <td>
-                  {{ $item->keluar }}
-                </td>
-                <td>&nbsp;</td>
-                <td>{{ $item->labs->name }}</td>
+                {{-- <td>{{ $item->sisa_pinjam}}</td> --}}
+                <td>{{ $item->studyprograms->name }}</td>
                 <td class="d-flex justify-content-center">
                   <span class='d-flex d-inline-block'>
                     <a href="{{ route('admin.inventory.show',$item->id) }}" class="btn btn-primary">

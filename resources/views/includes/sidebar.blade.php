@@ -25,16 +25,16 @@
         <li class="sidebar-title mb-0">Manajemen</li>
 
 
-        <li class="sidebar-item {{ ($title == "barang" ? "active" : "") }}">
+        <li class="sidebar-item {{ ($title == "barang" || $title == "cart" ? "active" : "") }}">
           <a href="/alat-dan-bahan" class='sidebar-link'>
-            <img src="{{ $title !== "barang" ? url("frontend/images/assets/listbarang-secondary.png") : url("frontend/images/assets/listbarang.png") }}" width='35px' alt="">
+            <img src="{{ $title !== "barang" && $title !=='cart' ? url("frontend/images/assets/listbarang-secondary.png") : url("frontend/images/assets/listbarang.png") }}" width='35px' alt="">
             <span>List Barang</span>
           </a>
         </li>
         
-        <li class="sidebar-item {{ ($title == "peminjaman" || $title == "cart" ? "active" : "") }}">
+        <li class="sidebar-item {{ ($title == "peminjaman"  ? "active" : "") }}">
           <a href="/peminjaman" class='sidebar-link'>
-            <img src="{{ $title !== "peminjaman" && $title !=='cart' ? url("user/dist/assets/images/logo/peminjaman-secondary.png") : url("user/dist/assets/images/logo/peminjaman.png") }}" width='35px' alt="">
+            <img src="{{ $title !== "peminjaman" ? url("user/dist/assets/images/logo/peminjaman-secondary.png") : url("user/dist/assets/images/logo/peminjaman.png") }}" width='35px' alt="">
             <span>Peminjaman</span>
           </a>
         </li>
@@ -47,13 +47,6 @@
         </li>
         
         <li class="sidebar-title mt-2">Lainnya</li>
-        
-        <li class="sidebar-item {{ ($title == "history" ? "active" : "") }}">
-          <a href="/history" class='sidebar-link'>
-            <img src="{{ $title !== "history" ? url("frontend/images/assets/mytransaksi-secondary.png") : url("frontend/images/assets/mytransaksi.png") }}" width='35px' alt="">
-            <span>History</span>
-          </a>
-        </li>
         
         
         <li class="sidebar-item {{ ($title == "informasi" ? "active" : "") }} ">

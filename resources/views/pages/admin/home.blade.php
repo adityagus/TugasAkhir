@@ -171,22 +171,6 @@
                   <div class="div">
                     <h4 class=''>Mahasiswa yang ingin Meminjam</h4>
                   </div>
-                  <div class="bd-highlight">
-                    @if ($items == true)
-                        
-                    <div class="export">
-                      <a href="{{ route('cetakpeminjaman') }}" target="_blank">
-                        <button class='btn-red'>
-                          Export PDF &nbsp;  <i class="bi bi-file-earmark-arrow-down "></i>
-                        </button>
-                      </a>
-                    </div>
-                    @endif
-                    {{-- <form action="">
-                      <input type="search" class='form-control'>
-                      <i></i>
-                    </form> --}}
-                  </div>
                 </div>
               </div>
               <div class="card-body table-responsive">
@@ -200,7 +184,7 @@
                       <th>Nim</th>
                       <th>Kelas</th>
                       <th>Phone</th>
-                      <th>Tempat Lab</th>
+                      <th>Tempat</th>
                       <th>Status</th>
                       <th>Aksi</th>
                     </tr>
@@ -218,7 +202,7 @@
                       <td>{{ $item->nim }}</td>
                       <td>{{ $item->kelas }}</td>
                       <td>{{ $item->phone }}</td>
-                      <td> {{ $item->laboratorium }}</td>
+                      <td> {{ $item->labs->name }}</td>
                       <td> {{ $item->status }}</td>
                       <td class="d-flex justify-content-center">
                         <span class='d-flex d-inline-block'>
@@ -252,29 +236,6 @@
 
                 {{-- End Auth --}}
 
-                {{-- Guest --}}
-                @guest
-                <table class='table table-bordered table-striped'>
-                  <thead>
-                    <tr>
-                      <th>NO.</th>
-                      <th>Nama Alat & Bahan</th>
-                      <th>Kategori</th>
-                      <th>Jumlah Dipinjam</th>
-                      <th>Jenis</th>
-                      <th>Status</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td colspan="8" class="text-center">Data Kosong</td>
-                    </tr>
-                  </tbody>
-
-                </table>
-                @endguest
-                {{-- End Guest --}}
               </div>
             </div>
           </div>
@@ -293,14 +254,14 @@
               <div class="card-body table-responsive">
                 {{-- Auth --}}
                 @auth
-                <table class='table table-bordered table-striped'>
+                <table class='table table-bordered table-striped '>
                   <thead>
                     <tr>
                       <th>No</th>
                       <th>Nama Peminjam</th>
-                      <th>phone</th>
-                      <th>keperluan</th>
-                      <th>laboratorium</th>
+                      <th>Phone</th>
+                      <th>Keperluan</th>
+                      <th>Lab</th>
                       <th>Kondisi Terakhir</th>
                       <th>Status</th>
                       <th>Aksi</th>
@@ -311,6 +272,9 @@
                     $nomor =1
                     @endphp
                     @forelse ($pengembalian as $item)
+                    @if (!$item->status == 'SUCCESS')
+                    
+                        
 
                     <tr>
                       <td>{{ $nomor++ }}</td>
@@ -332,6 +296,8 @@
                         </span>
                       </td>
 
+                      
+                      @endif
                     @empty
 
 
@@ -341,7 +307,7 @@
 
 
                     @endforelse
-
+                    
 
 
 

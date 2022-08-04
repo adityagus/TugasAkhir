@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class CetakController extends Controller
 {
   public function dataBarang(Request $request){
-    $data = Inventory::with('category_items', 'labs')->get();
+    $data = Inventory::with('category_items', 'studyprograms')->get();
     $html = view('pages.admin.inventory.cetak', compact('data'));
     $time = Carbon::now();
     $pdf = Pdf::loadView('pages.admin.inventory.cetak', compact('data', 'time'));
@@ -37,11 +37,11 @@ class CetakController extends Controller
   }  
   
   
-  public function cPeminjaman(Request $request){
+  public function cPeminjaman(Request $request, $id){
     
 
     $data = LoanItem::with(['inventory', 'transaction'])->get();
-    $transaction = Transaction::with(['studies'])->where('users_id',Auth::user()->id)->first();
+    $transaction = Transaction::with(['studies', 'labs'])->findOrFail($id);
     
     // dd($transaction);
     // $html = view('pages.admin.inventory.cetak', compact('data', 'transaction'));

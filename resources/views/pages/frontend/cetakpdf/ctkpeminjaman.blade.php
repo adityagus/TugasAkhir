@@ -49,7 +49,7 @@
       <tr>
         <td width='20%'>Nama Peminjam</td>
         <td width='4px'>:</td>
-        <td>{{ Auth::user()->name }}</td>
+        <td>{{ $transaction->name }}</td>
       </tr>
       <tr>
         <td width='20%'>NIM</td>
@@ -107,7 +107,7 @@
           <td align="center">{{ $item->inventory->jumlah}}</td>
           <td align="center">{{ $item->inventory->satuan }}</td>
           <td align="center" >{{ $transaction->status }}</td>
-          <td align="center" >{{ $transaction->laboratorium }}</td>
+          <td align="center" >{{ $transaction->labs->name }}</td>
           {{-- <td align="center">{{ $items->studies->matakuliah }}</td> --}}
           
           <td>&nbsp;</td>
@@ -125,7 +125,7 @@
       <tr>
         <td width='30%'>Tanggal Peminjaman</td>
         <td width='4px'>:</td>
-        <td>{{ date('d F Y  / h:i:s A', strtotime($item->created_at)) }}</td>
+        <td>{{ date('d F Y  / h:i:s A', strtotime($transaction->created_at)) }}</td>
       </tr>
       <tr>
         <td width='30%'>Tanggal Pengembalian</td>

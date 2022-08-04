@@ -31,24 +31,18 @@ Edit Inventaris
       <div class="card">
         <div class="card-body">
         
-         @if ($errors->any())
-            <div class="mb-3" role="alert">
-              <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                There's Something Wrong!!
-              </div>
-            <div class="border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text red-700">
-              <p>
-                <ul>
+          @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
                   @foreach ($errors->all() as $error)
-                      <li>{ $error }</li>
+                      <li>{{ $error }}</li>
                   @endforeach
-                </ul>
-              </p>
-            </div>
-            </div>
-          @endif
+              </ul>
+          </div>
+      @endif
+      
           
-          <form action="{{ route('admin.inventory.update', $item->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.inventory.update', $item->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-2">

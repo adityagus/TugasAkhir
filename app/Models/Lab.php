@@ -9,9 +9,9 @@ class Lab extends Model
 {
     use HasFactory;
     
-    // protected $fillable = [
-    //   'inventory_id', 'name'
-    // ];
+    protected $fillable = [
+      'name'
+    ];
     
     
 }

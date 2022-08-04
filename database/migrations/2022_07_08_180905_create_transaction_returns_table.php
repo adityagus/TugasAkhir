@@ -15,8 +15,9 @@ class CreateTransactionReturnsTable extends Migration
     {
         Schema::create('transaction_returns', function (Blueprint $table) {
           $table->id();
-          $table->foreignId('users_id')->nullable();
           $table->foreignId('transactions_id')->nullable();
+          $table->bigInteger('matakuliah_id');
+          $table->bigInteger('labs_id');
           $table->string('name')->nullable();
           $table->string('nim')->nullable();
           $table->string('kelas')->nullable();

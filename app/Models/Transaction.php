@@ -10,14 +10,14 @@ class Transaction extends Model
 {
     use HasFactory;
     protected $fillable = [
-     'id', 'mahasiswa_id', 'loanitem_id', 'matakuliah_id', 'name', 'nim', 'kelas', 'phone', 'pertemuan_ke', 'keperluan', 'laboratorium', 'status'
+     'id', 'mahasiswa_id', 'labs_id', 'matakuliah_id', 'name', 'nim', 'kelas', 'phone', 'pertemuan_ke', 'keperluan', 'laboratorium', 'status'
     ];
     
     public function user(){
       return $this->belongsTo(User::class, 'users_id', 'id');
     }
-    public function mahasiswa(){
-      return $this->belongsTo(User::class, 'mahasiswa_id', 'id');
+    public function labs(){
+      return $this->belongsTo(Lab::class, 'labs_id','id' );
     }
     
     public function studies(){

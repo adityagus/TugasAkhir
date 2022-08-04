@@ -82,7 +82,7 @@
           <td align="center">{{ $item->satuan }}</td>
           <td align="center">{{ $item->jumlah}}</td>
           <td align="center">{{ $item->satuan }}</td>
-          <td align="center">{{ $item->labs->name }}</td>
+          <td align="center">{{ $item->studyprograms->name }}</td>
           
           <td>&nbsp;</td>
         </tr>

@@ -41,7 +41,7 @@
             <h4 class="card-title">Data Alat dan Bahan</h4>
           </div>
           <div class="card-body">
-              <table class="table table-striped" id="table1">
+              <table class="table table-striped" id="table1" class='table-item'>
               <thead>
                 <tr>
                   <th>No</th>

@@ -3,15 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\ReturnController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\otentikasi\OtentikasiController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\cetak\CetakController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\User\FrontendController;
 use App\Http\Controllers\TransactionReturnController;
+use App\Http\Controllers\otentikasi\OtentikasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,8 @@ use App\Http\Controllers\TransactionReturnController;
     ->name('attach');
   Route::get('/pesan',[EmailController::class, 'notif'] )
     ->name('notif');
+  Route::post('/checkout-pengembalian/{id}', [ReturnController::class, 'return'])
+  ->name('return');
     
 
   
@@ -57,22 +60,26 @@ Route::middleware(['mahasiswa'])->group(function () {
     ->name('cart-add');
     Route::get('/read', [FrontendController::class, 'read'])
     ->name('read');
+    Route::post('update-to-cart',[FrontendController::class, 'updatetocart']);
+    
     Route::delete('/cart/{id}', [FrontendController::class, 'cartDelete'])
     ->name('cart-delete');
     Route::post('/checkout-peminjaman', [FrontendController::class, 'checkout'])
     ->name('checkout');
-    Route::post('/checkout-pengembalian/{id}', [FrontendController::class, 'return'])
-    ->name('return');
+
     Route::post('/return-success', [FrontendController::class, 'return'])
     ->name('return-success');
     Route::get('/checkout-success', [FrontendController::class, 'success'])
     ->name('success');
     Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
       ->name('pengembalian');
-    Route::get('/cetakpeminjaman', [CetakController::class, 'cPeminjaman'])
+    Route::get('/cetakpeminjaman/{id}', [CetakController::class, 'cPeminjaman'])
     ->name('cetakpeminjaman');
-    Route::get('/history', [Frontendcontroller::class, 'history'])
-    ->name('history');
+    Route::get('/detail-peminjaman/{id}', [FrontendController::class, 'show'])
+    ->name('showpeminjam');
+    Route::get('/detail-pengembalian/{id}', [FrontendController::class, 'showpengembalian'])
+    ->name('showpengembalian');
+    
 });
 
     
@@ -85,6 +92,10 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
   ->name('home');
   Route::get('/cetakdatabarang', [CetakController::class, 'dataBarang'])
   ->name('cetakdatabarang');
+  Route::delete('/deleteloan/{id}', [ReturnController::class, 'deletebarang'])
+  ->name('delete-loan');
+
+  
   
   Route::resource('inventory', InventoryController::class, [
     'title' => 'approval'

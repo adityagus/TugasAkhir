@@ -30,49 +30,56 @@
       <section class="section">
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">Informasi</h4>
+            <h4>Informasi</h4>
           </div>
           <div class="card-body">
+            <div class="border border-2 rounded p-3" >
+            <img class="img-fluid" src="{{ url('frontend/images/assets/flow-peminjaman.png') }}" alt="" style="width: 1000px;">
+            </div>
              {{-- content --}}
              <div class="card-body">
               <!-- pemesanan -->
               <div class="row">
                   <div class="col">
-                      <h4>Memesan alat dan bahan</h4>
-                      <ul>
+                      <h4>Cara Meminjam Alat dan Bahan</h4>
+                      <ol type="1">
                           <li>
-                              Setelah anda berhasil masuk ke aplikasi, anda akan diarahkan ke halaman utama, dimana ada menu peminjaman, lalu tekan menu peminjaman.
+                              Pertama-tama mengecek nama anda di pencarian Mahasiswa Elektro
                           </li>
                           <li>
-                              Apabila anda diarahkan ke halaman peminjaman, terdapat alat dan bahan yang tersedia di jurusan bisa menekan tombol detail untuk melihat detail dari barang tersebut.
+                              Apabila <span class='badge rounded-pill bg-success'>terdaftar</span> anda dapat melanjutkan peminjaman alat dan bahan yang langsung diarahkan untuk memilih alat dan bahan yang tersedia di jurusan teknik elektro. jika <span class="badge rounded-pill bg-danger">tidak terdaftar</span> harap untuk menghubungi Staff PLP
                           </li>
                           <li>
-                            jika ingin meminjam alat maka pengguna dapat memilih add to cart untuk memasuk alat dan bahan ke dalam keranjang peminjaman 
+                            Lalu mahasiswa dapat memilih barang yang akan di pinjam
                           </li>
                           <li>
-                              Setelah anda memilih tenan, anda akan diarahkan ke halaman daftar menu yang disediakan oleh tenan tersebut.
+                              Setelah memilih, anda dapat masuk ke halaman checkout peminjaman <i class='bi bi-cart bi-sub fs-4 py-0 text-gray-600'></i> 
                           </li>
                           <li>
-                              Di halaman menu anda dapat memilih menu yang anda inginkan, jika anda menginginkan tambahan toping anda bisa mencentang toping yang disediakan.
+                             Mahasiswa wajib mengisi form peminjaman yang disediakan 
                           </li>
                           <li>
-                              Jika sekiranya anda mengalami kesulitan untuk memilih menu yang anda inginkan anda dapat melakukan pencarian menu dengan menekan <i class="fas fa-search"></i> yang berada di atas layar anda.
+                            Setelah itu mahasiswa dapat menekan tombol Chekout untuk menyelesaikan peminjaman
                           </li>
                           <li>
-                              Untuk memeriksa menu apa saja yang anda inginkan anda dapat menekan tombol <i class="fas fa-shopping-cart"></i> yang berada di kanan atas.
+                            Mahasiswa dapat menunggu persetujuan dari laboran setelah dipinjam dan status peminjaman <span class="badge bg-"></span>
+                          </li>
+                          
+                          <li>
+                              Jika sekiranya anda mengalami kesulitan untuk memilih menu yang anda inginkan anda dapat bertanya kepada Staff PLP.
                           </li>
                           <li>
-                              Harga total tertera pada bagian bawah.
+                            setelah menunggu persetujuan maka status peminjaman <span class="badge bg-success">Dipinjam</span>   dan alat sudah dipinjamkan
                           </li>
                           <li>
-                              Apabila dirasa menu yang anda pesan sudah sesuai, silahkan tekan tombol <i class="fas fa-shopping-cart"></i> yang ada di kanan bawah untuk melakukan checkout pada pesanan anda.
+                              Jika Mahasiswa Telah mengembalikan, maka mahasiswa mengembalikan ke ruang alat dan memberitahu untuk mengubah status peminjaman ke status pengembalian
                           </li>
                           <li>
-                              Pesanan anda sudah masuk ke dalam antrian.
+                              Maka Barang telah di kembalikan dan memiliki status <span class="badge bg-success">Selesai</span>
                           </li>
-                      </ul>
+                      </ol>
                   </div>
-              </div>
+              {{-- </div>
               <!-- checkout -->
               <div class="row">
                   <div class="col">
@@ -199,7 +206,7 @@
                           </li>
                       </ul>
                   </div>
-              </div>
+              </div> --}}
           </div>
              {{-- content --}}
              

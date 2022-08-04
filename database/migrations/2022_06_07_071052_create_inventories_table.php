@@ -23,6 +23,7 @@ class CreateInventoriesTable extends Migration
             $table->text('deskripsi');
             // $table->integer('jumlah_awal');
             $table->integer('jumlah');
+            $table->integer('sisa_pinjam')->default(0);
             $table->string('satuan');
             $table->string('slug');
             $table->softDeletes();
