@@ -12,6 +12,7 @@ use App\Http\Controllers\cetak\CetakController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\User\FrontendController;
 use App\Http\Controllers\TransactionReturnController;
+use App\Http\Controllers\mahasiswa\MahasiswaController;
 use App\Http\Controllers\otentikasi\OtentikasiController;
 
 /*
@@ -66,7 +67,6 @@ Route::middleware(['mahasiswa'])->group(function () {
     ->name('cart-delete');
     Route::post('/checkout-peminjaman', [FrontendController::class, 'checkout'])
     ->name('checkout');
-
     Route::post('/return-success', [FrontendController::class, 'return'])
     ->name('return-success');
     Route::get('/checkout-success', [FrontendController::class, 'success'])
@@ -108,6 +108,9 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
   ]);
   Route::resource('user', UserController::class)->only([
     'index', 'edit', 'update', 'destroy'
+  ]);
+  Route::resource('mahasiswa', MahasiswaController::class)->only([
+    'index', 'create', 'store', 'edit', 'update', 'destroy'
   ]);
   Route::resource('gallery', GalleryController::class);
   

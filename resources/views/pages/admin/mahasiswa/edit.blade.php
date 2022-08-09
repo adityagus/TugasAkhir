@@ -13,14 +13,14 @@ Edit Inventaris
     <div class="page-title">
       <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>Edit Data Barang <span class='text-primary'>{{ $item->nama }}</span></h3>
-          <p class="text-subtitle text-muted">Membuat Alat dan Bahan yang tersedia di Jurusan Elektro</p>
+          <h3>Edit Mahasiswa <span class='text-primary'>{{ $mahasiswa->nama_mhs }}</span></h3>
+          <p class="text-subtitle text-muted">Mengubah data mahasiswa jurusan Teknik Elektro</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="index.html">CRUD Data Barang</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.inventory.index') }}">CRUD Data Barang</a></li>
               <li class="breadcrumb-item active" aria-current="page">Edit</li>
             </ol>
           </nav>
@@ -31,65 +31,37 @@ Edit Inventaris
       <div class="card">
         <div class="card-body">
         
-         @if ($errors->any())
-            <div class="mb-3" role="alert">
-              <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                There's Something Wrong!!
-              </div>
-            <div class="border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text red-700">
-              <p>
-                <ul>
+          @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
                   @foreach ($errors->all() as $error)
-                      <li>{ $error }</li>
+                      <li>{{ $error }}</li>
                   @endforeach
-                </ul>
-              </p>
-            </div>
-            </div>
-          @endif
+              </ul>
+          </div>
+      @endif
+      
           
-          <form action="{{ route('admin.inventory.update', $item->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.mahasiswa.update', $mahasiswa->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-2">
-              <label for="kode" class="form-label">Kode Barang</label>
-              <input type="text" class="form-control text-bold" name="kd_brg" value="{{ old('kd_brg') ?? $item->kd_brg }}" id="kode" placeholder="Masukan Kode Barang" required>
+              <label for="nama_mhs" class="form-label">Nama Mahasiswa</label>
+              <input type="text" class="form-control text-bold" name="nama_mhs" value="{{ old('nama_mhs') ?? $mahasiswa->nama_mhs }}" id="nama_mhs" placeholder="Masukan Kode Barang" required>
             </div>
 
             <div class="mb-2">
-              <label for="nama" class="form-label">Nama Barang</label>
-              <input type="text" class="form-control text-bold" name="nama" value="{{ old('nama') ?? $item->nama}}" id="nama" placeholder="Masukan Nama Barang">
-            </div>
-
-            <div class="mb-2">
-              <label for="namakategori" class="">Kategori </label>
-              <select name="category_id" id="namakategori" required class="form-select">
-                <option value="{{ $item->category_id }}" class=''>Jangan Diubah</option>
-                @foreach ($items as $category)
-                <option value="{{ $category->id }}">
-                  {{ $category->namakategori }}
-                </option>
-                @endforeach
-              </select>
-            </div>
-
-            <div class="mb-2">
-              <label for="deskripsii" class="form-label">Deskripsi</label>
-              <textarea name="deskripsi" type="text" rows="12" required autofocus class="form-control text-bold" id="deskripsii" placeholder="Masukan Deskripsi Barang" required>{!!  old('deskripsi') ?? $item->deskripsi  !!}</textarea>
-            </div>
-
-            <div class="mb-2">
-              <label for="jumlah" class="form-label">Jumlah</label>
-              <input type="text" class="form-control text-bold" name="jumlah" value="{{ old('jumlah') ?? $item->jumlah }}" id="jumlah" placeholder="Masukan Jumlah Barang" required>
+              <label for="nim" class="form-label">Nim</label>
+              <input type="text" class="form-control text-bold" name="nim" value="{{ old('nim') ?? $mahasiswa->nim}}" id="nim" placeholder="Masukan Nim Mahasiswa">
             </div>
 
             <div class="mb-4">
-              <label for="satuan" class="form-label">Satuan</label>
-              <input type="text" class="form-control text-bold text-gray-600" value="{{ old('satuan') ?? $item->satuan }}" name="satuan" id="satuan" placeholder="Masukan Jumlah Barang" required>
+              <label for="prodi" class="form-label">Prodi</label>
+              <input type="text" class="form-control text-bold" name="prodi" value="{{ old('prodi') ?? $mahasiswa->prodi }}" id="prodi" placeholder="Masukan Prodi" required>
             </div>
 
             <div class="mb-2 d-grid gap-1">
-              <button class='btn btn-success w-full' type='submit'>Update Barang</button>
+              <button class='btn btn-success w-full' type='submit'>Update Data Mahasiswa</button>
             </div>
 
           </form>

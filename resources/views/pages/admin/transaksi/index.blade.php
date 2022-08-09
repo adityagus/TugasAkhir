@@ -34,8 +34,9 @@
                 <tr>
                   <th>No</th>
                   <th>Nama Peminjam</th>
-                  <th>phone</th>
-                  <th>keperluan</th>
+                  <th>Phone</th>
+                  <th>Keperluan</th>
+                  <th>Status</th>
                   <th class="">Aksi</th>
                 </tr>
               </thead>

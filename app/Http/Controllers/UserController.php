@@ -17,7 +17,10 @@ class UserController extends Controller
     public function index(User $user)
     { 
         $user = User::with('roles')->get();    
-        return view('pages.admin.user.index', compact('user'));
+        return view('pages.admin.user.index', [
+          "subtitle" => "users",
+          "user" => $user
+        ]);
     }
 
     /**
@@ -60,7 +63,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {   
-        $data = roles::all();
+        $data = User::all();
         return view('pages.admin.user.edit', [
           'roles' => $data,
           'user' => $user

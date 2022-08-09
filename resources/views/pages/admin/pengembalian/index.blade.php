@@ -36,7 +36,6 @@
                   <th>Nama Peminjam</th>
                   <th>phone</th>
                   <th>keperluan</th>
-                  <th>laboratorium</th>
                   <th>Kondisi Terakhir</th>
                   <th>Status</th>
                   <th class="">Aksi</th>
@@ -62,7 +61,6 @@
                   <td>{{ $item->name}}</td>
                   <td>{{ $item->phone }}</td>
                   <td>{{ $item->keperluan}}</td>
-                  <td>{{ $item->laboratorium}}</td>
                   <td>{{ $item->kondisi}}</td>
                   <td>{{ $item->status}}</td>
                   <td class="d-flex justify-content-center">

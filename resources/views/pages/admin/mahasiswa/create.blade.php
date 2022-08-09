@@ -20,7 +20,7 @@ Create Inventaris
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="index.html">CRUD Data Barang</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.inventory.index') }}">CRUD Data Barang</a></li>
               <li class="breadcrumb-item active" aria-current="page">Create</li>
             </ol>
           </nav>
@@ -58,58 +58,21 @@ Create Inventaris
           </div>
           @endif
 
-          <form action="{{ route('admin.inventory.store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('admin.mahasiswa.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-2">
-              <label for="kode" class="form-label">Kode Barang</label>
-              <input type="text" class="form-control text-bold" name="kd_brg" value="{{ old('kd_brg') }}" id="kode" placeholder="Masukan Kode Barang" required>
+              <label for="kode" class="form-label">Nama Mahasiswa</label>
+              <input type="text" class="form-control text-bold" name="nama_mhs" value="{{ old('nama_mhs') }}" id="kode" placeholder="Masukan Nama Mahasiswa" required>
             </div>
 
             <div class="mb-2">
-              <label for="nama" class="form-label">Nama Barang</label>
-              <input type="text" class="form-control text-bold" name="nama" value="{{ old('nama') }}" id="nama" placeholder="Masukan Nama Barang">
+              <label for="nim" class="form-label">Nim</label>
+              <input type="text" class="form-control text-bold" name="nim" value="{{ old('nim') }}" id="nim" placeholder="Masukan Nim Mahasiswa">
             </div>
 
             <div class="mb-4">
-              <label for="labs_id" class="">Name</label>
-              <select name="labs_id" id="status" required class="form-select">
-                <option value="1">TE</option>
-                <option value="2">TL</option>
-
-              </select>
-            </div>
-
-
-            <div class="mb-2">
-              <label for="namakategori" class="">Kategori </label>
-              <select name="category_id" id="namakategori" required class="form-select">
-                <option value="" class='' style="color:#607080">Pilih Kategori</option>
-                @foreach ($items as $item)
-                <option value="{{ $item->id }}">
-                  {{ $item->namakategori }}
-                </option>
-                @endforeach
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="image">Image</label>
-              <input type="file" name="image" placeholder="Image">
-            </div>
-
-            <div class="mb-2">
-              <label for="deskripsii" class="form-label">Deskripsi</label>
-              <textarea name="deskripsi" type="text" class="form-control text-bold" id="deskripsii" placeholder="Masukan Deskripsi Barang" required>{!!  old('deskripsi')  !!}</textarea>
-            </div>
-
-            <div class="mb-2">
-              <label for="jumlah" class="form-label">Jumlah</label>
-              <input type="text" class="form-control text-bold" value="{{ old('jumlah') }}" name="jumlah" id="jumlah" placeholder="Masukan Jumlah Barang" required>
-            </div>
-
-            <div class="mb-4">
-              <label for="satuan" class="form-label">Satuan</label>
-              <input type="text" class="form-control text-bold text-gray-600" value="{{ old('satuan') }}" name="satuan" id="satuan" placeholder="Masukan Jumlah Barang" required>
+              <label for="prodi" class="form-label">Prodi</label>
+              <input type="text" class="form-control text-bold" value="{{ old('prodi') }}" name="prodi" id="prodi" placeholder="Masukan Prodi Mahasiswa" required>
             </div>
 
             <div class="mb-2 d-grid gap-1">

@@ -29,6 +29,14 @@
       <section class="section">
         <div class="card">
           <div class="card-header">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab"  aria-selected="false" tabindex="-1">User</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" href="{{ route('admin.mahasiswa.index') }}" role="tab" aria-controls="profile" aria-selected="true">Mahasiswa</a>
+              </li>
+            </ul>
 
           </div>
           <div class="card-body">

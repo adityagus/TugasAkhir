@@ -198,10 +198,10 @@
                       </a>
                     </div>
                     @endif --}}
-                    <form action="">
+                    {{-- <form action="">
                       <input type="search" class='form-control'>
                       <i></i>
-                    </form>
+                    </form> --}}
                   </div>
                 </div>
               </div>
@@ -215,15 +215,14 @@
                       <th>Jumlah Dipinjam</th>
                       <th>Jenis</th>
                       <th>Status</th>
-                      <th>Aksi</th>
                     </tr>
                   </thead> 
                   <tbody>
                     @php
                     $no =1
                     @endphp
-                    @if (session()->get(1) )
                     @forelse ($items as $item)
+                    @if (session()->get(1) == $item->transaction->name )
 
                     <tr>
                       <!-- <td colspan='7'><center>No Data</center></td> -->
@@ -238,15 +237,12 @@
                       @elseif($condition)
                           
                       @endif  --}}
-                     <td class='d-flex justify-content-center'>
-                      <a href="{{ route('details', $item->inventory->id) }}"></a>
-                        <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
-                      </td>
+
                     </tr>
 
 
 
-
+                    @endif
                     @empty
 
 
@@ -256,7 +252,6 @@
 
 
                     @endforelse
-                    @endif
                       
 
 

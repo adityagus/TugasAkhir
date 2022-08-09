@@ -64,7 +64,7 @@ class User extends Authenticatable
     ];
     
     public function roles(){
-      return $this->belongsTo(roles::class, 'roles_id', 'id');
+      return $this->belongsTo(Roles::class, 'roles_id', 'id');
     }
     
     public function loanitem(){

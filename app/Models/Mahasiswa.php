@@ -11,8 +11,11 @@ class Mahasiswa extends model
 {
     use HasFactory,SoftDeletes;
     protected $fillable = [
-      'nama_mhs', 'nim', 'image'
+      'nama_mhs', 'nim', 'prodi', 
     ];
+    // protected $hidden = [
+    //   'image'
+    // ];
     
     public function scopeFilter($query, array $filters)
     {

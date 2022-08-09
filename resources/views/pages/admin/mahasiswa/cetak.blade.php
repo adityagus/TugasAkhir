@@ -14,7 +14,7 @@
 </head>
 <body>
   <section class="kop-surat" id="kopSurat">
-    <table  width='100%'  align="center">
+    <table   width='100%'  align="center">
       <tr>
         <td width='10px' class='gambar'>
           {{-- {{ url('user/assets/images/logo/logo.png') }} --}}
@@ -29,7 +29,7 @@
           <p>Telp. (0542) 860895, 862305 Fax. 861107</p>
           <p>Email: admin@poltkeba.ac.id Web:http://www.poltkeba.ac.id</p>
         </td>
-      </tr>
+      </tr> 
       <tr>
         <td colspan="2">
           <hr>
@@ -43,20 +43,29 @@
         </td>
       </tr>
       <tr>
-        <td>Periode :</td>
+        @php
+            // date_default_timezone_set('Asia/Makassar');
+            $getTime = date("j F Y");
+        @endphp
+        
+        <td colspan="2">
+          Periode : {{ $getTime }}
+        </td>
       </tr>
     </table>
 
-    <table class='table-info' width='100%' border="10px" cellpadding='10px' cellspacing='0px'>
+    <table class='table-info' width='100%' border="1px" cellpadding='0px' cellspacing='10px'>
       <thead>
         <tr>
-          <th>No</th>
-          <th>Nama Alat & Bahan</th>
-          <th>Tanggal Masuk <br>Barang</th>
-          <th>Stock Awal</th>
-          <th>Satuan</th>
-          <th>Lab</th>
-          <th>Keterangan</th>
+          <th class="thead">No</th>
+          <th class="thead">Nama Alat & Bahan</th>
+          <th class="thead">Tanggal Masuk <br>Barang</th>
+          <th class="thead">Stock Awal</th>
+          <th class="thead">Satuan</th>
+          <th class="thead">Stock Akhir</th>
+          <th class="thead">Satuan</th>
+          <th class="thead">Lab</th>
+          <th class="thead">Keterangan</th>
         </tr>
       </thead>
       @php
@@ -69,9 +78,11 @@
           <td>{{ $nomor++ }}</td>
           <td align="center">{!! $item->nama !!}</td>
           <td align="center">{{ date('d/n/Y', strtotime($item->created_at)) }}</td>
+          <td align="center">10</td>
+          <td align="center">{{ $item->satuan }}</td>
           <td align="center">{{ $item->jumlah}}</td>
           <td align="center">{{ $item->satuan }}</td>
-          <td align="center">{{ $item->labs->name }}</td>
+          <td align="center">{{ $item->studyprograms->name }}</td>
           
           <td>&nbsp;</td>
         </tr>

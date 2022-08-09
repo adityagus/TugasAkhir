@@ -71,7 +71,7 @@
         <li class="sidebar-item">
           <a href="#" class='sidebar-link'>
             <i class="bi bi-stack"></i>
-            <span>Kelola Alat & Bahan</span>
+            <span>Pengolahan Form</span>
           </a>
         </li>
 

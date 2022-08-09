@@ -54,7 +54,7 @@
       </tr>
     </table>
 
-    <table class='table-info' width='100%' border="10px" cellpadding='10px' cellspacing='0px'>
+    <table class='table-info' width='100%' border="1px" cellpadding='0px' cellspacing='0px'>
       <thead>
         <tr>
           <th class="thead">No</th>
