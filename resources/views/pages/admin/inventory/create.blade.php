@@ -13,7 +13,7 @@ Create Inventaris
     <div class="page-title">
       <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>Create Data Barang</h3>
+          <h3>Membuat Data Barang</h3>
           <p class="text-subtitle text-muted">Membuat Alat dan Bahan yang tersedia di Jurusan Elektro</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
@@ -72,7 +72,7 @@ Create Inventaris
 
             <div class="mb-4">
               <label for="labs_id" class="">Lab</label>
-              <select name="labs_id" id="status" required class="form-select">
+              <select name="studyprogram_id" id="status" required class="form-select">
                 <option value="1">TE</option>
                 <option value="2">TL</option>
 
@@ -83,7 +83,7 @@ Create Inventaris
             <div class="mb-2">
               <label for="namakategori" class="">Kategori </label>
               <select name="category_id" id="namakategori" required class="form-select">
-                <option value="" class='' style="color:#607080">Pilih Kategori</option>
+                <option value="{{ old('category_id') }}" class='' style="color:#607080">Pilih Kategori</option>
                 @foreach ($items as $item)
                 <option value="{{ $item->id }}">
                   {{ $item->namakategori }}
@@ -95,6 +95,15 @@ Create Inventaris
             <div class="mb-2">
               <label for="deskripsii" class="form-label">Deskripsi</label>
               <textarea name="deskripsi" type="text" class="form-control text-bold" id="deskripsii" placeholder="Masukan Deskripsi Barang" required>{!!  old('deskripsi')  !!}</textarea>
+            </div>
+            
+            <div class="mb-2">
+              <label for="Jenis" class="">Jenis</label>
+              <select name="jenis" id="Jenis" value='{{ old('jenis') }}' class="form-select" required>
+                <option selected disabled>Pilih Kategori</option>
+                <option value="Alat">Alat</option>
+                <option value="Bahan">Bahan</option>
+              </select>
             </div>
 
             <div class="mb-2">

@@ -98,7 +98,7 @@ Admin Inventaris
               <tr>
                 <th>No</th>
                 <th>Nama Alat dan Bahan</th>
-                <th>Banyak</th>
+                <th>Jumlah</th>
               </tr>
             </thead>
             <tbody>

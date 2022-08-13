@@ -25,6 +25,7 @@ class CreateInventoriesTable extends Migration
             $table->integer('jumlah');
             $table->integer('sisa_pinjam')->default(0);
             $table->string('satuan');
+            $table->string('jenis')->nullable();
             $table->string('slug');
             $table->softDeletes();
             $table->timestamps();

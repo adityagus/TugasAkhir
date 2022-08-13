@@ -66,12 +66,29 @@ Edit Inventaris
                 @endforeach
               </select>
             </div>
+            
+            <div class="mb-4">
+              <label for="labs_id" class="">Lab</label>
+              <select name="studyprogram_id" id="status" required class="form-select">
+                <option value="1">TE</option>
+                <option value="2">TL</option>
+
+              </select>
+            </div>
 
             <div class="mb-2">
               <label for="deskripsii" class="form-label">Deskripsi</label>
               <textarea name="deskripsi" type="text" rows="12" required autofocus class="form-control text-bold" id="deskripsii" placeholder="Masukan Deskripsi Barang" required>{!!  old('deskripsi') ?? $item->deskripsi  !!}</textarea>
             </div>
 
+            <div class="mb-2">
+              <label for="jenis" class="form-label">Jenis</label>
+              <select type="text" class="form-select text-bold" name="jenis" value="{{ old('jenis') ?? $item->jenis }}" id="jenis" placeholder="Masukan Jenis Barang" required>
+                <option value="Alat">Alat</option>
+                <option value="Bahan">Bahan</option>
+              </select>
+            </div>
+            
             <div class="mb-2">
               <label for="jumlah" class="form-label">Jumlah</label>
               <input type="text" class="form-control text-bold" name="jumlah" value="{{ old('jumlah') ?? $item->jumlah }}" id="jumlah" placeholder="Masukan Jumlah Barang" required>

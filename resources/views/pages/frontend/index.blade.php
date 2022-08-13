@@ -211,10 +211,11 @@
                     <tr>
                       <th>NO.</th>
                       <th>Nama Alat & Bahan</th>
-                      <th>Kategori</th>
+                      {{-- <th>Kategori</th> --}}
                       <th>Jumlah Dipinjam</th>
                       <th>Jenis</th>
                       <th>Status</th>
+                      <th>Ruangan</th>
                     </tr>
                   </thead> 
                   <tbody>
@@ -228,10 +229,11 @@
                       <!-- <td colspan='7'><center>No Data</center></td> -->
                       <td>{{ $no++ }}</td>
                       <td>{{ $item->inventory->nama }}</td>
-                      <td>{{ $item->inventory->category_items->namakategori }}</td>
+                      {{-- <td>{{ $item->inventory->category_items->namakategori }}</td> --}}
                       <td>{{ $item->total }}</td>
-                      <td>{{ $item->transaction->labs->name }}</td>
+                      <td>{{ $item->inventory->jenis }}</td>
                       <td> {{ $item->transaction->status }}</td>
+                      <td>{{ $item->transaction->labs->name }}</td>
                       {{-- @if ($item->sta)
                           
                       @elseif($condition)

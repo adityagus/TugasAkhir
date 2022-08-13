@@ -42,14 +42,15 @@ Admin Inventaris
               </button>
             </a>
           </div>
-          <div class="export">
-            <a href="{{ route('admin.cetakdatabarang') }}" target="_blank">
-              <button class='btn-red'>
-                Export PDF &nbsp;  <i class="bi bi-file-earmark-arrow-down "></i>
-              </button>
-            </a>
+          <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle me-1 show" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Cetak Barang
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4" data-popper-placement="top-start" style="position: absolute; inset: auto auto 100px 0px; margin: 0px; transform: translate(0px, -10px); background-color: #BB2D3B;">
+              <a class="dropdown-item" href="{{ route('admin.cetakdatabarang') }}" target="_blank">Export TL</a>
+              <a class="dropdown-item" href="{{ route('admin.cetakTe') }}" target="_blank">Export TE</a>
+            </div>
           </div>
-          
           
           
           
@@ -61,8 +62,11 @@ Admin Inventaris
               <tr>
                 <th>No</th>
                 <th>Nama Alat & Bahan</th>
-                <th>Kategori</th>
+                {{-- <th>Kategori</th> --}}
+                <th>Jumlah</th>
+                <th>Dipinjam</th>
                 <th>Ketersedian</th>
+                <th>Prodi</th>
                 <th>Jenis</th>
                 {{-- <th>Dipinjam</th>
                 <th>Ketersedian</th> --}}
@@ -78,10 +82,12 @@ Admin Inventaris
               <tr>
                 <td>{{ $nomor++ }}</td>
                 <td>{{ $item->nama}}</td>
-                <td >{{ $item->category_items->namakategori }}</td>
+                {{-- <td>{{ $item->category_items->namakategori }}</td> --}}
                 <td>{{ $item->jumlah}}</td>
-                {{-- <td>{{ $item->sisa_pinjam}}</td> --}}
+                <td>{{ $item->dipinjam}}</td>
+                <td>{{ $item->jumlah - $item->dipinjam}}</td>
                 <td>{{ $item->studyprograms->name }}</td>
+                <td>{{ $item->jenis }}</td>
                 <td class="d-flex justify-content-center">
                   <span class='d-flex d-inline-block'>
                     <a href="{{ route('admin.inventory.show',$item->id) }}" class="btn btn-primary">

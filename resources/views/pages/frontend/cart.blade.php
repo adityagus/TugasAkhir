@@ -5,7 +5,7 @@ Checkout
 @endsection
 
 @section('content')
-<script>
+{{-- <script>
   $(document).ready(function(){
     $('upCart').on('change key', function(){
       
@@ -13,7 +13,7 @@ Checkout
       
     })
   })
-</script>
+</script> --}}
 
 
 
@@ -55,7 +55,7 @@ Checkout
     </div>
     @endif
 
-    <form action="{{ route('checkout') }}" method="POST">
+    <form action="{{ route('checkout') }}" method="POST" id='Form1'>
       @csrf
       @method('POST')
       <section class="form-group">
@@ -71,19 +71,19 @@ Checkout
 
                 <div class="form-group">
                   <label for="nama">Nama</label>
-                  <input type="text" name="name" class="form-control" id="nama" placeholder='Masukan Nama Anda' value="{{ session()->get(1) }}" readonly required>
+                  <input type="text" name="name" class="form-control" id="nama" placeholder='Masukan Nama Anda' form="Form1" value="{{ session()->get(1) }}" readonly required>
                 </div>
                 
                 
                 <div class="form-group">
                   <label for="nama-peminjam">Nim</label>
-                  <input type="number" name="nim" class="form-control" id="nama-peminjam" placeholder='Masukan Nama Anda' value='{{ session()->get(0) }}' readonly required>
+                  <input type="number" name="nim" class="form-control" id="nama-peminjam" placeholder='Masukan Nama Anda' form="Form1" value='{{ session()->get(0) }}' readonly required>
                 </div>
 
                 <div class="form-group">
                   <label for="kelas-peminjam">Kelas</label>
                   {{-- <input type="text" name="kelas" class="form-control" id="kelas-peminjam" placeholder="Masukan Kelas Anda" value='' required> --}}
-                  <select name="kelas" id="kelas-peminjam" class="form-select" required>
+                  <select name="kelas" id="kelas-peminjam" class="form-select" form="Form1" autofocus required>
                     <option selected disabled value="{{ false }}">
                       Pilih Kelas Anda
                     </option>
@@ -106,19 +106,17 @@ Checkout
 
                 <div class="form-group">
                   <label for="phone">No. Telp</label>
-                  <input type="number" name="phone" class="form-control" id="phone" placeholder="Masukan Kelas Anda" value='{{ old('phone') }}' required>
+                  <input type="number" name="phone" class="form-control" form="Form1" id="phone" placeholder="Masukan Kelas Anda" value='{{ old('phone') }}' required>
                 </div>
 
                 <div class="form-group">
-                  <label for="mata-kuliah">Keperluan Alat</label>
-                  <fieldset class="form-group">
-                    <select class="form-select" name='keperluan' id="basicSelect" value='{{ old('keperluan') }} required'>
-                      <option selected disabled value="{{ false }}">Pilih Keperluan Anda</option>
+                  <label for="keperluan">Keperluan Alat</label>
+                    <select class="form-select" name='keperluan' form="Form1" id="keperluan" value="{{ old('keperluan') }}" required>
+                      <option selected disabled value="">Pilih Keperluan Anda</option>
                       <option value="PENELITIAN">Penelitian</option>
                       <option value="PRAKTIKUM">Praktikum</option>
                       <option value="PKM">PKM</option>
                     </select>
-                  </fieldset>
                 </div>
               </div>
 
@@ -128,7 +126,7 @@ Checkout
                 <div class="form-group">
                   <label for="mata-kuliah">Mata Kuliah</label>
                   <small class="text-muted">contoh. <i>elektronika dasar</i></small>
-                  <select class="form-select" id="mata-kuliah" name="matakuliah_id" placeholder="Masukan Mata Kuliah Anda" required>
+                  <select class="form-select" id="mata-kuliah" name="matakuliah_id" form="Form1" placeholder="Masukan Mata Kuliah Anda"  value="{{ old('matakuliah_id') }}" required>
                     <option selected disabled value="{{ false }}">Pilih Mata Kuliah Anda</option>
                     @foreach ($studies as $study)
                     <option value={{ $study->id }}>{{ $study->matakuliah }}</option>
@@ -141,7 +139,7 @@ Checkout
                   <label for="pertemuan">Pertemuan Ke</label>
                   <small class="text-muted">contoh. <i>1</i></small>
                   {{-- <input type="text" name="pertemuan_ke" class="form-control" id="pertemuan" placeholder="Masukan Pertemuan ke Anda"> --}}
-                  <select  class="form-select" id="pertemuan" name="pertemuan_ke" required>
+                  <select  class="form-select" id="pertemuan" form="Form1" name="pertemuan_ke" required>
                     <option selected disabled value="{{ false }}">
                       Pilih Pertemuan ke
                     </option>
@@ -167,7 +165,7 @@ Checkout
 
                 <div class="form-group">
                   <label for="laboratorium">Laboratorium</label>
-                  <select  id="" class="form-select" name="labs_id"  required>
+                  <select  id="" class="form-select" name="labs_id" form="Form1" required>
                     <option selected disabled value="{{ false }}">
                       Masukan Tempat Laboratorium
                     </option>
@@ -179,16 +177,6 @@ Checkout
                   </select>
                 </div>
 
-
-                {{-- <div class="form-group">
-                  <label for="disabledInput">Readonly Input</label>
-                  <input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="You can't update me :P">
-                </div>
-
-                <div class="form-group">
-                  <label for="disabledInput">Static Text</label>
-                  <p class="form-control-static" id="staticInput">email@mazer.com</p>
-                </div> --}}
               </div>
 
             </div>
@@ -197,21 +185,88 @@ Checkout
 
           </div>
       </section>
+    </form>
 
 
       {{-- Start Cart Section --}}
       <section class="section">
         <div class="card">
           <div class="card-header">
+            @if (session('cart_update'))
+              <div class="alert alert-success alert dismissible fade show" role="alert">
+                <button type="button" class="btn btn-success" data-dismiss="alert" aria-label="Close">
+                  <strong>
+                    {{ session('cart_update') }}
+                  </strong>
+                </button>
+              </div>
+            @endif
             <h4 class="card-title">Checkout Item</h4>
           </div>
           <div class="card-body table-responsive">
-            <div id="read""></div>
-
+            <table class='table table-borderedtable-striped'>
+              <thead>
+                <p style="color: red"></p>
+                <tr>
+                  <th>Nama Alat & Bahan</th>
+                  <th>Kategori</th>
+                  <th style="width: 200px">Kuantitas</th>
+                  <th>Jenis</th>
+                  <th class="">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                @forelse ($carts as $item)
+                <div id='isi' class="product_data">
+                  <input type="hidden" name="inventory_id" value="{{ $item->inventory->id }}" form="Form1">
+                  <tr class="cartpage">
+                    <!-- <td colspan='7'><center>No Data</center></td> -->
+                    <td >{{ $item->inventory->nama }}</td>
+                    <td class="">{{ $item->inventory->category_items->namakategori }}</td>
+                    <td class="cart-product-quantity" width="10px" align="center">
+                      
+                      <form action="{{ route('cart.store', $item->id ) }}" method='POST'>
+                        <div class="input-group quantity">
+                          @csrf
+                        <input type="hidden" name="inventory_id" value="{{ $item->inventory->id }}">
+                          <div class="input-group-prepend decrement-btn updateQty" style="cursor: pointer">
+                              <span class="input-group-text">-</span>
+                          </div>
+                          <input type="text" class="qty-input form-control qty_input" name='inven_qty' maxlength="2" max="10" value="{{ $item->inven_qty }}">
+                          <div class="input-group-append increment-btn updateQty" style="cursor: pointer">
+                              <span class="input-group-text">+</span>
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-2">Update Qty</button>
+                      </form>
+                  </td>
+                    <td>{{ $item->inventory->studyprograms->name }}</td>
+                    <td>
+                      <form action="{{ route('cart-delete', $item->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn">
+                          X
+                        </button>
+                      </form>
+                    </td>
+            
+                  </tr>
+            
+                </div>
+                  @empty
+                  <td colspan="5" class='text-center'>
+                    <h6>Oopps Transaksi Belum Ada</h6>
+                    <a href="{{ route('barang') }}" class="no-underline">Kembali</a>
+                  </td>
+                  @endforelse
+            
+              </tbody>
+            
             </table>
             <div class="check d-flex justify-content-between align-content-center mt-4 table-footer">
               <h4 id='total'>Alat yang anda pinjam ({{ $inCart }})</h4>
-              <button id='checkouty' class='btn btn-primary btn-checkout px-lg-5 py-2 ' type="submit">Checkout</button>
+              <button id='checkouty' class='btn btn-primary btn-checkout px-lg-5 py-2 ' form="Form1" type="submit">Checkout</button>
             </div>
 
   {{-- End Cart Section --}}
@@ -221,7 +276,6 @@ Checkout
         </div>
 
       </section>
-    </form>
 
     {{-- End Cart Section --}}
 
@@ -248,29 +302,61 @@ Checkout
 @push('addon-script')
 <script>
     $(document).ready(function() {
-      read()
+  //     read()
       
-      $(document).on('click','.checkout-item', function(e){
-      e.preventDefault();
-      // console.log('ok');
-      const data = {
-        'total ' : $('.qty-input').val(),
-      }
-      console.log(data);
+  //     $(document).on('click','.checkout-item', function(e){
+  //     e.preventDefault();
+  //     // console.log('ok');
+  //     const data = {
+  //       'total ' : $('.qty-input').val(),
+  //     }
+  //     console.log(data);
       
       
-      })
+  //     })
       
       
 
+  //   function read() {
+  //     $.get("{{ url('read') }}", {}, function(carts, status) {
+  //       $("#read").html(carts);
+  //     })
+  //   }
+  
+  $('.increment-btn').click(function (e) {
+            e.preventDefault();
+            var incre_value = $(this).parents('.quantity').find('.qty-input').val();
+            var value = parseInt(incre_value, 10);
+            value = isNaN(value) ? 0 : value;
+            if(value<10){
+                value++;
+                $(this).parents('.quantity').find('.qty-input').val(value);
+            }
+
+        });
+
+        $('.decrement-btn').click(function (e) {
+            e.preventDefault();
+            var decre_value = $(this).parents('.quantity').find('.qty-input').val();
+            var value = parseInt(decre_value, 10);
+            value = isNaN(value) ? 0 : value;
+            if(value>1){
+                value--;
+                $(this).parents('.quantity').find('.qty-input').val(value);
+            }
+        });
+
+    
     function read() {
-      $.get("{{ url('read') }}", {}, function(carts, status) {
+      $.get("{{ url('read') }}", {}, function(carts,status,total){
+          
         $("#read").html(carts);
+        
       })
     }
+
+
   });
-
-
 
 </script>
 @endpush

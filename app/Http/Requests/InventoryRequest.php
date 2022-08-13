@@ -27,8 +27,10 @@ class InventoryRequest extends FormRequest
         return [
             'kd_brg' => 'required|max:255',
             'category_id'=> 'required',
+            'studyprogram_id' => 'required',
             'nama' => 'required|max:255',
             'deskripsi' => 'required',
+            'jenis' => 'required',
             'jumlah' => 'required|integer',
             'satuan' => 'required',
 

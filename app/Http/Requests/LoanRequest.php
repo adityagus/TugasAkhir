@@ -25,7 +25,7 @@ class LoanRequest extends FormRequest
     public function rules()
     {
         return [
-            'total' => 'integer|required'
+            'inventory_id' => 'integer|required'
         ];
     }
 }

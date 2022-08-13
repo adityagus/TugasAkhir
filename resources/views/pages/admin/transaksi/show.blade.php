@@ -34,7 +34,7 @@ Admin Inventaris
         <div class="card-body">
           <div class="card-header">
             <div class="export d-flex justify-content-end">
-              <a href="{{ route('cetakpeminjaman', $transaction->id) }}" target="_blank">
+              <a href="{{ route('admin.cetakpeminjaman', $transaction->id) }}" target="_blank">
                 <button class='btn-red'>
                   Export PDF &nbsp;  <i class="bi bi-file-earmark-arrow-down "></i>
                 </button>

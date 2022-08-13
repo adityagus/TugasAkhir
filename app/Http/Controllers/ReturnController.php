@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\TransactionReturn;
 use App\Notifications\Pengembalian;
 use App\Http\Requests\CheckoutReturnRequest;
+use App\Models\Inventory;
 use Illuminate\Support\Facades\Notification;
 use phpDocumentor\Reflection\Types\Nullable;
 
@@ -48,9 +49,17 @@ class ReturnController extends Controller
     foreach ($loans as $loan) {
       $items[] = ReturnItem::create([
         'transactionreturn_id' => $transactionreturn->id,
-        //  'total' => $loan->total,
+        'total' => $loan->total,
         'inventory_id' => $loan->inventory_id
       ]);
+      
+      // mengecek data
+      $inventory = Inventory::where('id', $loan->inventory_id)->first();
+      // menghitung ketersedian
+      $inventory->dipinjam - $loan->total;
+      // menyimpan data 
+      $inventory->save();
+      
       $loan->delete();
     }
 

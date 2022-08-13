@@ -38,7 +38,7 @@
       <tr>
         <td colspan="2" align="center" class="judul">
           <h4>
-            REKAPITULASI STOCK OPNAME BAHAN HABIS PAKAI LABORATORIUM TEKNIK ELEKTRO PRODI TEKNIK ELEKTRONIKA
+            KETERSEDIAAN ALAT DAN BAHAN DI LABORATORIUM TEKNIK ELEKTRO PRODI TEKNOLOGI LISTRIK
           </h4>
         </td>
       </tr>
@@ -76,11 +76,11 @@
         @forelse ($data as $item)
         <tr>
           <td>{{ $nomor++ }}</td>
-          <td align="center">{!! $item->nama !!}</td>
+          <td align="left">{!! $item->nama !!}</td>
           <td align="center">{{ date('d/n/Y', strtotime($item->created_at)) }}</td>
-          <td align="center">10</td>
-          <td align="center">{{ $item->satuan }}</td>
           <td align="center">{{ $item->jumlah}}</td>
+          <td align="center">{{ $item->satuan }}</td>
+          <td align="center">{{ $item->jumlah - $item->dipinjam}}</td>
           <td align="center">{{ $item->satuan }}</td>
           <td align="center">{{ $item->studyprograms->name }}</td>
           
@@ -122,9 +122,9 @@
       </tr>
       <tr class="ttd">
         <td class='jabatan' >
-            Slamet Widodo, A.Md. T.<br>
-            NIP. 198912282019031017
-        </td>
+          {{ Auth::user()->name }}<br>
+          NIP. {{ Auth::user()->nip }}
+      </td>
         <td class='jabatan'>
             Ihsan, S.Kom., M.T.<br>
             NIP. 199008272019031011<br>

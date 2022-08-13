@@ -19,6 +19,7 @@ class CreateMahasiswasTable extends Migration
             $table->string('nama_mhs');
             $table->integer('nim');
             $table->string('prodi');
+            $table->string('kelas');
             $table->text('image');
             $table->softDeletes();
             $table->timestamps();

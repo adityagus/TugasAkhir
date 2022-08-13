@@ -14,7 +14,7 @@ class LoanItem extends Model
     ];
     
     public function inventory(){
-      return $this->hasOne(Inventory::class, 'id', 'inventory_id');
+      return $this->belongsTo(Inventory::class, 'inventory_id', 'id');
     }
     
     public function transaction(){

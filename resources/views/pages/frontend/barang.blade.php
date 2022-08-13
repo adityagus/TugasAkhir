@@ -46,9 +46,10 @@
                 <tr>
                   <th>No</th>
                   <th>Nama Alat & Bahan</th>
-                  <th>Kategori</th>
-                  {{-- <th>Total</th> --}}
                   <th>Lab</th>
+                  <th>Jenis</th>
+                  {{-- <th>Kategori</th> --}}
+                  {{-- <th>Total</th> --}}
                   <th class="text-center">Aksi</th>
                 </tr>
               </thead>
@@ -61,7 +62,7 @@
                 <tr>
                   <td>{{ $no++ }}</td>
                   <td>{{ $item->nama }}</td>
-                  <td>{{ $item->category_items->namakategori }}</td>
+                  {{-- <td>{{ $item->categoryitems->namakategori }}</td> --}}
                   {{-- @if ($item->loan_items->total == 0)
                   <td>0</td>
                       
@@ -70,6 +71,7 @@
                       
                   @endif --}}
                   <td>{{ $item->studyprograms->name }}</td>
+                  <td>{{ $item->jenis }}</td>
                   <td class="d-flex justify-content-center">
                     <span class='d-flex d-inline-block px-2'>
                       <a href='{{ route('details', $item->slug) }}'>

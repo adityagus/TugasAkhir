@@ -1,7 +1,7 @@
 @extends('layouts.main-admin')
 
 @section('title')
-Create Inventaris
+Edit Inventaris
 @endsection
 
 @section('content')
@@ -13,15 +13,15 @@ Create Inventaris
     <div class="page-title">
       <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>Create Data Barang</h3>
+          <h3>Edit User <span class='text-primary'>{{ $user->name }}</span></h3>
           <p class="text-subtitle text-muted">Membuat Alat dan Bahan yang tersedia di Jurusan Elektro</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('admin.user.index') }}">Data User</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Create</li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Data User</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Edit</li>
             </ol>
           </nav>
         </div>
@@ -48,49 +48,34 @@ Create Inventaris
             </div>
           @endif
           
-          <form action="{{ route('admin.inventory.store') }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('admin.user.update', $user->id) }}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="mb-2">
-              <label for="kode" class="form-label">Kode Barang</label>
-              <input type="text" class="form-control text-bold" name="kd_brg" value="{{ old('kd_brg') }}" id="kode" placeholder="Masukan Kode Barang" required>
+              <label for="name" class="form-label">Nama</label>
+              <input type="text" class="form-control text-bold" name="name" value="{{ old('name') ?? $user->name }}" id="kode" placeholder="Masukan Nama Anda" required>
             </div>
 
             <div class="mb-2">
-              <label for="nama" class="form-label">Nama Barang</label>
-              <input type="text" class="form-control text-bold" name="nama" value="{{ old('nama') }}" id="nama" placeholder="Masukan Nama Barang">
+              <label for="nama" class="form-label">Email</label>
+              <input type="text" class="form-control text-bold" name="email" value="{{ old('email') ?? $user->email}}" id="nama" placeholder="Masukan Email Anda">
             </div>
 
-            <div class="mb-2">
-              <label for="namakategori" class="">Kategori </label>
-              <select name="category_id" id="namakategori" required class="form-select">
-                <option value="" class='' style="color:#607080">Pilih Kategori</option>
-                @foreach ($items as $item)
-                <option value="{{ $item->id }}">
-                  {{ $item->namakategori }}
-                </option>
-                @endforeach
+
+            <div class="mb-4">
+              <label for="roles" class="form-label">Roles</label>
+              <select name="roles_id" id="roles" class="form-select text-bold">
+                <option value="{{ $user->roles_id }}">{{ $user->roles->name }}</option>
+                <option disabled>----------------------------------------------------------------------------------------------------------------------------------------</option>
+                @foreach ($roles as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+               @endforeach 
               </select>
             </div>
 
-            <div class="mb-2">
-              <label for="deskripsii" class="form-label">Deskripsi</label>
-            <textarea name="deskripsi" type="text" class="form-control text-bold" id="deskripsii" placeholder="Masukan Deskripsi Barang" required>{!!  old('deskripsi')  !!}</textarea>
-            </div>
-
-            <div class="mb-2">
-              <label for="jumlah" class="form-label">Jumlah</label>
-              <input type="text" class="form-control text-bold" value="{{ old('jumlah') }}" name="jumlah" id="jumlah" placeholder="Masukan Jumlah Barang" required>
-            </div>
-
-            <div class="mb-4">
-              <label for="satuan" class="form-label">Satuan</label>
-              <input type="text" class="form-control text-bold text-gray-600" value="{{ old('satuan') }}" name="satuan" id="satuan" placeholder="Masukan Jumlah Barang" required>
-            </div>
-
             <div class="mb-2 d-grid gap-1">
-              <button class='btn btn-success w-full' type=''>Submit</button>
+              <button class='btn btn-success w-full' type='submit'>Update Kelola User</button>
             </div>
-
 
           </form>
         </div>

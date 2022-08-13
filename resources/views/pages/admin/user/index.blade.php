@@ -37,7 +37,15 @@
                 <a class="nav-link" id="profile-tab" href="{{ route('admin.mahasiswa.index') }}" role="tab" aria-controls="profile" aria-selected="true">Mahasiswa</a>
               </li>
             </ul>
-
+            <div class="card-headers d-flex justify-content-between pt-4">
+              <div>
+                <a href="{{ route('admin.user.create') }}" disabled>
+                  <button class='btn btn-primary btn-opacity-70 rounded' disabled>
+                    <i class='bi bi-plus bi-sub'></i>Tambah User
+                  </button>
+                </a>
+              </div>
+            </div>
           </div>
           <div class="card-body">
               <table class="table table-striped" id="table1">

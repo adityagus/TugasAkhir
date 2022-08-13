@@ -61,8 +61,8 @@ Route::middleware(['mahasiswa'])->group(function () {
     ->name('cart-add');
     Route::get('/read', [FrontendController::class, 'read'])
     ->name('read');
-    Route::post('update-to-cart',[FrontendController::class, 'updatetocart']);
-    
+    Route::post('/update-cart/{id}',[FrontendController::class, 'updatetocart'])
+    ->name('cart.store');
     Route::delete('/cart/{id}', [FrontendController::class, 'cartDelete'])
     ->name('cart-delete');
     Route::post('/checkout-peminjaman', [FrontendController::class, 'checkout'])
@@ -73,8 +73,6 @@ Route::middleware(['mahasiswa'])->group(function () {
     ->name('success');
     Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
       ->name('pengembalian');
-    Route::get('/cetakpeminjaman/{id}', [CetakController::class, 'cPeminjaman'])
-    ->name('cetakpeminjaman');
     Route::get('/detail-peminjaman/{id}', [FrontendController::class, 'show'])
     ->name('showpeminjam');
     Route::get('/detail-pengembalian/{id}', [FrontendController::class, 'showpengembalian'])
@@ -90,8 +88,12 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
 
   Route::get('/', [HomeController::class, 'home'])
   ->name('home');
-  Route::get('/cetakdatabarang', [CetakController::class, 'dataBarang'])
+  Route::get('/cetakbarangTL', [CetakController::class, 'dataBarang'])
   ->name('cetakdatabarang');
+  Route::get('/cetakbarangTE', [CetakController::class, 'cetakTe'])
+  ->name('cetakTe');
+  Route::get('/cetakpeminjaman/{id}', [CetakController::class, 'cPeminjaman'])
+  ->name('cetakpeminjaman');
   Route::delete('/deleteloan/{id}', [ReturnController::class, 'deletebarang'])
   ->name('delete-loan');
 
@@ -107,7 +109,7 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
     'index', 'show', 'edit', 'update', 'store'
   ]);
   Route::resource('user', UserController::class)->only([
-    'index', 'edit', 'update', 'destroy'
+    'index', 'create', 'store', 'edit', 'update', 'destroy'
   ]);
   Route::resource('mahasiswa', MahasiswaController::class)->only([
     'index', 'create', 'store', 'edit', 'update', 'destroy'

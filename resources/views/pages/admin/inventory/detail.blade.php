@@ -36,7 +36,7 @@ Admin Inventaris
               <td class="px-6 py-4">
                 @forelse ($items as $item)
 
-                <img src="{{ Storage::url($item->image) }}" alt="alat dan bahan" style="width: 250px; height:160px" class="img-thumbnail">
+                <img src="{{ Storage::url($item->image) }}" alt="alat dan bahan" style="width: 250px;" class="img-thumbnail">
                 
                 @empty
                   

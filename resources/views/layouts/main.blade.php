@@ -25,11 +25,11 @@
       
 
       @yield('content')
-  </div>
+    </div>
       
     
     </div>
-    
+    <script src="{{ asset('frontend/scripts/custom.js') }}"></script>
     @stack('prepend-script')
     @include('includes.script')
     @stack('addon-script')

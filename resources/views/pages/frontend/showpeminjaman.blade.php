@@ -94,7 +94,8 @@ Admin Inventaris
               <tr>
                 <th>No</th>
                 <th>Nama Alat dan Bahan</th>
-                <th>Banyak</th>
+                <th>Jenis</th>
+                <th>Jumlah</th>
               </tr>
             </thead>
             <tbody>
@@ -108,43 +109,8 @@ Admin Inventaris
                <tr>
                  <td>{{ $nomor++ }}</td>
                  <td>{{ $loan->inventory->nama }}</td>
+                 <td>{{ $loan->inventory->jenis }}</td>
                  <td>{{ $loan->total }}</td>
-                  {{-- <form action="{{ route('admin., $loan->id)  }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('delete')
-                    <button class="btn btn-danger">
-                      <i class="fa fa-trash"></i>
-                    </button>
-                  </form> --}}
-                 {{-- <td>{{ $items->nama }}</td>
-                 <td>{{ $items->jumlah }}</td> --}}
-                 {{-- <td>{{ }}</td> --}}
-                 
-                 {{--
-                  <td>{{ $transactions->phone}}</td>
-                <td>{{ $transactions->keperluan}}</td>
-                <td>{{ $transactions->laboratorium}}</td>
-                <td>{{ $transactions->pertemuan_ke}}</td>
-                <td>{{ $transactions->status}}</td>
-                <td class="d-flex justify-content-center">
-                  <span class='d-flex d-inline-block'>
-                    <a href="{{ route('admin.transaction.show',$item->id) }}" class="btn btn-primary">
-                      <i class="fa fa-eye"></i>
-                      Show
-                    </a>
-                    <a href="{{ route('admin.transaction.edit',$item->id) }}" class="btn btn-info mx-2">
-                      Edit
-                    </a>
-                  </span> 
-                </td> --}}
-                {{-- <td>{{ $item->roles }}</td> --}}
-                
-                {{-- <td class="d-flex justify-content-center">
-                  <a href="{{ route('admin.users.edit', $item->id) }}" class="btn btn-info mx-2">
-                    <i class="fa fa-pencil-alt"></i>
-                  </a>
-                 
-                </td> --}}
               </tr>
               @endforeach
               

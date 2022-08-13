@@ -26,12 +26,16 @@ class InventoryController extends Controller
         
         // "posts" =>  Post::all()
          
-        $items = Inventory::with(['category_items', 'studyprograms'])->get();
+        $items = Inventory::with(['category_items', 'studyprograms','loan_items'])->get();
+            
+        // // $sisa = $items['stok'] - $pinjam['total'];
+        
         
         // dd($items);
         return view('pages.admin.inventory.index', [
           "title" => "inventaris",
-          'items' => $items
+          'items' => $items,
+          // 'sisa' => $sisa
           
         ]);
         
@@ -63,9 +67,8 @@ class InventoryController extends Controller
     public function store(RequestsInventoryRequest $request)
     {
       $data = $request->all();
-      $data['jumlah_awal'] = $request->jumlah;
       $slug1 = '-' . $request->jumlah;
-      $data['slug'] = Str::slug($request->nama . $slug1) ;
+      $data['slug'] = Str::slug($request->nama . $slug1);
 
  
 
@@ -117,6 +120,9 @@ class InventoryController extends Controller
       $data = $request->all();
       $slug1 = '-' . $request->jumlah;
       $data['slug'] = Str::slug($request->nama . $slug1) ;
+      $data['created_at'] = $request->updated_at;
+      
+      
 
       $inventory->update($data);
 

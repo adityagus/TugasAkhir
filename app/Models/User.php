@@ -29,7 +29,8 @@ class User extends Authenticatable
         'password',
         'roles_id',
         'photo',
-        'roles'
+        'roles',
+        'Nip'
     ];  
 
     /**

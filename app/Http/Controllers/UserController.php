@@ -30,7 +30,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+      $data = User::all();
+      return view('pages.admin.user.create', [
+        'roles' => $data,
+      ]);
+        
     }
 
     /**

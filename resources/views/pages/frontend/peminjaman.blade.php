@@ -137,7 +137,7 @@ Pengembalian Alat
               @php
               $no =1
               @endphp
-              @foreach ($transactionreturn as $item)
+              @forelse ($transactionreturn as $item)
               @if ($item->status == 'Ditangguhkan')
               <tr>
                 <!-- <td colspan='7'><center>No Data</center></td> -->
@@ -176,7 +176,13 @@ Pengembalian Alat
               
               
               @endif
-              @endforeach
+              @empty
+              <tr>
+                <td colspan="8" class="text-center">Tidak Ada Mahasiswa Ditangguhkan</td>
+              </tr>
+              
+              
+              @endforelse
 
             </tbody>
 

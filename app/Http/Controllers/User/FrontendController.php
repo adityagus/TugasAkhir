@@ -34,6 +34,7 @@ class FrontendController extends Controller
   {
 
     $loanItem = LoanItem::with(['inventory', 'transaction.labs', 'transaction'])->get();
+    
 
     // dd($request->session()->has('data'));
 
@@ -54,9 +55,9 @@ class FrontendController extends Controller
   {
     $inCarts = Cart::count();
 
-    $data = Inventory::with('category_items', 'studyprograms', 'loan_items')->get();
-
-    // dd($data);
+    $data = Inventory::with(['studyprograms', 'loan_items', 'category_items'])->get();
+    
+    
     return view('pages.frontend.barang', [
       'items' => $data,
       "title" => "barang",
@@ -64,34 +65,14 @@ class FrontendController extends Controller
     ]);
   }
   
-  public function updatetocart(Request $request)
+  public function updatetocart(Request $request,$id)
   {
-      $prod_id = $request->input('product_id');
-      $quantity = $request->input('quantity');
+    
+    Cart::where('id', $id)->update([
+      'inven_qty' => $request->inven_qty,
+    ]);
+    return redirect()->back()->with('cart_update', 'Quantity Updated');
 
-      if(Cookie::get('shopping_cart'))
-      {
-          $cookie_data = stripslashes(Cookie::get('shopping_cart'));
-          $cart_data = json_decode($cookie_data, true);
-
-          $item_id_list = array_column($cart_data, 'item_id');
-          $prod_id_is_there = $prod_id;
-
-          if(in_array($prod_id_is_there, $item_id_list))
-          {
-              foreach($cart_data as $keys => $values)
-              {
-                  if($cart_data[$keys]["item_id"] == $prod_id)
-                  {
-                      $cart_data[$keys]["item_quantity"] =  $quantity;
-                      $item_data = json_encode($cart_data);
-                      $minutes = 60;
-                      Cookie::queue(Cookie::make('shopping_cart', $item_data, $minutes));
-                      return response()->json(['status'=>'"'.$cart_data[$keys]["item_name"].'" Quantity Updated']);
-                  }
-              }
-          }
-      }
   }
 
 
@@ -175,9 +156,7 @@ class FrontendController extends Controller
 
     $data->delete();
 
-    return response()->json([
-      'success' => 'Record deleted successfully!'
-    ]);
+    return redirect()->route('cart');
   }
 
   public function informasi(Request $request)
@@ -191,30 +170,49 @@ class FrontendController extends Controller
 
 
   // peminjaman alat dan bahan
-  public function checkout(CheckoutRequest $request)
+  public function checkout(CheckoutRequest $request, LoanRequest $loanRequest)
   {
     $data = $request->all();
 
     //Get Carts Data 
     $carts = Cart::with('inventory')->get();
+    
+    
+    
 
     //Add to Transaction data 
     $data['name'] = $request->name;
     $email = $request->email;
     $user = User::with(['roles'])->get();
-    // dd( $data['waktupeminjaman']);
-    // $data['total_price'] = $carts->sum('inventory.jumlah');
+
+    // sisa stok barang
+    // $sisa = 
 
     //Create transaction item 
     $transactions = Transaction::create($data);
 
-    //Create transaction item 
+    //Create transaction item
+
     foreach ($carts as $cart) {
       $items[] = LoanItem::create([
         'transactions_id' => $transactions->id,
-        // 'total' => $loanRequest->total,
+        'total' => $cart->inven_qty,
         'inventory_id' => $cart->inventories_id
       ]);
+      
+      // mengecek data
+      $inventory = Inventory::where('id', $cart->inventories_id)->first();
+      // menghitung ketersedian
+      if ($inventory->dipinjam == 0) {
+        $inventory->dipinjam = $cart->inven_qty;
+      }else {
+        $inventory->dipinjam += $cart->inven_qty;
+      }
+      // menyimpan data 
+      $inventory->save();
+      
+      
+      
       $cart->delete();
     }
     // 
