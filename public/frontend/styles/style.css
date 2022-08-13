@@ -41,10 +41,11 @@ td .gambar {
     margin: 2px;
 }
 
-.instansi p {
+.kop-surat p {
   text-align: center;
   margin: 2px;
   font-size: small;
+  padding-right: 80px;
 }
 
 .judul h4 {
