@@ -10,6 +10,8 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
+use App\Models\ReturnItem;
+use App\Models\TransactionReturn;
 use Illuminate\Support\Facades\Auth;
 
 class CetakController extends Controller
@@ -52,6 +54,22 @@ class CetakController extends Controller
     // return $pdf->download('Rekapitulasi Stock Opname.pdf');
     return $pdf->stream();
   }
+  
+  public function cPengembalian(Request $request, $id){
+    
+
+    $data = ReturnItem::with(['inventory', 'transactionreturn'])->get();
+    $transaction = TransactionReturn::with(['studies', 'labs'])->findOrFail($id);
+    
+    // dd($transaction);
+    $html = view('pages.frontend.cetakpdf.ctkpengembalian', compact('data', 'transaction'));
+    $time = Carbon::now();
+    $pdf = Pdf::loadView('pages.frontend.cetakpdf.ctkpengembalian', compact('data', 'time', 'transaction'));
+    
+    // return $pdf->download('Rekapitulasi Stock Opname.pdf');
+    return $pdf->stream();
+  }
+  
   public function cetakTe(){
     $data = Inventory::where('studyprogram_id', '1')->with('category_items', 'studyprograms')->get();
     $Kepalalab = User::where('roles_id', '1')->first();

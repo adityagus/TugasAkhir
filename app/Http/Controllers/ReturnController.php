@@ -38,7 +38,10 @@ class ReturnController extends Controller
       'keperluan' => $transactions->keperluan,
       'laboratorium' => $transactions->laboratorium,
       'status' => $request->status,
+      'tgl_peminjaman' => $transactions->created_at
     ]);
+    
+    dd($transactionreturn);
 
 
     // $data['total_price'] = $carts->sum('inventory.jumlah');
@@ -56,7 +59,7 @@ class ReturnController extends Controller
       // mengecek data
       $inventory = Inventory::where('id', $loan->inventory_id)->first();
       // menghitung ketersedian
-      $inventory->dipinjam - $loan->total;
+      $inventory->dipinjam -= $loan->total;
       // menyimpan data 
       $inventory->save();
       

@@ -9,7 +9,7 @@ class TransactionReturn extends Model
 {
     use HasFactory;
     protected $fillable = [
-      'id', 'users_id', 'transactions_id', 'matakuliah_id', 'labs_id', 'name', 'nim', 'kelas', 'phone', 'pertemuan_ke', 'keperluan', 'laboratorium', 'status', 'kondisi', 'keterangan' 
+      'id', 'users_id', 'transactions_id', 'matakuliah_id', 'labs_id', 'name', 'nim', 'kelas', 'phone', 'pertemuan_ke', 'keperluan', 'status', 'kondisi', 'keterangan', 'tgl_peminjaman' 
      ];
      
      public function user(){

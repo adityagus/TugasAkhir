@@ -130,7 +130,7 @@
       <tr>
         <td width='30%'>Tanggal Pengembalian</td>
         <td width='4px'>:</td>
-        <td></td>
+        <td>{{ date('d F Y  / h:i:s A', strtotime($transaction->tgl_pengembalian)) }}</td>
       <tr>
       <tr>
         <td width='30%'>Catatan Peminjaman</td>
@@ -163,12 +163,12 @@
       <tr class="ttd">
         <td class='jabatan' >
             {{ Auth::user()->name }}<br>
-            NIP. {{ Auth::user()->nip }}
+            NIP. 198912282019031017
         </td>
 
         <td class='jabatan'>
             {{ $transaction->name }}<br>
-            NIM. {{ $transaction->nim }}
+            NIM {{ $transaction->nim }}
         </td>
       </tr>
     </table>

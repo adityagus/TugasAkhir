@@ -32,6 +32,15 @@ Admin Inventaris
     <section class="section">
       <div class="card">
         <div class="card-body">
+          <div class="card-header">
+            <div class="export d-flex justify-content-end">
+              <a href="{{ route('admin.cetakpengembalian', $pengembalian->id) }}" target="_blank">
+                <button class='btn-red'>
+                  Export PDF &nbsp;  <i class="bi bi-file-earmark-arrow-down "></i>
+                </button>
+              </a>
+            </div>
+          </div>
           <table class="table table-bordered middle">
             <tr>
               <th class="px-6 py-4 text-end">Nama</th>

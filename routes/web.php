@@ -88,12 +88,17 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
 
   Route::get('/', [HomeController::class, 'home'])
   ->name('home');
+  
+  // print pdf
   Route::get('/cetakbarangTL', [CetakController::class, 'dataBarang'])
   ->name('cetakdatabarang');
   Route::get('/cetakbarangTE', [CetakController::class, 'cetakTe'])
   ->name('cetakTe');
   Route::get('/cetakpeminjaman/{id}', [CetakController::class, 'cPeminjaman'])
   ->name('cetakpeminjaman');
+  Route::get('/cetakpengembalian/{id}', [CetakController::class, 'cPengembalian'])
+  ->name('cetakpengembalian');
+  
   Route::delete('/deleteloan/{id}', [ReturnController::class, 'deletebarang'])
   ->name('delete-loan');
 
