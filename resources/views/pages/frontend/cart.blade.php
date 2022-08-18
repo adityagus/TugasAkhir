@@ -181,7 +181,7 @@ Checkout
                 </button>
               </div>
             @endif
-            <h4 class="card-title" id='keranjang'>Checkout Item</h4>
+            <h4 class="card-title">Checkout Item</h4>
           </div>
           <div class="card-body table-responsive">
             <table class='table table-borderedtable-striped'>
@@ -278,16 +278,8 @@ Checkout
 
 @push('prepend')
     <script src="{{ url('frontend/scripts/script.js') }}"></script>
-
-    
 @endpush
-@push('prepend-script')
-<script type="text/javascript">
-  window.addEventListener("hashchange", function() {
-    alert('tidak bisa kembali')
-  })
-</script>
-
+@push('addon-script')
 <script>
     $(document).ready(function() {
   //     read()
