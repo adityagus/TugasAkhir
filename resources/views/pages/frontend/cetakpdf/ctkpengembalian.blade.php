@@ -162,8 +162,13 @@
       </tr>
       <tr class="ttd">
         <td class='jabatan' >
-            {{ Auth::user()->name }}<br>
-            NIP. 198912282019031017
+          @if (Auth::user()->roles_id == 2)
+          {{ Auth::user()->name }}<br>
+          NIP. {{ Auth::user()->nip }}
+          @else
+          ..........................................<br>
+          NIP ....................................
+          @endif
         </td>
 
         <td class='jabatan'>

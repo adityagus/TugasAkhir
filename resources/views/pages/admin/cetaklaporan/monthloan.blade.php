@@ -14,7 +14,7 @@
 </head>
 <body>
   <section class="kop-surat" id="kopSurat">
-    <table   width='100%'  align="center">
+    <table  width='100%'  align="center">
       <tr>
         <td width='10px' class='gambar'>
           {{-- {{ url('user/assets/images/logo/logo.png') }} --}}
@@ -38,7 +38,7 @@
       <tr>
         <td colspan="2" align="center" class="judul">
           <h4>
-            KETERSEDIAAN ALAT DAN BAHAN DI LABORATORIUM TEKNIK ELEKTRO PRODI TEKNOLOGI LISTRIK
+          DAFTAR MAHASISWA MEMINJAM ALAT DAN BAHAN DI RUANG ALAT DALAM SEBULAN
           </h4>
         </td>
       </tr>
@@ -58,13 +58,14 @@
       <thead>
         <tr>
           <th class="thead">No</th>
-          <th class="thead">Nama Alat & Bahan</th>
-          <th class="thead">Tanggal Masuk <br>Barang</th>
-          <th class="thead">Stock Awal</th>
-          <th class="thead">Satuan</th>
-          <th class="thead">Stock Akhir</th>
-          <th class="thead">Satuan</th>
-          <th class="thead">Lab</th>
+          <th class="thead">ID Transaksi</th>
+          <th class="thead">Nama Peminjam</th>
+          <th class="thead">Nim</th>
+          <th class="thead">Kelas</th>
+          <th class="thead">Phone</th>
+          <th class="thead">Status</th>
+          <th class="thead">Tanggal Pinjam</th>
+          <th class="thead">Tanggal Kembali</th>
           <th class="thead">Keterangan</th>
         </tr>
       </thead>
@@ -76,13 +77,14 @@
         @forelse ($data as $item)
         <tr>
           <td>{{ $nomor++ }}</td>
-          <td align="left">{!! $item->nama !!}</td>
+          <td align="left">{{ $item->transactions_id }}</td>
+          <td align="left">{{  $item->name  }}</td>
+          <td align="center">{{ $item->nim }}</td>
+          <td align="center">{{ $item->kelas }}</td>
+          <td align="center">{{ $item->phone }}</td>
+          <td align="center">{{ $item->status }}</td>
+          <td align="center">{{ date('d/n/Y', strtotime($item->tgl_peminjaman)) }}</td>
           <td align="center">{{ date('d/n/Y', strtotime($item->created_at)) }}</td>
-          <td align="center">{{ $item->jumlah}}</td>
-          <td align="center">{{ $item->satuan }}</td>
-          <td align="center">{{ $item->jumlah - $item->dipinjam}}</td>
-          <td align="center">{{ $item->satuan }}</td>
-          <td align="center">{{ $item->studyprograms->name }}</td>
           
           <td>&nbsp;</td>
         </tr>
@@ -122,12 +124,17 @@
       </tr>
       <tr class="ttd">
         <td class='jabatan' >
+          @if (Auth::user()->roles_id == 2)
           {{ Auth::user()->name }}<br>
           NIP. {{ Auth::user()->nip }}
-      </td>
+          @else
+          ..........................................<br>
+          NIP ....................................
+          @endif
+        </td>
         <td class='jabatan'>
-            Ihsan, S.Kom., M.T.<br>
-            NIP. 199008272019031011<br>
+            {{ $Kepalalab->name }}<br>
+            NIP. {{ $Kepalalab->nip }}<br>
         </td>
         <td class='jabatan'>
             Drs Armin, M.T.<br>

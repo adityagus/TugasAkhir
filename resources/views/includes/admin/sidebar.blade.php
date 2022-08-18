@@ -69,9 +69,9 @@
         <li class="sidebar-title">Lainnya</li>
 
         <li class="sidebar-item">
-          <a href="#" class='sidebar-link'>
+          <a href="{{ route('admin.laporan') }}" class='sidebar-link'>
             <i class="bi bi-stack"></i>
-            <span>Pengolahan Form</span>
+            <span>Laporan</span>
           </a>
         </li>
 

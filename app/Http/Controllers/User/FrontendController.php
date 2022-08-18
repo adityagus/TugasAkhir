@@ -156,7 +156,7 @@ class FrontendController extends Controller
 
     $data->delete();
 
-    return redirect()->route('cart');
+    return redirect()->route('cart', '#laporan');
   }
 
   public function informasi(Request $request)

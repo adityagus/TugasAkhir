@@ -51,6 +51,11 @@ Edit Inventaris
             </div>
 
             <div class="mb-2">
+              <label for="kelas" class="form-label">Kelas</label>
+              <input type="text" class="form-control text-bold" name="kelas" value="{{ old('kelas') ?? $mahasiswa->kelas}}" id="kelas" placeholder="Masukan Kelas Mahasiswa">
+            </div>
+            
+            <div class="mb-2">
               <label for="nim" class="form-label">Nim</label>
               <input type="text" class="form-control text-bold" name="nim" value="{{ old('nim') ?? $mahasiswa->nim}}" id="nim" placeholder="Masukan Nim Mahasiswa">
             </div>

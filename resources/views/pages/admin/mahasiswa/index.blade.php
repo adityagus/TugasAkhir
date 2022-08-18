@@ -53,13 +53,13 @@ Admin Inventaris
               </button>
             </a>
           </div>
-          {{-- <div class="export">
-            <a href="{{ route('admin.cetakdatabarang') }}" target="_blank">
+          <div class="export">
+            <a href="{{ route('admin.cetakmahasiswa') }}" target="_blank">
               <button class='btn-red'>
                 Export PDF &nbsp;  <i class="bi bi-file-earmark-arrow-down "></i>
               </button>
             </a>
-          </div> --}}
+          </div>
         </div>
           
           
@@ -73,6 +73,7 @@ Admin Inventaris
               <tr>
                 <th>No</th>
                 <th>Nama</th>
+                <th>Kelas</th>
                 <th>Nim</th>
                 <th>Prodi</th>
                 {{-- <th>Dipinjam</th>
@@ -89,6 +90,7 @@ Admin Inventaris
               <tr>
                 <td>{{ $nomor++ }}</td>
                 <td>{{ $mhs->nama_mhs}}</td>
+                <td>{{ $mhs->kelas}}</td>
                 <td >{{ $mhs->nim }}</td>
                 <td>{{ $mhs->prodi}}</td>
                 {{-- <td>{{ $item->sisa_pinjam}}</td> --}}

@@ -55,11 +55,18 @@
                 @forelse ($mhs as $mhs)
 
                 <tr>
-                  <td width='10%'>Nama</td>
+                  <td width='25%'>Nama</td>
                   <td width='5%'>:</td>
                   <td width='0%'>{{ $mhs->nama_mhs }}</td>
 
                 </tr>
+                
+                <tr>
+                  <td width='10%'>Kelas</td>
+                  <td width='5%'>:</td>
+                  <td width='0%'>{{ $mhs->kelas }}</td>
+                </tr>
+                
                 <tr>
                   <td width='10%'>Nim</td>
                   <td width='5%'>:</td>
@@ -70,16 +77,19 @@
                   <td width='10%'>Prodi</td>
                   <td width='5%'>:</td>
                   <td width='0%'">{{ $mhs->prodi }}</td>
-                  <input type="hidden" name="prodi" value="{{ $mhs->prodi }}">
-                  
-                  
-                </tr class='py-4'>
-                  <form action="{{ route('masuk') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="nama_mhs" value="{{ $mhs->nama_mhs }}">
-                    <input type="hidden" name="nim" value="{{ $mhs->nim }}">
-                    <button  class='btn btn-primary' type="submit" >Submit</button>
-                  </form>
+                </tr>
+                
+                <tr>
+                  <td colspan="4" >
+                    <form action="{{ route('masuk') }}" method="POST" class="mt-3">
+                      @csrf
+                      <input type="hidden" name="nama_mhs" value="{{ $mhs->nama_mhs }}">
+                      <input type="hidden" name="nim" value="{{ $mhs->nim }}">
+                      <button  class='btn btn-primary py-2 px-5' type="submit" >Submit</button>
+                    </form>
+                    
+                  </td>
+                </tr>
                   
                   
                   @empty
@@ -222,7 +232,7 @@
                     @php
                     $no =1
                     @endphp
-                    @forelse ($items as $item)
+                    @foreach ($items as $item)
                     @if (session()->get(1) == $item->transaction->name )
 
                     <tr>
@@ -243,17 +253,17 @@
                     </tr>
 
 
-
-                    @endif
-                    @empty
-
-
+                    
+                    @empty($items)
                     <tr>
                       <td colspan="8" class="text-center">Data Kosong</td>
                     </tr>
-
-
-                    @endforelse
+                    @endempty
+                    @endif
+                    
+                    
+                    
+                    @endforeach
                       
 
 

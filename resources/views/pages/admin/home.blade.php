@@ -183,7 +183,7 @@
                       <th>Nama Mahasiswa</th>
                       <th>Nim</th>
                       <th>Kelas</th>
-                      <th>Phone</th>
+                      {{-- <th>Phone</th> --}}
                       <th>Tempat</th>
                       <th>Status</th>
                       <th>Aksi</th>
@@ -201,17 +201,17 @@
                       <td>{{ $item->name }}</td>
                       <td>{{ $item->nim }}</td>
                       <td>{{ $item->kelas }}</td>
-                      <td>{{ $item->phone }}</td>
+                      {{-- <td>{{ $item->phone }}</td> --}}
                       <td> {{ $item->labs->name }}</td>
                       <td> {{ $item->status }}</td>
                       <td class="d-flex justify-content-center">
                         <span class='d-flex d-inline-block'>
                           <a href="{{ route('admin.transaction.show',$item->id) }}" class="btn btn-primary">
                             <i class="fa fa-eye"></i>
-                            Show
+                            Tampilkan
                           </a>
                           <a href="{{ route('admin.transaction.edit',$item->id) }}" class="btn btn-info mx-2">
-                            Edit
+                            Ubah Status
                           </a>
                         </span>
                     </tr>

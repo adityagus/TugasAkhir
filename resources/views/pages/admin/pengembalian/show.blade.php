@@ -68,7 +68,7 @@ Admin Inventaris
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Laboratorium</th>
-              <td class="border px-6 py-4">{{ $pengembalian->laboratorium }}</td>
+              <td class="border px-6 py-4">{{ $pengembalian->labs->name }}</td>
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Kondisi Terakhir</th>

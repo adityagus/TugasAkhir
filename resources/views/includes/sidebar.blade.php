@@ -6,6 +6,7 @@
         <div class="logo">
         <a href="{{ route('index') }}"><img src="{{ url('user/dist/assets/images/logo/logo.png') }}" alt="Logo" style="height:40px;" srcset=""></a>
         </div>
+        <div class="sub-logo fs-6 pt-1 px-3">Jurusan Teknik Elektro</div>
         <div class="toggler">
           <a href="#" class="sidebar-hide d-xl-none d-block">
             <i class="bi bi-x bi-middle"></i></a>
@@ -22,7 +23,7 @@
             <span>Dashboard</span>
           </a>
         </li>
-        <li class="sidebar-title mb-0">Manajemen</li>
+        <li class="sidebar-title mb-0">Proses pemohon peminjam</li>
 
 
         <li class="sidebar-item {{ ($title == "barang" || $title == "cart" ? "active" : "") }}">
@@ -35,14 +36,14 @@
         <li class="sidebar-item {{ ($title == "peminjaman"  ? "active" : "") }}">
           <a href="/peminjaman" class='sidebar-link'>
             <img src="{{ $title !== "peminjaman" ? url("user/dist/assets/images/logo/peminjaman-secondary.png") : url("user/dist/assets/images/logo/peminjaman.png") }}" width='35px' alt="">
-            <span>Peminjaman</span>
+            <span>List Pemohon</span>
           </a>
         </li>
 
         <li class="sidebar-item {{ ($title == "pengembalian" ? "active" : "") }}">
           <a href="/pengembalian" class='sidebar-link'>
           <img src="{{ $title !== "pengembalian" ? url("user/dist/assets/images/logo/pengembalian-secondary.png") : url("user/dist/assets/images/logo/pengembalian.png") }}" width='35px' coloalt="">
-            <span>Pengembalian</span>
+            <span>List Pengembalian</span>
           </a>
         </li>
         
@@ -52,7 +53,7 @@
         <li class="sidebar-item {{ ($title == "informasi" ? "active" : "") }} ">
           <a href="{{ route('informasi') }}" class='sidebar-link'>
             <i class="bi bi-info" ></i>
-            <span>Informasi</span>
+            <span>Panduan Peminjaman</span>
           </a>
         </li>
       </ul>

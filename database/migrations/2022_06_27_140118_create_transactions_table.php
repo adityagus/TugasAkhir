@@ -24,8 +24,8 @@ class CreateTransactionsTable extends Migration
             $table->string('phone')->nullable();
             $table->integer('pertemuan_ke')->nullable();
             $table->string('keperluan')->nullable();
-            $table->dateTime('waktupeminjaman')->nullable();
-            $table->string('status')->default('PENDING');
+            $table->string('status')->default('Verifikasi');
+            $table->string('keterangan')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

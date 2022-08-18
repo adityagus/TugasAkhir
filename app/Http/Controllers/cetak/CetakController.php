@@ -10,6 +10,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
+use App\Models\Mahasiswa;
 use App\Models\ReturnItem;
 use App\Models\TransactionReturn;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,9 @@ class CetakController extends Controller
 {
   public function dataBarang(Request $request){
     $data = Inventory::where('studyprogram_id', '2')->with('category_items', 'studyprograms')->get();
-    $html = view('pages.admin.inventory.cetakTl', compact('data'));
+    $html = view('pages.admin.cetaklaporan.cetakTl', compact('data'));
     $time = Carbon::now();
-    $pdf = Pdf::loadView('pages.admin.inventory.cetakTl', compact('data', 'time'));
+    $pdf = Pdf::loadView('pages.admin.cetaklaporan.cetakTl', compact('data', 'time'));
     
     // return $pdf->download('Rekapitulasi Stock Opname.pdf');
     return $pdf->stream();
@@ -73,12 +74,53 @@ class CetakController extends Controller
   public function cetakTe(){
     $data = Inventory::where('studyprogram_id', '1')->with('category_items', 'studyprograms')->get();
     $Kepalalab = User::where('roles_id', '1')->first();
-    $html = view('pages.admin.inventory.cetakTe', compact('data', 'Kepalalab'));
+    $html = view('pages.admin.cetaklaporan.cetakTe', compact('data', 'Kepalalab'));
     $time = Carbon::now();
-    $pdf = Pdf::loadView('pages.admin.inventory.cetakTe', compact('data', 'time', 'Kepalalab'));
+    $pdf = Pdf::loadView('pages.admin.cetaklaporan.cetakTe', compact('data', 'time', 'Kepalalab'));
     
     // return $pdf->download('Rekapitulasi Stock Opname.pdf');
     return $pdf->stream();
   }
+  
+  public function laporan(){
+     
+    return view('pages.admin.laporan');
+  }
+  
+  public function ctkbulanlalu(){
+    // $data = Carbon::now()->subMonth(1)->month;
+    $data = TransactionReturn::whereMonth('created_at', Carbon::now()->subMonth(1)->month)->get();
+    $Kepalalab = User::where('roles_id', '1')->first();
+    $html = view('pages.admin.cetaklaporan.submonthloan', compact('data', 'Kepalalab'));
+    $time = Carbon::now();
+    $pdf = Pdf::loadView('pages.admin.cetaklaporan.submonthloan', compact('data', 'time', 'Kepalalab'));
+    
+    // return $pdf->download('Rekapitulasi Stock Opname.pdf');
+    return $pdf->stream();
+  }
+  
+  public function ctkbulan(){
+    // $data = Carbon::now()->subMonth(1)->month;
+    $data = TransactionReturn::whereMonth('created_at', Carbon::now()->month)->get();
+    $Kepalalab = User::where('roles_id', '1')->first();
+    $html = view('pages.admin.cetaklaporan.monthloan', compact('data', 'Kepalalab'));
+    $time = Carbon::now();
+    $pdf = Pdf::loadView('pages.admin.cetaklaporan.monthloan', compact('data', 'time', 'Kepalalab'));
+    
+    // return $pdf->download('Rekapitulasi Stock Opname.pdf');
+    return $pdf->stream();
+  }
+  
+  public function ctkmhs(){
+    $data = Mahasiswa::all();
+    $html = view('pages.admin.cetaklaporan.ctkmahasiswa', compact('data'));
+    $time = Carbon::now();
+    $pdf = Pdf::loadView('pages.admin.cetaklaporan.ctkmahasiswa', compact('data', 'time'));
+    
+    // return $pdf->download('Rekapitulasi Stock Opname.pdf');
+    return $pdf->stream();
+  }
+  
+  
 }
 

@@ -21,8 +21,8 @@ Pengembalian Alat
         
 
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>Peminjaman Alat dan Bahan</h3>
-          <p class="text-subtitle text-muted">List Peminjaman di Jurusan Teknik Elektro</p>
+          <h3>List Pemohon</h3>
+          <p class="text-subtitle text-muted">List Pemohon Peminjaman di Jurusan Teknik Elektro</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -68,14 +68,14 @@ Pengembalian Alat
                 <td>{{ $item->studies->matakuliah }}</td>
                 <td align="center"> {{ $item->created_at->format('d M Y / H:i a') }}</td>
                 <td>
-                  @if ($item->status == 'PENDING')
+                  @if ($item->status == 'Verifikasi')
                   <span class="badge rounded-pill bg-primary">Verifikasi</span>
                   
-                  @elseif($item->status == 'SUCCESS')
-                  <span class="badge rounded-pill bg-success">Dipinjam</span>
+                  @elseif($item->status == 'Meminjam')
+                  <span class="badge rounded-pill bg-success">Meminjam</span>
                   
-                  @elseif($item->status == 'FAILED')
-                  <span class="badge rounded-pill bg-danger">Gagal</span>
+                  @elseif($item->status == 'Ditolak')
+                  <span class="badge rounded-pill bg-danger">Ditolak</span>
                   
                   
                   @endif
@@ -209,6 +209,11 @@ Pengembalian Alat
 
 @push('prepend-styles')
 <link rel="stylesheet" href="user/dist/assets/vendors/simple-datatables/style.css">
+<script type="text/javascript">
+  window.addEventListener("hashchange", function() {
+    alert('tidak bisa kembali')
+  })
+</script>
 @endpush
 
 @push('addon-script')

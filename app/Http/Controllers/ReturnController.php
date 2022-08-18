@@ -36,12 +36,11 @@ class ReturnController extends Controller
       'phone' => $transactions->phone,
       'pertemuan_ke' => $transactions->pertemuan_ke,
       'keperluan' => $transactions->keperluan,
-      'laboratorium' => $transactions->laboratorium,
       'status' => $request->status,
       'tgl_peminjaman' => $transactions->created_at
     ]);
     
-    dd($transactionreturn);
+    // dd($transactionreturn);
 
 
     // $data['total_price'] = $carts->sum('inventory.jumlah');

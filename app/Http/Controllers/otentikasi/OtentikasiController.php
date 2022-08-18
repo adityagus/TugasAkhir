@@ -16,7 +16,7 @@ class OtentikasiController extends Controller
 
       // foreach ($items as $item) {
         # code...
-          session([$items->nim, $items->nama_mhs]);
+          session([$items->nim, $items->nama_mhs, $items->kelas]);
           
           foreach ($carts as $cart) {
             $cart->delete();

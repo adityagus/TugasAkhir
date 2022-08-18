@@ -25,6 +25,7 @@ class MahasiswaRequest extends FormRequest
     {
         return [
             'nama_mhs' => 'required|string|max:255',
+            'kelas' => 'required|string|max:255',
             'nim' => 'required|integer',
             'prodi' => 'required|string|max:255'
         ];

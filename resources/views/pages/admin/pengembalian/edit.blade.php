@@ -45,6 +45,11 @@ Create Inventaris
           <form action="{{ route('admin.return.update', $return->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            
+            <div class="mb-2">
+              <label for="keterangan" class="form-label">Keterangan</label>
+              <textarea name="keterangan" type="text" rows="2"  class="form-control text-bold" id="keterangan" placeholder="Masukan Deskripsi Barang">{!!  old('keterangan') ?? $return->keterangan  !!}</textarea>
+            </div>
 
             <div class="mb-4">
               <label for="status" class="">Name</label>

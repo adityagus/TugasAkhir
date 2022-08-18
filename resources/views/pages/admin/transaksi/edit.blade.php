@@ -13,16 +13,16 @@ Create Inventaris
     <div class="page-title">
       <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>Create Data Barang</h3>
+          <h3>Ubah Status</h3>
           <p class="text-subtitle text-muted">Membuat Alat dan Bahan yang tersedia di Jurusan Elektro</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('admin.transaction.index') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="#">Approval</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('admin.transaction.index') }}">Peminjaman</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Edit</li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.transaction.index') }}">Approval Peminjaman</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Ubah &raquo; #{{ $transaction->id }} <span class='text-primary'>{{ $transaction->name }}</span>
             </ol>
           </nav>
         </div>
@@ -45,23 +45,28 @@ Create Inventaris
           <form action="{{ route('admin.transaction.update', $transaction->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            
+            
+            <div class="mb-2">
+              <label for="keterangan" class="form-label">Keterangan</label>
+              <textarea name="keterangan" type="text" rows="2"  class="form-control text-bold" id="keterangan" placeholder="Masukan Deskripsi Barang">{!!  old('keterangan') ?? $transaction->keterangan  !!}</textarea>
+            </div>
 
             <div class="mb-4">
-              <label for="status" class="">Name</label>
+              <label for="status" class="">Status</label>
               <select name="status" id="status" required class="form-select">
                 <option class='' style="color:#607080" value="{{ $transaction->status }}">{{ $transaction->status }}</option>
                 <option disabled>-----------------------------------------------------------------------------------------------------------------------------------------------------</option>
-                <option value="PENDING">PENDING</option>
-                <option value="SUCCESS">SUCCESS</option>
-                <option value="FAILED">FAILED</option>
-                <option value="CANCEL">CANCEL</option>
+                <option value="Verifikasi">Verifikasi</option>
+                <option value="Meminjam">Meminjam</option>
+                <option value="Ditolak">Ditolak</option>
               </select>
             </div>
 
 
 
             <div class="mb-2 d-grid gap-1">
-              <button class='btn btn-success w-full' type=''>Update Data</button>
+              <button class='btn btn-success w-full' type='submit'>Update Data</button>
             </div>
 
 
@@ -82,8 +87,18 @@ Create Inventaris
 </div>
 @endsection
 
-@push('prepend-script')
-<link rel="stylesheet" href="{{ url('user/dist/assets/vendors/simple-datatables/style.css') }}">
+@push('addon-script')
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor
+          .create( document.querySelector( '#keterangan' ) )
+          .then( editor => {
+                  console.log( editor );
+          } )
+          .catch( error => {
+                  console.error( error );
+          } );
+</script>
 @endpush
 
 @push('prepend-script')
@@ -93,6 +108,11 @@ Create Inventaris
   // Simple Datatable
   let table1 = document.querySelector('#table1');
   let dataTable = new simpleDatatables.DataTable(table1);
+  
+  // 
 
 </script>
+
+{{-- ckeditor --}}
+
 @endpush

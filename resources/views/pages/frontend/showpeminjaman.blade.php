@@ -50,6 +50,14 @@ Admin Inventaris
               <td class="px-6 py-4">{{ $transaction->phone }}</td>
             </tr>
             <tr>
+              <th class="border px-6 py-4 text-end">Status</th>
+              <td class="border px-6 py-4">{{ $transaction->status}}</td>
+            </tr>
+            <tr>
+              <th class="border px-6 py-4 text-end">Keterangan</th>
+              <td class="border px-6 py-4">{{ $transaction->keterangan}}</td>
+            </tr>
+            <tr>
               <th class="px-6 py-4 text-end">Mata Kuliah</th>
               <td class="px-6 py-4">{{ $transaction->studies->matakuliah }}</td>
             </tr>
@@ -69,10 +77,7 @@ Admin Inventaris
               <th class="border px-6 py-4 text-end">Laboratorium</th>
               <td class="border px-6 py-4">{{ $transaction->labs->name }}</td>
             </tr>
-            <tr>
-              <th class="border px-6 py-4 text-end">Status</th>
-              <td class="border px-6 py-4">{{ $transaction->status}}</td>
-            </tr>
+
             
 
           </table>

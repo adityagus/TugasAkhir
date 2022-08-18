@@ -20,7 +20,7 @@
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Peminjaman</li>
+                <li class="breadcrumb-item active" aria-current="page">Approval Peminjaman</li>
               </ol>
             </nav>
           </div>
@@ -37,7 +37,7 @@
                   <th>Phone</th>
                   <th>Keperluan</th>
                   <th>Status</th>
-                  <th class="">Aksi</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -65,10 +65,10 @@
                     <span class='d-flex d-inline-block'>
                       <a href="{{ route('admin.transaction.show',$item->id) }}" class="btn btn-primary">
                         <i class="fa fa-eye"></i>
-                        Show
+                        Tampilkan
                       </a>
                       <a href="{{ route('admin.transaction.edit',$item->id) }}" class="btn btn-info mx-2">
-                        Edit
+                        Ubah Status
                       </a>
                       <form action="{{ route('return', $item->id) }}" method="POST">
                         @csrf
@@ -104,12 +104,6 @@
                                     <label for="periksa" class="col-form-label">Status Pengembalian</label>
                                     <div class="d-flex">
                                       <div class="form-check me-4">
-                                        <input class="form-check-input" type="radio" name="status" id="verifikasi" value="Verifikasi">
-                                        <label class="form-check-label" for="verifikasi">
-                                          Verifikasi
-                                        </label>
-                                      </div>
-                                      <div class="form-check me-4">
                                         <input class="form-check-input" type="radio" name="status" id="ditangguhkan" value="Ditangguhkan">
                                         <label class="form-check-label" for="ditangguhkan">
                                           Ditangguhkan
@@ -131,9 +125,11 @@
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                   <button type="submit" class="btn btn-primary" onclick="Swal.fire(
-                                    'The Internet?',
-                                    'That thing is still around?',
-                                    'question'
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Your work has been saved',
+                                    showConfirmButton: false,
+                                    timer: 1000
                                   );" >Submit Pengembalian</button>
                                 </div>
                               </div>

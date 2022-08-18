@@ -37,7 +37,7 @@ Checkout
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('peminjaman') }}">Peminjaman</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('peminjaman', '#peminjamana') }}">Peminjaman</a></li>
               <li class="breadcrumb-item active" aria-current="page">Checkout</li>
             </ol>
           </nav>
@@ -79,34 +79,15 @@ Checkout
                   <label for="nama-peminjam">Nim</label>
                   <input type="number" name="nim" class="form-control" id="nama-peminjam" placeholder='Masukan Nama Anda' form="Form1" value='{{ session()->get(0) }}' readonly required>
                 </div>
-
+                
                 <div class="form-group">
                   <label for="kelas-peminjam">Kelas</label>
-                  {{-- <input type="text" name="kelas" class="form-control" id="kelas-peminjam" placeholder="Masukan Kelas Anda" value='' required> --}}
-                  <select name="kelas" id="kelas-peminjam" class="form-select" form="Form1" autofocus required>
-                    <option selected disabled value="{{ false }}">
-                      Pilih Kelas Anda
-                    </option>
-                    <option value="1TE1">1TE1</option>
-                    <option value="1TE2">1TE2</option>
-                    <option value="1TE3">1TE3</option>
-                    <option value="1TL1">1TL1</option>
-                    <option value="2TE1">2TE1</option>
-                    <option value="2TE2">2TE2</option>
-                    <option value="2TE3">2TE3</option>
-                    <option value="2TL1">2TL1</option>
-                    <option value="3TE1">3TE1</option>
-                    <option value="3TE2">3TE2</option>
-                    <option value="3TE3">3TE3</option>
-                    <option value="3TE4">3TE4</option>
-                    <option value="3TL1">3TL1</option>
-
-                  </select>
+                  <input type="text" name="kelas" class="form-control" id="nama-peminjam" placeholder='Masukan Nama Anda' form="Form1" value='{{ session()->get(2) }}' readonly required>
                 </div>
 
                 <div class="form-group">
                   <label for="phone">No. Telp</label>
-                  <input type="number" name="phone" class="form-control" form="Form1" id="phone" placeholder="Masukan Kelas Anda" value='{{ old('phone') }}' required>
+                  <input type="number" name="phone" class="form-control" form="Form1" id="phone" placeholder="Masukan Kelas Anda" value='{{ old('phone') }}' autofocus autocomplete="on" required>
                 </div>
 
                 <div class="form-group">
@@ -200,7 +181,7 @@ Checkout
                 </button>
               </div>
             @endif
-            <h4 class="card-title">Checkout Item</h4>
+            <h4 class="card-title" id='keranjang'>Checkout Item</h4>
           </div>
           <div class="card-body table-responsive">
             <table class='table table-borderedtable-striped'>
@@ -297,8 +278,16 @@ Checkout
 
 @push('prepend')
     <script src="{{ url('frontend/scripts/script.js') }}"></script>
+
+    
 @endpush
-@push('addon-script')
+@push('prepend-script')
+<script type="text/javascript">
+  window.addEventListener("hashchange", function() {
+    alert('tidak bisa kembali')
+  })
+</script>
+
 <script>
     $(document).ready(function() {
   //     read()

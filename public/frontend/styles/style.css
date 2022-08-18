@@ -69,8 +69,11 @@ td .gambar {
     vertical-align: top;
 }
 
-.jabatan {
+.jabatan-pinjam {
     padding-left: 70px;
+}
+.jabatan {
+    padding-left: 10px;
 }
 
 .thead{

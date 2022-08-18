@@ -17,6 +17,7 @@ class CreateMahasiswasTable extends Migration
             $table->id();
             $table->bigInteger('roles_id')->default(3);
             $table->string('nama_mhs');
+            $table->string('kelas');
             $table->integer('nim');
             $table->string('prodi');
             $table->string('kelas');

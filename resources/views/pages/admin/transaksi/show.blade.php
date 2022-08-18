@@ -20,7 +20,7 @@ Admin Inventaris
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('admin.transaction.index') }}">Peminjaman</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.transaction.index') }}">Approval Peminjaman</a></li>
               <li class="breadcrumb-item active" aria-current="page">
                 transaksi &raquo; #{{ $transaction->id }} <span class='text-primary'>{{ $transaction->name }}</span>
               </li>
@@ -59,6 +59,14 @@ Admin Inventaris
               <td class="px-6 py-4">{{ $transaction->phone }}</td>
             </tr>
             <tr>
+              <th class="border px-6 py-4 text-end">Status</th>
+              <td class="border px-6 py-4">{{ $transaction->status}}</td>
+            </tr>
+            <tr>
+              <th class="border px-6 py-4 text-end">Keterangan</th>
+              <td class="border px-6 py-4">{!! $transaction->keterangan!!}</td>
+            </tr>
+            <tr>
               <th class="px-6 py-4 text-end">Waktu Peminjaman</th>
               <td class="px-6 py-4">{{ $transaction->created_at->format('d M Y / H:i a')}}</td>
               
@@ -79,10 +87,7 @@ Admin Inventaris
               <th class="border px-6 py-4 text-end">Laboratorium</th>
               <td class="border px-6 py-4">{{ $transaction->labs->name }}</td>
             </tr>
-            <tr>
-              <th class="border px-6 py-4 text-end">Status</th>
-              <td class="border px-6 py-4">{{ $transaction->status}}</td>
-            </tr>
+
             
 
           </table>

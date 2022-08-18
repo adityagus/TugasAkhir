@@ -26,7 +26,6 @@ class TransactionReturnRequest extends FormRequest
     {
         return [
           'status' => 'required|string|in:Verifikasi,Ditangguhkan,Selesai',
-          'keterangan' => 'string'
         ];
     }
 }

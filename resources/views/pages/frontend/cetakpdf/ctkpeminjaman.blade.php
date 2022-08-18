@@ -141,32 +141,37 @@
   
     </table>
     
-    <table class="" width='100%'>
+    <table border="1px" class="" width='100%'>
       <tr>
         <td height="50px" colspan="2">
           
         </td>
       </tr>
-      <tr class="ttd">
-        <td class='jabatan' >
+      <tr class="ttd" align="center">
+        <td width='50%'>
             PLP/Teknisi Laboratorium,<br>
 
         </td>
-        <td class='jabatan'>
+        <td width='50%'>
           Nama Peminjam<br>
         </td>
       </tr>
-      <tr class="ttd">
-        <td class='jabatan' colspan="3" height='70px'>
+      <tr class="ttd" align="center">
+        <td colspan="3" height='70px'>
         </td>
       </tr>
-      <tr class="ttd">
-        <td class='jabatan' >
-            {{ Auth::user()->name }}<br>
-            NIP. {{ Auth::user()->nip }}
+      <tr class="ttd" align="center">
+        <td >
+          @if (Auth::user()->roles_id == 2)
+          {{ Auth::user()->name }}<br>
+          NIP. {{ Auth::user()->nip }}
+          @else
+          ..........................................<br>
+          NIP ....................................
+          @endif
         </td>
 
-        <td class='jabatan'>
+        <td>
             {{ $transaction->name }}<br>
             NIM. {{ $transaction->nim }}
         </td>

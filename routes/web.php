@@ -42,10 +42,10 @@ use App\Http\Controllers\otentikasi\OtentikasiController;
     ->name('informasi');
   Route::get('/email',[EmailController::class, 'email'] )
     ->name('email');
-  Route::get('/emailattach',[EmailController::class, 'attach'] )
-    ->name('attach');
-  Route::get('/pesan',[EmailController::class, 'notif'] )
-    ->name('notif');
+  // Route::get('/emailattach',[EmailController::class, 'attach'] )
+  //   ->name('attach');
+  // Route::get('/pesan',[EmailController::class, 'notif'] )
+  //   ->name('notif');
   Route::post('/checkout-pengembalian/{id}', [ReturnController::class, 'return'])
   ->name('return');
     
@@ -98,9 +98,21 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
   ->name('cetakpeminjaman');
   Route::get('/cetakpengembalian/{id}', [CetakController::class, 'cPengembalian'])
   ->name('cetakpengembalian');
+  Route::get('/ctkbulananlalu', [CetakController::class, 'ctkbulanlalu'])
+  ->name('laporanbulanlalu');
+  Route::get('/ctkbulanan', [CetakController::class, 'ctkbulan'])
+  ->name('laporansebulan');
+  Route::get('/cetakmahasiswa', [CetakController::class, 'ctkmhs'])
+  ->name('cetakmahasiswa');
   
   Route::delete('/deleteloan/{id}', [ReturnController::class, 'deletebarang'])
   ->name('delete-loan');
+  
+  
+  Route::get('/laporanlab', [CetakController::class, 'laporan'])
+  ->name('laporan');
+  
+  
 
   
   
