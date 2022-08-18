@@ -62,7 +62,7 @@ Admin Inventaris
               <tr>
                 <th>No</th>
                 <th>Nama Alat & Bahan</th>
-                {{-- <th>Kategori</th> --}}
+                <th>Kategori</th>
                 <th>Jumlah</th>
                 <th>Dipinjam</th>
                 <th>Ketersedian</th>
@@ -82,7 +82,7 @@ Admin Inventaris
               <tr>
                 <td>{{ $nomor++ }}</td>
                 <td>{{ $item->nama}}</td>
-                {{-- <td>{{ $item->category_items->namakategori }}</td> --}}
+                <td>{{ $item->category_items ? $item->category_items->namakategori : " " }}</td>
                 <td>{{ $item->jumlah}}</td>
                 <td>{{ $item->dipinjam}}</td>
                 <td>{{ $item->jumlah - $item->dipinjam}}</td>
