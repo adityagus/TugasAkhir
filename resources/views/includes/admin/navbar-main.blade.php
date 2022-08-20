@@ -4,6 +4,19 @@
       <a href="#" class="burger-btn d-block">
         <i class="bi bi-justify fs-3"></i>
       </a>
+      
+      @if (Auth::check())
+         
+      @php
+      $data = Auth::user()->name;
+      $item = explode(' ', $data);
+      
+      @endphp
+          
+      @else
+          
+
+      @endif
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -59,7 +72,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton" style="min-width: 11rem;">
             <li>
-              <h6 class="dropdown-header">Hello, Aditya!</h6>
+              <h6 class="dropdown-header">Hello, {{ $item[0]  }}!</h6>
             </li>
             <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
                 Profile</a></li>

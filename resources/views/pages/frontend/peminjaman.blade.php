@@ -219,8 +219,6 @@ Pengembalian Alat
 @push('addon-script')
 <script src="{{ url('user/dist/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
 
-@include('sweetalert::alert')
-
 <script>
 // Simple Datatable
 let table1 = document.querySelector('#table1');

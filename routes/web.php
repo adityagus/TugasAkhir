@@ -61,6 +61,8 @@ Route::middleware(['mahasiswa'])->group(function () {
     ->name('cart-add');
     Route::get('/read', [FrontendController::class, 'read'])
     ->name('read');
+    Route::get('/incart', [FrontendController::class, 'incart'])
+    ->name('incart');
     Route::post('/update-cart/{id}',[FrontendController::class, 'updatetocart'])
     ->name('cart.store');
     Route::delete('/cart/{id}', [FrontendController::class, 'cartDelete'])

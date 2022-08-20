@@ -37,18 +37,7 @@
           </li> --}}
           
           
-          @if ( $title == 'barang')
-          <li class="nav-item mx-5">
-            <a class="nav-link active position-relative py-0 " href="{{ route('cart') }}" aria-expanded="false">
-              <i class='bi bi-cart bi-sub fs-4 py-0 text-gray-600'></i>
-              <span class="{{ $inCart >= 1 ? 'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger' : '' }}">
-                {{ $inCart >= 1 ? $inCart : '' }}
-                <span class="visually-hidden">Peminjaman Ballon</span>
-              </span>
-              {{-- <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">5</span> --}}
-            </a>
-          </li>
-          @endif
+          <div id="tampildata"></div>
           
         </ul>
         <div class="dropdown">
@@ -96,3 +85,50 @@
     </div>
   </nav>
 </header>
+
+@push('addon-script')
+<script>
+      $(function() {
+      $(document).ready(function() {
+        tampildata();
+      });
+  
+      function read() {
+        $.get("{{ url('incart') }}", {}, function(carts,incart, status) {
+          $("#read").html(carts);
+          $("#incart").html(incart);
+        })
+    }
+      });
+</script>
+
+@if ( $title == 'barang')
+    
+    <script>
+      $(document).ready(function() {
+        tampildata();
+      });
+  
+      function tampildata() {
+        $.('#incart').html('');
+        $.ajax({
+        url: "{{ route('incart') }}",
+        type: 'get',
+        dataType: 'json',
+        success: function(inCarts) {
+          window.reload()
+          }
+          // // h4.innerHTML = ("Alat yang anda pinjam ({{ $inCart-1 }})");
+            
+      , error: function(jqXhr, textStatus, errorMessage) {
+        $("p").append("Delete request is Fail.");
+        
+      }
+  
+    });
+    }
+    
+    </script>
+    
+    @endif
+@endpush

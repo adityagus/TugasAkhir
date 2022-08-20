@@ -10,9 +10,16 @@
 <div class="px-5 pb-5">
   <div class="page-title">
     <div class="row">
+      @if (session('info'))
+      <div class="alert alert-primary d-flex justify-content-between">
+    {{ session('info') }}
+    <a type="button" class="btn-close btn-close-white btn-close-focus-opacity" data-bs-dismiss="alert" aria-label="Close"></a>
+      </div>
+      @endif
       <div class="col-12 col-md-7 ">
         <h3>Dashboard</h3>
         <h6>Permohonan Peminjaman Alat dan Bahan</h6>
+
       </div>
       <div class="col-md-5 ">
       <form action="{{ route('index') }}">

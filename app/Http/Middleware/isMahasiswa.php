@@ -20,6 +20,6 @@ class isMahasiswa
       if (Auth::user() && Auth::user()->roles_id == 3) {
         return $next($request);
       }  
-      return redirect('/');
+      return redirect('/')->with('info', 'Masukan Nama Anda di kolom Pencarian');
     }
 }

@@ -137,17 +137,30 @@ class FrontendController extends Controller
   public function read(Request $request)
   {
     $inCarts = Cart::count();
-    $carts = Cart::with(['inventory'])->get();
+    $carts = Inventory::with(['studyprograms', 'loan_items', 'category_items'])->get();
 
     // $data = LoanItem::with('study')->get();
     return view('pages.frontend.ajax.tabelcart', [
       "title" => "cart",
-      "carts" =>  $carts,
+      "items" =>  $carts,
       'inCart' => $inCarts,
 
       // "study" => $data,
     ]);
   }
+  
+  public function incart(Request $request)
+  {
+    $inCarts = Cart::count();
+
+    // $data = LoanItem::with('study')->get();
+    return view('pages.frontend.ajax.balonpeminjaman', [
+      'inCart' => $inCarts,
+
+      // "study" => $data,
+    ]);
+  }
+  
 
   public function cartDelete(Request $request, $id)
   {
@@ -156,7 +169,7 @@ class FrontendController extends Controller
 
     $data->delete();
 
-    return redirect()->route('cart', '#laporan');
+    return redirect()->route('cart');
   }
 
   public function informasi(Request $request)

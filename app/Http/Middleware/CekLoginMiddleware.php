@@ -17,7 +17,7 @@ class CekLoginMiddleware
     public function handle(Request $request, Closure $next)
     {
       if(!session('berhasil_login')){
-        return redirect('/');
+        return redirect('/')->with('info', 'Masukan Nama Anda di kolom Pencarian');
       }
       
         return $next($request);
