@@ -2,7 +2,7 @@
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
-            <h2 class="text-center mt-4 bold">LOGIN PEMINJAM ALAT & BAHAN</h2>
+            <h2 class="text-center mt-4 font-bold">LOGIN ADMIN<br>PEMINJAMAN ALAT & BAHAN</h2>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -48,16 +48,6 @@
                       Lupa Password?
                     </a>
                 @endif
-                
-              </div>
-              <hr>
-              
-              <div class="flex items-center justify-center mt-4 text-sm">
-                Belum Mempunyai Akun? &nbsp;
-                    <a class="underline text-sm text-blue-400 hover:text-gray-900" href="{{ route('register') }}">
-                        {{ __('Daftar Disini') }}
-                    </a>
-
                 
               </div>
 

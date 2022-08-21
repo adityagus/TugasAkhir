@@ -4,8 +4,8 @@
             <x-jet-authentication-card-logo />
         </x-slot>
 
-        <div class="mb-4 text-sm text-center text-gray-600">
-            {{ __("Enter your email and we'll send you a link to get back into your account.") }}
+        <div class="mb-4 text-md text-left text-gray-600">
+            {{ __("Masukkan email Anda dan kami akan mengirimkan tautan untuk kembali ke akun Anda.") }}
         </div>
 
         @if (session('status'))
@@ -24,9 +24,9 @@
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 
-            <div class="flex items-center justify-center mt-4">
+            <div class="flex items-center justify-center mt-4 block">
                 <x-jet-button>
-                    {{ __('Email Password Reset Link') }}
+                    {{ __('Link Reset Password') }}
                 </x-jet-button>
             </div>
         </form>

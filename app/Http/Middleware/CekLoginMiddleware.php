@@ -19,7 +19,6 @@ class CekLoginMiddleware
       if(!session('berhasil_login')){
         return redirect('/')->with('info', 'Masukan Nama Anda di kolom Pencarian');
       }
-      
         return $next($request);
     }
 }

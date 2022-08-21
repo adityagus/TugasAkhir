@@ -25,7 +25,7 @@ use App\Http\Controllers\otentikasi\OtentikasiController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+  Route::redirect('/register', '/login');
   Route::get('/', [FrontendController::class, 'home'])
     ->name('index');
   Route::get('/alat-dan-bahan', [FrontendController::class, 'barang'])
@@ -48,6 +48,8 @@ use App\Http\Controllers\otentikasi\OtentikasiController;
   //   ->name('notif');
   Route::post('/checkout-pengembalian/{id}', [ReturnController::class, 'return'])
   ->name('return');
+  Route::get('/read', [FrontendController::class, 'read'])
+  ->name('read');
     
 
   
@@ -59,8 +61,7 @@ Route::middleware(['mahasiswa'])->group(function () {
     ->name('cart')->middleware('mahasiswa');
     Route::post('/cart/{id}', [FrontendController::class, 'cartAdd'])
     ->name('cart-add');
-    Route::get('/read', [FrontendController::class, 'read'])
-    ->name('read');
+
     Route::get('/incart', [FrontendController::class, 'incart'])
     ->name('incart');
     Route::post('/update-cart/{id}',[FrontendController::class, 'updatetocart'])

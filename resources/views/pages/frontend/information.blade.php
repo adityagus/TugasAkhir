@@ -33,7 +33,7 @@
             <h4>Informasi</h4>
           </div>
           <div class="card-body">
-            <div class="border border-2 rounded p-3" >
+            <div class="border border-2 rounded p-3 d-flex justify-content-center" >
             <img class="img-fluid" src="{{ url('frontend/images/assets/flow-peminjaman.png') }}" alt="" style="width: 1000px;">
             </div>
              {{-- content --}}
@@ -41,7 +41,7 @@
               <!-- pemesanan -->
               <div class="row">
                   <div class="col">
-                      <h4>Cara Meminjam Alat dan Bahan</h4>
+                      <h4>Tahap Meminjam Alat dan Bahan</h4>
                       <ol type="1">
                           <li>
                               Pertama-tama mengecek nama anda di pencarian Mahasiswa Elektro
@@ -59,26 +59,63 @@
                              Mahasiswa wajib mengisi form peminjaman yang disediakan 
                           </li>
                           <li>
-                            Setelah itu mahasiswa dapat menekan tombol Chekout untuk menyelesaikan peminjaman
+                            Setelah itu mahasiswa dapat menekan tombol Chekout untuk menyelesaikan peminjaman. status menjadi<span class="badge bg-primary">Verifikasi</span>
                           </li>
                           <li>
-                            Mahasiswa dapat menunggu persetujuan dari laboran setelah dipinjam dan status peminjaman <span class="badge bg-"></span>
+                            Mahasiswa mengkonfirmasi peminjaman yang telah diisi di halaman web
                           </li>
-                          
+                          <li>
+                          Staff plp mengambil dan menyerahkan alat dan bahan yang telah di inputkan mahasiswa, mahasiswa menyerahkan ktm atau kartu identitas mahasiswa yang meminjam 
+                          </li>
+                          <li>
+                            mahasiswa meminjam alat dan bahan. status berubah menjadi <span class="badge bg-success">Meminjam</span>
+                          </li>
+                          <li>
+                            Setelah selesai menggunakan alat dan bahan, mahasiswa mengembalikan alat dan bahan ke ruang alat dan bahan
+                          </li>
+                          <li>
+                            Mahasiswa mengembalikan alat dan bahan serta mengkonfirmasi peminjaman alat dan bahan ke staff PLP dan meminta untuk mengubah status peminjaman
+                          </li>
+                          <li>Jika barang telah di cek dengan kondisi aman maka staff plp mengubah status <span class="badge bg-success">Selesai</span>. sedangkan jika ada kerusakan atau kendala lain maka status <span class="badge bg-warning">ditangguhkan</span></li>
                           <li>
                               Jika sekiranya anda mengalami kesulitan untuk memilih menu yang anda inginkan anda dapat bertanya kepada Staff PLP.
                           </li>
-                          <li>
-                            setelah menunggu persetujuan maka status peminjaman <span class="badge bg-success">Dipinjam</span>   dan alat sudah dipinjamkan
-                          </li>
-                          <li>
-                              Jika Mahasiswa Telah mengembalikan, maka mahasiswa mengembalikan ke ruang alat dan memberitahu untuk mengubah status peminjaman ke status pengembalian
-                          </li>
-                          <li>
-                              Maka Barang telah di kembalikan dan memiliki status <span class="badge bg-success">Selesai</span>
-                          </li>
                       </ol>
+                      
+                      <h4>Kategori Alat dan Bahan</h4>
+                      <table class="table tabled-borderedS" width='100%'>
+                        <thead>
+                          <tr>
+                            <th>Kategori</th>
+                            <th>Penjelasan</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Sulit</td>
+                            <td>Perlu adanya Pendampingan Oleh Staff PLP dan izin oleh Kepala Lab</td>
+                          </tr>
+                          <tr>
+                            <td>Sedang</td>
+                            <td>Perlu adanya Pendampingan Oleh Staff PLP dan izin oleh Kepala Lab</td>
+                          </tr>
+                          <tr>
+                            <td>Mudah</td>
+                            <td>Tanpa Dampingan dan izin oleh Staff PLP</td>
+                          </tr>
+                          <tr>
+                            <td>Bahan Khusus</td>
+                            <td>Perlu adanya Pendampingan Oleh Staff PLP dan izin oleh Kepala Lab</td>
+                          </tr>
+                          <tr>
+                            <td>Bahan Umum</td>
+                            <td>Tanpa Dampingan dan izin oleh Staff PLP</td>
+                          </tr>
+                        </tbody>
+                        
+                      </table>
                   </div>
+                  
               {{-- </div>
               <!-- checkout -->
               <div class="row">

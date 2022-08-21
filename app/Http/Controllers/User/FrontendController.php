@@ -131,7 +131,9 @@ class FrontendController extends Controller
       'inventories_id' => $id,
     ]);
     // public function pengurangan 
-    return redirect()->route('barang');
+    return response()->json([
+      'success' => 'Record deleted successfully!'
+  ]);
   }
 
   public function read(Request $request)

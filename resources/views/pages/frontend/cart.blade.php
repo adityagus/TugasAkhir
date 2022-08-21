@@ -37,7 +37,7 @@ Checkout
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('peminjaman', '#peminjamana') }}">Peminjaman</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('barang') }}">List Barang</a></li>
               <li class="breadcrumb-item active" aria-current="page">Checkout</li>
             </ol>
           </nav>

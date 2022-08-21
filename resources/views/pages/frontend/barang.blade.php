@@ -24,7 +24,7 @@ Peminjaman Alat
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Peminjaman</li>
+              <li class="breadcrumb-item active" aria-current="page">List Barang</li>
             </ol>
           </nav>
         </div>
@@ -39,10 +39,70 @@ Peminjaman Alat
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Data Alat dan Bahan</h4>
-          <h4 class='peminjaman'>Peminjaman Kosong</h4>
         </div>
         <div class="card-body">
-          <div id="read""></div>
+          <table class="table table-responsive table-striped" id="table1" class='table-item'>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Alat & Bahan</th>
+                <th>Lab</th>
+                <th>Kategori</th>
+                <th>Jenis</th>
+                {{-- <th>Total</th> --}}
+                <th class="text-center">Aksi</th>
+              </tr>
+            </thead>
+            @php
+            $no = 1;
+            @endphp
+          
+            <tbody>
+              @forelse ($items as $item)
+              <tr>
+                <td>{{ $no++ }}</td>
+                <td>{{ $item->nama }}</td>
+                <td>{{ $item->jenis }}</td>
+                
+                <td>{{ $item->category_items ? $item->category_items->namakategori : " " }}</td>
+                
+                {{-- @if ($item->loan_items->total == 0)
+                  <td>0</td>
+                      
+                  @else
+                  <td>{{ $item->loan_items->total }}</td>
+          
+                @endif --}}
+                <td>{{ $item->studyprograms->name }}</td>
+                <td class="d-flex justify-content-center">
+                  <span class='d-flex d-inline-block px-2'>
+                    <a href='{{ route('details', $item->slug) }}'>
+                      <button class='btn btn-primary mx-1' type="submit">Detail</button>
+                    </a>
+                  </span>
+                  <a class='btn btn-info mx-1 px-2 btnCart' type="submit" data-id='{{ $item->id }}' data-token="{{ csrf_token() }}">Pinjam</a>
+                  
+          
+                  {{-- <form action="{{ route('cart-add', $item->id) }}" method="POST" class="d-inline">
+                  @csrf
+                  <button class="btn btn-info" type="submit">
+          
+          
+                    Add to Cart
+                  </button>
+                  </form> --}}
+                </td>
+              </tr>
+              @empty
+          
+              @endforelse
+          
+          
+          
+          
+            </tbody>
+          </table>
+          {{-- <div id="read""></div> --}}
         </div>
 
       </div>
@@ -72,28 +132,61 @@ Peminjaman Alat
   let dataTable = new simpleDatatables.DataTable(table1);
 
 </script>
+<script>
+  const ini = document.getElementById('coba');
+  
+  </script>
   @endpush
   
-  @push('addon-script')
-  <script>
-    $(function() {
-      $(document).ready(function() {
-        read();
-      });
-  
-      function read() {
-        $.get("{{ url('read') }}", {}, function(carts,incart, status) {
-          $("#read").html(carts);
-          $("#incart").html(incart);
-        })
-    }
-    
-    
+@push('addon-script')
+<script>
 
-    
+$(document).ready(function(){
+      read()
     });
     
+    function read() {
+      $.get("{{ url('read') }}", {}, function(carts,status){
+        $("#read").html(carts);
+        
+      })
+    }
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+
     
-  </script>  
+    $('.btnCart').on('click', function() {
+    console.log('ok');
+    const id = $(this).data('id');
+    const token = $("meta[name='csrf-token']").attr("content");
+    
+    $.ajax({
+        url: "{{ url('cart') }}/" + id,
+        data: {
+          'id': id,
+          // '_token': token,
+        },
+        type: 'post',
+        dataType: 'json',
+        success: function(carts) {
+          const h4 = document.querySelector('#barang');
+          h4.innerHTML = {{ $inCart + 1}};
+          h4.classList.add("position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger");
+            
+        }
+      , error: function(jqXhr, textStatus, errorMessage) {
+        $("p").append("inikah");
+        
+      }
   
-  @endpush
+  
+  });
+});
+    
+    
+    </script>  
+    @endpush
+  
