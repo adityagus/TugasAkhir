@@ -88,24 +88,24 @@ class CetakController extends Controller
   }
   
   public function ctkbulanlalu(){
-    // $data = Carbon::now()->subMonth(1)->month;
+    $waktu = Carbon::now()->subMonth(1)->month;
     $data = TransactionReturn::whereMonth('created_at', Carbon::now()->subMonth(1)->month)->get();
     $Kepalalab = User::where('roles_id', '1')->first();
     $html = view('pages.admin.cetaklaporan.submonthloan', compact('data', 'Kepalalab'));
     $time = Carbon::now();
-    $pdf = Pdf::loadView('pages.admin.cetaklaporan.submonthloan', compact('data', 'time', 'Kepalalab'));
+    $pdf = Pdf::loadView('pages.admin.cetaklaporan.submonthloan', compact('data', 'time', 'waktu', 'Kepalalab'));
     
     // return $pdf->download('Rekapitulasi Stock Opname.pdf');
     return $pdf->stream();
   }
   
   public function ctkbulan(){
-    // $data = Carbon::now()->subMonth(1)->month;
+    $waktu = Carbon::now()->subMonth(1)->month;
     $data = TransactionReturn::whereMonth('created_at', Carbon::now()->month)->get();
     $Kepalalab = User::where('roles_id', '1')->first();
-    $html = view('pages.admin.cetaklaporan.monthloan', compact('data', 'Kepalalab'));
+    $html = view('pages.admin.cetaklaporan.monthloan', compact('data', 'Kepalalab', 'waktu'));
     $time = Carbon::now();
-    $pdf = Pdf::loadView('pages.admin.cetaklaporan.monthloan', compact('data', 'time', 'Kepalalab'));
+    $pdf = Pdf::loadView('pages.admin.cetaklaporan.monthloan', compact('data', 'time', 'waktu', 'Kepalalab'));
     
     // return $pdf->download('Rekapitulasi Stock Opname.pdf');
     return $pdf->stream();

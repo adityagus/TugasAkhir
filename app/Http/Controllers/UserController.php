@@ -32,7 +32,7 @@ class UserController extends Controller
     {
       $data = User::all();
       return view('pages.admin.user.create', [
-        'roles' => $data,
+        'user' => $data,
       ]);
         
     }

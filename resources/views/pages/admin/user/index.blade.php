@@ -20,7 +20,7 @@
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">User</li>
+                <li class="breadcrumb-item active" aria-current="page">Staff</li>
               </ol>
             </nav>
           </div>
@@ -31,7 +31,7 @@
           <div class="card-header">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab"  aria-selected="false" tabindex="-1">User</a>
+                <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab"  aria-selected="false" tabindex="-1">Staff</a>
               </li>
               <li class="nav-item" role="presentation">
                 <a class="nav-link" id="profile-tab" href="{{ route('admin.mahasiswa.index') }}" role="tab" aria-controls="profile" aria-selected="true">Mahasiswa</a>
@@ -41,7 +41,7 @@
               <div>
                 <a href="{{ route('admin.user.create') }}" disabled>
                   <button class='btn btn-primary btn-opacity-70 rounded' disabled>
-                    <i class='bi bi-plus bi-sub'></i>Tambah User
+                    <i class='bi bi-plus bi-sub'></i>Tambah Staff
                   </button>
                 </a>
               </div>

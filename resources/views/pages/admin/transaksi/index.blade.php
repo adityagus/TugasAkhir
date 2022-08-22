@@ -65,7 +65,7 @@
                     <span class='d-flex d-inline-block'>
                       <a href="{{ route('admin.transaction.show',$item->id) }}" class="btn btn-primary">
                         <i class="fa fa-eye"></i>
-                        Tampilkan
+                        Lihat
                       </a>
                       <a href="{{ route('admin.transaction.edit',$item->id) }}" class="btn btn-info mx-2">
                         Ubah Status

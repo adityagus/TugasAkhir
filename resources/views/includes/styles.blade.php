@@ -15,6 +15,9 @@
     <link rel="shortcut icon" href="{{ url('favicon.ico') }}" type="image/x-icon">
     
     <link rel="stylesheet" href="{{ url('frontend/styles/style_main.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="user/dist/assets/vendors/simple-datatables/style.css"> --}}
+    
     
     
     <!-- STOP STYLE -->

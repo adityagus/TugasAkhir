@@ -132,7 +132,7 @@ class FrontendController extends Controller
     ]);
     // public function pengurangan 
     return response()->json([
-      'success' => 'Record deleted successfully!'
+      'success' => 'Record cart successfully!'
   ]);
   }
 

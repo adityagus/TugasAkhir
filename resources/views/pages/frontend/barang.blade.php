@@ -41,7 +41,7 @@ Peminjaman Alat
           <h4 class="card-title">Data Alat dan Bahan</h4>
         </div>
         <div class="card-body">
-          <table class="table table-responsive table-striped" id="table1" class='table-item'>
+          <table id='table1' class="table table-responsive table-striped" >
             <thead>
               <tr>
                 <th>No</th>
@@ -119,34 +119,26 @@ Peminjaman Alat
 </div>
 @endsection
 
-@push('prepend-script')
-<link rel="stylesheet" href="user/dist/assets/vendors/simple-datatables/style.css">
+@push('prepend-style')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 @endpush
 
-@push('prepend-script')
-<script src="{{ url('user/dist/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
+@push('addon-script')
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+@endpush
 
-<script>
-  // Simple Datatable
-  let table1 = document.querySelector('#table1');
-  let dataTable = new simpleDatatables.DataTable(table1);
-
-</script>
-<script>
-  const ini = document.getElementById('coba');
-  
-  </script>
-  @endpush
   
 @push('addon-script')
 <script>
 
-$(document).ready(function(){
-      read()
-    });
-    
-    function read() {
-      $.get("{{ url('read') }}", {}, function(carts,status){
+  $(document).ready(function () {
+    read();
+    $('#table1').DataTable();
+  });
+      
+      function read() {
+      $.get("{{ url('barang') }}", {}, function(carts,status){
         $("#read").html(carts);
         
       })
@@ -171,20 +163,22 @@ $(document).ready(function(){
         },
         type: 'post',
         dataType: 'json',
-        success: function(carts) {
+        success: function(inCart) {
           const h4 = document.querySelector('#barang');
-          h4.innerHTML = {{ $inCart + 1}};
-          h4.classList.add("position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger");
+          h4.innerHTML = {{ $inCart }};
+          location.reload();
             
         }
       , error: function(jqXhr, textStatus, errorMessage) {
-        $("p").append("inikah");
+        $("p").append("tidak bisa masukan ke keranjang");
         
       }
   
   
   });
 });
+    
+
     
     
     </script>  

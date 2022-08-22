@@ -67,7 +67,7 @@
                     <span class='d-flex d-inline-block'>
                       <a href="{{ route('admin.return.show',$item->id) }}" class="btn btn-primary">
                         <i class="fa fa-eye"></i>
-                        Show
+                        Lihat
                       </a>
                       <a href="{{ route('admin.return.edit',$item->id) }}" class="btn btn-info mx-2">
                         Edit

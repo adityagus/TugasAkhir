@@ -20,7 +20,7 @@ Edit Inventaris
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('admin.inventory.index') }}">CRUD Data Barang</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.mahasiswa.index') }}">Data Mahasiswa</a></li>
               <li class="breadcrumb-item active" aria-current="page">Edit</li>
             </ol>
           </nav>

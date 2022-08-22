@@ -18,7 +18,7 @@ class TransactionReturnController extends Controller
      */
     public function index()
     {
-      $pengembalian = TransactionReturn::with(['user'])->get();
+    $pengembalian = TransactionReturn::with(['user'])->get();
       // dd($transaction);
       return view('pages.admin.pengembalian.index', compact('pengembalian'));
     }

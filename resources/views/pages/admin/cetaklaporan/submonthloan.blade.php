@@ -38,7 +38,7 @@
       <tr>
         <td colspan="2" align="center" class="judul">
           <h4>
-          DAFTAR MAHASISWA MEMINJAM ALAT DAN BAHAN DI RUANG ALAT DALAM SEBULAN
+          DAFTAR MAHASISWA MEMINJAM ALAT DAN BAHAN DI RUANG ALAT BULAN {{ strtoupper(date('F',strtotime("-1 month")))  }}
           </h4>
         </td>
       </tr>

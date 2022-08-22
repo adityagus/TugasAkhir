@@ -13,8 +13,8 @@ Create Inventaris
     <div class="page-title">
       <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>Create Data Barang</h3>
-          <p class="text-subtitle text-muted">Membuat Alat dan Bahan yang tersedia di Jurusan Elektro</p>
+          <h3>Ubah Pengembalian</h3>
+          <p class="text-subtitle text-muted">Ubah pengembalian alat dan bahan yang ada di Jurusan Teknik Elektro</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">

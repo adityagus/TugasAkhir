@@ -8,6 +8,6 @@ Percobaan pengiriman dari Laravel
 Approval Now
 @endcomponent
 
-Thanks,<br>
+Thanks,Jurusan Teknik Elektro<br>
 {{ config('app.name') }} :)
 @endcomponent
