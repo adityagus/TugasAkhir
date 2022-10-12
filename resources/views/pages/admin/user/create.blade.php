@@ -1,7 +1,7 @@
 @extends('layouts.main-admin')
 
 @section('title')
-Edit Inventaris
+Menambahkan Staff
 @endsection
 
 @section('content')
@@ -13,15 +13,15 @@ Edit Inventaris
     <div class="page-title">
       <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-          <h3>Edit User <span class='text-primary'>{{ $user->name }}</span></h3>
-          <p class="text-subtitle text-muted">Membuat Alat dan Bahan yang tersedia di Jurusan Elektro</p>
+          <h3>Menambahkan Staff</h3>
+          <p class="text-subtitle text-muted">Menambahkan Staff Baru Di Ruang Alat</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
           <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Data User</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Edit</li>
+              <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Staff</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Menambahkan</li>
             </ol>
           </nav>
         </div>
@@ -48,33 +48,39 @@ Edit Inventaris
             </div>
           @endif
           
-          <form action="{{ route('admin.user.update', $user->id) }}" method="post" enctype="multipart/form-data">
+          <form action="{{ route('admin.user.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
+            @method('post')
             <div class="mb-2">
               <label for="name" class="form-label">Nama</label>
-              <input type="text" class="form-control text-bold" name="name" value="{{ old('name') ?? $user->name }}" id="kode" placeholder="Masukan Nama Anda" required>
+              <input type="text" class="form-control text-bold" name="name" value="{{ old('name') }}" id="kode" placeholder="Masukan Nama Anda" required>
             </div>
 
             <div class="mb-2">
-              <label for="nama" class="form-label">Email</label>
-              <input type="text" class="form-control text-bold" name="email" value="{{ old('email') ?? $user->email}}" id="nama" placeholder="Masukan Email Anda">
+              <label for="email" class="form-label">Email</label>
+              <input type="text" class="form-control text-bold" name="email" value="{{ old('email') }}" id="email" placeholder="Masukan Email Anda">
             </div>
-
+            <div class="mb-2">
+              <label for="nip" class="form-label">Nip</label>
+              <input type="text" class="form-control text-bold" name="nip" value="{{ old('nip')  }}" id="nip" placeholder="Masukan NIP Anda">
+            </div>
+            
+            <div class="mb-2">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control text-bold" name="password" value="{{ old('password') }}" id="password" placeholder="Masukan Password Anda">
+            </div>
 
             <div class="mb-4">
               <label for="roles" class="form-label">Roles</label>
               <select name="roles_id" id="roles" class="form-select text-bold">
-                <option value="{{ $user->roles_id }}">{{ $user->roles->name }}</option>
-                <option disabled>----------------------------------------------------------------------------------------------------------------------------------------</option>
-                @foreach ($roles as $item)
-                <option value="{{ $item->id }}">{{ $item->name }}</option>
-               @endforeach 
+                <option disabled selected>Belum Diisi</option>
+                <option value="1">Kepala Lab</option>
+                <option value="2">Admin</option>
               </select>
             </div>
 
             <div class="mb-2 d-grid gap-1">
-              <button class='btn btn-success w-full' type='submit'>Update Kelola User</button>
+              <button class='btn btn-success w-full' type='submit'>Tambahkan Staff</button>
             </div>
 
           </form>

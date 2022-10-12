@@ -51,7 +51,7 @@ Admin Inventaris
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Mata Kuliah</th>
-              <td class="px-6 py-4">{{ $transactionreturn->studies->matakuliah }}</td>
+              <td class="px-6 py-4">{{ $transactionreturn->studies }}</td>
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Pertemuan Ke</th>
@@ -59,7 +59,11 @@ Admin Inventaris
             </tr>
             <tr>
               <th class="px-6 py-4 text-end">Waktu Peminjaman</th>
-              <td class="px-6 py-4">{{ $transactionreturn->created_at->format('d M Y / H:i a')}}</td>
+              <td class="px-6 py-4">{{ $transactionreturn->tgl_peminjaman->format('d M Y / H:i A') }}</td>
+            </tr>
+            <tr>
+              <th class="px-6 py-4 text-end">Waktu Pengembalian</th>
+              <td class="px-6 py-4">{{ $transactionreturn->created_at->format('d M Y / H:i A')}}</td>
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Keperluan</th>
@@ -71,7 +75,7 @@ Admin Inventaris
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Laboratorium</th>
-              <td class="border px-6 py-4">{{ $transactionreturn->labs->name }}</td>
+              <td class="border px-6 py-4">{{ $transactionreturn->labs }}</td>
             </tr>
             <tr>
               <th class="border px-6 py-4 text-end">Status</th>
@@ -111,7 +115,7 @@ Admin Inventaris
                    
                <tr>
                  <td>{{ $nomor++}}</td>
-                 <td>{{ $loan->inventory->nama }}</td>
+                 <td>{{ $loan->inventory  }}</td>
                  <td>{{ $loan->total }}</td>
                   {{-- <form action="{{ route('admin., $loan->id)  }}" method="POST" class="d-inline">
                     @csrf

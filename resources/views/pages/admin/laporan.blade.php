@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<div id="main-content">
 <section class="section">
   <div class="card">
     <div class="card-header">
@@ -16,25 +17,24 @@
       </div>
       @endif
       
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <a class="nav-link active" href="{{ route('admin.user.index') }}" tabindex="-1">Laporan</a>
-        </li>
-      </ul>
-      <div class="card-headers">
-      {{-- <div class="export">
-        <a href="{{ route('admin.cetakdatabarang') }}" target="_blank">
-          <button class='btn-red'>
-            Export PDF &nbsp;  <i class="bi bi-file-earmark-arrow-down "></i>
-          </button>
-        </a>
-      </div> --}}
-    </div>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab"  aria-selected="false" tabindex="-1">Laporan</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" href="{{ route('admin.matakuliah.index') }}" role="tab" aria-controls="profile" aria-selected="true">Mata Kuliah</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" href="{{ route('admin.mahasiswa.index') }}" role="tab" aria-controls="profile" aria-selected="true">Laboratorium</a>
+          </li>
+        </ul>
+      </div>
       
       
       
       
-    </div>
+
     <div class="card-body">
 
       <table class="table table-striped" id="table1">
@@ -82,5 +82,6 @@
     </div>
 
   </div>
+</div>
 </section>
 @endsection

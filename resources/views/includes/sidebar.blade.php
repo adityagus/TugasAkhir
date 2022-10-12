@@ -1,4 +1,5 @@
 <!-- START SIDEBAR -->
+
 <div id="sidebar" class="active">
   <div class="sidebar-wrapper active">
     <div class="sidebar-header">
@@ -56,6 +57,24 @@
             <span>Panduan Peminjaman</span>
           </a>
         </li>
+ 
+        @if (session()->get(1))
+            
+        <hr class="mt-5">
+        <li  class="ml-4 mt-2" style="list-style-type: none;">
+          <a disabled class='d-flex justify-content-center text-secondary'>
+            <font style="font-weight: bold" class="center">{{ session()->get(1) }}</font>
+          </a>
+        </li>
+        <li  class=""  style="list-style-type: none;">
+          <a href="{{ route('keluar') }}" class='d-flex align-items-center justify-content-center'>
+            <div class="exit">
+              <i class="bi bi-box-arrow-left align-items-center"></i> 
+                Keluar
+            </a>
+          </div>
+        </li>
+        @endif
       </ul>
     </div>
     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

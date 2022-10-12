@@ -41,67 +41,73 @@ Peminjaman Alat
           <h4 class="card-title">Data Alat dan Bahan</h4>
         </div>
         <div class="card-body">
-          <table id='table1' class="table table-responsive table-striped" >
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama Alat & Bahan</th>
-                <th>Lab</th>
-                <th>Kategori</th>
-                <th>Jenis</th>
-                {{-- <th>Total</th> --}}
-                <th class="text-center">Aksi</th>
-              </tr>
-            </thead>
-            @php
-            $no = 1;
-            @endphp
-          
-            <tbody>
-              @forelse ($items as $item)
-              <tr>
-                <td>{{ $no++ }}</td>
-                <td>{{ $item->nama }}</td>
-                <td>{{ $item->jenis }}</td>
-                
-                <td>{{ $item->category_items ? $item->category_items->namakategori : " " }}</td>
-                
-                {{-- @if ($item->loan_items->total == 0)
-                  <td>0</td>
-                      
-                  @else
-                  <td>{{ $item->loan_items->total }}</td>
-          
-                @endif --}}
-                <td>{{ $item->studyprograms->name }}</td>
-                <td class="d-flex justify-content-center">
-                  <span class='d-flex d-inline-block px-2'>
-                    <a href='{{ route('details', $item->slug) }}'>
-                      <button class='btn btn-primary mx-1' type="submit">Detail</button>
-                    </a>
-                  </span>
-                  <a class='btn btn-info mx-1 px-2 btnCart' type="submit" data-id='{{ $item->id }}' data-token="{{ csrf_token() }}">Pinjam</a>
+          <div class="table-responsive">
+            
+            <table id='table1' class="table table-responsive table-striped" >
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama Alat & Bahan</th>
+                  <th>Jenis</th>
+                  <th>Kategori</th>
+                  <th>Lab</th>
+                  {{-- <th>Total</th> --}}
+                  <th class="text-center">Aksi</th>
+                </tr>
+              </thead>
+              @php
+              $no = 1;
+              @endphp
+            
+              <tbody>
+                @forelse ($items as $item)
+                <tr>
+                  <td>{{ $no++ }}</td>
+                  <td font-size:1vw;>{{ $item->nama }}</td>
+                  <td>{{ $item->jenis }}</td>
                   
-          
-                  {{-- <form action="{{ route('cart-add', $item->id) }}" method="POST" class="d-inline">
-                  @csrf
-                  <button class="btn btn-info" type="submit">
-          
-          
-                    Add to Cart
-                  </button>
-                  </form> --}}
-                </td>
-              </tr>
-              @empty
-          
-              @endforelse
-          
-          
-          
-          
-            </tbody>
-          </table>
+                  <td>{{ $item->category_items ? $item->category_items->namakategori : " " }}</td>
+                  
+                  {{-- @if ($item->loan_items->total == 0)
+                    <td>0</td>
+                        
+                    @else
+                    <td>{{ $item->loan_items->total }}</td>
+            
+                  @endif --}}
+                  <td>{{ $item->studyprograms->name }}</td>
+                  <td>
+                    <div class="d-flex justify-content-center">
+                      
+                      <span class='d-flex d-inline-block px-2'>
+                        <a href='{{ route('details', $item->slug) }}'>
+                          <button class='btn btn-primary mx-1' type="submit">Detail</button>
+                        </a>
+                      </span>
+                      <a class='btn btn-info mx-1 px-2 btnCart' type="submit" data-id='{{ $item->id }}' data-token="{{ csrf_token() }}">Pinjam</a>
+                    </div>
+                    
+            
+                    {{-- <form action="{{ route('cart-add', $item->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button class="btn btn-info" type="submit">
+            
+            
+                      Add to Cart
+                    </button>
+                    </form> --}}
+                  </td>
+                </tr>
+                @empty
+            
+                @endforelse
+            
+            
+            
+            
+              </tbody>
+            </table>
+          </div>
           {{-- <div id="read""></div> --}}
         </div>
 
@@ -122,6 +128,9 @@ Peminjaman Alat
 @push('prepend-style')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 @endpush
+@push('addon-style')
+    <link rel="stylesheet" href="{{ url('frontend/styles/style.css') }}">
+@endpush
 
 @push('addon-script')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -131,15 +140,15 @@ Peminjaman Alat
   
 @push('addon-script')
 <script>
-
+$(function(){
   $(document).ready(function () {
-    read();
     $('#table1').DataTable();
+    read();
   });
       
       function read() {
-      $.get("{{ url('barang') }}", {}, function(carts,status){
-        $("#read").html(carts);
+      $.get("{{ url('read') }}", {}, function(incart,status){
+        $("#barang").text(incart);
         
       })
     }
@@ -159,23 +168,21 @@ Peminjaman Alat
         url: "{{ url('cart') }}/" + id,
         data: {
           'id': id,
-          // '_token': token,
+          // '_token': {{ csrf_token() }},
         },
         type: 'post',
         dataType: 'json',
-        success: function(inCart) {
-          const h4 = document.querySelector('#barang');
-          h4.innerHTML = {{ $inCart }};
-          location.reload();
-            
+        success: function(carts) {
+          read();
         }
       , error: function(jqXhr, textStatus, errorMessage) {
-        $("p").append("tidak bisa masukan ke keranjang");
+        location.replace('{{ url("cart") }}');
         
       }
   
   
   });
+});
 });
     
 

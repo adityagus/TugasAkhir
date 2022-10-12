@@ -42,7 +42,7 @@ class FrontendController extends Controller
     return view('pages.frontend.index', [
       'status' => LoanItem::count(),
       'jumlah_alat' => Inventory::count(),
-      'user_pinjam' => Transaction::count(),
+      'user_pinjam' => Mahasiswa::count(),
       'loan_pending' => Transaction::where('status', 'PENDING')->count(),
       'loan_success' => Transaction::where('status', 'SUCCESS')->count(),
       "items" => $loanItem,
@@ -53,7 +53,7 @@ class FrontendController extends Controller
 
   public function barang(Request $request, Mahasiswa $mahasiswa)
   {
-    $inCarts = Cart::count();
+    $inCarts = Cart::where('users_id', session()->get(0))->count();
 
     $data = Inventory::with(['studyprograms', 'loan_items', 'category_items'])->get();
     
@@ -105,7 +105,7 @@ class FrontendController extends Controller
 
   public function cart(Request $request, Mahasiswa $mahasiswa)
   {
-    $matakuliah = Study::all();
+    $matakuliah = Study::all()->sortBy('matakuliah');
     $labs = Lab::all();
     $inCarts = Cart::count();
     $carts = Cart::with(['inventory', 'inventory.studyprograms'])->get();
@@ -127,8 +127,9 @@ class FrontendController extends Controller
   public function cartAdd($id)
   {
     // 
-    Cart::create([
+    Cart::where('users_id', session()->get(0))->create([
       'inventories_id' => $id,
+      'users_id' => session()->get(0)
     ]);
     // public function pengurangan 
     return response()->json([
@@ -138,7 +139,7 @@ class FrontendController extends Controller
 
   public function read(Request $request)
   {
-    $inCarts = Cart::count();
+    $inCarts = Cart::where('users', session()->get(0))->count();
     $carts = Inventory::with(['studyprograms', 'loan_items', 'category_items'])->get();
 
     // $data = LoanItem::with('study')->get();
@@ -153,7 +154,7 @@ class FrontendController extends Controller
   
   public function incart(Request $request)
   {
-    $inCarts = Cart::count();
+    $inCarts = Cart::where('')->count();
 
     // $data = LoanItem::with('study')->get();
     return view('pages.frontend.ajax.balonpeminjaman', [
@@ -318,8 +319,8 @@ class FrontendController extends Controller
   {
     // dd($transaction);
     // $transaction = Transaction::with(['studies'])->all();
-    $transaction = TransactionReturn::with(['transaction.studies', 'transaction.labs'])->findOrFail($id);
-    // dd($transaction);
+    $transaction = TransactionReturn::with('labs', 'study')->findOrFail($id);
+    dd($transaction);
     $loanItem =  ReturnItem::with(['inventory'])->where('transactionreturn_id', $transaction->id)->get();
 
     // $transaction = Transaction::find($transaction);
@@ -329,7 +330,7 @@ class FrontendController extends Controller
     return view('pages.frontend.showpengembalian', [
       'transactionreturn' => $transaction,
       'returnitem' => $loanItem,
-      'title' => 'peminjaman'
+      'title' => 'pengembalian'
     ]);
   }
 

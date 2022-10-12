@@ -42,15 +42,7 @@ Admin Inventaris
               </button>
             </a>
           </div>
-          <div class="dropdown">
-            <button class="btn btn-danger dropdown-toggle me-1 show" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Cetak Barang
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4" data-popper-placement="top-start" style="position: absolute; inset: auto auto 100px 0px; margin: 0px; transform: translate(0px, -10px); background-color: #BB2D3B;">
-              <a class="dropdown-item" href="{{ route('admin.cetakdatabarang') }}" target="_blank">Export TL</a>
-              <a class="dropdown-item" href="{{ route('admin.cetakTe') }}" target="_blank">Export TE</a>
-            </div>
-          </div>
+
           
           
           
@@ -88,43 +80,46 @@ Admin Inventaris
                 <td>{{ $item->jumlah - $item->dipinjam}}</td>
                 <td>{{ $item->studyprograms->name }}</td>
                 <td>{{ $item->jenis }}</td>
-                <td class="d-flex justify-content-center">
-                  <span class='d-flex d-inline-block'>
-                    <a href="{{ route('admin.inventory.show',$item->id) }}" class="btn btn-primary">
-                      <i class="fa fa-eye"></i>
-                      Detail
-                    </a>
-                    <a href="{{ route('admin.inventory.edit',$item->id) }}" class="btn btn-info mx-2">
-                      Edit
-                    </a>
-                  </span>
-
-                  <form action="{{ route('admin.inventory.destroy', $item->id )  }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('delete')
-                    <button type="button" class="btn btn-danger" data-bs-toggle='modal' data-bs-target="#{{ Str::slug($item->nama) }}">
-                      Delete
-                    </button>
+                <td>
+                  <div class="d-flex justify-content-center">
                     
-                    <div class="modal fade" id="{{ Str::slug($item->nama)  }}" aria-hidden="true" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                           <div class="modal-header">
-                             <h5 class="modal-title">Hapus Data</h5>
-                             <i class="bi bi-x-circle-red"></i>
-                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <span class='d-flex d-inline-block'>
+                      <a href="{{ route('admin.inventory.show',$item->id) }}" class="btn btn-primary">
+                        <i class="fa fa-eye"></i>
+                        Detail
+                      </a>
+                      <a href="{{ route('admin.inventory.edit',$item->id) }}" class="btn btn-info mx-2">
+                        Edit
+                      </a>
+                    </span>
+  
+                    <form action="{{ route('admin.inventory.destroy', $item->id )  }}" method="POST" class="d-inline">
+                      @csrf
+                      @method('delete')
+                      <button type="button" class="btn btn-danger" data-bs-toggle='modal' data-bs-target="#{{ Str::slug($item->nama) }}">
+                        Delete
+                      </button>
+                      
+                      <div class="modal fade" id="{{ Str::slug($item->nama)  }}" aria-hidden="true" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                             <div class="modal-header">
+                               <h5 class="modal-title">Hapus Data</h5>
+                               <i class="bi bi-x-circle-red"></i>
+                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <p>Apakah {{ $item->nama }} yakin dihapus?</p>
+                              </div>
+                              <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                              <button type="submit" class="btn btn-danger">Hapus Data</button>
                             </div>
-                            <div class="modal-body">
-                              <p>Apakah {{ $item->nama }} yakin dihapus?</p>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-danger">Hapus Data</button>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 </td>
               </tr>
               @empty

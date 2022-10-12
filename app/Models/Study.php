@@ -11,4 +11,9 @@ class Study extends Model
     protected $fillable = [
       'matakuliah'
     ];
+    
+    protected function TransactionReturn(){
+      $this->belongsTo(TransactionReturn::class, 'matakuliah_id', 'id');
+    }
+
 }

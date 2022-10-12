@@ -1,4 +1,4 @@
-@extends('layouts.main-admin')
+  @extends('layouts.main-admin')
 
 @section('title')
 Admin Inventaris

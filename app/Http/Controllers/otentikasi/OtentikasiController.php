@@ -32,7 +32,12 @@ class OtentikasiController extends Controller
     }
     
     public function keluar(Request $request){
+      $carts = Cart::where('users_id', session()->get(0))->get();
+      
       $request->session()->flush();
+      foreach ($carts as $cart) {
+        $cart->delete();
+      }
       return redirect('/');
     }
 }

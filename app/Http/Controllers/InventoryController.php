@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use App\Models\CategoryItem;
 use Illuminate\Http\Request;
 use App\Http\Request\InventoryRequest;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use App\Http\Requests\InventoryRequest as RequestsInventoryRequest;
 
 class InventoryController extends Controller
@@ -54,6 +55,7 @@ class InventoryController extends Controller
       return view('pages.admin.inventory.create', [
         'items' => $items,
         'gallery' => $galleries,
+        
       ]);
       
     }
@@ -85,10 +87,12 @@ class InventoryController extends Controller
      */
     public function show(inventory $inventory)
     {
+      // Debugbar::info($inventory);
+      // dd($inventory);
       $item = Gallery::where('inventories_id', $inventory->id)->get(); 
       // dd($item);
       return view('pages.admin.inventory.detail', [
-        'inventory' => $inventory,
+        'inventory' => $inventory->load('category_items'),
         'items' => $item
       ]);
     }

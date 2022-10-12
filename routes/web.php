@@ -8,6 +8,8 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\matakuliahController;
+use App\Http\Controllers\LaboratoriumController;
 use App\Http\Controllers\cetak\CetakController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\User\FrontendController;
@@ -32,6 +34,8 @@ use App\Http\Controllers\otentikasi\OtentikasiController;
     ->name('barang');
   Route::get('/peminjaman', [FrontendController::class, 'peminjaman'])
     ->name('peminjaman');
+  Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
+    ->name('pengembalian');
   Route::get('/details/{slug}', [FrontendController::class, 'details'])
     ->name('details');
   Route::post('/masuk', [OtentikasiController::class, 'masuk'])
@@ -50,6 +54,10 @@ use App\Http\Controllers\otentikasi\OtentikasiController;
   ->name('return');
   Route::get('/read', [FrontendController::class, 'read'])
   ->name('read');
+  Route::get('/detail-peminjaman/{id}', [FrontendController::class, 'show'])
+  ->name('showpeminjam');
+  Route::get('/detail-pengembalian/{id}', [FrontendController::class, 'showpengembalian'])
+  ->name('showpengembalian');
     
 
   
@@ -74,12 +82,8 @@ Route::middleware(['mahasiswa'])->group(function () {
     ->name('return-success');
     Route::get('/checkout-success', [FrontendController::class, 'success'])
     ->name('success');
-    Route::get('/pengembalian', [FrontendController::class, 'pengembalian'])
-      ->name('pengembalian');
-    Route::get('/detail-peminjaman/{id}', [FrontendController::class, 'show'])
-    ->name('showpeminjam');
-    Route::get('/detail-pengembalian/{id}', [FrontendController::class, 'showpengembalian'])
-    ->name('showpengembalian');
+
+
     
 });
 
@@ -116,9 +120,6 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
   ->name('laporan');
   
   
-
-  
-  
   Route::resource('inventory', InventoryController::class, [
     'title' => 'approval'
   ]);
@@ -132,6 +133,12 @@ Route::middleware(['auth', 'verified', 'admin'])->name('admin.')->prefix('admin'
     'index', 'create', 'store', 'edit', 'update', 'destroy'
   ]);
   Route::resource('mahasiswa', MahasiswaController::class)->only([
+    'index', 'create', 'store', 'edit', 'update', 'destroy'
+  ]);
+  Route::resource('matakuliah', matakuliahController::class)->only([
+    'index', 'create', 'store', 'edit', 'update', 'destroy'
+  ]);
+  Route::resource('laboratorium', LaboratoriumController::class)->only([
     'index', 'create', 'store', 'edit', 'update', 'destroy'
   ]);
   Route::resource('gallery', GalleryController::class);

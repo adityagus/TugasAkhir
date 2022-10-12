@@ -71,7 +71,7 @@
         <li class="sidebar-item">
           <a href="{{ route('admin.laporan') }}" class='sidebar-link'>
             <i class="bi bi-stack"></i>
-            <span>Laporan</span>
+            <span>Lanjutan</span>
           </a>
         </li>
 

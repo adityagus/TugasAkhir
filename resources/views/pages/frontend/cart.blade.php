@@ -145,7 +145,7 @@ Checkout
 
                 <div class="form-group">
                   <label for="laboratorium">Laboratorium</label>
-                  <select  id="" class="form-select" name="labs_id" form="Form1" required>
+                  <select  id="" class="form-select" name="labs_id"  form="Form1" required>
                     <option selected disabled value="{{ false }}">
                       Masukan Tempat Laboratorium
                     </option>

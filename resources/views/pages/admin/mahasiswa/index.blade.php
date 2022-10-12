@@ -1,14 +1,14 @@
-@extends('layouts.main-admin')
+  @extends('layouts.main-admin')
 
 @section('title')
 Admin Inventaris
 @endsection
 
 @section('content')
-
+ 
 
 <div id="main-content">
-
+  
   <div class="page-heading">
     <div class="page-title">
       <div class="row">

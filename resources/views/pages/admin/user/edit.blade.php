@@ -60,16 +60,19 @@ Edit Inventaris
               <label for="nama" class="form-label">Email</label>
               <input type="text" class="form-control text-bold" name="email" value="{{ old('email') ?? $user->email}}" id="nama" placeholder="Masukan Email Anda">
             </div>
-
+            
+            <div class="mb-2">
+              <label for="nip" class="form-label">Nip</label>
+              <input type="text" class="form-control text-bold" name="nip" value="{{ old('nip') ?? $user->nip }}" id="nip" placeholder="Masukan NIP Anda">
+            </div>
+            
 
             <div class="mb-4">
               <label for="roles" class="form-label">Roles</label>
               <select name="roles_id" id="roles" class="form-select text-bold">
-                <option value="{{ $user->roles_id }}">{{ $user->roles->name }}</option>
-                <option disabled>----------------------------------------------------------------------------------------------------------------------------------------</option>
-                @foreach ($roles as $item)
-                <option value="{{ $item->id }}">{{ $item->name }}</option>
-               @endforeach 
+                <option value="{{ $user->roles_id }}" disabled>{{ $user->roles->name == 'KepalaLab' ? 'Kepala Lab' : 'Admin'}}</option>
+                <option value="1">Kepala Lab</option>
+                <option value="2">Admin</option>
               </select>
             </div>
 

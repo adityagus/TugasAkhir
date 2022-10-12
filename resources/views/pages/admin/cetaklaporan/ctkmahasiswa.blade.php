@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url('user/dist/assets/vendors/bootstrap-icons/bootstrpap-icons.css') }}">
   <title>Data Barang</title>
-  <link rel="stylesheet" href="{{ url('frontend/styles/style.css') }}">
+  <link rel="stylesheet" href="{{ url('frontend/styles/style.css') }}">r
 
   {{-- <link rel="shortcut icon" href="{{ url('favicon.ico') }}" type="image/x-icon"> --}}
   {{-- <link rel="stylesheet" href="{{ url('user/dist/assets/css/bootstrap.css') }}"> --}}

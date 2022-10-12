@@ -124,13 +124,7 @@
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="submit" class="btn btn-primary" onclick="Swal.fire(
-                                    position: 'top-end',
-                                    icon: 'success',
-                                    title: 'Your work has been saved',
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                  );" >Submit Pengembalian</button>
+                                  <button type="submit" class="btn btn-primary" >Submit Pengembalian</button>
                                 </div>
                               </div>
                             </div>

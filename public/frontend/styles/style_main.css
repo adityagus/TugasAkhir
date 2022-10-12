@@ -10,8 +10,6 @@
   margin-top: 50px;
 }
 
-<<<<<<< HEAD
-=======
 .btn-red {
   background-color: rgb(239, 83, 83);
   border-radius: 4px;
@@ -27,7 +25,6 @@
 }
 
 
->>>>>>> main
 .descriptions table tr{
   margin-top: 20px;
 }
@@ -53,3 +50,24 @@
 select.disabled{
   color: white;
 }
+
+.logout-profile{
+  text-decoration: none;
+  list-style-type: none;
+}
+
+
+.exit a{
+  color: gray;
+  margin-top: 5px;
+  gap: 10px;
+  transition: 300ms ease-in;
+}
+
+.exit a:hover{
+  color: #348eb2;
+  text-shadow: 4px 2px 7px #c64cd6;
+  display: flex;
+  align-items: center;
+}
+

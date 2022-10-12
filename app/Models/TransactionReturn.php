@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TransactionReturn extends Model
 {
     use HasFactory;
+    protected $dates = ['tgl_peminjaman'];
     protected $fillable = [
-      'id', 'users_id', 'transactions_id', 'matakuliah_id', 'labs_id', 'name', 'nim', 'kelas', 'phone', 'pertemuan_ke', 'keperluan', 'status', 'kondisi', 'keterangan', 'tgl_peminjaman' 
+      'id', 'users_id', 'transactions_id', 'matakuliah_id', 'labs_id', 'name', 'nim', 'kelas', 'phone', 'pertemuan_ke', 'keperluan', 'status', 'kondisi', 'keterangan'
      ];
      
      public function user(){
@@ -24,7 +25,7 @@ class TransactionReturn extends Model
       return $this->belongsTo(Lab::class, 'labs_id','id' );
     }
     
-    public function studies(){
+    public function study(){
       return $this->belongsTo(Study::class, 'matakuliah_id', 'id' );
     }
     

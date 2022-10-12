@@ -47,6 +47,8 @@ Pengembalian Alat
                 <th>Nama</th>
                 <th>Nim</th>
                 <th>Kelas</th>
+                <th>Mata Kuliah</th>
+                <th>Waktu Pengembalian</th>
                 <th>Status</th>
                 <th>Aksi</th>
               </tr>
@@ -64,6 +66,9 @@ Pengembalian Alat
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->nim }}</td>
                 <td>{{ $item->kelas }}</td>
+                <td>{{ $item->matakuliah }}</td>
+                <td>{{ $item->studies }}</td>
+                <td>{{ $item->created_at->format('d M Y / H:i A') }}</td>
                 <td>
                   
                   @if ($item->status == 'Verifikasi')
@@ -75,8 +80,8 @@ Pengembalian Alat
                   
                   @endif
                 </td>
-                <td class="d-flex justify-content-center">
-                  <span class='d-flex d-inline-block'>
+                <td>
+                  <span class='d-flex justify-content-center d-inline-block'>
                     <a href="{{ route('showpengembalian', $item->id) }}">
                       <button class='btn-outline-primary rounded py-1 px-3 mx-2'>Detail</button>
                     </a>
@@ -129,4 +134,3 @@ let dataTable = new simpleDatatables.DataTable(table1);
 
 </script>
 @endpush
-

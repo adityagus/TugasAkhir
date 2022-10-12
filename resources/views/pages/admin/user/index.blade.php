@@ -39,8 +39,8 @@
             </ul>
             <div class="card-headers d-flex justify-content-between pt-4">
               <div>
-                <a href="{{ route('admin.user.create') }}" disabled>
-                  <button class='btn btn-primary btn-opacity-70 rounded' disabled>
+                <a href="{{ route('admin.user.create') }}">
+                  <button class='btn btn-primary' >
                     <i class='bi bi-plus bi-sub'></i>Tambah Staff
                   </button>
                 </a>
@@ -54,8 +54,9 @@
                   <th>No</th>
                   <th>ID</th>
                   <th>Nama</th>
-                  <th>email</th>
-                  <th>roles</th>
+                  <th>NIP</th>
+                  <th>Email</th>
+                  <th>Roles</th>
                   <th class="">Aksi</th>
                 </tr>
               </thead>
@@ -69,6 +70,7 @@
                   <td>{{ $nomor++ }}</td>
                   <td>{{ $users->id}}</td>
                   <td>{{ $users->name}}</td>
+                  <td>{{ $users->nip}}</td>
                   <td>{{ $users->email }}</td>
                   <td>{{ $users->roles->name}}</td>
                   <td class="d-flex justify-content-center">
@@ -78,7 +80,7 @@
                       </a>
                     </span>
                    
-                    <form action="{{ route('admin.user.destroy', $users->id)  }}" onclick="return confirm('Yakin Hapus?')" method="POST" class="d-inline">
+                    <form action="{{ route('admin.user.destroy', $users->id)  }}" onclick="return confirm('{{ $users->name }}  Yakin Hapus?')" method="POST" class="d-inline">
                       @csrf
                       @method('delete')
                       <button class="btn btn-danger">

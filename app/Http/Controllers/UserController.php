@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Models\roles;
+use App\Models\Keturunan;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -14,11 +15,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index()
     { 
-        $user = User::with('roles')->get();    
+        $user = User::get();    
         return view('pages.admin.user.index', [
-          "subtitle" => "users",
           "user" => $user
         ]);
     }
@@ -45,7 +45,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $data = $request->all();
+      $data['password'] = bcrypt($request->password);
+      User::create($data);
+      return redirect()->route('admin.user.index');
     }
 
     /**

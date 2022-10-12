@@ -42,7 +42,7 @@
               <i class='bi bi-cart bi-sub fs-4 py-0 text-gray-600'></i>
               
               <span id="barang" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {{ $inCart >= 1 ? $inCart : '' }}
+              {{ $inCart >= 1 ? $inCart : '0' }}
                 
                 {{-- <h4 id="incarts">{{ $inCart >= 1 ? $inCart : '' }}</h4> --}}
                 <span class="visually-hidden">Peminjaman Ballon</span>
